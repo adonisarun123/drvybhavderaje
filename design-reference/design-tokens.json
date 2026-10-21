@@ -1,0 +1,228 @@
+{
+  "name": "Dr Vybhav Deraje Website Redesign",
+  "version": "1.0.0",
+  "date": "2026-10-21",
+  "status": "Implemented design values; not extracted UnitedHealthcare tokens",
+  "units": "Dimensions are CSS px unless expressed as a CSS string.",
+  "colors": {
+    "navy": {
+      "value": "#08294A",
+      "cssVariable": "--navy",
+      "role": "headings, primary text, dark CTA surface"
+    },
+    "blue": {
+      "value": "#0759C7",
+      "cssVariable": "--blue",
+      "role": "primary action, link, icon"
+    },
+    "muted": {
+      "value": "#536578",
+      "cssVariable": "--muted",
+      "role": "supporting copy"
+    },
+    "pale": {
+      "value": "#EDF5FC",
+      "cssVariable": "--pale",
+      "role": "page hero and information state"
+    },
+    "line": {
+      "value": "#DCE4EC",
+      "cssVariable": "--line",
+      "role": "border and divider"
+    },
+    "white": {
+      "value": "#FFFFFF",
+      "cssVariable": "--white",
+      "role": "canvas and inverse text"
+    },
+    "buttonHover": "#03449C",
+    "heroLeft": "#F4F8FB",
+    "heroRight": "#E9F2FA",
+    "supportSurface": "#F2F7FC",
+    "careCraniosynostosis": "#EDF5FE",
+    "careCosmetic": "#F6F7FD",
+    "careCleft": "#F4F8F5",
+    "careReconstructive": "#FFF9F3",
+    "featureArt": "#DFEEF9",
+    "journey": "#F8F9FB",
+    "footer": "#F5F7FA",
+    "utility": "#EDF4FA",
+    "inputBorder": "#A8B9CA",
+    "errorBackground": "#FFF4F1",
+    "errorBorder": "#A13C31",
+    "previewNoticeBackground": "#FFF7E8",
+    "previewNoticeBorder": "#EDDDBA",
+    "previewNoticeText": "#6B5529"
+  },
+  "typography": {
+    "fontFamily": "Arial, Helvetica, sans-serif",
+    "monogramFontFamily": "Georgia, serif",
+    "body": {
+      "fontSize": 16,
+      "lineHeight": 1.6
+    },
+    "h1": {
+      "fontSize": 62,
+      "lineHeight": 1.08,
+      "fontWeight": 500,
+      "letterSpacing": -2.6
+    },
+    "h2": {
+      "fontSize": 39,
+      "lineHeight": 1.13,
+      "fontWeight": 500,
+      "letterSpacing": -1.4
+    },
+    "h3": {
+      "fontSize": 23,
+      "lineHeight": 1.13,
+      "fontWeight": 500,
+      "letterSpacing": -0.6
+    },
+    "innerPageH1": {
+      "fontSize": 51,
+      "maxWidth": 800
+    },
+    "eyebrow": {
+      "fontSize": 10,
+      "lineHeight": 1.7,
+      "fontWeight": 700,
+      "letterSpacing": 1.7
+    },
+    "button": {
+      "fontSize": 13,
+      "fontWeight": 600
+    },
+    "nav": {
+      "fontSize": 12,
+      "fontWeight": 500
+    },
+    "formLabel": {
+      "fontSize": 13
+    },
+    "heroDescription": {
+      "fontSize": 15,
+      "lineHeight": 1.8,
+      "maxWidth": 445
+    },
+    "heroH1ByMedia": {
+      "min1500": 68,
+      "max1080": 52,
+      "max800": 42,
+      "max580": 49
+    },
+    "sectionH2ByMedia": {
+      "max800": 32
+    },
+    "innerPageH1ByMedia": {
+      "max580": 39
+    },
+    "note": "Component-specific 8–14px text overrides exist; guide recommends production readability review."
+  },
+  "breakpoints": {
+    "largeDesktopMin": 1500,
+    "compactDesktopMax": 1080,
+    "tabletMax": 800,
+    "phoneMax": 580
+  },
+  "layout": {
+    "containerDefault": "min(1180px, calc(100% - 88px))",
+    "containerMin1500": "1240px",
+    "containerMax1080": "calc(100% - 48px)",
+    "containerMax800": "calc(100% - 40px)",
+    "containerMax580": "calc(100% - 36px)",
+    "heroGrid": "1.12fr 1fr",
+    "heroGridGap": 42,
+    "heroMinHeight": 596,
+    "heroMinHeightLarge": 630,
+    "careColumnsDefault": 4,
+    "careColumnsMax800": 2,
+    "careGap": 18,
+    "careGapPhone": 12,
+    "featureGrid": "1fr 1.1fr",
+    "featureGap": 80,
+    "doctorGrid": "1.1fr 1fr",
+    "doctorGap": 80,
+    "stepsColumns": 3,
+    "stepsGap": 55,
+    "faqGrid": "1fr 1.6fr",
+    "faqGap": 70,
+    "contentGrid": "1.5fr 0.8fr",
+    "contentGap": 65,
+    "clinicColumns": 3,
+    "clinicColumnsMax800": 1,
+    "footerGrid": "1.6fr 1fr 1fr",
+    "sectionPaddingBlock": 76,
+    "sectionPaddingBlockMax800": 54,
+    "phoneSingleColumnSections": [
+      "hero",
+      "feature",
+      "doctor",
+      "steps",
+      "faq",
+      "innerContent"
+    ],
+    "headerMinHeight": 97,
+    "headerMinHeightMax800": 80,
+    "scrollPaddingTop": 100
+  },
+  "radii": {
+    "button": 4,
+    "field": 4,
+    "topicRow": 4,
+    "card": 6,
+    "form": 6,
+    "cta": 6,
+    "featureArt": 8,
+    "portrait": "180px 180px 10px 10px",
+    "portraitPhone": "140px 140px 8px 8px"
+  },
+  "spacing": {
+    "sectionHeadingBottom": 36,
+    "sectionHeadingBottomPhone": 28,
+    "cardPadding": "26px 22px 22px",
+    "cardPaddingPhone": "20px 15px",
+    "sidebarPadding": 28,
+    "formPadding": 32,
+    "formPaddingTablet": 24,
+    "formPaddingPhone": 22,
+    "ctaPadding": "38px 40px",
+    "ctaPaddingPhone": "28px 24px"
+  },
+  "controls": {
+    "buttonMinHeight": 50,
+    "compactButtonMinHeight": 44,
+    "inputMinHeight": 47,
+    "buttonPadding": "14px 22px",
+    "inputPadding": "10px 12px",
+    "focusOutlineOffset": 5,
+    "disabledOpacity": 0.5
+  },
+  "shadows": {
+    "portraitLabel": "0 8px 30px #0929480A",
+    "cardHover": "0 8px 24px #0C396914",
+    "mobileMenu": "0 16px 30px #08294A18"
+  },
+  "motion": {
+    "transitionDurationMs": 200,
+    "careCardHoverTranslateY": -4,
+    "scrollBehavior": "smooth",
+    "reducedMotion": "Disable transitions and smooth scrolling"
+  },
+  "image": {
+    "file": "doctor.png",
+    "width": 466,
+    "height": 588,
+    "heroFit": "cover",
+    "heroSaturation": 0.8,
+    "frameHeight": 448,
+    "frameHeightPhone": 340
+  },
+  "implementation": {
+    "framework": "Next.js App Router",
+    "database": "Neon PostgreSQL, server-side only",
+    "htmlExport": "Presentation and client interactions; no direct database connection",
+    "onlineEnquiries": "Disabled until server connection and activation",
+    "source": "/workspace/sites/dr-vybhav-redesign/app/globals.css"
+  }
+}

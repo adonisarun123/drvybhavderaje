@@ -1,0 +1,16 @@
+node_modules
+.next
+out
+.env
+.env.local
+.env.*.local
+.env.test
+*.tsbuildinfo
+next-env.d.ts
+playwright-report
+test-results
+.DS_Store
+
+# test artefacts
+test-results
+playwright-report
