@@ -29,7 +29,7 @@ export async function listInvitations() {
 }
 
 /** Creates the very first administrator. Only valid while no users exist and the setup token matches. */
-export async function createFirstAdmin(input: { name: string; email: string; password: string }, actor: Actor) {
+export async function createFirstAdmin(input: { name: string; email: string; password: string }) {
   if ((await countUsers()) > 0) throw new AppError("setup_done", "Setup has already been completed.", 409);
   const created = await auth.api.createUser({ body: { email: input.email, password: input.password, name: input.name, role: "admin" } });
   await recordAudit(db, { actor: { id: created.user.id, label: `${input.name} <${input.email}>` }, action: "user.setup", entityType: "user", entityId: created.user.id, summary: `First administrator created via setup token` });
@@ -77,12 +77,12 @@ export async function acceptInvitation(token: string, input: { name: string; pas
   return created.user;
 }
 
-export async function setUserRole(userId: string, role: Role, actor: Actor) {
+export async function setUserRole(userId: string, role: Role, actor: Actor, headers: Headers) {
   if (userId === actor.id) throw new AppError("self_change", "You cannot change your own role.");
   const [target] = await db.select().from(userTable).where(eq(userTable.id, userId));
   if (!target) throw new NotFoundError("User not found");
   await db.update(userTable).set({ role, updatedAt: new Date() }).where(eq(userTable.id, userId));
-  await auth.api.revokeUserSessions({ body: { userId } }); // role changes take effect immediately
+  await auth.api.revokeUserSessions({ body: { userId }, headers }); // role changes take effect immediately
   await recordAudit(db, { actor, action: "user.role", entityType: "user", entityId: userId, summary: `Role changed to ${role}`, changes: { role: { from: target.role, to: role } } });
 }
 
@@ -95,24 +95,25 @@ export async function setUserPermissions(userId: string, perms: Permission[], ac
   });
 }
 
-export async function deactivateUser(userId: string, reason: string, actor: Actor) {
+export async function deactivateUser(userId: string, reason: string, actor: Actor, headers: Headers) {
   if (userId === actor.id) throw new AppError("self_change", "You cannot deactivate your own account.");
   const admins = await db.select({ id: userTable.id }).from(userTable).where(and(eq(userTable.role, "admin"), eq(userTable.banned, false)));
   const [target] = await db.select().from(userTable).where(eq(userTable.id, userId));
   if (!target) throw new NotFoundError("User not found");
   if (target.role === "admin" && admins.length <= 1) throw new AppError("last_admin", "You cannot deactivate the only active administrator.");
-  await auth.api.banUser({ body: { userId, banReason: reason || "Deactivated by administrator" } });
-  await auth.api.revokeUserSessions({ body: { userId } });
+  // Admin-plugin endpoints verify the calling administrator's session from the request headers.
+  await auth.api.banUser({ body: { userId, banReason: reason || "Deactivated by administrator" }, headers });
+  await auth.api.revokeUserSessions({ body: { userId }, headers });
   await recordAudit(db, { actor, action: "user.deactivate", entityType: "user", entityId: userId, summary: `Deactivated ${target.email}: ${reason}` });
 }
 
-export async function reactivateUser(userId: string, actor: Actor) {
-  await auth.api.unbanUser({ body: { userId } });
+export async function reactivateUser(userId: string, actor: Actor, headers: Headers) {
+  await auth.api.unbanUser({ body: { userId }, headers });
   await recordAudit(db, { actor, action: "user.reactivate", entityType: "user", entityId: userId, summary: `Reactivated account` });
 }
 
-export async function adminResetPassword(userId: string, newPassword: string, actor: Actor) {
-  await auth.api.setUserPassword({ body: { userId, newPassword } });
-  await auth.api.revokeUserSessions({ body: { userId } });
+export async function adminResetPassword(userId: string, newPassword: string, actor: Actor, headers: Headers) {
+  await auth.api.setUserPassword({ body: { userId, newPassword }, headers });
+  await auth.api.revokeUserSessions({ body: { userId }, headers });
   await recordAudit(db, { actor, action: "user.password_reset", entityType: "user", entityId: userId, summary: `Password reset by administrator; sessions revoked` });
 }

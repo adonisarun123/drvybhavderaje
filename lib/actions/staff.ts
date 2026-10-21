@@ -1,6 +1,7 @@
 "use server";
 
 import { z } from "zod";
+import { headers } from "next/headers";
 import { actorOf, requireAdmin } from "@/lib/auth/guard";
 import { PERMISSIONS, type Permission } from "@/lib/db/schema";
 import { adminResetPassword, createInvitation, deactivateUser, reactivateUser, revokeInvitation, setUserPermissions, setUserRole } from "@/lib/staff/service";
@@ -39,7 +40,7 @@ export async function revokeInvitationAction(id: string) {
 export async function setRoleAction(userId: string, role: "admin" | "coordinator") {
   return run(async () => {
     const user = await requireAdmin();
-    await setUserRole(userId, role, actorOf(user));
+    await setUserRole(userId, role, actorOf(user), await headers());
     return undefined;
   });
 }
@@ -56,7 +57,7 @@ export async function setPermissionsAction(userId: string, formData: FormData) {
 export async function deactivateUserAction(userId: string, reason: string) {
   return run(async () => {
     const user = await requireAdmin();
-    await deactivateUser(userId, reason, actorOf(user));
+    await deactivateUser(userId, reason, actorOf(user), await headers());
     return undefined;
   });
 }
@@ -64,7 +65,7 @@ export async function deactivateUserAction(userId: string, reason: string) {
 export async function reactivateUserAction(userId: string) {
   return run(async () => {
     const user = await requireAdmin();
-    await reactivateUser(userId, actorOf(user));
+    await reactivateUser(userId, actorOf(user), await headers());
     return undefined;
   });
 }
@@ -73,7 +74,7 @@ export async function resetPasswordAction(userId: string, newPassword: string) {
   return run(async () => {
     const user = await requireAdmin();
     parseOrThrow(z.string().min(10).max(128), newPassword);
-    await adminResetPassword(userId, newPassword, actorOf(user));
+    await adminResetPassword(userId, newPassword, actorOf(user), await headers());
     return undefined;
   });
 }

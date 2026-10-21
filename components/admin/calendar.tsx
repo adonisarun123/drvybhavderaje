@@ -196,7 +196,7 @@ export function AdminCalendar({ clinics, initialDate, initialView, canManageAvai
           timeZone="Asia/Kolkata"
           initialView={initialView ?? (isNarrow ? "listWeek" : "timeGridWeek")}
           initialDate={initialDate}
-          headerToolbar={{ left: "prev,next today", center: "title", right: "timeGridDay,timeGridWeek,dayGridMonth,listWeek" }}
+          headerToolbar={isNarrow ? { left: "prev,next today", center: "title", right: "timeGridDay,listWeek,dayGridMonth" } : { left: "prev,next today", center: "title", right: "timeGridDay,timeGridWeek,dayGridMonth,listWeek" }}
           buttonText={{ today: "Today", day: "Day", week: "Week", month: "Month", list: "Agenda" }}
           views={{ listWeek: { buttonText: "Agenda" } }}
           events={fetchEvents}

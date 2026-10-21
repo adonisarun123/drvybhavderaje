@@ -48,7 +48,7 @@ export async function setupAction(_prev: ActionResult | null, formData: FormData
   if (!safeEqual(parsed.data.token, expected)) return { ok: false, code: "bad_token", message: "The setup token is incorrect." };
   try {
     if ((await countUsers()) > 0) return { ok: false, code: "setup_done", message: "Setup has already been completed. Sign in instead." };
-    await createFirstAdmin(parsed.data, { id: null, label: "setup" });
+    await createFirstAdmin(parsed.data);
     await auth.api.signInEmail({ body: { email: parsed.data.email, password: parsed.data.password }, headers: h });
   } catch (e) {
     return toActionError(e);

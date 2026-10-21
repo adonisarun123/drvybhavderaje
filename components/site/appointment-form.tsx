@@ -28,8 +28,9 @@ function fmtIst(iso: string) {
 
 export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateMax, initialClinic }: Props) {
   const [status, setStatus] = useState<Status>({ kind: "idle" });
-  const [submissionId, setSubmissionId] = useState("");
-  const [startedAt, setStartedAt] = useState(0);
+  // Generated once per mounted form (in the submit handler) so retries reuse the same key.
+  const submissionId = useRef<string | null>(null);
+  const startedAt = useRef<number | null>(null);
   const [clinic, setClinic] = useState(initialClinic ?? "");
   const [date, setDate] = useState("");
   const [slots, setSlots] = useState<{ start: string; end: string }[] | null>(null);
@@ -38,24 +39,20 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
   const alertRef = useRef<HTMLDivElement>(null);
   const id = useId();
 
-  useEffect(() => {
-    setSubmissionId(crypto.randomUUID());
-    setStartedAt(Date.now());
-  }, []);
-
-  useEffect(() => {
-    if (!slotsEnabled || !clinic || clinic === "help_me_choose" || !date) {
+  const fetchSeq = useRef(0);
+  function loadSlots(nextClinic: string, nextDate: string) {
+    setSelectedSlot("");
+    if (!slotsEnabled || !nextClinic || nextClinic === "help_me_choose" || !nextDate) {
       setSlots(null);
       setSlotState("idle");
       return;
     }
-    let cancelled = false;
+    const seq = ++fetchSeq.current;
     setSlotState("loading");
-    setSelectedSlot("");
-    fetch(`/api/availability?clinic=${encodeURIComponent(clinic)}&date=${date}`)
+    fetch(`/api/availability?clinic=${encodeURIComponent(nextClinic)}&date=${nextDate}`)
       .then((r) => r.json())
       .then((data: { enabled: boolean; slots: { start: string; end: string }[] }) => {
-        if (cancelled) return;
+        if (seq !== fetchSeq.current) return;
         if (!data.enabled || !data.slots.length) {
           setSlots([]);
           setSlotState("none");
@@ -64,11 +61,8 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
           setSlotState("idle");
         }
       })
-      .catch(() => !cancelled && setSlotState("error"));
-    return () => {
-      cancelled = true;
-    };
-  }, [clinic, date, slotsEnabled]);
+      .catch(() => seq === fetchSeq.current && setSlotState("error"));
+  }
 
   useEffect(() => {
     if (status.kind === "error" || status.kind === "success") alertRef.current?.focus();
@@ -79,6 +73,7 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
     if (status.kind === "sending") return;
     const form = e.currentTarget;
     const fd = new FormData(form);
+    submissionId.current ??= crypto.randomUUID();
     const payload = {
       name: String(fd.get("name") ?? ""),
       phone: String(fd.get("phone") ?? ""),
@@ -86,9 +81,9 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
       clinic: String(fd.get("clinic") ?? ""),
       preferredStart: selectedSlot,
       consent: fd.get("consent") === "on",
-      submissionId,
+      submissionId: submissionId.current,
       website: String(fd.get("website") ?? ""),
-      startedAt,
+      startedAt: startedAt.current ?? Date.now(),
     };
     setStatus({ kind: "sending" });
     try {
@@ -123,7 +118,7 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate aria-describedby={`${id}-explain`}>
+    <form onSubmit={onSubmit} noValidate aria-describedby={`${id}-explain`} onFocusCapture={() => { startedAt.current ??= Date.now(); }}>
       {!enabled && (
         <div className="status" role="status">
           Online requests are not available at the moment. Please call{" "}
@@ -172,7 +167,10 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
         </label>
         <label className="field full" htmlFor={`${id}-clinic`}>
           Preferred clinic *
-          <select id={`${id}-clinic`} name="clinic" required value={clinic} onChange={(e) => setClinic(e.target.value)} aria-invalid={!!err("clinic")} aria-describedby={err("clinic") ? `${id}-clinic-err` : undefined} disabled={!enabled}>
+          <select id={`${id}-clinic`} name="clinic" required value={clinic} onChange={(e) => {
+              setClinic(e.target.value);
+              loadSlots(e.target.value, date);
+            }} aria-invalid={!!err("clinic")} aria-describedby={err("clinic") ? `${id}-clinic-err` : undefined} disabled={!enabled}>
             <option value="" disabled>
               Select a clinic
             </option>
@@ -192,7 +190,10 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
         {slotsEnabled && clinic && clinic !== "help_me_choose" && (
           <div className="field full">
             <label htmlFor={`${id}-date`}>Preferred date (optional)</label>
-            <input id={`${id}-date`} type="date" name="date" min={dateMin} max={dateMax} value={date} onChange={(e) => setDate(e.target.value)} disabled={!enabled} />
+            <input id={`${id}-date`} type="date" name="date" min={dateMin} max={dateMax} value={date} onChange={(e) => {
+              setDate(e.target.value);
+              loadSlots(clinic, e.target.value);
+            }} disabled={!enabled} />
             {slotState === "loading" && <span className="note">Checking published availability…</span>}
             {slotState === "none" && <span className="note">No published times for this date. You can still send the request and the clinic will suggest a time.</span>}
             {slotState === "error" && <span className="note">We couldn’t load availability. You can still send the request without a time.</span>}

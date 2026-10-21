@@ -69,3 +69,4 @@ See the latest run output in the summary delivered with the project. Scenarios:
 - **Screen-reader testing** with VoiceOver/NVDA was not performed; the review above is structural.
 - **Load testing** — not performed. The advisory lock serialises bookings per doctor, which is correct for a single-doctor practice but is the first thing to revisit if more providers are added.
 - The live domain was not touched; no DNS or deployment to drvybhavderaje.com was made.
+- After the test runs, `npm run db:reset-test-data` was executed so the practice database contains no invented working hours, no published slots and no synthetic patients or staff.

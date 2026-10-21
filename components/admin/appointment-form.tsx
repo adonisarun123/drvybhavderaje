@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState, useTransition } from "react";
+import { useRef, useState, useTransition } from "react";
 import { ResultAlert } from "./ui";
 import type { ActionResult } from "@/lib/errors";
 
@@ -25,14 +25,16 @@ export function AppointmentForm({ doctorId, clinics, defaults = {}, defaultDurat
   const router = useRouter();
   const [pending, start] = useTransition();
   const [result, setResult] = useState<ActionResult<{ id: string; reference: string }> | null>(null);
-  const [idempotencyKey, setKey] = useState("");
+  // One key per mounted form: repeated submits (double-click, retry after a network error) reuse it.
+  const idempotencyKey = useRef<string | null>(null);
   const [status, setStatus] = useState<"requested" | "confirmed">("confirmed");
-  useEffect(() => setKey(crypto.randomUUID()), []);
   const needsAck = result && !result.ok && result.code === "ack_required";
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
+    idempotencyKey.current ??= crypto.randomUUID();
+    fd.set("idempotencyKey", idempotencyKey.current);
     start(async () => {
       const r = await action(fd);
       setResult(r);
@@ -44,7 +46,7 @@ export function AppointmentForm({ doctorId, clinics, defaults = {}, defaultDurat
     <form className="form" onSubmit={onSubmit}>
       <ResultAlert result={result} />
       <input type="hidden" name="doctorId" value={doctorId} />
-      <input type="hidden" name="idempotencyKey" value={idempotencyKey} />
+      <input type="hidden" name="idempotencyKey" value="" />
       {defaults.enquiryId && <input type="hidden" name="enquiryId" value={defaults.enquiryId} />}
       <div className="row">
         <label>
@@ -139,7 +141,7 @@ export function AppointmentForm({ doctorId, clinics, defaults = {}, defaultDurat
         </label>
       )}
       <div className="form-actions">
-        <button className="btn" type="submit" disabled={pending || !idempotencyKey}>
+        <button className="btn" type="submit" disabled={pending}>
           {pending ? "Checking availability…" : submitLabel}
         </button>
         <span className="help">Availability is re-checked on the server at the moment of saving.</span>

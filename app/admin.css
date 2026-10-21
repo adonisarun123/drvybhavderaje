@@ -124,3 +124,16 @@ table.data .muted { color: var(--muted); font-size: 13px; }
   .agenda-item { grid-template-columns: 1fr; }
   .page-head h1 { font-size: 24px; }
 }
+/* Calendar on small screens: stacked toolbar, wrapping controls, never widen the page. */
+.calendar-wrap { overflow-x: auto; max-width: 100%; }
+.admin-main { overflow-x: hidden; }
+@media (max-width: 700px) {
+  .calendar-wrap .fc .fc-toolbar { flex-wrap: wrap; gap: 8px; }
+  .calendar-wrap .fc .fc-toolbar-chunk { display: flex; flex-wrap: wrap; gap: 6px; }
+  .calendar-wrap .fc .fc-toolbar-title { font-size: 16px; width: 100%; }
+  .calendar-wrap .fc .fc-button { padding: 6px 8px; font-size: 12px; }
+  .calendar-wrap .fc .fc-list-event-time { white-space: normal; }
+  .filters label { flex: 1 1 140px; min-width: 0; }
+  .filters select, .filters input { width: 100%; }
+  .legend { gap: 8px; }
+}

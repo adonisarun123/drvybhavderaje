@@ -115,7 +115,7 @@ async function loadOverrides(tx: Tx, doctorId: string, fromDate: string, toDate:
 }
 
 /** Load every rule and occupied slot relevant to [from, to) (+ buffer margins). */
-export async function loadWindow(tx: Tx, doctorId: string, from: Date, to: Date, now: Date): Promise<WindowData> {
+export async function loadWindow(tx: Tx, doctorId: string, from: Date, to: Date): Promise<WindowData> {
   const policy = await loadPolicy(tx, doctorId);
   const margin = Math.max(policy.bufferMin, policy.travelBufferMin, 0) * 60_000 + 86_400_000;
   const qFrom = new Date(from.getTime() - margin);
@@ -212,7 +212,7 @@ async function assertBookable(
 ): Promise<void> {
   if (!(args.end > args.start)) throw new ValidationError("End time must be after start time.", { endAt: ["End time must be after start time."] });
   await purgeExpiredHolds(tx, args.doctorId, args.now);
-  const data = await loadWindow(tx, args.doctorId, args.start, args.end, args.now);
+  const data = await loadWindow(tx, args.doctorId, args.start, args.end);
   const check = checkBookable(data, { clinicId: args.clinicId, start: args.start, end: args.end }, args.now, args.exclude ?? {});
   if (check.conflicts.length) {
     throw new ConflictError("That time is not available for the doctor.", check.conflicts);
@@ -809,7 +809,7 @@ export async function updateRecurringBlock(id: string, change: Partial<Recurring
 export async function futureAppointmentsOutsideHours(doctorId: string, now = new Date()): Promise<AffectedAppointment[]> {
   return db.transaction(async (tx) => {
     const to = DateTime.fromJSDate(now).plus({ days: RECURRING_CHECK_DAYS }).toJSDate();
-    const data = await loadWindow(tx, doctorId, now, to, now);
+    const data = await loadWindow(tx, doctorId, now, to);
     const windows = sessionWindows(localDate(now), localDate(to), data.weekly, data.overrides, data.policy.timezone);
     const rows = await tx
       .select({ id: appointments.id, reference: appointments.reference, patientName: appointments.patientName, startAt: appointments.startAt, endAt: appointments.endAt, status: appointments.status, clinicId: appointments.clinicId, clinicName: clinics.name })

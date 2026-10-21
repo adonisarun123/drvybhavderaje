@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CalendarDays, ClipboardList, Clock, History, Inbox, LayoutDashboard, MapPin, Users } from "lucide-react";
 import { signOutAction } from "@/lib/actions/auth";
 
@@ -28,7 +28,6 @@ const ITEMS = [
 export function AdminShell({ user, children }: { user: ShellUser; children: React.ReactNode }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  useEffect(() => setOpen(false), [pathname]);
   const visible = ITEMS.filter((i) => (i.adminOnly ? user.role === "admin" : i.permission ? user.role === "admin" || user.permissions.includes(i.permission) : true));
   const expiry = new Date(user.sessionExpiresAt);
   return (
@@ -48,7 +47,7 @@ export function AdminShell({ user, children }: { user: ShellUser; children: Reac
           const Icon = item.icon;
           const current = item.href === "/admin" ? pathname === "/admin" : pathname.startsWith(item.href);
           return (
-            <Link key={item.href} href={item.href} className="nav-item" aria-current={current ? "page" : undefined}>
+            <Link key={item.href} href={item.href} className="nav-item" aria-current={current ? "page" : undefined} onClick={() => setOpen(false)}>
               <Icon size={18} aria-hidden="true" /> {item.label}
             </Link>
           );

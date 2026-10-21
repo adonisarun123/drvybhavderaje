@@ -311,7 +311,7 @@ test("coordinator can work enquiries/appointments but not staff, audit or availa
   await p2.goto(`${BASE}/admin/availability`);
   await expect(p2.locator("#weekly form")).toHaveCount(0);
   // Direct server-action style request through the API is also refused: calendar works (allowed), nothing admin-only is reachable via GET
-  const cal = await p2.request.get(`${BASE}/api/admin/calendar?start=${nextMonday.toISO()}&end=${nextMonday.plus({ days: 7 }).toISO()}`);
+  const cal = await p2.request.get(`${BASE}/api/admin/calendar?start=${encodeURIComponent(nextMonday.toISO()!)}&end=${encodeURIComponent(nextMonday.plus({ days: 7 }).toISO()!)}`);
   expect(cal.status()).toBe(200);
   // Coordinator can open the enquiry list and the appointment detail
   await p2.goto(`${BASE}/admin/enquiries?status=all`);
@@ -337,8 +337,10 @@ test("calendar shows appointments, holds and blocks in IST and audit history rec
   await page.locator(".fc-event", { hasText: "E2E Patient" }).click();
   await expect(page.locator(".drawer")).toContainText("IST");
   await page.goto(`${BASE}/admin/audit?q=E2E`);
-  await expect(page.locator("table")).toContainText("Confirmed");
-  await expect(page.locator("table")).toContainText("Cancelled");
+  await expect(page.locator("table")).toContainText("Cancelled APT-");
+  await expect(page.locator("table")).toContainText("Blocked time (leave)");
+  await page.goto(`${BASE}/admin/audit?entity=appointment&q=Confirmed`);
+  await expect(page.locator("table")).toContainText("appointment.confirm");
 });
 
 for (const width of [320, 390, 768, 1024, 1440]) {

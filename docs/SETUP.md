@@ -79,6 +79,14 @@ Every server action and API route re-checks these on the server (`lib/auth/guard
 3. **Date-specific hours** for one-off changes; **Leave / blocks** for holidays and unavailable periods.
 4. Tick **Show available times on the public appointment page** only when the hours are right. Until then the public form offers a general request plus phone/email.
 
+## 6a. Running the test suites safely
+
+`npm test` needs no database. `npm run test:db` and `npm run test:e2e` **write to `DATABASE_URL`**: they create
+synthetic staff (`*@example.test`), "E2E …" patients and — for the e2e suite — weekly working hours and the
+public-slots switch. Run them against a **Neon branch** (`neonctl branches create --name test` → use that
+branch's connection string in `.env.test`), or run `npm run db:reset-test-data` afterwards, which removes the
+synthetic records, deletes all weekly sessions/overrides and switches public slots off again.
+
 ## 7. Deployment (Vercel)
 
 1. Import the repository, framework preset Next.js (defaults are fine). Node 22 runtime.
