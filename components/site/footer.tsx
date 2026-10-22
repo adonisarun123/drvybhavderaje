@@ -1,3 +1,4 @@
+import { CookieSettingsLink } from "@/components/site/cookie-banner";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { FacebookIcon, InstagramIcon, LinkedinIcon, YoutubeIcon } from "./social-icons";
@@ -74,7 +75,7 @@ export function SiteFooter() {
         <span>© {new Date().getFullYear()} {SITE.name}</span>
         <span>Information on this site supports, and does not replace, a medical consultation.</span>
         <span>
-          <Link href={ROUTES.privacy}>Privacy policy</Link> · <Link href={ROUTES.terms}>Terms of use</Link>
+          <Link href={ROUTES.privacy}>Privacy policy</Link> · <Link href={ROUTES.terms}>Terms of use</Link> · <CookieSettingsLink />
         </span>
       </div>
     </footer>
