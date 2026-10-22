@@ -1,10 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, ArrowUpRight, Building2, MapPin, Phone } from "lucide-react";
+import { ArrowRight, ArrowUpRight, MapPin, Phone } from "lucide-react";
 import { CtaBand, PageHero } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { getPublicClinics } from "@/lib/clinics";
-import { HOSPITALS } from "@/lib/content";
+import { CLINICS_SEED, HOSPITALS } from "@/lib/content";
 import { formatPhone } from "@/lib/phone";
 import { ROUTES } from "@/lib/routes";
 import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, physicianJsonLd, practiceJsonLd } from "@/lib/seo";
@@ -39,8 +40,12 @@ export default async function LocationsPage() {
         </div>
         <div className="location-grid">
           {clinics.map((c) => (
-            <article className="location-card" key={c.slug} id={c.slug} aria-labelledby={`clinic-${c.slug}`}>
-              <MapPin size={28} strokeWidth={1.5} aria-hidden="true" />
+            <article className="location-card has-photo" key={c.slug} id={c.slug} aria-labelledby={`clinic-${c.slug}`}>
+              {CLINICS_SEED.find((seed) => seed.slug === c.slug)?.photo ? (
+                <Image className="location-photo" src={CLINICS_SEED.find((seed) => seed.slug === c.slug)!.photo} alt={`${c.brand} ${c.name} clinic`} width={370} height={260} sizes="(max-width: 580px) 90vw, 370px" />
+              ) : (
+                <MapPin size={28} strokeWidth={1.5} aria-hidden="true" />
+              )}
               <p className="eyebrow">{c.brand}</p>
               <h3 id={`clinic-${c.slug}`}>{c.name}</h3>
               <p>{c.addressLines}</p>
@@ -71,8 +76,8 @@ export default async function LocationsPage() {
         </div>
         <div className="location-grid hospital-grid">
           {HOSPITALS.map((h) => (
-            <article className="location-card" key={h.name}>
-              <Building2 size={28} strokeWidth={1.5} aria-hidden="true" />
+            <article className="location-card has-photo" key={h.name}>
+              <Image className="location-photo" src={h.image} alt={h.name} width={370} height={260} sizes="(max-width: 580px) 90vw, 370px" />
               <h3>{h.name}</h3>
               <p>{h.address}</p>
               <a href={`tel:${h.phone}`}>

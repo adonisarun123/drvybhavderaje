@@ -74,19 +74,35 @@ export const CREDENTIALS = [
 ];
 
 export const AFFILIATIONS = [
-  { org: "Association of Plastic Surgeons of India", detail: "Life member (APSI ID 1799, Membership No. D089FL2019)", url: "https://www.apsi.in/" },
-  { org: "National Academy of Burns India", detail: "Life member", url: "https://www.nabi.org.in/" },
-  { org: "Karnataka Medical Council", detail: "Registered since 2008 (Reg. No. 79493)", url: "https://www.karnatakamedicalcouncil.com/" },
-  { org: "Indian Association of Aesthetic Plastic Surgeons", detail: "Life member", url: "https://www.iaaps.in/" },
+  { org: "Association of Plastic Surgeons of India", detail: "Life member (APSI ID 1799, Membership No. D089FL2019)", url: "https://www.apsi.in/", logo: "/images/custom/membership_1.png" },
+  { org: "National Academy of Burns India", detail: "Life member", url: "https://www.nabi.org.in/", logo: "/images/custom/membership_2.png" },
+  { org: "Karnataka Medical Council", detail: "Registered since 2008 (Reg. No. 79493)", url: "https://www.karnatakamedicalcouncil.com/", logo: "/images/custom/membership_3.png" },
+  { org: "Indian Association of Aesthetic Plastic Surgeons", detail: "Life member", url: "https://www.iaaps.in/", logo: "/images/custom/membership_4.png" },
 ];
 
 export const HOSPITALS = [
-  { name: "Aster Hospital Whitefield", address: "Plot No. 2, 3 & 4, Survey No. 76, Sadaramangala Industrial Area, Opp. ITPL Main Road, Kadugodi, Bengaluru, Karnataka 560066", phone: "+918045108888", phoneDisplay: "080 4510 8888" },
-  { name: "Gleneagles Global Hospital", address: "5/5, Richmond Road, Bengaluru, Karnataka 560025", phone: "+918046694333", phoneDisplay: "+91 80 4669 4333" },
-  { name: "Sakra World Hospital", address: "Sy No. 52/2 & 52/3, Devarabeesanahalli, Varthur Hobli, Opp. Intel, Outer Ring Road, Marathahalli, Bengaluru, Karnataka 560103", phone: "+918049694969", phoneDisplay: "+91 80 4969 4969" },
-  { name: "Apollo Spectra Hospital", address: "143, 1st Cross, Near Nagarjuna Hotel, 5th Block, Koramangala, Bengaluru, Karnataka 560034", phone: "+918448440991", phoneDisplay: "084484 40991" },
-  { name: "Kauvery Hospital Marathahalli", address: "2371/3, Old HAL Airport Varthur Road, Munnekolala, Marathahalli, Bengaluru, Karnataka 560037", phone: "+918041804180", phoneDisplay: "080 4180 4180" },
-  { name: "Belenus Champion Hospital", address: "Sarjapur – Marathahalli Road, Opp. Decathlon, Carmelaram, Ambedkar Nagar, Chikkabellandur, Bengaluru, Karnataka 560035", phone: "+918069366936", phoneDisplay: "080 6936 6936" },
+  { name: "Aster Hospital Whitefield", image: "/images/custom/aster1.webp", address: "Plot No. 2, 3 & 4, Survey No. 76, Sadaramangala Industrial Area, Opp. ITPL Main Road, Kadugodi, Bengaluru, Karnataka 560066", phone: "+918045108888", phoneDisplay: "080 4510 8888" },
+  { name: "Gleneagles Global Hospital", image: "/images/custom/gleneagles1.webp", address: "5/5, Richmond Road, Bengaluru, Karnataka 560025", phone: "+918046694333", phoneDisplay: "+91 80 4669 4333" },
+  { name: "Sakra World Hospital", image: "/images/custom/sakara1.webp", address: "Sy No. 52/2 & 52/3, Devarabeesanahalli, Varthur Hobli, Opp. Intel, Outer Ring Road, Marathahalli, Bengaluru, Karnataka 560103", phone: "+918049694969", phoneDisplay: "+91 80 4969 4969" },
+  { name: "Apollo Spectra Hospital", image: "/images/custom/appolo1.webp", address: "143, 1st Cross, Near Nagarjuna Hotel, 5th Block, Koramangala, Bengaluru, Karnataka 560034", phone: "+918448440991", phoneDisplay: "084484 40991" },
+  { name: "Kauvery Hospital Marathahalli", image: "/images/custom/kauvery1.webp", address: "2371/3, Old HAL Airport Varthur Road, Munnekolala, Marathahalli, Bengaluru, Karnataka 560037", phone: "+918041804180", phoneDisplay: "080 4180 4180" },
+  { name: "Belenus Champion Hospital", image: "/images/custom/belenus1.webp", address: "Sarjapur – Marathahalli Road, Opp. Decathlon, Carmelaram, Ambedkar Nagar, Chikkabellandur, Bengaluru, Karnataka 560035", phone: "+918069366936", phoneDisplay: "080 6936 6936" },
+];
+
+/** Photographs from the practice's about page, at their original URLs. */
+export const ABOUT_GALLERY: Photo[] = [
+  { src: "/images/custom/gallery_1.png", caption: "Receiving the Craniofacial Fellowship certificate from Prof Peter Anderson, Australian Craniofacial Unit, Adelaide", width: 370, height: 260 },
+  { src: "/images/custom/gallery_2.png", caption: "With Dr Derick Mendonca, former Head, Department of Plastic Surgery, Sakra World Hospital, Bangalore", width: 370, height: 260 },
+  { src: "/images/custom/gallery_3.png", caption: "At the Australian Craniofacial Unit, Adelaide, Australia", width: 370, height: 260 },
+  { src: "/images/custom/gallery_4.png", caption: "With Prof David David, former Head, Australian Craniofacial Unit, Adelaide", width: 370, height: 260 },
+  { src: "/images/custom/gallery_5.png", caption: "With Dr Rajeev B Ahuja, former Head, Department of Burns & Plastic Surgery, Lok Nayak Hospital and MAMC, Delhi", width: 370, height: 260 },
+  { src: "/images/custom/12.png", caption: "With Dr Mark Moore, Head, Australian Craniofacial Unit, Adelaide", width: 370, height: 260 },
+  { src: "/images/custom/13.png", caption: "With Dr Chutima Jirapinyo, Consultant Craniofacial Surgeon, Bangkok", width: 370, height: 260 },
+  { src: "/images/custom/14.png", caption: "With Dr Adam Blackburn, Consultant Plastic Surgeon, East Grinstead, UK", width: 370, height: 260 },
+  { src: "/images/custom/15.png", caption: "At a fat grafting demonstration course, Bangalore", width: 370, height: 260 },
+  { src: "/images/custom/16.png", caption: "Debating at APSICON 2019, Bhubaneswar", width: 370, height: 260 },
+  { src: "/images/custom/17.png", caption: "Presenting at ISCFS 2019, Paris", width: 370, height: 260 },
+  { src: "/images/custom/18.png", caption: "Presenting at APSICON 2018, Lucknow", width: 370, height: 260 },
 ];
 
 export const PUBLICATIONS = [
@@ -123,6 +139,7 @@ export const PRESENTATIONS = [
 export const CLINICS_SEED = [
   {
     slug: "whitefield",
+    photo: "/images/custom/whitefield.webp",
     name: "Whitefield",
     brand: "Aesthetica Veda",
     addressLines: "222/220/A, 2nd Floor, above BMW Deutsche Motoren showroom, opposite Sheraton Grand, Whitefield Main Road, Sadaramangala, KR Puram Hobli, Bengaluru, Karnataka 560048",
@@ -132,6 +149,7 @@ export const CLINICS_SEED = [
   },
   {
     slug: "hrbr-layout",
+    photo: "/images/custom/hrbr.webp",
     name: "HRBR Layout",
     brand: "Aesthetica Veda",
     addressLines: "4M 403, 2nd Floor, TRINE House, Kammanahalli Main Road, HRBR Layout 3rd Block, Kalyan Nagar, Bengaluru, Karnataka 560043",
@@ -141,6 +159,7 @@ export const CLINICS_SEED = [
   },
   {
     slug: "koramangala",
+    photo: "/images/custom/koramangala.webp",
     name: "Koramangala",
     brand: "Aesthetica Veda",
     addressLines: "Docube Clinic, Suite 6 & 7, Sulochana Building, 365, 1st Floor, 1st Cross Road, 3rd Block, Koramangala, Bengaluru, Karnataka 560034",
@@ -194,6 +213,15 @@ export interface ServicePage {
   /** Schema.org MedicalProcedure names covered by the page. */
   procedures: string[];
   related: ServiceSlug[];
+  /** Optional photo gallery (legacy images, served at their original URLs). */
+  gallery?: Photo[];
+}
+
+export interface Photo {
+  src: string;
+  caption: string;
+  width: number;
+  height: number;
 }
 
 const PDF = "/images/pdf";
@@ -300,6 +328,13 @@ export const SERVICE_PAGES: ServicePage[] = [
     conditions: ["Craniosynostosis", "Unicoronal synostosis", "Metopic synostosis", "Sagittal synostosis", "Lambdoid synostosis", "Bicoronal synostosis", "Multisuture synostosis", "Apert syndrome", "Crouzon syndrome", "Pfeiffer syndrome"],
     procedures: ["Endoscope-assisted strip craniectomy", "3D-printed helmet therapy", "Fronto-orbital remodelling", "Cranial vault remodelling", "Posterior vault expansion", "Le Fort III osteotomy"],
     related: ["cleft-lip-and-palate-treatment-bangalore", "other-craniofacial-conditions-treatments", "corrective-jaw-surgery-bangalore"],
+    gallery: [
+      { src: "/images/custom/cran_1.png", caption: "Sagittal craniosynostosis", width: 370, height: 260 },
+      { src: "/images/custom/cran_2.png", caption: "Metopic craniosynostosis", width: 370, height: 260 },
+      { src: "/images/custom/cran_3.png", caption: "Unicoronal craniosynostosis", width: 370, height: 260 },
+      { src: "/images/custom/cran_4.png", caption: "Bicoronal craniosynostosis", width: 370, height: 260 },
+      { src: "/images/custom/cran_5.png", caption: "3D-printed helmet", width: 370, height: 260 },
+    ],
   },
   {
     slug: "cleft-lip-and-palate-treatment-bangalore",
@@ -403,7 +438,10 @@ export const SERVICE_PAGES: ServicePage[] = [
           { title: "Genioplasty", text: "Cuts are made in the chin and the bone is moved forwards, backwards, up or down to correct the deformity." },
         ],
         note: "All incisions are inside the mouth, so there are no external skin scars. These operations involve 3–4 days in hospital including one day in ICU; a blood transfusion is occasionally needed.",
-        body: [],
+      },
+      {
+        heading: "Patient information",
+        items: [{ title: "Patient information sheet", text: "Corrective jaw surgery — what to expect before and after the operation.", sheet: `${PDF}/Corrective-Jaw-Surgery/Patient-information-sheet-Jaw-surgery.pdf` }],
       },
     ],
     faqs: [

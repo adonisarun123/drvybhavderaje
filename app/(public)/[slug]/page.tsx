@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
-import { CtaBand, Faq, HelpSideCard, PageHero, RelatedServices } from "@/components/site/blocks";
+import { CtaBand, Faq, HelpSideCard, PageHero, PhotoGallery, RelatedServices } from "@/components/site/blocks";
 import { InfoSheet } from "@/components/site/info-sheet";
 import { JsonLd } from "@/components/site/json-ld";
 import { getService, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
@@ -82,6 +82,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           {page.sections.map((s) => (
             <Section key={s.heading} s={s} />
           ))}
+          {page.gallery && (
+            <section>
+              <h2>Gallery</h2>
+              <PhotoGallery photos={page.gallery} columns={2} />
+            </section>
+          )}
           <section className="contact-inline">
             <h2>Need more information?</h2>
             <p>

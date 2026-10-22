@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { CtaBand, PageHero } from "@/components/site/blocks";
+import { AffiliationLogos, CtaBand, PageHero, PhotoGallery } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
-import { AFFILIATIONS, CREDENTIALS, DOCTOR, HOSPITALS, PRESENTATIONS, PUBLICATIONS, PUBLICATIONS_OTHER, SITE } from "@/lib/content";
+import { ABOUT_GALLERY, AFFILIATIONS, CREDENTIALS, DOCTOR, HOSPITALS, PRESENTATIONS, PUBLICATIONS, PUBLICATIONS_OTHER, SITE } from "@/lib/content";
 import { getPublicClinics } from "@/lib/clinics";
 import { ROUTES } from "@/lib/routes";
 import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, physicianJsonLd } from "@/lib/seo";
@@ -46,6 +46,7 @@ export default async function AboutPage() {
           </div>
 
           <h2 id="affiliations">Affiliations and memberships</h2>
+          <AffiliationLogos />
           <div className="credential-list">
             {AFFILIATIONS.map((a) => (
               <div key={a.org}>
@@ -95,6 +96,9 @@ export default async function AboutPage() {
               <li key={p.slice(0, 50)}>{p}</li>
             ))}
           </ul>
+
+          <h2 id="gallery">Gallery</h2>
+          <PhotoGallery photos={ABOUT_GALLERY} columns={2} />
         </article>
         <div>
           <Image className="about-image" src="/images/doctor.png" alt="Dr Vybhav Deraje" width={466} height={588} sizes="(max-width: 580px) 90vw, 400px" />
@@ -105,6 +109,7 @@ export default async function AboutPage() {
             <a href="#hospitals">Hospitals</a>
             <a href="#publications">Publications</a>
             <a href="#presentations">Presentations</a>
+            <a href="#gallery">Gallery</a>
           </nav>
           <div className="side-card" style={{ marginTop: 24 }}>
             <h3>Care begins with listening.</h3>

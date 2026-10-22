@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight, Baby, Building2, Check, GraduationCap, HeartHandshake, MapPin, Phone, ShieldCheck } from "lucide-react";
-import { CtaBand, Faq, ServiceGrid, TestimonialCard } from "@/components/site/blocks";
+import { AffiliationLogos, CtaBand, Faq, ServiceGrid, TestimonialCard } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { VideoGallery } from "@/components/site/video-gallery";
-import { AFFILIATIONS, CRANIOFACIAL_SERVICES, DOCTOR, HOME_FAQS, HOSPITALS, PLASTIC_SERVICES, SITE, TESTIMONIALS, VIDEOS } from "@/lib/content";
+import { CRANIOFACIAL_SERVICES, DOCTOR, HOME_FAQS, HOSPITALS, PLASTIC_SERVICES, SITE, TESTIMONIALS, VIDEOS } from "@/lib/content";
 import { getPublicClinics } from "@/lib/clinics";
 import { ROUTES, servicePath } from "@/lib/routes";
 import { faqJsonLd, pageMetadata, physicianJsonLd, practiceJsonLd, videoJsonLd, websiteJsonLd } from "@/lib/seo";
@@ -104,7 +104,7 @@ export default async function HomePage() {
             Protocol-based care with a multidisciplinary team.
           </p>
         </div>
-        <ServiceGrid services={CRANIOFACIAL_SERVICES} />
+        <ServiceGrid services={CRANIOFACIAL_SERVICES} columns={3} />
       </section>
 
       <section id="plastic-surgery" className="section container" aria-labelledby="plastic-heading" style={{ paddingTop: 0 }}>
@@ -182,9 +182,7 @@ export default async function HomePage() {
           <p>{DOCTOR.summary}</p>
           <p>{DOCTOR.summary2}</p>
           <p>{DOCTOR.values}</p>
-          <p className="affiliation-line">
-            <b>Affiliations:</b> {AFFILIATIONS.map((a) => a.org).join(" · ")}
-          </p>
+          <AffiliationLogos />
           <Link href={ROUTES.about} className="text-link">
             Read the full profile, publications and training <ArrowRight size={18} aria-hidden="true" />
           </Link>

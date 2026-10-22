@@ -1,6 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, Baby, Check, Ear, Hand, HeartHandshake, Phone, Quote, Ribbon, ScanFace, Smile, Sparkles, Stethoscope, Waves } from "lucide-react";
-import { SITE, type ServicePage } from "@/lib/content";
+import { AFFILIATIONS, SITE, type Photo, type ServicePage } from "@/lib/content";
 import { ROUTES } from "@/lib/routes";
 
 export function CtaBand() {
@@ -152,5 +153,33 @@ export function TestimonialCard({ name, topic, text }: { name: string; topic: st
         <span>{topic}</span>
       </figcaption>
     </figure>
+  );
+}
+
+export function PhotoGallery({ photos, columns = 3 }: { photos: Photo[]; columns?: 2 | 3 | 4 }) {
+  return (
+    <div className={`photo-grid cols-${columns}`}>
+      {photos.map((p) => (
+        <figure key={p.src} className="photo">
+          <Image src={p.src} alt={p.caption} width={p.width} height={p.height} sizes="(max-width: 580px) 90vw, (max-width: 900px) 45vw, 370px" />
+          <figcaption>{p.caption}</figcaption>
+        </figure>
+      ))}
+    </div>
+  );
+}
+
+export function AffiliationLogos() {
+  return (
+    <ul className="logo-row" aria-label="Memberships and registrations">
+      {AFFILIATIONS.map((a) => (
+        <li key={a.org}>
+          <a href={a.url} target="_blank" rel="noopener noreferrer">
+            <Image src={a.logo} alt={a.org} width={154} height={155} sizes="120px" />
+            <span>{a.org}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
   );
 }
