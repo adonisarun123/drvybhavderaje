@@ -29,7 +29,9 @@ export function pageMetadata(args: { title: string; description: string; path: s
   return {
     title: fullTitle,
     description: args.description,
-    alternates: { canonical: url },
+    // Single-language site serving visitors worldwide: `en` + `x-default` tell search engines the English
+    // page is the right result in every market, not an India-only page.
+    alternates: { canonical: url, languages: { en: url, "x-default": url } },
     robots: args.noindex || !indexingEnabled() ? { index: false, follow: false } : { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
     openGraph: {
       title: fullTitle,
@@ -38,6 +40,7 @@ export function pageMetadata(args: { title: string; description: string; path: s
       siteName: SITE.name,
       type: args.ogType ?? "website",
       locale: "en_IN",
+      alternateLocale: ["en_US", "en_GB", "en_AE", "en_AU"],
       images: [{ url: DOCTOR_IMAGE(), width: 466, height: 588, alt: "Dr Vybhav Deraje, craniofacial and plastic surgeon, Bangalore" }],
     },
     twitter: { card: "summary", title: fullTitle, description: args.description, images: [DOCTOR_IMAGE()] },
@@ -103,7 +106,7 @@ export function practiceJsonLd(clinics: ClinicLike[]) {
     founder: { "@id": PHYSICIAN_ID() },
     sameAs: SAME_AS(),
     department: clinics.map(clinicNode),
-    contactPoint: [{ "@type": "ContactPoint", telephone: SITE.phoneTel, email: SITE.email, contactType: "appointments", areaServed: "IN", availableLanguage: ["en", "kn", "hi"] }],
+    contactPoint: [{ "@type": "ContactPoint", telephone: SITE.phoneTel, email: SITE.email, contactType: "appointments", areaServed: ["IN", "Worldwide"], availableLanguage: ["en", "kn", "hi"] }],
   };
 }
 

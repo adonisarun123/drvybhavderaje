@@ -25,6 +25,10 @@ Source: `lib/procedures.ts`. The ten cosmetic pages expand the doctor's existing
 - Portrait: `public/images/doctor.png` is the 466×588 image from the existing site. A higher-resolution approved portrait is recommended.
 - The `vd` monogram is a design concept, not an approved brand asset.
 
+## International visitors — contact page note (22 Oct 2026)
+- `/contact-us` now carries a short "Patients travelling from abroad" card: use the form (with a country selector for the phone number) or email; replies are in IST; don't email medical reports unsolicited. **Confirm the doctor accepts overseas enquiries and whether he offers video consultations** — the copy deliberately promises neither until he says so. If he does, say so here and the card (and the FAQ on the home page) should state it.
+- Data-protection note for the privacy policy: visitors from the EU/UK/Gulf are submitting personal data to servers hosted outside India (Vercel/Neon). The policy should name where data is stored and the legal basis; this is a legal-review item, not something drafted here.
+
 ## Clinic information
 - Addresses and phone numbers for Whitefield, HRBR Layout and Koramangala (Aesthetica Veda) — taken from the existing site; confirm they are current. Editable in Admin → Clinics.
 - Main practice phone `+91 95355 81616` and email `connect@drvybhavderaje.com`.

@@ -7,6 +7,7 @@ import { AppError, NotFoundError, ValidationError } from "../errors";
 import { recordAudit, diff, PUBLIC_ACTOR, type Actor } from "../audit";
 import { nextEnquiryReference } from "../references";
 import { normalisePhone } from "../phone";
+import { dialCodeFor } from "../dial-codes";
 import { createAppointment, type CreateAppointmentInput } from "../scheduling/engine";
 
 export const CONSENT_VERSION = "2026-10-privacy-v1";
@@ -14,6 +15,8 @@ export const CONSENT_VERSION = "2026-10-privacy-v1";
 export const publicEnquirySchema = z.object({
   name: z.string().trim().min(2, "Please enter your name").max(80),
   phone: z.string().trim().min(8, "Please enter a phone number").max(20),
+  /** ISO country of the phone number (see lib/dial-codes.ts); "OTHER" means the number carries its own "+". */
+  phoneCountry: z.string().trim().max(8).optional(),
   email: z.union([z.literal(""), z.string().trim().email("Please enter a valid email address").max(254)]).optional(),
   clinic: z.string().trim().min(1, "Please choose a clinic").max(64),
   preferredStart: z.string().trim().max(40).optional().or(z.literal("")),
@@ -28,8 +31,11 @@ export async function createPublicEnquiry(
   input: PublicEnquiryInput,
   meta: { ipHash: string | null; userAgent: string | null },
 ) {
-  const phoneE164 = normalisePhone(input.phone);
-  if (!phoneE164) throw new ValidationError("Please check the phone number.", { phone: ["Please enter a valid phone number"] });
+  const dialCode = dialCodeFor(input.phoneCountry);
+  const phoneE164 = normalisePhone(input.phone, dialCode ?? "91");
+  if (!phoneE164 || (!dialCode && input.phoneCountry === "OTHER" && !input.phone.trim().startsWith("+"))) {
+    throw new ValidationError("Please check the phone number.", { phone: [input.phoneCountry === "OTHER" ? "Please include your country code, starting with +" : "Please enter a valid phone number"] });
+  }
   let clinicId: string | null = null;
   let clinicPreference: string | null = null;
   if (input.clinic === "help_me_choose") {
@@ -54,7 +60,7 @@ export async function createPublicEnquiry(
       .values({
         reference,
         name: input.name,
-        phoneRaw: input.phone,
+        phoneRaw: input.phoneCountry && input.phoneCountry !== "IN" ? `${input.phone} (${input.phoneCountry})` : input.phone,
         phoneE164,
         email: input.email || null,
         clinicId,

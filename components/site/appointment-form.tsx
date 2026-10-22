@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { SITE } from "@/lib/content";
 import { ROUTES } from "@/lib/routes";
 import type { PublicClinic } from "@/lib/clinics";
+import { DIAL_CODES, OTHER_COUNTRY } from "@/lib/dial-codes";
 
 type FieldErrors = Record<string, string[]>;
 type Status =
@@ -23,8 +24,30 @@ interface Props {
   initialClinic?: string;
 }
 
+const CLINIC_TZ = "Asia/Kolkata";
+
 function fmtIst(iso: string) {
-  return new Intl.DateTimeFormat("en-IN", { timeZone: "Asia/Kolkata", hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(iso)) + " IST";
+  return new Intl.DateTimeFormat("en-IN", { timeZone: CLINIC_TZ, hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(iso)) + " IST";
+}
+
+/** The visitor's own time zone, or null when it is the clinic's (so we don't print the same time twice). */
+function visitorTimeZone(): string | null {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return tz && tz !== CLINIC_TZ && tz !== "Asia/Calcutta" ? tz : null;
+  } catch {
+    return null;
+  }
+}
+
+const noopSubscribe = () => () => {};
+
+/** Slot label: clinic time, plus the visitor's local time when they are outside India. */
+function fmtSlot(iso: string, tz: string | null) {
+  const ist = fmtIst(iso);
+  if (!tz) return ist;
+  const local = new Intl.DateTimeFormat("en-GB", { timeZone: tz, weekday: "short", hour: "numeric", minute: "2-digit", hour12: true, timeZoneName: "short" }).format(new Date(iso));
+  return `${ist} (${local} your time)`;
 }
 
 export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateMax, initialClinic }: Props) {
@@ -37,6 +60,9 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
   const [slots, setSlots] = useState<{ start: string; end: string }[] | null>(null);
   const [slotState, setSlotState] = useState<"idle" | "loading" | "none" | "error">("idle");
   const [selectedSlot, setSelectedSlot] = useState("");
+  const [phoneCountry, setPhoneCountry] = useState("IN");
+  // Browser-only (null on the server and during hydration, so markup matches).
+  const visitorTz = useSyncExternalStore(noopSubscribe, visitorTimeZone, () => null);
   const alertRef = useRef<HTMLDivElement>(null);
   const id = useId();
 
@@ -78,6 +104,7 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
     const payload = {
       name: String(fd.get("name") ?? ""),
       phone: String(fd.get("phone") ?? ""),
+      phoneCountry,
       email: String(fd.get("email") ?? ""),
       clinic: String(fd.get("clinic") ?? ""),
       preferredStart: selectedSlot,
@@ -148,12 +175,27 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
             </span>
           )}
         </label>
+        <label className="field" htmlFor={`${id}-phone-country`}>
+          Country of your phone number *
+          <select id={`${id}-phone-country`} name="phoneCountry" autoComplete="tel-country-code" value={phoneCountry} onChange={(e) => setPhoneCountry(e.target.value)} disabled={!enabled}>
+            {DIAL_CODES.map((d) => (
+              <option key={d.iso} value={d.iso}>
+                {d.name} (+{d.code})
+              </option>
+            ))}
+            <option value={OTHER_COUNTRY}>Other country (type the full number with +)</option>
+          </select>
+        </label>
         <label className="field" htmlFor={`${id}-phone`}>
           Phone number *
-          <input id={`${id}-phone`} name="phone" type="tel" autoComplete="tel" placeholder="+91" required maxLength={20} aria-invalid={!!err("phone")} aria-describedby={err("phone") ? `${id}-phone-err` : undefined} disabled={!enabled} />
-          {err("phone") && (
+          <input id={`${id}-phone`} name="phone" type="tel" autoComplete={phoneCountry === OTHER_COUNTRY ? "tel" : "tel-national"} placeholder={phoneCountry === OTHER_COUNTRY ? "+ country code and number" : phoneCountry === "IN" ? "10-digit mobile number" : "Number without the country code"} required maxLength={20} aria-invalid={!!err("phone")} aria-describedby={err("phone") ? `${id}-phone-err` : `${id}-phone-help`} disabled={!enabled} />
+          {err("phone") ? (
             <span className="field-error" id={`${id}-phone-err`}>
               {err("phone")}
+            </span>
+          ) : (
+            <span className="note" id={`${id}-phone-help`}>
+              {phoneCountry === "IN" ? "The clinic will call or message you on this number." : "The clinic will call or message you on this number; WhatsApp-enabled numbers are easiest to reach from India."}
             </span>
           )}
         </label>
@@ -201,13 +243,13 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
             {slots && slots.length > 0 && (
               <fieldset style={{ border: 0, padding: 0, margin: 0 }}>
                 <legend className="note" style={{ marginTop: 8 }}>
-                  Preferred time (IST) — a preference, not a booking
+                  Preferred time (clinic time, IST / UTC+5:30{visitorTz ? ", with your local time" : ""}) — a preference, not a booking
                 </legend>
                 <div className="slot-grid">
                   {slots.map((s) => (
                     <label key={s.start}>
                       <input type="radio" name="slot" value={s.start} checked={selectedSlot === s.start} onChange={() => setSelectedSlot(s.start)} />
-                      {fmtIst(s.start)}
+                      {fmtSlot(s.start, visitorTz)}
                     </label>
                   ))}
                 </div>

@@ -50,6 +50,17 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
               {SITE.email} <ArrowUpRight size={16} aria-hidden="true" />
             </a>
           </aside>
+          <aside className="side-card" aria-label="Contacting us from outside India" style={{ marginTop: 24 }}>
+            <p className="eyebrow">Outside India?</p>
+            <h3>Patients travelling from abroad.</h3>
+            <p>
+              Use the form above and choose the country of your phone number, or email{" "}
+              <a className="text-link" href={`mailto:${SITE.email}`}>
+                {SITE.email}
+              </a>
+              . The clinic replies in Indian Standard Time (UTC+5:30). Preferred consultation times on the form are shown in IST and in your local time. Please do not send medical reports by email until the clinic asks for them.
+            </p>
+          </aside>
           <aside className="side-card" aria-label="Clinic addresses" style={{ marginTop: 24 }}>
             <p className="eyebrow">Consultation clinics</p>
             {clinics.map((c) => (

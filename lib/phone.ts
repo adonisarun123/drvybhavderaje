@@ -1,7 +1,11 @@
 /**
- * Minimal phone normalisation for an Indian practice. Produces E.164 where the
- * input is unambiguous; otherwise returns null so validation can reject it.
- * Default country code +91. International numbers must include a leading "+".
+ * Phone normalisation to E.164. Returns null when the input is ambiguous so validation can reject it.
+ *
+ * `defaultCountry` is the calling code (digits, no "+") the number is read against when it has no
+ * leading "+": "91" for the practice's home market, or whatever the visitor chose in the country
+ * selector on the enquiry form. For a non-Indian default the national trunk prefix "0" is dropped
+ * (UK "07700 900123" with "44" → +447700900123). A number typed with a leading "+" is always taken
+ * as already international, whatever the default.
  */
 export function normalisePhone(raw: string, defaultCountry = "91"): string | null {
   const trimmed = raw.trim();
@@ -10,6 +14,15 @@ export function normalisePhone(raw: string, defaultCountry = "91"): string | nul
   let digits = trimmed.replace(/[^\d]/g, "");
   if (!digits) return null;
   if (hasPlus) {
+    if (digits.length < 8 || digits.length > 15) return null;
+    return `+${digits}`;
+  }
+  if (defaultCountry !== "91") {
+    if (digits.startsWith("00")) digits = digits.slice(2);
+    else {
+      if (digits.startsWith("0")) digits = digits.replace(/^0+/, "");
+      if (!digits.startsWith(defaultCountry) || digits.length <= defaultCountry.length + 6) digits = `${defaultCountry}${digits}`;
+    }
     if (digits.length < 8 || digits.length > 15) return null;
     return `+${digits}`;
   }

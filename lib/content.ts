@@ -84,12 +84,12 @@ export const AFFILIATIONS = [
 ];
 
 export const HOSPITALS = [
-  { name: "Aster Hospital Whitefield", image: "/custom/aster1.webp", address: "Plot No. 2, 3 & 4, Survey No. 76, Sadaramangala Industrial Area, Opp. ITPL Main Road, Kadugodi, Bengaluru, Karnataka 560066", phone: "+918045108888", phoneDisplay: "080 4510 8888" },
+  { name: "Aster Hospital Whitefield", image: "/custom/aster1.webp", address: "Plot No. 2, 3 & 4, Survey No. 76, Sadaramangala Industrial Area, Opp. ITPL Main Road, Kadugodi, Bengaluru, Karnataka 560066", phone: "+918045108888", phoneDisplay: "+91 80 4510 8888" },
   { name: "Gleneagles Global Hospital", image: "/custom/gleneagles1.webp", address: "5/5, Richmond Road, Bengaluru, Karnataka 560025", phone: "+918046694333", phoneDisplay: "+91 80 4669 4333" },
   { name: "Sakra World Hospital", image: "/custom/sakara1.webp", address: "Sy No. 52/2 & 52/3, Devarabeesanahalli, Varthur Hobli, Opp. Intel, Outer Ring Road, Marathahalli, Bengaluru, Karnataka 560103", phone: "+918049694969", phoneDisplay: "+91 80 4969 4969" },
-  { name: "Apollo Spectra Hospital", image: "/custom/appolo1.webp", address: "143, 1st Cross, Near Nagarjuna Hotel, 5th Block, Koramangala, Bengaluru, Karnataka 560034", phone: "+918448440991", phoneDisplay: "084484 40991" },
-  { name: "Kauvery Hospital Marathahalli", image: "/custom/kauvery1.webp", address: "2371/3, Old HAL Airport Varthur Road, Munnekolala, Marathahalli, Bengaluru, Karnataka 560037", phone: "+918041804180", phoneDisplay: "080 4180 4180" },
-  { name: "Belenus Champion Hospital", image: "/custom/belenus1.webp", address: "Sarjapur – Marathahalli Road, Opp. Decathlon, Carmelaram, Ambedkar Nagar, Chikkabellandur, Bengaluru, Karnataka 560035", phone: "+918069366936", phoneDisplay: "080 6936 6936" },
+  { name: "Apollo Spectra Hospital", image: "/custom/appolo1.webp", address: "143, 1st Cross, Near Nagarjuna Hotel, 5th Block, Koramangala, Bengaluru, Karnataka 560034", phone: "+918448440991", phoneDisplay: "+91 84484 40991" },
+  { name: "Kauvery Hospital Marathahalli", image: "/custom/kauvery1.webp", address: "2371/3, Old HAL Airport Varthur Road, Munnekolala, Marathahalli, Bengaluru, Karnataka 560037", phone: "+918041804180", phoneDisplay: "+91 80 4180 4180" },
+  { name: "Belenus Champion Hospital", image: "/custom/belenus1.webp", address: "Sarjapur – Marathahalli Road, Opp. Decathlon, Carmelaram, Ambedkar Nagar, Chikkabellandur, Bengaluru, Karnataka 560035", phone: "+918069366936", phoneDisplay: "+91 80 6936 6936" },
 ];
 
 /** Photographs from the practice's about page (ImageKit paths; legacy /images/… URLs redirect there). */

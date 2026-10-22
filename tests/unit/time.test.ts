@@ -31,6 +31,14 @@ describe("phone normalisation", () => {
     expect(normalisePhone("919535581616")).toBe("+919535581616");
     expect(normalisePhone("+44 20 7946 0958")).toBe("+442079460958");
   });
+  it("reads a national number against the visitor's chosen country", () => {
+    expect(normalisePhone("07700 900123", "44")).toBe("+447700900123");
+    expect(normalisePhone("7700 900123", "44")).toBe("+447700900123");
+    expect(normalisePhone("(202) 555-0123", "1")).toBe("+12025550123");
+    expect(normalisePhone("050 123 4567", "971")).toBe("+971501234567");
+    expect(normalisePhone("+91 95355 81616", "44")).toBe("+919535581616");
+    expect(normalisePhone("0044 7700 900123", "44")).toBe("+447700900123");
+  });
   it("rejects junk", () => {
     expect(normalisePhone("abc")).toBeNull();
     expect(normalisePhone("12")).toBeNull();
