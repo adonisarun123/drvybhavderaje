@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AFFILIATIONS, CREDENTIALS, DOCTOR, HOSPITALS, SERVICE_PAGES, SITE, type ServicePage } from "./content";
+import { DOCTOR_PHOTO, imageUrl } from "./images";
 import { ROUTES } from "./routes";
 
 export function siteOrigin(): string {
@@ -18,7 +19,7 @@ export function indexingEnabled(): boolean {
 export const PHYSICIAN_ID = () => `${siteOrigin()}/#physician`;
 export const WEBSITE_ID = () => `${siteOrigin()}/#website`;
 export const ORG_ID = () => `${siteOrigin()}/#practice`;
-export const DOCTOR_IMAGE = () => `${siteOrigin()}/images/doctor.png`;
+export const DOCTOR_IMAGE = () => imageUrl(DOCTOR_PHOTO);
 
 const SAME_AS = () => [SITE.social.facebook, SITE.social.instagram, SITE.social.linkedin, SITE.social.youtube];
 

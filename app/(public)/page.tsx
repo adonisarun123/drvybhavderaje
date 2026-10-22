@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { Image } from "@imagekit/next";
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight, Baby, Building2, Check, GraduationCap, HeartHandshake, MapPin, Phone, ShieldCheck } from "lucide-react";
 import { AffiliationLogos, CtaBand, Faq, ServiceGrid, TestimonialCard } from "@/components/site/blocks";
@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/site/json-ld";
 import { VideoGallery } from "@/components/site/video-gallery";
 import { CRANIOFACIAL_SERVICES, DOCTOR, HOME_FAQS, HOSPITALS, PLASTIC_SERVICES, SITE, TESTIMONIALS, VIDEOS } from "@/lib/content";
 import { getPublicClinics } from "@/lib/clinics";
+import { DOCTOR_PHOTO } from "@/lib/images";
 import { ROUTES, servicePath } from "@/lib/routes";
 import { faqJsonLd, pageMetadata, physicianJsonLd, practiceJsonLd, videoJsonLd, websiteJsonLd } from "@/lib/seo";
 
@@ -53,7 +54,7 @@ export default async function HomePage() {
           </div>
           <div className="hero-visual">
             <div className="image-frame">
-              <Image className="doctor-hero" src="/images/doctor.png" alt="Dr Vybhav Deraje, craniofacial and plastic surgeon, in blue surgical scrubs" width={466} height={588} priority sizes="(max-width: 580px) 90vw, (max-width: 1080px) 45vw, 520px" />
+              <Image className="doctor-hero" src={DOCTOR_PHOTO} alt="Dr Vybhav Deraje, craniofacial and plastic surgeon, in blue surgical scrubs" width={466} height={588} priority sizes="(max-width: 580px) 90vw, (max-width: 1080px) 45vw, 520px" />
             </div>
             <div className="portrait-label">
               <span className="label-line" aria-hidden="true" />

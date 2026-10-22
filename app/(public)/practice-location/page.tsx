@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { Image } from "@imagekit/next";
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight, MapPin, Phone } from "lucide-react";
 import { CtaBand, PageHero } from "@/components/site/blocks";

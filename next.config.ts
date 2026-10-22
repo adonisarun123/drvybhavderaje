@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { imageKitEndpoint } from "./lib/image-config";
 import { RETIRED_PATHS, SERVICE_SLUGS, STATIC_LEGACY_STEMS } from "./lib/routes";
 
 /**
@@ -16,7 +17,22 @@ const LEGACY_STEMS: string[] = [...STATIC_LEGACY_STEMS, ...SERVICE_SLUGS];
 
 const legacyRewrites = LEGACY_STEMS.map((stem) => ({ source: `/${stem}.html`, destination: `/${stem}` }));
 
+/** Images moved to ImageKit; the legacy /images/… URLs (everything except the PDFs) redirect there. */
+const IK = imageKitEndpoint();
+const imageRedirects = [
+  { source: "/images/custom/:path*", destination: `${IK}/custom/:path*`, permanent: true },
+  { source: "/images/slider2/:path*", destination: `${IK}/slider2/:path*`, permanent: true },
+  { source: "/images/landing-page/:path*", destination: `${IK}/custom/:path*`, permanent: true },
+  { source: "/images/dRlogo.png", destination: `${IK}/dRlogo.png`, permanent: true },
+  { source: "/images/dRlogo_footer.png", destination: `${IK}/dRlogo_footer.png`, permanent: true },
+  { source: "/images/doctor.png", destination: `${IK}/doctor.png`, permanent: true },
+  // ImageKit replaces square brackets in file names with underscores.
+  { source: "/images/3518679_16443-[Converte.png", destination: `${IK}/3518679_16443-_Converte.png`, permanent: true },
+  { source: "/images/3518679_16443-[Converted].png", destination: `${IK}/3518679_16443-_Converted_.png`, permanent: true },
+];
+
 const canonicalRedirects = [
+  ...imageRedirects,
   ...LEGACY_STEMS.map((stem) => ({ source: `/${stem}`, destination: `/${stem}.html`, permanent: true })),
   ...Object.entries(RETIRED_PATHS).map(([source, destination]) => ({ source, destination, permanent: true })),
 ];
@@ -32,7 +48,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   typescript: { ignoreBuildErrors: false },
-  images: { remotePatterns: [{ protocol: "https", hostname: "i.ytimg.com" }] },
+  images: { remotePatterns: [{ protocol: "https", hostname: "i.ytimg.com" }, { protocol: "https", hostname: "ik.imagekit.io" }] },
   async redirects() {
     return canonicalRedirects;
   },

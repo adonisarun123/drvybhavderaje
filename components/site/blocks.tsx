@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { Image } from "@imagekit/next";
 import { ArrowRight, ArrowUpRight, Baby, Check, Ear, Hand, HeartHandshake, Phone, Quote, Ribbon, ScanFace, Smile, Sparkles, Stethoscope, Waves } from "lucide-react";
 import { AFFILIATIONS, SITE, type Photo, type ServicePage } from "@/lib/content";
 import { ROUTES } from "@/lib/routes";

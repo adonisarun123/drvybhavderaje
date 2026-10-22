@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { ABOUT_GALLERY, SERVICE_PAGES, SITE } from "@/lib/content";
 import { ROUTES } from "@/lib/routes";
+import { DOCTOR_PHOTO, imageUrl } from "@/lib/images";
 import { siteOrigin } from "@/lib/seo";
 
 /**
@@ -10,7 +11,7 @@ import { siteOrigin } from "@/lib/seo";
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = siteOrigin();
   const lastModified = new Date(SITE.contentUpdated);
-  const doctorImage = `${base}/images/doctor.png`;
+  const doctorImage = imageUrl(DOCTOR_PHOTO);
   const entry = (path: string, priority: number, changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"], images?: string[]): MetadataRoute.Sitemap[number] => ({
     url: `${base}${path}`,
     lastModified,
@@ -20,8 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
   return [
     entry("/", 1, "weekly", [doctorImage]),
-    entry(ROUTES.about, 0.9, "monthly", [doctorImage, ...ABOUT_GALLERY.map((g) => `${base}${g.src}`)]),
-    ...SERVICE_PAGES.map((p) => entry(p.path, 0.8, "monthly", p.gallery?.map((g) => `${base}${g.src}`))),
+    entry(ROUTES.about, 0.9, "monthly", [doctorImage, ...ABOUT_GALLERY.map((g) => imageUrl(g.src))]),
+    ...SERVICE_PAGES.map((p) => entry(p.path, 0.8, "monthly", p.gallery?.map((g) => imageUrl(g.src)))),
     entry(ROUTES.locations, 0.8, "monthly"),
     entry(ROUTES.contact, 0.9, "monthly"),
     entry(ROUTES.testimonials, 0.6, "monthly"),

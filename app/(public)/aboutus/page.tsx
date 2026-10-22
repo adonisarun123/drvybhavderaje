@@ -1,11 +1,12 @@
-import Image from "next/image";
 import Link from "next/link";
+import { Image } from "@imagekit/next";
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { AffiliationLogos, CtaBand, PageHero, PhotoGallery } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { ABOUT_GALLERY, AFFILIATIONS, CREDENTIALS, DOCTOR, HOSPITALS, PRESENTATIONS, PUBLICATIONS, PUBLICATIONS_OTHER, SITE } from "@/lib/content";
 import { getPublicClinics } from "@/lib/clinics";
+import { DOCTOR_PHOTO } from "@/lib/images";
 import { ROUTES } from "@/lib/routes";
 import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, physicianJsonLd } from "@/lib/seo";
 
@@ -101,7 +102,7 @@ export default async function AboutPage() {
           <PhotoGallery photos={ABOUT_GALLERY} columns={2} />
         </article>
         <div>
-          <Image className="about-image" src="/images/doctor.png" alt="Dr Vybhav Deraje" width={466} height={588} sizes="(max-width: 580px) 90vw, 400px" />
+          <Image className="about-image" src={DOCTOR_PHOTO} alt="Dr Vybhav Deraje" width={466} height={588} sizes="(max-width: 580px) 90vw, 400px" />
           <nav className="side-card toc" aria-label="On this page" style={{ marginTop: 24 }}>
             <p className="eyebrow">On this page</p>
             <a href="#qualifications">Qualifications</a>

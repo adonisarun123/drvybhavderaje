@@ -52,11 +52,17 @@ All copy comes from the live site (crawled 21 Oct 2026) and is the doctor's own 
 edited for clarity and consistency only — no new clinical claims. `lib/content.ts` is the single source
 for pages, schema, sitemap and `llms.txt`.
 
-**Still to pull from the old host (needs a download approval):** the 32 patient-information PDFs
-(`/images/pdf/<folder>/Patient-information-sheet-*.pdf`) and the about-page photos. The PDF links are
-already wired at their legacy paths and render only when the file exists in `/public`
-(`components/site/info-sheet.tsx`), so no dead links ship. Drop the files into
-`public/images/pdf/…` with the exact legacy folder names (note the legacy misspelling `Craniosynthosis`).
+**Legacy assets (22 Oct 2026):** the 34 patient-information PDFs stay in `public/images/pdf/<folder>/…`
+(legacy folder spelling `Craniosynthosis` kept on purpose). The 95 legacy images were moved to **ImageKit**
+(`@imagekit/next`; media-library folder `/drvybhavderaje`, same tree as the old `/images/` — `custom/`,
+`slider2/`, root logos and `doctor.png`). Endpoint: `NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT`
+(`https://ik.imagekit.io/meddeskos/drvybhavderaje`, see `lib/image-config.ts`). Every legacy
+`/images/…` image URL 308-redirects to its ImageKit URL (`next.config.ts → imageRedirects`); ImageKit
+replaced square brackets in two file names with `_`, which the redirect map accounts for. One legacy image
+(`images/landing-page/testimonial_img.jpg`) 404s on the old host too. Photos are used on the about page
+(12-photo gallery), the craniosynostosis page (5), the locations page (clinic photos + hospital images)
+and the affiliation logos on home/about; the PDFs render via `components/site/info-sheet.tsx` and are
+indexed on `/patient-resources`.
 
 ## On-page
 
@@ -66,7 +72,7 @@ already wired at their legacy paths and render only when the file exists in `/pu
 - Service pages: intro → sections (`<h2>`) → procedures (`<h3>` cards) → contact → FAQ (native `<details>`).
 - Internal linking: header → sections; every service page → 3 related services; footer lists all 10
   services + about/locations/stories/resources/contact + privacy/terms + social profiles (`rel="me"`).
-- Images: doctor photo only (optimised via `next/image`); YouTube loads on click (`youtube-nocookie`,
+- Images: served by ImageKit (`<Image>` from `@imagekit/next`, responsive `srcset`, auto format/quality); YouTube loads on click (`youtube-nocookie`,
   static thumbnail) — no third-party JS on page view.
 
 ## Structured data (JSON-LD, all backed by visible content)
@@ -99,8 +105,8 @@ already wired at their legacy paths and render only when the file exists in `/pu
 
 ## Launch checklist
 
-1. Pull PDFs/photos from the old host into `public/` (see above).
-2. Set `SITE_ORIGIN`, `PUBLIC_INDEXING=true`, `ENQUIRIES_ENABLED=true` on production.
+1. ~~Pull PDFs/photos from the old host~~ — done.
+2. Set `SITE_ORIGIN`, `PUBLIC_INDEXING=true`, `ENQUIRIES_ENABLED=true`, `NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT` on production.
 3. Point DNS; confirm `curl -I https://drvybhavderaje.com/aboutus.html` → 200 and `/about` → 308.
 4. Submit `https://drvybhavderaje.com/sitemap.xml` in Google Search Console and Bing Webmaster Tools.
 5. Validate three pages in the Rich Results Test (home, a service page, about).
