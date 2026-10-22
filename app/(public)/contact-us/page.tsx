@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, ArrowUpRight, MapPin, Phone } from "lucide-react";
+import { ArrowRight, ArrowUpRight, MapPin, MessageCircle, Phone } from "lucide-react";
 import { PageHero } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { AppointmentForm } from "@/components/site/appointment-form";
@@ -16,7 +16,7 @@ import { PRACTICE_TZ } from "@/lib/time";
 export const dynamic = "force-dynamic";
 
 const TITLE = "Contact Us & Book an Appointment — Dr Vybhav Deraje, Bangalore";
-const DESCRIPTION = `Book an appointment with Dr Vybhav Deraje, craniofacial & plastic surgeon, Bangalore. Call ${SITE.phone} or send an enquiry. Whitefield, HRBR Layout, Koramangala.`;
+const DESCRIPTION = `Book an appointment with Dr Vybhav Deraje, craniofacial & plastic surgeon, Bangalore. Call or WhatsApp ${SITE.phone} or send an enquiry. Whitefield, HRBR Layout, Koramangala.`;
 
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: ROUTES.contact });
 
@@ -41,9 +41,13 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
           <aside className="side-card" aria-label="Phone and email">
             <p className="eyebrow">Prefer to speak with us?</p>
             <h3>We’re here to help.</h3>
-            <p>Call to discuss appointment availability and the most convenient clinic for you.</p>
+            <p>Call or message on WhatsApp to discuss appointment availability and the most convenient clinic for you.</p>
             <a className="text-link" href={`tel:${SITE.phoneTel}`}>
               <Phone size={16} aria-hidden="true" /> {SITE.phone}
+            </a>
+            <br />
+            <a className="text-link" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
+              <MessageCircle size={16} aria-hidden="true" /> WhatsApp {SITE.phone}
             </a>
             <br />
             <a className="text-link" href={`mailto:${SITE.email}`}>
@@ -54,7 +58,11 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
             <p className="eyebrow">Outside India?</p>
             <h3>Patients from abroad are welcome.</h3>
             <p>
-              Dr Deraje sees patients travelling from outside India and offers video consultations for an initial opinion or follow-up. Choose <em>Video consultation</em> in the form above and select the country of your phone number, or email{" "}
+              Dr Deraje sees patients travelling from outside India and offers video consultations for an initial opinion or follow-up. Choose <em>Video consultation</em> in the form above and select the country of your phone number, message the clinic on{" "}
+              <a className="text-link" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
+                WhatsApp
+              </a>
+              , or email{" "}
               <a className="text-link" href={`mailto:${SITE.email}`}>
                 {SITE.email}
               </a>

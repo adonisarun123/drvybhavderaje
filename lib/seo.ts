@@ -106,7 +106,7 @@ export function practiceJsonLd(clinics: ClinicLike[]) {
     founder: { "@id": PHYSICIAN_ID() },
     sameAs: SAME_AS(),
     department: clinics.map(clinicNode),
-    contactPoint: [{ "@type": "ContactPoint", telephone: SITE.phoneTel, email: SITE.email, contactType: "appointments", areaServed: ["IN", "Worldwide"], availableLanguage: ["en", "kn", "hi"] }],
+    contactPoint: [{ "@type": "ContactPoint", telephone: SITE.phoneTel, email: SITE.email, contactType: "appointments", areaServed: ["IN", "Worldwide"], availableLanguage: ["en", "kn", "hi"], url: SITE.whatsappUrl }],
   };
 }
 

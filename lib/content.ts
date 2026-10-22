@@ -20,6 +20,9 @@ export const SITE = {
   city: "Bangalore, India",
   phone: "+91 95355 81616",
   phoneTel: "+919535581616",
+  /** WhatsApp on the same practice number; wa.me needs digits only. */
+  whatsappNumber: "919535581616",
+  whatsappUrl: "https://wa.me/919535581616?text=" + encodeURIComponent("Hello, I would like to enquire about a consultation with Dr Vybhav Deraje."),
   email: "connect@drvybhavderaje.com",
   utilityLine: "Reconstructing faces. Rebuilding lives.",
   /** <meta description> for the homepage (≤160 chars). */
