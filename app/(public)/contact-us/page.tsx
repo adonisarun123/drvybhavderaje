@@ -52,13 +52,13 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
           </aside>
           <aside className="side-card" aria-label="Contacting us from outside India" style={{ marginTop: 24 }}>
             <p className="eyebrow">Outside India?</p>
-            <h3>Patients travelling from abroad.</h3>
+            <h3>Patients from abroad are welcome.</h3>
             <p>
-              Use the form above and choose the country of your phone number, or email{" "}
+              Dr Deraje sees patients travelling from outside India and offers video consultations for an initial opinion or follow-up. Choose <em>Video consultation</em> in the form above and select the country of your phone number, or email{" "}
               <a className="text-link" href={`mailto:${SITE.email}`}>
                 {SITE.email}
               </a>
-              . The clinic replies in Indian Standard Time (UTC+5:30). Preferred consultation times on the form are shown in IST and in your local time. Please do not send medical reports by email until the clinic asks for them.
+              . The clinic replies in Indian Standard Time (UTC+5:30); preferred times are shown in IST and in your local time. Please wait for the clinic to ask before sending medical reports or photographs.
             </p>
           </aside>
           <aside className="side-card" aria-label="Clinic addresses" style={{ marginTop: 24 }}>

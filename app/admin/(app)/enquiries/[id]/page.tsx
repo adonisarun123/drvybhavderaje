@@ -1,3 +1,4 @@
+import { clinicPreferenceLabel } from "@/lib/enquiries/preferences";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EnquiryNoteForm, EnquiryStatusForm } from "@/components/admin/enquiry-panels";
@@ -59,7 +60,7 @@ export default async function EnquiryDetailPage({ params }: { params: Promise<{ 
               <dt>Email</dt>
               <dd>{e.email ? <a href={`mailto:${e.email}`}>{e.email}</a> : "—"}</dd>
               <dt>Preferred clinic</dt>
-              <dd>{clinicName ?? (e.clinicPreference === "help_me_choose" ? "Help me choose" : "Not specified")}</dd>
+              <dd>{clinicName ?? clinicPreferenceLabel(e.clinicPreference, "Not specified")}</dd>
               <dt>Preferred time</dt>
               <dd>{e.preferredStartAt ? fmtDateTime(e.preferredStartAt) : e.preferredNote ?? "—"}</dd>
               <dt>Consent</dt>

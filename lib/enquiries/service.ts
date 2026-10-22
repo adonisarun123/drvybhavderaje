@@ -8,6 +8,7 @@ import { recordAudit, diff, PUBLIC_ACTOR, type Actor } from "../audit";
 import { nextEnquiryReference } from "../references";
 import { normalisePhone } from "../phone";
 import { dialCodeFor } from "../dial-codes";
+import { isClinicPreference } from "./preferences";
 import { createAppointment, type CreateAppointmentInput } from "../scheduling/engine";
 
 export const CONSENT_VERSION = "2026-10-privacy-v1";
@@ -38,8 +39,8 @@ export async function createPublicEnquiry(
   }
   let clinicId: string | null = null;
   let clinicPreference: string | null = null;
-  if (input.clinic === "help_me_choose") {
-    clinicPreference = "help_me_choose";
+  if (isClinicPreference(input.clinic)) {
+    clinicPreference = input.clinic;
   } else {
     const [c] = await db.select().from(clinics).where(and(eq(clinics.slug, input.clinic), eq(clinics.active, true)));
     if (!c) throw new ValidationError("Please choose a clinic.", { clinic: ["Please choose a clinic from the list"] });

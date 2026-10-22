@@ -1,3 +1,4 @@
+import { clinicPreferenceLabel } from "@/lib/enquiries/preferences";
 import Link from "next/link";
 import { Pagination, StatusBadge } from "@/components/admin/ui";
 import { requireStaff } from "@/lib/auth/guard";
@@ -114,7 +115,7 @@ export default async function EnquiriesPage({ searchParams }: { searchParams: Pr
                       {e.email ? ` · ${e.email}` : ""}
                     </span>
                   </td>
-                  <td>{clinicName ?? (e.clinicPreference === "help_me_choose" ? "Help me choose" : "—")}</td>
+                  <td>{clinicName ?? clinicPreferenceLabel(e.clinicPreference, "—")}</td>
                   <td>{e.preferredStartAt ? fmtDateTime(e.preferredStartAt) : e.preferredNote ?? "—"}</td>
                   <td>{e.source.replace("_", " ")}</td>
                   <td>{fmtDateTime(e.receivedAt)}</td>

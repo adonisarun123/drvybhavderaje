@@ -7,6 +7,7 @@ import { SITE } from "@/lib/content";
 import { ROUTES } from "@/lib/routes";
 import type { PublicClinic } from "@/lib/clinics";
 import { DIAL_CODES, OTHER_COUNTRY } from "@/lib/dial-codes";
+import { CLINIC_PREFERENCES, isClinicPreference } from "@/lib/enquiries/preferences";
 
 type FieldErrors = Record<string, string[]>;
 type Status =
@@ -69,7 +70,7 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
   const fetchSeq = useRef(0);
   function loadSlots(nextClinic: string, nextDate: string) {
     setSelectedSlot("");
-    if (!slotsEnabled || !nextClinic || nextClinic === "help_me_choose" || !nextDate) {
+    if (!slotsEnabled || !nextClinic || isClinicPreference(nextClinic) || !nextDate) {
       setSlots(null);
       setSlotState("idle");
       return;
@@ -209,7 +210,7 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
           )}
         </label>
         <label className="field full" htmlFor={`${id}-clinic`}>
-          Preferred clinic *
+          Preferred clinic, or video consultation *
           <select id={`${id}-clinic`} name="clinic" required value={clinic} onChange={(e) => {
               setClinic(e.target.value);
               loadSlots(e.target.value, date);
@@ -222,7 +223,8 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
                 {c.name}
               </option>
             ))}
-            <option value="help_me_choose">Help me choose</option>
+            <option value="help_me_choose">{CLINIC_PREFERENCES.help_me_choose}</option>
+            <option value="video_consultation">{CLINIC_PREFERENCES.video_consultation}</option>
           </select>
           {err("clinic") && (
             <span className="field-error" id={`${id}-clinic-err`}>
@@ -230,7 +232,7 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
             </span>
           )}
         </label>
-        {slotsEnabled && clinic && clinic !== "help_me_choose" && (
+        {slotsEnabled && clinic && !isClinicPreference(clinic) && (
           <div className="field full">
             <label htmlFor={`${id}-date`}>Preferred date (optional)</label>
             <input id={`${id}-date`} type="date" name="date" min={dateMin} max={dateMax} value={date} onChange={(e) => {

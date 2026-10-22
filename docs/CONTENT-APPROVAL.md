@@ -25,9 +25,9 @@ Source: `lib/procedures.ts`. The ten cosmetic pages expand the doctor's existing
 - Portrait: `public/images/doctor.png` is the 466×588 image from the existing site. A higher-resolution approved portrait is recommended.
 - The `vd` monogram is a design concept, not an approved brand asset.
 
-## International visitors — contact page note (22 Oct 2026)
-- `/contact-us` now carries a short "Patients travelling from abroad" card: use the form (with a country selector for the phone number) or email; replies are in IST; don't email medical reports unsolicited. **Confirm the doctor accepts overseas enquiries and whether he offers video consultations** — the copy deliberately promises neither until he says so. If he does, say so here and the card (and the FAQ on the home page) should state it.
-- Data-protection note for the privacy policy: visitors from the EU/UK/Gulf are submitting personal data to servers hosted outside India (Vercel/Neon). The policy should name where data is stored and the legal basis; this is a legal-review item, not something drafted here.
+## International visitors (22 Oct 2026) — confirmed by Arun
+- The doctor accepts overseas patients and offers video consultations. Live on the site: the "Patients from abroad are welcome" card on `/contact-us`, a "Video consultation" choice in the enquiry form (stored as `clinic_preference = video_consultation`, labelled in Admin), and a home-page FAQ. The FAQ states that surgery always needs an in-person assessment in Bangalore — confirm this wording.
+- Privacy policy now has a "Where your data is stored and international transfers" section naming Neon (AWS Singapore), Vercel (Singapore functions, global CDN), ImageKit and Google Analytics, consent as the legal basis, and the visitor's rights. `vercel.json` pins functions to `sin1` so the statement is true. **Still a legal-review item**: Google Analytics loads without a consent banner, which EU/UK regulators treat as requiring prior consent — decide whether to add a cookie banner or load GA only after consent.
 
 ## Clinic information
 - Addresses and phone numbers for Whitefield, HRBR Layout and Koramangala (Aesthetica Veda) — taken from the existing site; confirm they are current. Editable in Admin → Clinics.

@@ -6,7 +6,7 @@ import { ROUTES } from "@/lib/routes";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 
 const TITLE = "Privacy Policy";
-const DESCRIPTION = "How drvybhavderaje.com collects and uses personal data: enquiry form details, usage data, cookies, analytics, security, children’s privacy and contact.";
+const DESCRIPTION = "How drvybhavderaje.com collects and uses personal data: enquiry form details, usage data, cookies, analytics, where data is stored (India and Singapore), international transfers, children’s privacy and contact.";
 
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: ROUTES.privacy });
 
@@ -42,8 +42,15 @@ export default function PrivacyPage() {
           <h2>Analytics</h2>
           <p>We may use third-party analytics services, such as Google Analytics, to monitor and analyse use of the Service. Google uses the data collected to track and report website traffic and may share it with other Google services. You can opt out with the Google Analytics opt-out browser add-on. For more information see Google’s privacy policy.</p>
 
-          <h2>Transfer and security of data</h2>
-          <p>Your information is processed and stored in India, and on the infrastructure of our hosting and database providers, which may be located outside India. We take reasonable steps to ensure your data is treated securely, but no method of transmission over the internet or of electronic storage is completely secure and we cannot guarantee absolute security.</p>
+          <h2>Where your data is stored and international transfers</h2>
+          <p>The practice is located in Bengaluru, India, and clinic staff access your enquiry from India. The website and its database are hosted by service providers outside India:</p>
+          <ul>
+            <li><strong>Enquiry and appointment records</strong> are stored in a database operated by Neon, Inc. in the Singapore region of Amazon Web Services.</li>
+            <li><strong>The website application</strong> runs on Vercel, Inc. Form submissions are processed in Vercel’s Singapore region; public pages are cached on Vercel’s global content-delivery network, so a copy of a public page (never your enquiry) may be served from a location near you.</li>
+            <li><strong>Images</strong> are delivered by ImageKit’s content-delivery network; <strong>analytics</strong> are provided by Google (Google LLC, United States) as described above.</li>
+          </ul>
+          <p>If you contact us from the European Economic Area, the United Kingdom, Switzerland or the Gulf states, your enquiry is therefore transferred to India and Singapore, countries that may not provide the same level of data protection as your own. We rely on your consent, given when you tick the box on the enquiry form, as the basis for that transfer and for contacting you about your request; our hosting providers are bound by data-processing agreements and standard contractual clauses. You may withdraw consent at any time by writing to {SITE.email}, after which we will stop contacting you and remove your enquiry, except where we must keep a record of care already provided. You also have the right to ask what data we hold about you, to have it corrected or deleted, and to complain to your local data-protection authority.</p>
+          <p>We take reasonable steps to ensure your data is treated securely, but no method of transmission over the internet or of electronic storage is completely secure and we cannot guarantee absolute security.</p>
 
           <h2>Disclosure</h2>
           <p>We may disclose personal data in the good-faith belief that it is necessary to comply with a legal obligation, to protect our rights or property, to prevent or investigate possible wrongdoing in connection with the Service, to protect the personal safety of users or the public, or to protect against legal liability. We do not sell or trade your personal information.</p>
