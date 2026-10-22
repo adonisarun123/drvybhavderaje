@@ -23,13 +23,14 @@ export const ROUTES = {
   resources: "/patient-resources",
 } as const;
 
-/** Public canonical path for a service page slug (legacy stem, e.g. "craniosynostosis-surgery-bangalore"). */
-export function servicePath(slug: string): string {
-  return `/${slug}.html`;
-}
-
-/** Legacy service page slugs (the part before `.html`). Order = display order. */
-export const SERVICE_SLUGS = [
+/**
+ * Service page slugs.
+ *
+ * LEGACY slugs are the ten service pages of the old site; their canonical URL keeps the `.html`
+ * suffix (see above). NEW slugs were added on 22 Oct 2026 when the practice narrowed its public
+ * focus to 14 named procedures; they have no legacy URL to preserve, so they use clean paths.
+ */
+export const LEGACY_SERVICE_SLUGS = [
   "craniosynostosis-surgery-bangalore",
   "cleft-lip-and-palate-treatment-bangalore",
   "corrective-jaw-surgery-bangalore",
@@ -42,7 +43,69 @@ export const SERVICE_SLUGS = [
   "hand-plastic-surgeon-bangalore",
 ] as const;
 
+export const NEW_SERVICE_SLUGS = [
+  "ear-reconstruction-surgery-bangalore",
+  "rhinoplasty-surgery-bangalore",
+  "blepharoplasty-eyelid-surgery-bangalore",
+  "otoplasty-ear-correction-bangalore",
+  "chin-augmentation-surgery-bangalore",
+  "facelift-surgery-bangalore",
+  "tummy-tuck-abdominoplasty-bangalore",
+  "breast-augmentation-surgery-bangalore",
+  "breast-reduction-surgery-bangalore",
+  "gynecomastia-surgery-bangalore",
+  "liposuction-surgery-bangalore",
+] as const;
+
+export const SERVICE_SLUGS = [...LEGACY_SERVICE_SLUGS, ...NEW_SERVICE_SLUGS] as const;
+
+export type LegacyServiceSlug = (typeof LEGACY_SERVICE_SLUGS)[number];
 export type ServiceSlug = (typeof SERVICE_SLUGS)[number];
+
+const LEGACY_SET: ReadonlySet<string> = new Set(LEGACY_SERVICE_SLUGS);
+
+/** Public canonical path for a service page slug: legacy slugs keep `.html`, new slugs are clean. */
+export function servicePath(slug: ServiceSlug): string {
+  return LEGACY_SET.has(slug) ? `/${slug}.html` : `/${slug}`;
+}
+
+/**
+ * Display order of the 14 procedures the practice leads with (header, homepage, footer), as
+ * specified by the doctor on 22 Oct 2026. Everything else in SERVICE_SLUGS stays live at its legacy
+ * URL and is listed under "Also treated".
+ */
+export const FEATURED_CRANIOFACIAL: readonly ServiceSlug[] = [
+  "craniosynostosis-surgery-bangalore",
+  "cleft-lip-and-palate-treatment-bangalore",
+  "corrective-jaw-surgery-bangalore",
+  "ear-reconstruction-surgery-bangalore",
+];
+
+export const FEATURED_COSMETIC: readonly ServiceSlug[] = [
+  "rhinoplasty-surgery-bangalore",
+  "blepharoplasty-eyelid-surgery-bangalore",
+  "otoplasty-ear-correction-bangalore",
+  "chin-augmentation-surgery-bangalore",
+  "facelift-surgery-bangalore",
+  "tummy-tuck-abdominoplasty-bangalore",
+  "breast-augmentation-surgery-bangalore",
+  "breast-reduction-surgery-bangalore",
+  "gynecomastia-surgery-bangalore",
+  "liposuction-surgery-bangalore",
+];
+
+export const OTHER_SERVICES_ORDER: readonly ServiceSlug[] = [
+  "facial-injuries-and-fracture-treatments",
+  "head-and-neck-cancer-treatment",
+  "other-craniofacial-conditions-treatments",
+  "hand-plastic-surgeon-bangalore",
+  "face-plastic-surgery-bangalore",
+  "breast-plastic-surgeon-bangalore",
+  "body-plastic-surgeon-bangalore",
+];
+
+/** Section anchors on the homepage. */
+export const SECTION = { craniofacial: "/#craniofacial", cosmetic: "/#cosmetic-surgery", other: "/#also-treated" } as const;
 
 /** Internal (suffix-less) stems of the non-service legacy pages, used by next.config.ts. */
 export const STATIC_LEGACY_STEMS = ["aboutus", "practice-location", "testimonials", "contact-us", "privacy-policy", "terms-of-use"] as const;

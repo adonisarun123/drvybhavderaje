@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 import { imageKitEndpoint } from "./lib/image-config";
-import { RETIRED_PATHS, SERVICE_SLUGS, STATIC_LEGACY_STEMS } from "./lib/routes";
+import { LEGACY_SERVICE_SLUGS, RETIRED_PATHS, STATIC_LEGACY_STEMS } from "./lib/routes";
 
 /**
  * URL strategy (see lib/routes.ts and docs/SEO-MIGRATION.md).
@@ -12,8 +12,10 @@ import { RETIRED_PATHS, SERVICE_SLUGS, STATIC_LEGACY_STEMS } from "./lib/routes"
  *   redirect /aboutus       →  /aboutus.html (301, so only one URL per page is ever indexed)
  * The clean paths used by the earlier redesign build (/about, /craniosynostosis …) also 301 to the
  * canonical legacy URL. Nothing redirects to the homepage except the old /index.html.
+ * Procedure pages added in Oct 2026 (/rhinoplasty-surgery-bangalore …) have no legacy URL and use
+ * clean paths; they are not rewritten or redirected.
  */
-const LEGACY_STEMS: string[] = [...STATIC_LEGACY_STEMS, ...SERVICE_SLUGS];
+const LEGACY_STEMS: string[] = [...STATIC_LEGACY_STEMS, ...LEGACY_SERVICE_SLUGS];
 
 const legacyRewrites = LEGACY_STEMS.map((stem) => ({ source: `/${stem}.html`, destination: `/${stem}` }));
 

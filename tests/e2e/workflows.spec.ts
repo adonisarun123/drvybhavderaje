@@ -347,7 +347,7 @@ for (const width of [320, 390, 768, 1024, 1440]) {
   test(`admin + public render without horizontal overflow at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 900 });
     await login(page);
-    for (const path of ["/admin", "/admin/enquiries?status=all", "/admin/appointments?status=all", `/admin/calendar?date=${nextMonday.toISODate()}`, "/admin/availability", "/", "/contact-us.html", "/practice-location.html", "/aboutus.html", "/craniosynostosis-surgery-bangalore.html", "/testimonials.html"]) {
+    for (const path of ["/admin", "/admin/enquiries?status=all", "/admin/appointments?status=all", `/admin/calendar?date=${nextMonday.toISODate()}`, "/admin/availability", "/", "/contact-us.html", "/practice-location.html", "/aboutus.html", "/craniosynostosis-surgery-bangalore.html", "/rhinoplasty-surgery-bangalore", "/face-plastic-surgery-bangalore.html", "/testimonials.html"]) {
       await page.goto(`${BASE}${path}`);
       await page.waitForLoadState("networkidle");
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);

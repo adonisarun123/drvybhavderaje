@@ -1,4 +1,4 @@
-import { AFFILIATIONS, CLINICS_SEED, CREDENTIALS, DOCTOR, HOME_FAQS, HOSPITALS, PUBLICATIONS, SERVICE_PAGES, SITE } from "./content";
+import { AFFILIATIONS, CLINICS_SEED, COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, CREDENTIALS, DOCTOR, HOME_FAQS, HOSPITALS, OTHER_SERVICES, PUBLICATIONS, SERVICE_PAGES, SITE } from "./content";
 import { ROUTES } from "./routes";
 import { absolute } from "./seo";
 
@@ -18,9 +18,11 @@ export function llmsTxt(): string {
     "",
   );
   lines.push("## Craniofacial surgery", "");
-  for (const p of SERVICE_PAGES.filter((p) => p.group === "craniofacial")) lines.push(`- [${p.shortTitle}](${absolute(p.path)}): ${p.description}`);
-  lines.push("", "## Plastic surgery", "");
-  for (const p of SERVICE_PAGES.filter((p) => p.group === "plastic")) lines.push(`- [${p.shortTitle}](${absolute(p.path)}): ${p.description}`);
+  for (const p of CRANIOFACIAL_SERVICES) lines.push(`- [${p.shortTitle}](${absolute(p.path)}): ${p.description}`);
+  lines.push("", "## Cosmetic surgery", "");
+  for (const p of COSMETIC_SERVICES) lines.push(`- [${p.shortTitle}](${absolute(p.path)}): ${p.description}`);
+  lines.push("", "## Also treated (reconstructive surgery and overview pages)", "");
+  for (const p of OTHER_SERVICES) lines.push(`- [${p.shortTitle}](${absolute(p.path)}): ${p.description}`);
   lines.push("", "## About the practice", "");
   lines.push(`- [About Dr Vybhav Deraje](${absolute(ROUTES.about)}): training, qualifications, memberships, hospital affiliations, publications and presentations`);
   lines.push(`- [Practice locations](${absolute(ROUTES.locations)}): clinic and hospital addresses and phone numbers`);

@@ -12,7 +12,7 @@ Every legacy URL keeps serving a **200 at the same address**. Nothing that is li
 
 | Public canonical URL | Internal route | Content |
 | --- | --- | --- |
-| `/` | `app/(public)/page.tsx` | Home: hero, 10 services, craniosynostosis feature, doctor, testimonials, videos, FAQs |
+| `/` | `app/(public)/page.tsx` | Home: hero, 14 featured procedures (4 craniofacial + 10 cosmetic), "Also treated" links to the 7 other pages, craniosynostosis feature, doctor, testimonials, videos, FAQs |
 | `/aboutus.html` | `app/(public)/aboutus/` | Full biography, qualifications, memberships, hospitals, 13 publications, 6 presentations |
 | `/craniosynostosis-surgery-bangalore.html` | `app/(public)/[slug]/` | Full clinical content from the live page + FAQs |
 | `/cleft-lip-and-palate-treatment-bangalore.html` | `[slug]` | ″ |
@@ -23,7 +23,18 @@ Every legacy URL keeps serving a **200 at the same address**. Nothing that is li
 | `/face-plastic-surgery-bangalore.html` | `[slug]` | ″ |
 | `/breast-plastic-surgeon-bangalore.html` | `[slug]` | ″ |
 | `/body-plastic-surgeon-bangalore.html` | `[slug]` | ″ |
-| `/hand-plastic-surgeon-bangalore.html` | `[slug]` | ″ |
+| `/hand-plastic-surgeon-bangalore.html` | `[slug]` | ″ (listed under "Also treated" since 22 Oct 2026) |
+| `/ear-reconstruction-surgery-bangalore` | `[slug]` | **New 22 Oct 2026** — no legacy URL, clean path. Draft content; doctor review required |
+| `/rhinoplasty-surgery-bangalore` | `[slug]` | New 22 Oct 2026 — expands the face hub paragraph |
+| `/blepharoplasty-eyelid-surgery-bangalore` | `[slug]` | ″ |
+| `/otoplasty-ear-correction-bangalore` | `[slug]` | ″ |
+| `/chin-augmentation-surgery-bangalore` | `[slug]` | ″ |
+| `/facelift-surgery-bangalore` | `[slug]` | ″ |
+| `/tummy-tuck-abdominoplasty-bangalore` | `[slug]` | New 22 Oct 2026 — expands the body hub paragraph |
+| `/breast-augmentation-surgery-bangalore` | `[slug]` | New 22 Oct 2026 — expands the breast hub paragraph |
+| `/breast-reduction-surgery-bangalore` | `[slug]` | ″ |
+| `/gynecomastia-surgery-bangalore` | `[slug]` | ″ (URL uses the US spelling patients search for; body copy uses "gynaecomastia") |
+| `/liposuction-surgery-bangalore` | `[slug]` | New 22 Oct 2026 — expands the body hub paragraph |
 | `/practice-location.html` | `app/(public)/practice-location/` | 3 clinics (DB-backed) + 6 hospitals |
 | `/testimonials.html` | `app/(public)/testimonials/` | 10 testimonials + video gallery |
 | `/contact-us.html` | `app/(public)/contact-us/` | Enquiry form + phone/email/addresses (was `/appointment`) |
@@ -111,3 +122,12 @@ indexed on `/patient-resources`.
 4. Submit `https://drvybhavderaje.com/sitemap.xml` in Google Search Console and Bing Webmaster Tools.
 5. Validate three pages in the Rich Results Test (home, a service page, about).
 6. Add Google Business Profile URL to `SITE.social`/`sameAs` once supplied.
+
+## Service restructure — 22 Oct 2026
+
+The doctor asked the site to lead with 14 named procedures: craniosynostosis, cleft lip & palate, orthognathic (jaw) surgery, ear reconstruction; rhinoplasty, blepharoplasty, otoplasty, chin augmentation, facelift, tummy tuck, breast augmentation, breast reduction, gynaecomastia and liposuction.
+
+- Three of the 14 are existing legacy pages (craniosynostosis, cleft, corrective jaw → retitled "Orthognathic (jaw correction) surgery"; URL unchanged).
+- Eleven are new pages at clean paths (no `.html`, no rewrite/redirect — `lib/routes.ts → NEW_SERVICE_SLUGS`). Content lives in `lib/procedures.ts`.
+- The seven other legacy pages (facial injuries, head & neck cancer, other craniofacial conditions, hand surgery, and the face / breast / body hub pages) **stay live at their canonical `.html` URLs** so backlinks and rankings are preserved. They are out of the header menu and listed on the homepage under "Also treated" and in the footer. Hub pages list their procedure pages at the top; procedure pages link back to their hub.
+- Header, homepage, footer, sitemap, `llms.txt` and the Physician schema (`availableService`, `knowsAbout`) all derive from `lib/routes.ts` order constants — nothing is hard-coded in JSX.

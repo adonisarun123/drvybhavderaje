@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { Image } from "@imagekit/next";
-import { ArrowRight, ArrowUpRight, Baby, Check, Ear, Hand, HeartHandshake, Phone, Quote, Ribbon, ScanFace, Smile, Sparkles, Stethoscope, Waves } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Baby, Check, Droplets, Ear, Eye, Hand, Heart, HeartHandshake, PersonStanding, Phone, Quote, Ribbon, ScanFace, Shirt, Smile, Sparkles, Stethoscope, Waves } from "lucide-react";
 import { AFFILIATIONS, SITE, type Photo, type ServicePage } from "@/lib/content";
-import { ROUTES } from "@/lib/routes";
+import { ROUTES, SECTION } from "@/lib/routes";
 
 export function CtaBand() {
   return (
@@ -99,8 +99,19 @@ const SERVICE_ICONS: Record<string, typeof Baby> = {
   "other-craniofacial-conditions-treatments": Waves,
   "face-plastic-surgery-bangalore": Sparkles,
   "breast-plastic-surgeon-bangalore": HeartHandshake,
-  "body-plastic-surgeon-bangalore": Ear,
+  "body-plastic-surgeon-bangalore": PersonStanding,
   "hand-plastic-surgeon-bangalore": Hand,
+  "ear-reconstruction-surgery-bangalore": Ear,
+  "rhinoplasty-surgery-bangalore": ScanFace,
+  "blepharoplasty-eyelid-surgery-bangalore": Eye,
+  "otoplasty-ear-correction-bangalore": Ear,
+  "chin-augmentation-surgery-bangalore": Smile,
+  "facelift-surgery-bangalore": Sparkles,
+  "tummy-tuck-abdominoplasty-bangalore": PersonStanding,
+  "breast-augmentation-surgery-bangalore": HeartHandshake,
+  "breast-reduction-surgery-bangalore": Heart,
+  "gynecomastia-surgery-bangalore": Shirt,
+  "liposuction-surgery-bangalore": Droplets,
 };
 
 export function ServiceGrid({ services, compact = false, columns }: { services: ServicePage[]; compact?: boolean; columns?: 3 | 4 }) {
@@ -132,7 +143,7 @@ export function RelatedServices({ services }: { services: ServicePage[] }) {
           <p className="eyebrow">You may also be looking for</p>
           <h2 id="related-heading">Related care</h2>
         </div>
-        <Link href="/#craniofacial" className="text-link">
+        <Link href={SECTION.craniofacial} className="text-link">
           All services <ArrowRight size={18} aria-hidden="true" />
         </Link>
       </div>

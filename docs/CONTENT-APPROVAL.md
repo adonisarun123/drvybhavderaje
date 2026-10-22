@@ -3,6 +3,21 @@
 Nothing below was invented; everything comes from the supplied design package or the existing website.
 It still needs the doctor's sign-off.
 
+## Clinical copy — 11 new procedure pages (22 Oct 2026) — REVIEW BEFORE LAUNCH
+Source: `lib/procedures.ts`. The ten cosmetic pages expand the doctor's existing one-paragraph descriptions (anaesthesia, admission, recovery, technique) with general patient-education sections written in non-promissory language. Points for the doctor to confirm or strike:
+- **Ear reconstruction** had no content on the live site. The page is a draft from standard craniofacial practice: rib-cartilage two-stage reconstruction from ~8–10 years, porous polyethylene as an alternative, hearing pathway with ENT/audiology. Confirm the techniques and ages he actually offers.
+- Rhinoplasty: open vs closed approach, septal cartilage grafts, revision rhinoplasty, 6-week contact-sport advice.
+- Blepharoplasty: transconjunctival lower-lid option, 5–7 day sutures, contraindications listed.
+- Otoplasty: age 5–6 timing, adults under local + sedation, headband for several weeks, lobe repair under local.
+- Chin: Medpor and silicone implants, sliding genioplasty with titanium plates, intra-oral incision, 6–8 week final contour.
+- Facelift: SMAS technique, submental incision for neck, mini-lift option, 2-week return to work, 4-week exercise.
+- Tummy tuck: mini-abdominoplasty option, 6-week garment; existing figures (3–4 day stay, 1 week, 6 weeks) retained.
+- Breast augmentation: inframammary incision default, sub-/pre-pectoral, "not lifetime devices", augmentation-mastopexy, breastfeeding statement.
+- Breast reduction: pedicle technique, vertical/anchor scars, breastfeeding "cannot be guaranteed".
+- Gynaecomastia: adolescent deferral, compression vest 4–6 weeks, periareolar gland excision.
+- Liposuction: MicroAire PAL retained; tumescent infiltration, 4–6 week garment, 3-month final contour.
+- All pages: scars, risks and limitations wording; the standing "Is a consultation a commitment" and "cost estimate" FAQs reused from the hub pages.
+
 ## Clinical copy
 - All care-page text and FAQs (`lib/content.ts → SERVICE_PAGES`, `HOME_FAQS`) — general, non-promissory wording; the doctor should confirm accuracy and tone.
 - Home hero statements: "National Board certified plastic surgeon", "Fellowship-trained in craniofacial surgery, Adelaide", "International training India · United Kingdom · Australia".
@@ -21,5 +36,5 @@ It still needs the doctor's sign-off.
 
 ## Decisions outstanding
 - Whether to add testimonials/terms pages (legacy URLs currently 404 — see docs/SEO-MIGRATION.md).
-- Whether to add dedicated sub-service pages for long-tail SEO.
+- ~~Whether to add dedicated sub-service pages for long-tail SEO.~~ Done 22 Oct 2026 (11 pages).
 - Notification provider (email/SMS) — none configured; staff contact patients manually.

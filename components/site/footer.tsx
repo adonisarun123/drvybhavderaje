@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { FacebookIcon, InstagramIcon, LinkedinIcon, YoutubeIcon } from "./social-icons";
-import { CRANIOFACIAL_SERVICES, PLASTIC_SERVICES, SITE } from "@/lib/content";
+import { COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, OTHER_SERVICES, SITE } from "@/lib/content";
 import { ROUTES } from "@/lib/routes";
 
 export function SiteFooter() {
   return (
     <footer className="site-footer">
-      <div className="container footer-grid footer-grid-4">
+      <div className="container footer-grid footer-grid-5">
         <div>
           <Link href="/" className="footer-name">
             {SITE.name}
@@ -44,8 +44,16 @@ export function SiteFooter() {
           ))}
         </div>
         <div>
-          <h3>Plastic surgery</h3>
-          {PLASTIC_SERVICES.map((s) => (
+          <h3>Cosmetic surgery</h3>
+          {COSMETIC_SERVICES.map((s) => (
+            <Link key={s.slug} href={s.path}>
+              {s.shortTitle}
+            </Link>
+          ))}
+        </div>
+        <div>
+          <h3>Also treated</h3>
+          {OTHER_SERVICES.map((s) => (
             <Link key={s.slug} href={s.path}>
               {s.shortTitle}
             </Link>

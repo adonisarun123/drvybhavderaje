@@ -5,8 +5,8 @@ import { ArrowRight } from "lucide-react";
 import { CtaBand, Faq, HelpSideCard, PageHero, PhotoGallery, RelatedServices } from "@/components/site/blocks";
 import { InfoSheet } from "@/components/site/info-sheet";
 import { JsonLd } from "@/components/site/json-ld";
-import { getService, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
-import { ROUTES } from "@/lib/routes";
+import { childServices, getService, GROUP_HREF, GROUP_LABEL, isFeatured, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
+import { ROUTES, SECTION } from "@/lib/routes";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, serviceEntitiesJsonLd } from "@/lib/seo";
 
 export const dynamicParams = false;
@@ -54,8 +54,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const { slug } = await params;
   const page = getService(slug);
   if (!page) notFound();
-  const groupLabel = page.group === "craniofacial" ? "Craniofacial surgery" : "Plastic surgery";
-  const groupHref = page.group === "craniofacial" ? "/#craniofacial" : "/#plastic-surgery";
+  const featured = isFeatured(page);
+  const groupLabel = featured ? GROUP_LABEL[page.group] : "Also treated";
+  const groupHref = featured ? GROUP_HREF[page.group] : SECTION.other;
+  const parent = page.parent ? getService(page.parent) : undefined;
+  const children = childServices(page.slug);
   const related = page.related.map(getService).filter((p): p is NonNullable<typeof p> => Boolean(p));
   return (
     <>
@@ -79,6 +82,20 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               {p}
             </p>
           ))}
+          {page.infoSheet && <InfoSheet href={page.infoSheet} />}
+          {children.length > 0 && (
+            <section>
+              <h2>Procedure pages</h2>
+              <p>Each of these procedures has its own page with candidacy, technique, recovery and limitations explained in full.</p>
+              <ul className="child-list">
+                {children.map((c) => (
+                  <li key={c.slug}>
+                    <Link href={c.path}>{c.shortTitle}</Link> — {c.cardText}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
           {page.sections.map((s) => (
             <Section key={s.heading} s={s} />
           ))}
@@ -87,6 +104,15 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               <h2>Gallery</h2>
               <PhotoGallery photos={page.gallery} columns={2} />
             </section>
+          )}
+          {parent && (
+            <p className="note">
+              Part of{" "}
+              <Link href={parent.path}>
+                {parent.title.toLowerCase()} <ArrowRight size={14} aria-hidden="true" />
+              </Link>{" "}
+              — see the overview for the full range of procedures, including those without a dedicated page.
+            </p>
           )}
           <section className="contact-inline">
             <h2>Need more information?</h2>

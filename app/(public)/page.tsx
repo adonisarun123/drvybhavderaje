@@ -5,7 +5,7 @@ import { ArrowRight, ArrowUpRight, Baby, Building2, Check, GraduationCap, HeartH
 import { AffiliationLogos, CtaBand, Faq, ServiceGrid, TestimonialCard } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { VideoGallery } from "@/components/site/video-gallery";
-import { CRANIOFACIAL_SERVICES, DOCTOR, HOME_FAQS, HOSPITALS, PLASTIC_SERVICES, SITE, TESTIMONIALS, VIDEOS } from "@/lib/content";
+import { COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, DOCTOR, HOME_FAQS, HOSPITALS, OTHER_SERVICES, SITE, TESTIMONIALS, VIDEOS } from "@/lib/content";
 import { getPublicClinics } from "@/lib/clinics";
 import { DOCTOR_PHOTO } from "@/lib/images";
 import { ROUTES, servicePath } from "@/lib/routes";
@@ -33,7 +33,7 @@ export default async function HomePage() {
               Rebuilding <em>lives</em>.
             </h1>
             <p className="hero-description">
-              Dr Vybhav Deraje is a National Board certified plastic surgeon with fellowship training in craniofacial surgery. From a baby’s first craniosynostosis consultation to facial trauma, cancer reconstruction and cosmetic surgery — specialist care, explained clearly.
+              Dr Vybhav Deraje is a National Board certified plastic surgeon with fellowship training in craniofacial surgery. From a baby’s first craniosynostosis consultation to rhinoplasty, facelift, breast and body surgery — specialist care, explained clearly.
             </p>
             <div className="actions">
               <Link className="button" href={ROUTES.contact}>
@@ -100,27 +100,48 @@ export default async function HomePage() {
             <h2 id="craniofacial-heading">Craniofacial surgery</h2>
           </div>
           <p>
-            Conditions of the skull, face and jaws — in children and adults.
+            Conditions of the skull, face, jaws and ears — in children and adults.
             <br />
             Protocol-based care with a multidisciplinary team.
           </p>
         </div>
-        <ServiceGrid services={CRANIOFACIAL_SERVICES} columns={3} />
+        <ServiceGrid services={CRANIOFACIAL_SERVICES} />
       </section>
 
-      <section id="plastic-surgery" className="section container" aria-labelledby="plastic-heading" style={{ paddingTop: 0 }}>
+      <section id="cosmetic-surgery" className="section container" aria-labelledby="cosmetic-heading" style={{ paddingTop: 0 }}>
         <div className="section-heading">
           <div>
             <p className="eyebrow">Our services</p>
-            <h2 id="plastic-heading">Plastic surgery</h2>
+            <h2 id="cosmetic-heading">Cosmetic surgery</h2>
           </div>
           <p>
-            Cosmetic and reconstructive surgery of the face, breast, body and hand.
+            Face, breast and body procedures by a board-certified plastic surgeon.
             <br />
             Honest conversations about options, limits and recovery.
           </p>
         </div>
-        <ServiceGrid services={PLASTIC_SERVICES} />
+        <ServiceGrid services={COSMETIC_SERVICES} />
+      </section>
+
+      <section id="also-treated" className="section container" aria-labelledby="also-treated-heading" style={{ paddingTop: 0 }}>
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">Also treated</p>
+            <h2 id="also-treated-heading">Reconstructive and other conditions</h2>
+          </div>
+          <p>
+            Facial injuries, head and neck cancer, facial palsy, vascular anomalies and hand surgery.
+            <br />
+            Plus overview pages for the full range of face, breast and body procedures.
+          </p>
+        </div>
+        <div className="also-treated">
+          {OTHER_SERVICES.map((s) => (
+            <Link key={s.slug} href={s.path}>
+              {s.shortTitle} <ArrowUpRight size={16} aria-hidden="true" />
+            </Link>
+          ))}
+        </div>
       </section>
 
       <section className="feature-section" aria-labelledby="feature-heading">

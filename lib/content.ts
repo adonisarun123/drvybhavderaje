@@ -10,7 +10,8 @@
  * They are rendered only when the file is present in /public (see components/site/info-sheet.tsx).
  * Image paths are relative to the ImageKit folder (see lib/images.ts), e.g. "/custom/gallery_1.png".
  */
-import { ROUTES, servicePath, type ServiceSlug } from "./routes";
+import { FEATURED_COSMETIC, FEATURED_CRANIOFACIAL, OTHER_SERVICES_ORDER, ROUTES, SECTION, servicePath, type ServiceSlug } from "./routes";
+import { PROCEDURE_PAGES } from "./procedures";
 
 export const SITE = {
   name: "Dr Vybhav Deraje",
@@ -22,10 +23,10 @@ export const SITE = {
   email: "connect@drvybhavderaje.com",
   utilityLine: "Reconstructing faces. Rebuilding lives.",
   /** <meta description> for the homepage (≤160 chars). */
-  metaDescription: "Dr Vybhav Deraje, craniofacial & plastic surgeon in Bangalore: craniosynostosis, cleft, jaw surgery, facial trauma, cancer reconstruction and cosmetic surgery.",
+  metaDescription: "Dr Vybhav Deraje, craniofacial & plastic surgeon in Bangalore: craniosynostosis, cleft, jaw and ear reconstruction; rhinoplasty, facelift, breast and body surgery.",
   /** Longer entity description used in structured data and llms.txt. */
   defaultDescription:
-    "Dr Vybhav Deraje is a National Board certified plastic surgeon in Bangalore with fellowship training in craniofacial surgery (Australian Craniofacial Unit, Adelaide). Craniosynostosis, cleft lip and palate, jaw surgery, facial trauma, head and neck reconstruction and cosmetic surgery of the face, breast, body and hand.",
+    "Dr Vybhav Deraje is a National Board certified plastic surgeon in Bangalore with fellowship training in craniofacial surgery (Australian Craniofacial Unit, Adelaide). Craniofacial surgery — craniosynostosis, cleft lip and palate, orthognathic (jaw) surgery and ear reconstruction — and cosmetic surgery: rhinoplasty, blepharoplasty, otoplasty, chin augmentation, facelift, tummy tuck, breast augmentation, breast reduction, gynaecomastia surgery and liposuction. He also treats facial injuries, head and neck cancer, facial palsy and hand conditions.",
   social: {
     facebook: "https://www.facebook.com/drvybhavderaje/",
     instagram: "https://www.instagram.com/drvybhavderaje/",
@@ -33,16 +34,17 @@ export const SITE = {
     youtube: "https://www.youtube.com/@drvybhavderaje",
   },
   /** ISO date the public copy was last reviewed; used for sitemap lastmod and schema dateModified. */
-  contentUpdated: "2026-10-21",
+  contentUpdated: "2026-10-22",
 };
 
-export const NAV = [
-  { href: ROUTES.about, label: "Meet the doctor" },
-  { href: "/#craniofacial", label: "Craniofacial surgery" },
-  { href: "/#plastic-surgery", label: "Plastic surgery" },
-  { href: ROUTES.locations, label: "Locations" },
-  { href: ROUTES.testimonials, label: "Patient stories" },
-] as const;
+export interface NavItem {
+  href: string;
+  label: string;
+  /** Dropdown entries (service pages). */
+  children?: { href: string; label: string }[];
+}
+
+/** Main navigation — defined after SERVICE_PAGES, at the end of the services section. */
 
 /* ------------------------------------------------------------------------------------------------
  * Doctor profile
@@ -193,10 +195,15 @@ export interface ServiceSection {
   note?: string;
 }
 
+export type ServiceGroup = "craniofacial" | "cosmetic" | "reconstructive";
+
 export interface ServicePage {
   slug: ServiceSlug;
   path: string;
-  group: "craniofacial" | "plastic";
+  /** Which of the two headline groups the page belongs to (hub pages for reconstructive work still sit under "cosmetic" for navigation). */
+  group: ServiceGroup;
+  /** Hub page this procedure page belongs to (e.g. rhinoplasty → facial plastic surgery). */
+  parent?: ServiceSlug;
   /** Card / nav label. */
   shortTitle: string;
   /** H1. */
@@ -216,6 +223,8 @@ export interface ServicePage {
   related: ServiceSlug[];
   /** Optional photo gallery (ImageKit paths). */
   gallery?: Photo[];
+  /** Page-level patient-information PDF (legacy path under /public/images/pdf). */
+  infoSheet?: string;
 }
 
 export interface Photo {
@@ -227,7 +236,7 @@ export interface Photo {
 
 const PDF = "/images/pdf";
 
-export const SERVICE_PAGES: ServicePage[] = [
+const LEGACY_SERVICE_PAGES: ServicePage[] = [
   {
     slug: "craniosynostosis-surgery-bangalore",
     path: servicePath("craniosynostosis-surgery-bangalore"),
@@ -401,10 +410,10 @@ export const SERVICE_PAGES: ServicePage[] = [
     slug: "corrective-jaw-surgery-bangalore",
     path: servicePath("corrective-jaw-surgery-bangalore"),
     group: "craniofacial",
-    shortTitle: "Corrective jaw surgery",
-    title: "Corrective jaw surgery (orthognathic surgery) in Bangalore",
-    metaTitle: "Corrective Jaw Surgery in Bangalore — Orthognathic Surgery | Dr Vybhav Deraje",
-    description: "Corrective jaw (orthognathic) surgery in Bangalore by Dr Vybhav Deraje: Le Fort I, BSSO, double-jaw surgery and genioplasty for bite, face and sleep apnoea.",
+    shortTitle: "Orthognathic (jaw correction) surgery",
+    title: "Orthognathic surgery (corrective jaw surgery) in Bangalore",
+    metaTitle: "Orthognathic Surgery in Bangalore — Jaw Correction Surgery | Dr Vybhav Deraje",
+    description: "Orthognathic (jaw correction) surgery in Bangalore by Dr Vybhav Deraje: Le Fort I, BSSO, double-jaw surgery and genioplasty for bite, face and sleep apnoea.",
     eyebrow: "Craniofacial surgery · Function and facial balance",
     lead: "Repositioning the upper jaw, lower jaw or both to realign the teeth, balance the face and, in selected patients, relieve snoring and sleep apnoea.",
     cardText: "Le Fort I, BSSO, double-jaw surgery and genioplasty for bite problems and facial balance.",
@@ -581,12 +590,12 @@ export const SERVICE_PAGES: ServicePage[] = [
   {
     slug: "face-plastic-surgery-bangalore",
     path: servicePath("face-plastic-surgery-bangalore"),
-    group: "plastic",
-    shortTitle: "Plastic surgery of the face",
+    group: "cosmetic",
+    shortTitle: "Facial plastic surgery — all procedures",
     title: "Facial plastic surgery in Bangalore",
     metaTitle: "Facial Plastic Surgery in Bangalore — Rhinoplasty, Blepharoplasty, Facelift | Dr Vybhav Deraje",
     description: "Facial plastic surgery in Bangalore by Dr Vybhav Deraje: rhinoplasty, blepharoplasty, chin and ear correction, facelift, fat grafting, Botox and fillers.",
-    eyebrow: "Plastic surgery · Face",
+    eyebrow: "Cosmetic surgery · Face · Overview",
     lead: "Surgical and non-surgical options for the nose, eyes, chin, ears, forehead and ageing face — explained plainly, with realistic recovery times.",
     cardText: "Rhinoplasty, eyelid surgery, chin and ear correction, facelift, fat grafting, Botox and fillers.",
     intro: ["An informed decision begins with an honest conversation about what you would like to change, what is achievable and what recovery involves. These are the facial procedures Dr Vybhav Deraje offers."],
@@ -619,12 +628,12 @@ export const SERVICE_PAGES: ServicePage[] = [
   {
     slug: "breast-plastic-surgeon-bangalore",
     path: servicePath("breast-plastic-surgeon-bangalore"),
-    group: "plastic",
-    shortTitle: "Plastic surgery of the breast",
+    group: "cosmetic",
+    shortTitle: "Breast surgery — all procedures",
     title: "Breast plastic surgery in Bangalore",
     metaTitle: "Breast Surgery in Bangalore — Augmentation, Lift, Reduction, Reconstruction | Dr Vybhav Deraje",
     description: "Breast surgery in Bangalore by Dr Vybhav Deraje: augmentation with implants or fat, lift, reduction, DIEP flap reconstruction after cancer and gynaecomastia surgery.",
-    eyebrow: "Plastic surgery · Breast",
+    eyebrow: "Cosmetic & reconstructive surgery · Breast · Overview",
     lead: "Augmentation, lift, reduction and reconstruction after breast cancer — plus male breast reduction — with a clear explanation of what each involves.",
     cardText: "Augmentation, lift, reduction, reconstruction after cancer and gynaecomastia surgery.",
     intro: ["Each of these procedures is discussed individually at consultation, including the options, scars, recovery and realistic outcomes."],
@@ -657,12 +666,12 @@ export const SERVICE_PAGES: ServicePage[] = [
   {
     slug: "body-plastic-surgeon-bangalore",
     path: servicePath("body-plastic-surgeon-bangalore"),
-    group: "plastic",
-    shortTitle: "Plastic surgery of the body",
+    group: "cosmetic",
+    shortTitle: "Body contouring — all procedures",
     title: "Body contouring surgery in Bangalore",
     metaTitle: "Body Contouring in Bangalore — Tummy Tuck, Liposuction, Arm & Thigh Lift | Dr Vybhav Deraje",
     description: "Body contouring in Bangalore by Dr Vybhav Deraje: abdominoplasty (tummy tuck), power-assisted liposuction, arm lift and thigh lift, with recovery explained.",
-    eyebrow: "Plastic surgery · Body",
+    eyebrow: "Cosmetic surgery · Body · Overview",
     lead: "Abdominoplasty, liposuction, arm lift and thigh lift — with honest guidance on scars, hospital stay and recovery.",
     cardText: "Tummy tuck, power-assisted liposuction, arm lift and thigh lift.",
     intro: ["Body contouring removes excess skin and fat and tightens tissue to restore a firmer shape. The right procedure depends on your anatomy and goals, which is what the consultation is for."],
@@ -690,12 +699,12 @@ export const SERVICE_PAGES: ServicePage[] = [
   {
     slug: "hand-plastic-surgeon-bangalore",
     path: servicePath("hand-plastic-surgeon-bangalore"),
-    group: "plastic",
-    shortTitle: "Plastic surgery of the hand",
+    group: "reconstructive",
+    shortTitle: "Hand surgery",
     title: "Hand surgery in Bangalore",
     metaTitle: "Hand Surgery in Bangalore — Carpal Tunnel, Trigger Finger, Syndactyly, Hand Trauma | Dr Vybhav Deraje",
     description: "Hand surgery in Bangalore by Dr Vybhav Deraje: wide-awake (WALANT) carpal tunnel and trigger finger release, syndactyly, burn contractures and hand trauma.",
-    eyebrow: "Plastic surgery · Hand",
+    eyebrow: "Reconstructive surgery · Hand",
     lead: "Wide-awake day-care surgery for carpal tunnel and trigger finger, congenital hand surgery for children, burn deformity release and emergency hand trauma care.",
     cardText: "WALANT carpal tunnel and trigger finger release, syndactyly, burn contractures and hand trauma.",
     intro: ["Hand surgery sits at the heart of plastic surgery. Dr Vybhav Deraje trained in hand surgery at Queen Victoria Hospital, East Grinstead, and offers the following procedures."],
@@ -722,12 +731,46 @@ export const SERVICE_PAGES: ServicePage[] = [
   },
 ];
 
-export const CRANIOFACIAL_SERVICES = SERVICE_PAGES.filter((p) => p.group === "craniofacial");
-export const PLASTIC_SERVICES = SERVICE_PAGES.filter((p) => p.group === "plastic");
+export const SERVICE_PAGES: ServicePage[] = [...LEGACY_SERVICE_PAGES, ...PROCEDURE_PAGES];
 
 export function getService(slug: string): ServicePage | undefined {
   return SERVICE_PAGES.find((p) => p.slug === slug);
 }
+
+function bySlugs(order: readonly ServiceSlug[]): ServicePage[] {
+  return order.map((slug) => {
+    const page = getService(slug);
+    if (!page) throw new Error(`No service page for slug "${slug}"`);
+    return page;
+  });
+}
+
+/** The 14 procedures the practice leads with, in the doctor's order. */
+export const CRANIOFACIAL_SERVICES = bySlugs(FEATURED_CRANIOFACIAL);
+export const COSMETIC_SERVICES = bySlugs(FEATURED_COSMETIC);
+export const FEATURED_SERVICES = [...CRANIOFACIAL_SERVICES, ...COSMETIC_SERVICES];
+/** Legacy pages kept live for the patients and backlinks that still use them; listed under "Also treated". */
+export const OTHER_SERVICES = bySlugs(OTHER_SERVICES_ORDER);
+
+/** Procedure pages that belong to a hub page. */
+export function childServices(parent: ServiceSlug): ServicePage[] {
+  return FEATURED_SERVICES.filter((p) => p.parent === parent);
+}
+
+export const GROUP_LABEL: Record<ServiceGroup, string> = { craniofacial: "Craniofacial surgery", cosmetic: "Cosmetic surgery", reconstructive: "Reconstructive surgery" };
+export const GROUP_HREF: Record<ServiceGroup, string> = { craniofacial: SECTION.craniofacial, cosmetic: SECTION.cosmetic, reconstructive: SECTION.other };
+
+export function isFeatured(page: ServicePage): boolean {
+  return FEATURED_SERVICES.includes(page);
+}
+
+export const NAV: NavItem[] = [
+  { href: ROUTES.about, label: "Meet the doctor" },
+  { href: SECTION.craniofacial, label: GROUP_LABEL.craniofacial, children: CRANIOFACIAL_SERVICES.map((s) => ({ href: s.path, label: s.shortTitle })) },
+  { href: SECTION.cosmetic, label: GROUP_LABEL.cosmetic, children: COSMETIC_SERVICES.map((s) => ({ href: s.path, label: s.shortTitle })) },
+  { href: ROUTES.locations, label: "Locations" },
+  { href: ROUTES.testimonials, label: "Patient stories" },
+];
 
 /* ------------------------------------------------------------------------------------------------
  * Testimonials and videos (as published on the practice's existing website)
