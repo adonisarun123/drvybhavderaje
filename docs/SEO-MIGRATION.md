@@ -5,57 +5,66 @@ the live navigation (the legacy site has no `sitemap.xml`, no `robots.txt`, no c
 structured data). 17 pages, 32 patient-information PDFs under `/images/pdf/…`, 11 YouTube videos,
 4 social profiles.
 
-## URL strategy — legacy URLs are the canonical URLs
+## URL strategy — clean URLs are canonical; legacy `.html` URLs 308 to them (since 22 Oct 2026)
 
-Every legacy URL keeps serving a **200 at the same address**. Nothing that is linked from outside
-(backlinks, Google Business Profile, directories, printed material) changes or hops through a redirect.
+Every public page lives at a clean, suffix-less path. Every legacy URL of the old site (the 17 `.html`
+pages) is kept alive as a **permanent 308 redirect** to its clean twin, so backlinks, Google Business
+Profile links, directory listings and printed material all keep resolving and pass their equity to the
+canonical URL. Up to 21 Oct 2026 the `.html` URLs themselves were canonical (served via rewrite); the
+flip to clean URLs was made on 22 Oct 2026.
 
-| Public canonical URL | Internal route | Content |
-| --- | --- | --- |
-| `/` | `app/(public)/page.tsx` | Home: hero, 14 featured procedures (4 craniofacial + 10 cosmetic), "Also treated" links to the 7 other pages, craniosynostosis feature, doctor, testimonials, videos, FAQs |
-| `/aboutus.html` | `app/(public)/aboutus/` | Full biography, qualifications, memberships, hospitals, 13 publications, 6 presentations |
-| `/craniosynostosis-surgery-bangalore.html` | `app/(public)/[slug]/` | Full clinical content from the live page + FAQs |
-| `/cleft-lip-and-palate-treatment-bangalore.html` | `[slug]` | ″ |
-| `/corrective-jaw-surgery-bangalore.html` | `[slug]` | ″ |
-| `/facial-injuries-and-fracture-treatments.html` | `[slug]` | ″ |
-| `/head-and-neck-cancer-treatment.html` | `[slug]` | ″ |
-| `/other-craniofacial-conditions-treatments.html` | `[slug]` | ″ |
-| `/face-plastic-surgery-bangalore.html` | `[slug]` | ″ |
-| `/breast-plastic-surgeon-bangalore.html` | `[slug]` | ″ |
-| `/body-plastic-surgeon-bangalore.html` | `[slug]` | ″ |
-| `/hand-plastic-surgeon-bangalore.html` | `[slug]` | ″ (listed under "Also treated" since 22 Oct 2026) |
-| `/ear-reconstruction-surgery-bangalore` | `[slug]` | **New 22 Oct 2026** — no legacy URL, clean path. Draft content; doctor review required |
-| `/rhinoplasty-surgery-bangalore` | `[slug]` | New 22 Oct 2026 — expands the face hub paragraph |
-| `/blepharoplasty-eyelid-surgery-bangalore` | `[slug]` | ″ |
-| `/otoplasty-ear-correction-bangalore` | `[slug]` | ″ |
-| `/chin-augmentation-surgery-bangalore` | `[slug]` | ″ |
-| `/facelift-surgery-bangalore` | `[slug]` | ″ |
-| `/tummy-tuck-abdominoplasty-bangalore` | `[slug]` | New 22 Oct 2026 — expands the body hub paragraph |
-| `/breast-augmentation-surgery-bangalore` | `[slug]` | New 22 Oct 2026 — expands the breast hub paragraph |
-| `/breast-reduction-surgery-bangalore` | `[slug]` | ″ |
-| `/gynecomastia-surgery-bangalore` | `[slug]` | ″ (URL uses the US spelling patients search for; body copy uses "gynaecomastia") |
-| `/liposuction-surgery-bangalore` | `[slug]` | New 22 Oct 2026 — expands the body hub paragraph |
-| `/practice-location.html` | `app/(public)/practice-location/` | 3 clinics (DB-backed) + 6 hospitals |
-| `/testimonials.html` | `app/(public)/testimonials/` | 10 testimonials + video gallery |
-| `/contact-us.html` | `app/(public)/contact-us/` | Enquiry form + phone/email/addresses (was `/appointment`) |
-| `/privacy-policy.html` | `app/(public)/privacy-policy/` | Updated policy (practice as operator, form-specific detail) |
-| `/terms-of-use.html` | `app/(public)/terms-of-use/` | Legacy disclaimer, lightly edited |
-| `/patient-resources` | `app/(public)/patient-resources/` | New page (no legacy equivalent) |
+| Legacy URL (308 →) | Canonical URL | Internal route | Content |
+| --- | --- | --- | --- |
+| `/index.html` | `/` | `app/(public)/page.tsx` | Home: hero, 14 featured procedures (4 craniofacial + 10 cosmetic), "Also treated" links to the 7 other pages, craniosynostosis feature, doctor, testimonials, videos, FAQs |
+| `/aboutus.html` | `/aboutus` | `app/(public)/aboutus/` | Full biography, qualifications, memberships, hospitals, 13 publications, 6 presentations |
+| `/craniosynostosis-surgery-bangalore.html` | `/craniosynostosis-surgery-bangalore` | `app/(public)/[slug]/` | Full clinical content from the live page + FAQs |
+| `/cleft-lip-and-palate-treatment-bangalore.html` | `/cleft-lip-and-palate-treatment-bangalore` | `[slug]` | ″ |
+| `/corrective-jaw-surgery-bangalore.html` | `/corrective-jaw-surgery-bangalore` | `[slug]` | ″ |
+| `/facial-injuries-and-fracture-treatments.html` | `/facial-injuries-and-fracture-treatments` | `[slug]` | ″ |
+| `/head-and-neck-cancer-treatment.html` | `/head-and-neck-cancer-treatment` | `[slug]` | ″ |
+| `/other-craniofacial-conditions-treatments.html` | `/other-craniofacial-conditions-treatments` | `[slug]` | ″ |
+| `/face-plastic-surgery-bangalore.html` | `/face-plastic-surgery-bangalore` | `[slug]` | ″ |
+| `/breast-plastic-surgeon-bangalore.html` | `/breast-plastic-surgeon-bangalore` | `[slug]` | ″ |
+| `/body-plastic-surgeon-bangalore.html` | `/body-plastic-surgeon-bangalore` | `[slug]` | ″ |
+| `/hand-plastic-surgeon-bangalore.html` | `/hand-plastic-surgeon-bangalore` | `[slug]` | ″ (listed under "Also treated" since 22 Oct 2026) |
+| — | `/ear-reconstruction-surgery-bangalore` … (11 procedure pages, see below) | `[slug]` | New 22 Oct 2026, never had a `.html` URL |
+| `/practice-location.html` | `/practice-location` | `app/(public)/practice-location/` | 3 clinics (DB-backed) + 6 hospitals |
+| `/testimonials.html` | `/testimonials` | `app/(public)/testimonials/` | 10 testimonials + video gallery |
+| `/contact-us.html` | `/contact-us` | `app/(public)/contact-us/` | Enquiry form + phone/email/addresses (was `/appointment`) |
+| `/privacy-policy.html` | `/privacy-policy` | `app/(public)/privacy-policy/` | Updated policy (practice as operator, form-specific detail) |
+| `/terms-of-use.html` | `/terms-of-use` | `app/(public)/terms-of-use/` | Legacy disclaimer, lightly edited |
+| — | `/patient-resources` | `app/(public)/patient-resources/` | New page (no legacy equivalent) |
 
 Mechanics (`next.config.ts`, `lib/routes.ts`):
 
-- **Rewrite** (`beforeFiles`): `/<stem>.html → /<stem>`; the browser URL is unchanged.
-- **Redirect 308** (permanent): `/<stem> → /<stem>.html`, so the suffix-less internal path is never indexed.
-- **Redirect 308**: paths from the earlier redesign build — `/about`, `/appointment` (query string preserved,
-  so `?clinic=` deep links still work), `/locations`, `/privacy`, `/craniosynostosis`, `/cleft-care`,
-  `/cosmetic-surgery`, `/reconstructive-surgery` — and `/index.html`, `/index`, `/home` → canonical URL.
-- Every `<link rel="canonical">`, sitemap entry, breadcrumb and internal link uses the `.html` URL via
-  `ROUTES` / `servicePath()`. Never hard-code a path in JSX.
-- Verified with `curl` against `next start`: all 17 legacy URLs → 200, every retired path → 308 to its
-  canonical, unknown paths → 404, `/admin` → login.
+- **Redirect 308** (permanent, query string preserved): `/<stem>.html → /<stem>` for all 17 legacy pages
+  (`lib/routes.ts → LEGACY_HTML_REDIRECTS`). 308 is treated by Google and Bing exactly like a 301.
+- **Redirect 308**: paths from the earlier redesign build — `/about`, `/appointment` (`?clinic=` deep
+  links still work), `/locations`, `/privacy`, `/terms`, `/craniosynostosis`, `/cleft-care`,
+  `/cosmetic-surgery`, `/reconstructive-surgery` — and `/index.html`, `/index`, `/home` → clean URL.
+  **Every redirect is one hop**; nothing goes via a `.html` URL.
+- **No rewrites.** The URL in the address bar is the canonical URL.
+- Every `<link rel="canonical">`, OG `url`, sitemap entry, breadcrumb, `Physician.availableService`,
+  `llms.txt` entry and internal link uses the clean URL via `ROUTES` / `servicePath()`. Never hard-code a
+  path in JSX. The sitemap lists clean URLs only — never a `.html` URL.
+- Verified with `curl` against `next start`: all 17 legacy `.html` URLs → 308 to the clean URL, every clean
+  URL → 200 with a self-referencing canonical, every retired path → 308 (one hop), unknown paths → 404.
 
-Why not 301 the legacy URLs to clean URLs? A 301 passes most equity but not all, costs a hop, and the
-client asked for the backlink profile to be left untouched. Same-URL is the zero-risk option.
+Why 308 rather than keeping `.html` as canonical? Clean URLs are the long-term address of the site; the
+cost is one redirect hop per legacy URL and a short ranking wobble (typically 2–4 weeks) while Google
+re-crawls and consolidates signals. Do **not** flip back: a second migration causes a second wobble.
+
+### Post-launch SEO watch (after the clean-URL deploy)
+
+1. Resubmit `https://drvybhavderaje.com/sitemap.xml` in Google Search Console and Bing Webmaster Tools
+   (same host, so GSC "Change of address" is **not** needed).
+2. In GSC → Pages, expect the 17 legacy URLs to move to "Page with redirect" over 2–4 weeks; the clean
+   URLs should appear as indexed. Use URL Inspection → Request indexing on the home, about and the three
+   craniofacial legacy pages to speed it up.
+3. Update the website link in Google Business Profile, Practo/Justdial/Lybrate and social bios to the clean
+   URL where it currently points at a `.html` page (optional — redirects cover it, but a direct link is
+   cleaner).
+4. Keep the `.html` redirects **permanently**. Never remove them.
 
 ## Content source
 
@@ -118,7 +127,7 @@ indexed on `/patient-resources`.
 
 1. ~~Pull PDFs/photos from the old host~~ — done.
 2. Set `SITE_ORIGIN`, `PUBLIC_INDEXING=true`, `ENQUIRIES_ENABLED=true`, `NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT` on production.
-3. Point DNS; confirm `curl -I https://drvybhavderaje.com/aboutus.html` → 200 and `/about` → 308.
+3. Point DNS; confirm `curl -I https://drvybhavderaje.com/aboutus` → 200, `/aboutus.html` → 308 → `/aboutus`, `/about` → 308 → `/aboutus`.
 4. Submit `https://drvybhavderaje.com/sitemap.xml` in Google Search Console and Bing Webmaster Tools.
 5. Validate three pages in the Rich Results Test (home, a service page, about).
 6. Add Google Business Profile URL to `SITE.social`/`sameAs` once supplied.
@@ -128,6 +137,6 @@ indexed on `/patient-resources`.
 The doctor asked the site to lead with 14 named procedures: craniosynostosis, cleft lip & palate, orthognathic (jaw) surgery, ear reconstruction; rhinoplasty, blepharoplasty, otoplasty, chin augmentation, facelift, tummy tuck, breast augmentation, breast reduction, gynaecomastia and liposuction.
 
 - Three of the 14 are existing legacy pages (craniosynostosis, cleft, corrective jaw → retitled "Orthognathic (jaw correction) surgery"; URL unchanged).
-- Eleven are new pages at clean paths (no `.html`, no rewrite/redirect — `lib/routes.ts → NEW_SERVICE_SLUGS`). Content lives in `lib/procedures.ts`.
-- The seven other legacy pages (facial injuries, head & neck cancer, other craniofacial conditions, hand surgery, and the face / breast / body hub pages) **stay live at their canonical `.html` URLs** so backlinks and rankings are preserved. They are out of the header menu and listed on the homepage under "Also treated" and in the footer. Hub pages list their procedure pages at the top; procedure pages link back to their hub.
+- Eleven are new pages at clean paths (`lib/routes.ts → NEW_SERVICE_SLUGS`); they never had a `.html` URL. Content lives in `lib/procedures.ts`.
+- The seven other legacy pages (facial injuries, head & neck cancer, other craniofacial conditions, hand surgery, and the face / breast / body hub pages) **stay live at their clean URLs** (the old `.html` URL 308s there) so backlinks and rankings are preserved. They are out of the header menu and listed on the homepage under "Also treated" and in the footer. Hub pages list their procedure pages at the top; procedure pages link back to their hub.
 - Header, homepage, footer, sitemap, `llms.txt` and the Physician schema (`availableService`, `knowsAbout`) all derive from `lib/routes.ts` order constants — nothing is hard-coded in JSX.

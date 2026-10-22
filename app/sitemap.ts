@@ -5,7 +5,8 @@ import { DOCTOR_PHOTO, imageUrl } from "@/lib/images";
 import { siteOrigin } from "@/lib/seo";
 
 /**
- * All canonical public URLs — the legacy `.html` addresses. `lastModified` is the content review
+ * All canonical public URLs — clean paths only; the legacy `.html` addresses are 308 redirects and
+ * must never appear here. `lastModified` is the content review
  * date (not the build time) so crawlers are not told every page changed on every deploy.
  */
 export default function sitemap(): MetadataRoute.Sitemap {

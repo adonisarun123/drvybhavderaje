@@ -37,7 +37,7 @@ export function SiteHeader() {
     };
   }, [open, menu]);
 
-  const isCurrent = (href: string) => href === pathname || `${pathname}.html` === href;
+  const isCurrent = (href: string) => href === pathname;
   const close = () => {
     setOpen(false);
     setMenu(null);

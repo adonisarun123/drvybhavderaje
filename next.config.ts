@@ -1,24 +1,18 @@
 import type { NextConfig } from "next";
 import { imageKitEndpoint } from "./lib/image-config";
-import { LEGACY_SERVICE_SLUGS, RETIRED_PATHS, STATIC_LEGACY_STEMS } from "./lib/routes";
+import { LEGACY_HTML_REDIRECTS, RETIRED_PATHS } from "./lib/routes";
 
 /**
  * URL strategy (see lib/routes.ts and docs/SEO-MIGRATION.md).
  *
- * Every URL of the legacy site https://drvybhavderaje.com/ keeps serving a 200 at the SAME address:
- *   /aboutus.html, /craniosynostosis-surgery-bangalore.html, /practice-location.html, …
- * These `.html` URLs are the canonical URLs. Internally the pages live at the suffix-less path, so
- *   rewrite  /aboutus.html  →  /aboutus      (URL in the browser is unchanged)
- *   redirect /aboutus       →  /aboutus.html (301, so only one URL per page is ever indexed)
- * The clean paths used by the earlier redesign build (/about, /craniosynostosis …) also 301 to the
- * canonical legacy URL. Nothing redirects to the homepage except the old /index.html.
- * Procedure pages added in Oct 2026 (/rhinoplasty-surgery-bangalore …) have no legacy URL and use
- * clean paths; they are not rewritten or redirected.
+ * Canonical URLs are clean, suffix-less paths: /aboutus, /craniosynostosis-surgery-bangalore, …
+ * Every URL of the legacy site https://drvybhavderaje.com/ (the `.html` paths) is kept alive as a
+ * permanent 308 redirect to its clean path, one hop, query string preserved:
+ *   /aboutus.html  →  /aboutus   (308)
+ * The clean paths of the earlier redesign build (/about, /craniosynostosis …) also 308 straight to the
+ * canonical URL. Nothing redirects to the homepage except /index.html, /index and /home.
+ * There are no rewrites: the URL in the address bar is the canonical URL.
  */
-const LEGACY_STEMS: string[] = [...STATIC_LEGACY_STEMS, ...LEGACY_SERVICE_SLUGS];
-
-const legacyRewrites = LEGACY_STEMS.map((stem) => ({ source: `/${stem}.html`, destination: `/${stem}` }));
-
 /** Images moved to ImageKit; the legacy /images/… URLs (everything except the PDFs) redirect there. */
 const IK = imageKitEndpoint();
 const imageRedirects = [
@@ -35,7 +29,7 @@ const imageRedirects = [
 
 const canonicalRedirects = [
   ...imageRedirects,
-  ...LEGACY_STEMS.map((stem) => ({ source: `/${stem}`, destination: `/${stem}.html`, permanent: true })),
+  ...LEGACY_HTML_REDIRECTS.map(({ source, destination }) => ({ source, destination, permanent: true })),
   ...Object.entries(RETIRED_PATHS).map(([source, destination]) => ({ source, destination, permanent: true })),
 ];
 
@@ -53,9 +47,6 @@ const nextConfig: NextConfig = {
   images: { remotePatterns: [{ protocol: "https", hostname: "i.ytimg.com" }, { protocol: "https", hostname: "ik.imagekit.io" }] },
   async redirects() {
     return canonicalRedirects;
-  },
-  async rewrites() {
-    return { beforeFiles: legacyRewrites, afterFiles: [], fallback: [] };
   },
   async headers() {
     return [

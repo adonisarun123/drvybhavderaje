@@ -1,24 +1,23 @@
 /**
  * Public URL map.
  *
- * The legacy URLs of https://drvybhavderaje.com/ (the `.html` paths) are the CANONICAL public URLs
- * of this site so that every existing backlink, bookmark and search result keeps resolving with a
- * 200 — no redirect hop, no equity loss. Internally each page lives at the same path without the
- * `.html` suffix (`app/(public)/aboutus/page.tsx`, `app/(public)/[slug]/page.tsx` …) and
- * `next.config.ts` rewrites the public `.html` URL onto it. The suffix-less paths, and the clean
- * paths used by the earlier redesign, 301 to the canonical `.html` URL so only one URL per page is
- * ever indexed.
+ * Every public page lives at a clean, suffix-less path (`/aboutus`, `/rhinoplasty-surgery-bangalore` …).
+ * The legacy URLs of https://drvybhavderaje.com/ (the `.html` paths: `/aboutus.html`,
+ * `/craniosynostosis-surgery-bangalore.html` …) are preserved as PERMANENT 308 redirects to the clean
+ * path (see `next.config.ts`), so every existing backlink, bookmark and search result still resolves
+ * and passes its equity to the canonical clean URL. Redirects are always one hop: the paths of the
+ * earlier redesign (`/about`, `/cleft-care` …) go straight to the clean URL, never via `.html`.
  *
  * Always link with these constants (or `servicePath()`); never hard-code a path in JSX.
  */
 export const ROUTES = {
   home: "/",
-  about: "/aboutus.html",
-  locations: "/practice-location.html",
-  testimonials: "/testimonials.html",
-  contact: "/contact-us.html",
-  privacy: "/privacy-policy.html",
-  terms: "/terms-of-use.html",
+  about: "/aboutus",
+  locations: "/practice-location",
+  testimonials: "/testimonials",
+  contact: "/contact-us",
+  privacy: "/privacy-policy",
+  terms: "/terms-of-use",
   /** New page without a legacy equivalent. */
   resources: "/patient-resources",
 } as const;
@@ -26,9 +25,9 @@ export const ROUTES = {
 /**
  * Service page slugs.
  *
- * LEGACY slugs are the ten service pages of the old site; their canonical URL keeps the `.html`
- * suffix (see above). NEW slugs were added on 22 Oct 2026 when the practice narrowed its public
- * focus to 14 named procedures; they have no legacy URL to preserve, so they use clean paths.
+ * LEGACY slugs are the ten service pages of the old site; their old `.html` URL 308s to the clean
+ * path (see above). NEW slugs were added on 22 Oct 2026 when the practice narrowed its public
+ * focus to 14 named procedures; they never had a `.html` URL.
  */
 export const LEGACY_SERVICE_SLUGS = [
   "craniosynostosis-surgery-bangalore",
@@ -62,16 +61,14 @@ export const SERVICE_SLUGS = [...LEGACY_SERVICE_SLUGS, ...NEW_SERVICE_SLUGS] as 
 export type LegacyServiceSlug = (typeof LEGACY_SERVICE_SLUGS)[number];
 export type ServiceSlug = (typeof SERVICE_SLUGS)[number];
 
-const LEGACY_SET: ReadonlySet<string> = new Set(LEGACY_SERVICE_SLUGS);
-
-/** Public canonical path for a service page slug: legacy slugs keep `.html`, new slugs are clean. */
+/** Public canonical path for a service page slug — always the clean, suffix-less path. */
 export function servicePath(slug: ServiceSlug): string {
-  return LEGACY_SET.has(slug) ? `/${slug}.html` : `/${slug}`;
+  return `/${slug}`;
 }
 
 /**
  * Display order of the 14 procedures the practice leads with (header, homepage, footer), as
- * specified by the doctor on 22 Oct 2026. Everything else in SERVICE_SLUGS stays live at its legacy
+ * specified by the doctor on 22 Oct 2026. Everything else in SERVICE_SLUGS stays live at its clean
  * URL and is listed under "Also treated".
  */
 export const FEATURED_CRANIOFACIAL: readonly ServiceSlug[] = [
@@ -107,10 +104,13 @@ export const OTHER_SERVICES_ORDER: readonly ServiceSlug[] = [
 /** Section anchors on the homepage. */
 export const SECTION = { craniofacial: "/#craniofacial", cosmetic: "/#cosmetic-surgery", other: "/#also-treated" } as const;
 
-/** Internal (suffix-less) stems of the non-service legacy pages, used by next.config.ts. */
+/** Stems of the non-service legacy pages whose `.html` URL redirects to the clean path (next.config.ts). */
 export const STATIC_LEGACY_STEMS = ["aboutus", "practice-location", "testimonials", "contact-us", "privacy-policy", "terms-of-use"] as const;
 
-/** Paths used by the previous redesign build; each 301s to its canonical legacy URL. */
+/** Every legacy `.html` URL of the old site (17 pages) and the clean URL it permanently redirects to. */
+export const LEGACY_HTML_REDIRECTS: ReadonlyArray<{ source: string; destination: string }> = [...STATIC_LEGACY_STEMS, ...LEGACY_SERVICE_SLUGS].map((stem) => ({ source: `/${stem}.html`, destination: `/${stem}` }));
+
+/** Paths used by the previous redesign build; each 308s straight to the clean canonical URL (one hop). */
 export const RETIRED_PATHS: Record<string, string> = {
   "/about": ROUTES.about,
   "/locations": ROUTES.locations,
