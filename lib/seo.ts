@@ -77,6 +77,10 @@ export function physicianJsonLd(clinics: ClinicLike[]) {
     email: SITE.email,
     description: SITE.defaultDescription,
     medicalSpecialty: ["PlasticSurgery", "Surgical"],
+    identifier: [
+      { "@type": "PropertyValue", propertyID: "Karnataka Medical Council registration", value: "79493" },
+      { "@type": "PropertyValue", propertyID: "Association of Plastic Surgeons of India membership", value: "D089FL2019" },
+    ],
     knowsAbout: SERVICE_PAGES.flatMap((p) => [...p.conditions, ...p.procedures]).filter((v, i, a) => a.indexOf(v) === i),
     sameAs: SAME_AS(),
     areaServed: [{ "@type": "City", name: "Bengaluru", alternateName: "Bangalore" }, { "@type": "Country", name: "India" }],
@@ -139,31 +143,76 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
   };
 }
 
-export function medicalWebPageJsonLd(args: { title: string; description: string; path: string; type?: "MedicalWebPage" | "AboutPage" | "ContactPage" | "WebPage" | "CollectionPage" }) {
+export function medicalWebPageJsonLd(args: {
+  title: string;
+  description: string;
+  path: string;
+  type?: "MedicalWebPage" | "AboutPage" | "ContactPage" | "WebPage" | "CollectionPage";
+  /** CSS selectors of the answer-first blocks assistants and voice search may read aloud / quote. */
+  speakable?: string[];
+  /** `@id` of the page's primary entity (the procedure or the physician). */
+  mainEntityId?: string;
+  /** Canonical paths of the pages this one links to as related reading (becomes `relatedLink`). */
+  relatedPaths?: string[];
+  /** Additional `@id`s the page is about (conditions, procedures). */
+  aboutIds?: string[];
+}) {
+  const url = absolute(args.path);
   return {
     "@context": "https://schema.org",
     "@type": args.type ?? "MedicalWebPage",
-    "@id": `${absolute(args.path)}#webpage`,
+    "@id": `${url}#webpage`,
     name: args.title,
+    headline: args.title,
     description: args.description,
-    url: absolute(args.path),
+    url,
     isPartOf: { "@id": WEBSITE_ID() },
-    about: { "@id": PHYSICIAN_ID() },
+    about: args.aboutIds?.length ? [{ "@id": PHYSICIAN_ID() }, ...args.aboutIds.map((id) => ({ "@id": id }))] : { "@id": PHYSICIAN_ID() },
+    mainEntity: args.mainEntityId ? { "@id": args.mainEntityId } : undefined,
     author: { "@id": PHYSICIAN_ID() },
+    publisher: { "@id": ORG_ID() },
     reviewedBy: { "@id": PHYSICIAN_ID() },
+    lastReviewed: SITE.contentUpdated,
     dateModified: SITE.contentUpdated,
     inLanguage: "en-IN",
     audience: { "@type": "MedicalAudience", audienceType: "Patient" },
+    speakable: args.speakable?.length ? { "@type": "SpeakableSpecification", cssSelector: args.speakable } : undefined,
+    relatedLink: args.relatedPaths?.length ? args.relatedPaths.map(absolute) : undefined,
+    significantLink: [absolute(ROUTES.about), absolute(ROUTES.contact)],
   };
 }
+
+/** Stable `@id`s for a service page's entities (used by the page node's mainEntity/about and by other pages' `mentions`). */
+export const PROCEDURE_ID = (page: ServicePage, i = 0) => `${absolute(page.path)}#procedure-${i + 1}`;
+export const CONDITION_ID = (page: ServicePage, i = 0) => `${absolute(page.path)}#condition-${i + 1}`;
 
 /** Condition + procedure entities for a service page, so answer engines can connect the page to the medical topics it covers. */
 export function serviceEntitiesJsonLd(page: ServicePage) {
   const url = absolute(page.path);
   return [
-    ...page.conditions.map((name) => ({ "@context": "https://schema.org", "@type": "MedicalCondition", name, url, relevantSpecialty: "PlasticSurgery" })),
-    ...page.procedures.map((name) => ({ "@context": "https://schema.org", "@type": "MedicalProcedure", name, url, procedureType: "Surgical", provider: { "@id": PHYSICIAN_ID() } })),
+    ...page.conditions.map((name, i) => ({ "@context": "https://schema.org", "@type": "MedicalCondition", "@id": CONDITION_ID(page, i), name, url, relevantSpecialty: "PlasticSurgery", possibleTreatment: page.procedures.map((_, j) => ({ "@id": PROCEDURE_ID(page, j) })) })),
+    ...page.procedures.map((name, i) => ({ "@context": "https://schema.org", "@type": "MedicalProcedure", "@id": PROCEDURE_ID(page, i), name, url, procedureType: "Surgical", relevantSpecialty: "PlasticSurgery", provider: { "@id": PHYSICIAN_ID() }, mainEntityOfPage: `${url}#webpage` })),
   ];
+}
+
+/**
+ * The doctor's peer-reviewed papers as ScholarlyArticle nodes authored by the Physician entity.
+ * Citation strings are kept verbatim; the title is the second sentence of the citation (Vancouver style).
+ */
+export function scholarlyArticlesJsonLd(citations: string[]) {
+  return citations.map((citation) => {
+    const parts = citation.split(/\.\s+/);
+    const name = (parts[1] ?? citation).replace(/\.$/, "");
+    return {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      name,
+      headline: name,
+      citation,
+      author: { "@id": PHYSICIAN_ID() },
+      mainEntityOfPage: `${absolute(ROUTES.about)}#publications`,
+    };
+  });
 }
 
 export function videoJsonLd(ids: string[]) {

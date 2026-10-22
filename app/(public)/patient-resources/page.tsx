@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { CtaBand, Faq, HelpSideCard, PageHero } from "@/components/site/blocks";
+import { CtaBand, Faq, HelpSideCard, PageHero, ServiceIndex } from "@/components/site/blocks";
 import { InfoSheet, sheetExists } from "@/components/site/info-sheet";
 import { JsonLd } from "@/components/site/json-ld";
 import { HOME_FAQS, RESOURCES, SERVICE_PAGES } from "@/lib/content";
+import { autolink, createLinkBudget } from "@/lib/links";
 import { ROUTES } from "@/lib/routes";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata } from "@/lib/seo";
 
@@ -12,6 +13,7 @@ const DESCRIPTION = "Before you see Dr Vybhav Deraje in Bangalore: what to bring
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: ROUTES.resources });
 
 export default function PatientResourcesPage() {
+  const faqs = HOME_FAQS.map((f) => ({ q: f.q, a: autolink(f.a, createLinkBudget(ROUTES.resources)) }));
   const sheets = SERVICE_PAGES.flatMap((p) => p.sections.flatMap((s) => (s.items ?? []).filter((it) => it.sheet && sheetExists(it.sheet)).map((it) => ({ page: p.shortTitle, title: it.title, href: it.sheet! }))));
   return (
     <>
@@ -46,8 +48,9 @@ export default function PatientResourcesPage() {
               </ul>
             </>
           )}
+          <ServiceIndex heading="Procedure guides" intro={<p>Every condition and procedure Dr Vybhav Deraje treats has its own page: who it suits, how it is done, recovery, limitations and the questions patients ask most.</p>} />
           <h2 style={{ marginTop: 40 }}>Frequently asked questions</h2>
-          <Faq items={HOME_FAQS} />
+          <Faq items={faqs} />
         </article>
         <HelpSideCard />
       </section>

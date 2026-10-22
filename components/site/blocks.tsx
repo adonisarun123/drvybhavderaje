@@ -1,8 +1,15 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { Image } from "@imagekit/next";
-import { ArrowRight, ArrowUpRight, Baby, Check, Droplets, Ear, Eye, Hand, Heart, HeartHandshake, PersonStanding, Phone, Quote, Ribbon, ScanFace, Shirt, Smile, Sparkles, Stethoscope, Waves } from "lucide-react";
-import { AFFILIATIONS, SITE, type Photo, type ServicePage } from "@/lib/content";
+import { ArrowRight, ArrowUpRight, Baby, BadgeCheck, Check, Droplets, Ear, Eye, Hand, Heart, HeartHandshake, PersonStanding, Phone, Quote, Ribbon, ScanFace, Shirt, Smile, Sparkles, Stethoscope, Waves } from "lucide-react";
+import { AFFILIATIONS, COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, DOCTOR, GROUP_LABEL, OTHER_SERVICES, SITE, type Photo, type ServicePage } from "@/lib/content";
 import { ROUTES, SECTION } from "@/lib/routes";
+
+export type Crumb = { label: string; href?: string };
+
+export function reviewedOn(): string {
+  return new Date(SITE.contentUpdated).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+}
 
 export function CtaBand() {
   return (
@@ -46,12 +53,22 @@ export function HelpSideCard() {
   );
 }
 
-export function PageHero({ eyebrow, title, lead, crumb }: { eyebrow: string; title: string; lead: string; crumb: string }) {
+export function PageHero({ eyebrow, title, lead, crumb }: { eyebrow: string; title: string; lead: string; crumb: string | Crumb[] }) {
+  const trail: Crumb[] = typeof crumb === "string" ? [{ label: crumb }] : crumb;
   return (
     <section className="page-hero">
       <div className="container">
         <nav className="breadcrumb" aria-label="Breadcrumb">
-          <Link href="/">Home</Link> / {crumb.toUpperCase()}
+          <ol>
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            {trail.map((c, i) => (
+              <li key={c.label} aria-current={i === trail.length - 1 ? "page" : undefined}>
+                {c.href && i < trail.length - 1 ? <Link href={c.href}>{c.label.toUpperCase()}</Link> : c.label.toUpperCase()}
+              </li>
+            ))}
+          </ol>
         </nav>
         <p className="eyebrow">{eyebrow}</p>
         <h1>{title}</h1>
@@ -61,7 +78,30 @@ export function PageHero({ eyebrow, title, lead, crumb }: { eyebrow: string; tit
   );
 }
 
-export function Faq({ items }: { items: { q: string; a: string }[] }) {
+/** Visible author / reviewer line — the E-E-A-T signal answer engines look for, and a contextual link to the surgeon's profile. */
+export function Byline() {
+  return (
+    <p className="byline">
+      <BadgeCheck size={16} aria-hidden="true" />
+      <span>
+        Written and medically reviewed by <Link href={ROUTES.about}>{DOCTOR.name}</Link>, {DOCTOR.honorificSuffix} · Consultant Craniofacial &amp; Plastic Surgeon, Bangalore · Last reviewed {reviewedOn()}
+      </span>
+    </p>
+  );
+}
+
+/** Answer-first summary block: the 40–60 words an assistant can quote as the direct answer. */
+export function KeyFacts({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <aside className="key-facts" id="summary" aria-label="At a glance">
+      <p className="eyebrow">At a glance</p>
+      <h2>{title}</h2>
+      {children}
+    </aside>
+  );
+}
+
+export function Faq({ items }: { items: { q: string; a: ReactNode }[] }) {
   return (
     <div className="faq">
       {items.map((f) => (
@@ -147,12 +187,43 @@ export function RelatedServices({ services }: { services: ServicePage[] }) {
           All services <ArrowRight size={18} aria-hidden="true" />
         </Link>
       </div>
-      <ServiceGrid services={services} compact />
+      <ServiceGrid services={services} compact columns={services.length % 3 === 0 ? 3 : undefined} />
     </section>
   );
 }
 
-export function TestimonialCard({ name, topic, text }: { name: string; topic: string; text: string }) {
+/** Every public service page, grouped — used wherever a page should act as a hub (About, Resources, Locations, 404). */
+export function ServiceIndex({ heading = "Conditions and procedures", intro }: { heading?: string; intro?: ReactNode }) {
+  const groups: { label: string; href: string; pages: ServicePage[] }[] = [
+    { label: GROUP_LABEL.craniofacial, href: SECTION.craniofacial, pages: CRANIOFACIAL_SERVICES },
+    { label: GROUP_LABEL.cosmetic, href: SECTION.cosmetic, pages: COSMETIC_SERVICES },
+    { label: "Also treated", href: SECTION.other, pages: OTHER_SERVICES },
+  ];
+  return (
+    <section className="service-index" aria-labelledby="service-index-heading">
+      <h2 id="service-index-heading">{heading}</h2>
+      {intro}
+      <div className="service-index-grid">
+        {groups.map((g) => (
+          <div key={g.label}>
+            <h3>
+              <Link href={g.href}>{g.label}</Link>
+            </h3>
+            <ul>
+              {g.pages.map((p) => (
+                <li key={p.slug}>
+                  <Link href={p.path}>{p.shortTitle}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export function TestimonialCard({ name, topic, text, href }: { name: string; topic: string; text: string; href?: string }) {
   return (
     <figure className="testimonial-card">
       <Quote size={22} aria-hidden="true" />
@@ -161,7 +232,7 @@ export function TestimonialCard({ name, topic, text }: { name: string; topic: st
       </blockquote>
       <figcaption>
         <b>{name}</b>
-        <span>{topic}</span>
+        <span>{href ? <Link href={href}>{topic}</Link> : topic}</span>
       </figcaption>
     </figure>
   );

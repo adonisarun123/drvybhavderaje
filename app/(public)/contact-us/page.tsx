@@ -5,7 +5,7 @@ import { PageHero } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { AppointmentForm } from "@/components/site/appointment-form";
 import { getPublicClinics } from "@/lib/clinics";
-import { SITE } from "@/lib/content";
+import { COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, SITE } from "@/lib/content";
 import { enquiriesEnabled } from "@/lib/enquiries/public-config";
 import { formatPhone } from "@/lib/phone";
 import { ROUTES } from "@/lib/routes";
@@ -83,6 +83,18 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
             <Link className="text-link" href={ROUTES.locations}>
               All locations and hospitals <ArrowRight size={16} aria-hidden="true" />
             </Link>
+          </aside>
+          <aside className="side-card" aria-label="Not sure which procedure?" style={{ marginTop: 24 }}>
+            <p className="eyebrow">Before you write</p>
+            <h3>Read about the procedure first.</h3>
+            <p>Each page explains who it suits, what the surgery involves and what recovery looks like, so your enquiry can be specific.</p>
+            <nav className="page-links" aria-label="Procedure pages">
+              {[...CRANIOFACIAL_SERVICES, ...COSMETIC_SERVICES].map((s) => (
+                <Link key={s.slug} href={s.path}>
+                  {s.shortTitle}
+                </Link>
+              ))}
+            </nav>
           </aside>
         </div>
       </section>

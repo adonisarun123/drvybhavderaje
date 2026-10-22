@@ -8,8 +8,9 @@ import { VideoGallery } from "@/components/site/video-gallery";
 import { COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, DOCTOR, HOME_FAQS, HOSPITALS, OTHER_SERVICES, SITE, TESTIMONIALS, VIDEOS } from "@/lib/content";
 import { getPublicClinics } from "@/lib/clinics";
 import { DOCTOR_PHOTO } from "@/lib/images";
+import { autolink, createLinkBudget, linkTargetFor } from "@/lib/links";
 import { ROUTES, servicePath } from "@/lib/routes";
-import { faqJsonLd, pageMetadata, physicianJsonLd, practiceJsonLd, videoJsonLd, websiteJsonLd } from "@/lib/seo";
+import { faqJsonLd, medicalWebPageJsonLd, pageMetadata, PHYSICIAN_ID, physicianJsonLd, practiceJsonLd, videoJsonLd, websiteJsonLd } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -18,9 +19,25 @@ export const metadata: Metadata = pageMetadata({ title: "Home", description: SIT
 export default async function HomePage() {
   const clinics = await getPublicClinics();
   const featured = TESTIMONIALS.filter((t) => ["Sandeep", "Anand", "Abhishek"].includes(t.name));
+  // Contextual links in the hero and the FAQ answers (first mention of each procedure links to its page).
+  const budget = createLinkBudget("/", [ROUTES.about, ROUTES.locations, ROUTES.contact]);
+  const heroCopy = autolink(
+    "Dr Vybhav Deraje is a National Board certified plastic surgeon with fellowship training in craniofacial surgery. From a baby’s first craniosynostosis consultation to rhinoplasty, facelift, breast and body surgery — specialist care, explained clearly.",
+    budget,
+  );
+  const faqs = HOME_FAQS.map((f) => ({ q: f.q, a: autolink(f.a, createLinkBudget("/")) }));
   return (
     <>
-      <JsonLd data={[websiteJsonLd(), physicianJsonLd(clinics), practiceJsonLd(clinics), faqJsonLd(HOME_FAQS), videoJsonLd(VIDEOS)]} />
+      <JsonLd
+        data={[
+          websiteJsonLd(),
+          medicalWebPageJsonLd({ title: `${SITE.name} | Craniofacial & Plastic Surgeon, Bangalore`, description: SITE.metaDescription, path: "/", type: "WebPage", speakable: [".hero-description", ".faq"], mainEntityId: PHYSICIAN_ID(), relatedPaths: [...CRANIOFACIAL_SERVICES, ...COSMETIC_SERVICES].map((s) => s.path) }),
+          physicianJsonLd(clinics),
+          practiceJsonLd(clinics),
+          faqJsonLd(HOME_FAQS),
+          videoJsonLd(VIDEOS),
+        ]}
+      />
       <section className="hero">
         <div className="container hero-grid">
           <div className="hero-copy">
@@ -32,9 +49,7 @@ export default async function HomePage() {
               <br />
               Rebuilding <em>lives</em>.
             </h1>
-            <p className="hero-description">
-              Dr Vybhav Deraje is a National Board certified plastic surgeon with fellowship training in craniofacial surgery. From a baby’s first craniosynostosis consultation to rhinoplasty, facelift, breast and body surgery — specialist care, explained clearly.
-            </p>
+            <p className="hero-description">{heroCopy}</p>
             <div className="actions">
               <Link className="button" href={ROUTES.contact}>
                 Book an appointment <ArrowUpRight size={18} aria-hidden="true" />
@@ -254,7 +269,7 @@ export default async function HomePage() {
         </div>
         <div className="testimonial-grid">
           {featured.map((t) => (
-            <TestimonialCard key={t.name} {...t} />
+            <TestimonialCard key={t.name} {...t} href={linkTargetFor(t.topic)} />
           ))}
         </div>
       </section>
@@ -293,7 +308,7 @@ export default async function HomePage() {
             <HeartHandshake size={14} aria-hidden="true" /> Empathy. Integrity. Collaboration.
           </span>
         </div>
-        <Faq items={HOME_FAQS} />
+        <Faq items={faqs} />
       </section>
 
       <CtaBand />

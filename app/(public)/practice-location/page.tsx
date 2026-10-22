@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Image } from "@imagekit/next";
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight, MapPin, Phone } from "lucide-react";
-import { CtaBand, PageHero } from "@/components/site/blocks";
+import { CtaBand, PageHero, ServiceIndex } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { getPublicClinics } from "@/lib/clinics";
 import { CLINICS_SEED, HOSPITALS } from "@/lib/content";
@@ -88,6 +88,7 @@ export default async function LocationsPage() {
           ))}
         </div>
         <p className="note">Appointment timings must be confirmed with the clinic. Hospital phone numbers connect to the hospital’s own front desk.</p>
+        <ServiceIndex heading="What is treated at these locations" intro={<p>Consultations for every condition and procedure take place at the Aesthetica Veda clinics; surgery is scheduled at the partner hospital best suited to it.</p>} />
       </section>
       <CtaBand />
     </>

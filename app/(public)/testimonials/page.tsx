@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { CtaBand, PageHero, TestimonialCard } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { VideoGallery } from "@/components/site/video-gallery";
 import { SITE, TESTIMONIALS, VIDEOS } from "@/lib/content";
-import { ROUTES } from "@/lib/routes";
+import { linkTargetFor } from "@/lib/links";
+import { ROUTES, servicePath } from "@/lib/routes";
 import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, videoJsonLd } from "@/lib/seo";
 
 const TITLE = "Patient Stories & Testimonials — Dr Vybhav Deraje, Bangalore";
@@ -26,10 +28,13 @@ export default function TestimonialsPage() {
       <section className="section container">
         <div className="testimonial-grid">
           {TESTIMONIALS.map((t) => (
-            <TestimonialCard key={t.name + t.topic} {...t} />
+            <TestimonialCard key={t.name + t.topic} {...t} href={linkTargetFor(t.topic)} />
           ))}
         </div>
         <p className="note">Testimonials are individual experiences shared voluntarily and do not predict the outcome of any treatment. Names are as supplied by the patients.</p>
+        <p>
+          Read about the treatments mentioned here: <Link href={servicePath("craniosynostosis-surgery-bangalore")}>craniosynostosis surgery</Link>, <Link href={servicePath("corrective-jaw-surgery-bangalore")}>corrective jaw surgery</Link>, <Link href={servicePath("facial-injuries-and-fracture-treatments")}>facial injuries and fractures</Link> and <Link href={servicePath("hand-plastic-surgeon-bangalore")}>hand surgery</Link> — or <Link href={ROUTES.about}>meet Dr Vybhav Deraje</Link>.
+        </p>
       </section>
       <section className="section container" aria-labelledby="video-heading" style={{ paddingTop: 0 }}>
         <div className="section-heading">

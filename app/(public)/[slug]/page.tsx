@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
-import { CtaBand, Faq, HelpSideCard, PageHero, PhotoGallery, RelatedServices } from "@/components/site/blocks";
+import { Byline, CtaBand, Faq, HelpSideCard, KeyFacts, PageHero, PhotoGallery, RelatedServices } from "@/components/site/blocks";
 import { InfoSheet } from "@/components/site/info-sheet";
 import { JsonLd } from "@/components/site/json-ld";
-import { childServices, getService, GROUP_HREF, GROUP_LABEL, isFeatured, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
+import { childServices, DOCTOR, getService, GROUP_HREF, GROUP_LABEL, HOSPITALS, isFeatured, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
+import { autolink, createLinkBudget, relatedServices } from "@/lib/links";
 import { ROUTES, SECTION } from "@/lib/routes";
-import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, serviceEntitiesJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, PROCEDURE_ID, CONDITION_ID, serviceEntitiesJsonLd } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -22,15 +24,24 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return pageMetadata({ title: page.metaTitle, description: page.description, path: page.path, ogType: "article" });
 }
 
-function Section({ s }: { s: ServiceSection }) {
+/** A section with its copy already run through the autolinker (in document order, so the first mention on the page gets the link). */
+interface LinkedSection {
+  heading: string;
+  body?: ReactNode[];
+  bullets?: ReactNode[];
+  items?: { title: string; text: ReactNode; sheet?: string }[];
+  note?: ReactNode;
+}
+
+function Section({ s }: { s: LinkedSection }) {
   return (
     <section>
       <h2>{s.heading}</h2>
-      {s.body?.map((p) => <p key={p.slice(0, 40)}>{p}</p>)}
+      {s.body?.map((p, i) => <p key={i}>{p}</p>)}
       {s.bullets && (
         <ul>
-          {s.bullets.map((b) => (
-            <li key={b}>{b}</li>
+          {s.bullets.map((b, i) => (
+            <li key={i}>{b}</li>
           ))}
         </ul>
       )}
@@ -59,7 +70,20 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const groupHref = featured ? GROUP_HREF[page.group] : SECTION.other;
   const parent = page.parent ? getService(page.parent) : undefined;
   const children = childServices(page.slug);
-  const related = page.related.map(getService).filter((p): p is NonNullable<typeof p> => Boolean(p));
+  const related = relatedServices(page);
+
+  // Contextual links, resolved in reading order: at-a-glance → intro → sections → FAQs.
+  const budget = createLinkBudget(page.path, [ROUTES.about, ROUTES.locations, ROUTES.contact]);
+  const intro = page.intro.map((p) => autolink(p, budget));
+  const sections: LinkedSection[] = page.sections.map((s: ServiceSection) => ({
+    heading: s.heading,
+    body: s.body?.map((p) => autolink(p, budget)),
+    bullets: s.bullets?.map((b) => autolink(b, budget)),
+    items: s.items?.map((it) => ({ title: it.title, text: autolink(it.text, budget), sheet: it.sheet })),
+    note: s.note ? autolink(s.note, budget) : undefined,
+  }));
+  const faqs = page.faqs.map((f) => ({ q: f.q, a: autolink(f.a, budget) }));
+
   return (
     <>
       <JsonLd
@@ -69,16 +93,51 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             { name: groupLabel, path: groupHref },
             { name: page.shortTitle, path: page.path },
           ]),
-          medicalWebPageJsonLd({ title: page.metaTitle, description: page.description, path: page.path }),
+          medicalWebPageJsonLd({
+            title: page.metaTitle,
+            description: page.description,
+            path: page.path,
+            speakable: ["#summary", ".service-prose .intro", ".faq"],
+            mainEntityId: page.procedures.length ? PROCEDURE_ID(page, 0) : page.conditions.length ? CONDITION_ID(page, 0) : undefined,
+            aboutIds: [...page.conditions.map((_, i) => CONDITION_ID(page, i)), ...page.procedures.map((_, i) => PROCEDURE_ID(page, i))],
+            relatedPaths: [...(parent ? [parent.path] : []), ...children.map((c) => c.path), ...related.map((r) => r.path)],
+          }),
           faqJsonLd(page.faqs),
           ...serviceEntitiesJsonLd(page),
         ]}
       />
-      <PageHero eyebrow={page.eyebrow} crumb={`${groupLabel} / ${page.shortTitle}`} title={page.title} lead={page.lead} />
+      <PageHero
+        eyebrow={page.eyebrow}
+        crumb={[
+          { label: groupLabel, href: groupHref },
+          ...(parent ? [{ label: parent.shortTitle, href: parent.path }] : []),
+          { label: page.shortTitle },
+        ]}
+        title={page.title}
+        lead={page.lead}
+      />
       <section className="section container content-grid">
         <article className="prose service-prose">
-          {page.intro.map((p) => (
-            <p key={p.slice(0, 40)} className="intro">
+          <Byline />
+          <KeyFacts title={`${page.shortTitle} in Bangalore`}>
+            <p>{page.description}</p>
+            <ul>
+              <li>
+                <b>Surgeon:</b> <Link href={ROUTES.about}>{DOCTOR.name}</Link>, {DOCTOR.honorificSuffix}; {DOCTOR.fellowship}.
+              </li>
+              <li>
+                <b>Where:</b> consultations at <Link href={ROUTES.locations}>Aesthetica Veda clinics</Link> in Bangalore; surgery at {HOSPITALS.map((h) => h.name.replace(" Hospital", "")).slice(0, 3).join(", ")} and other partner hospitals.
+              </li>
+              <li>
+                <b>Patients from outside Bangalore:</b> <Link href={ROUTES.contact}>video consultations</Link> for an initial opinion; surgery needs an in-person assessment.
+              </li>
+              <li>
+                <b>Contact:</b> <a href={`tel:${SITE.phoneTel}`}>{SITE.phone}</a> · <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+              </li>
+            </ul>
+          </KeyFacts>
+          {intro.map((p, i) => (
+            <p key={i} className="intro">
               {p}
             </p>
           ))}
@@ -96,7 +155,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               </ul>
             </section>
           )}
-          {page.sections.map((s) => (
+          {sections.map((s) => (
             <Section key={s.heading} s={s} />
           ))}
           {page.gallery && (
@@ -123,14 +182,26 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               </Link>
               .
             </p>
+            <nav className="page-links" aria-label="More about the practice">
+              <Link href={ROUTES.about}>
+                About {DOCTOR.name} <ArrowRight size={14} aria-hidden="true" />
+              </Link>
+              <Link href={ROUTES.locations}>
+                Clinics and hospitals <ArrowRight size={14} aria-hidden="true" />
+              </Link>
+              <Link href={ROUTES.resources}>
+                Preparing for your consultation <ArrowRight size={14} aria-hidden="true" />
+              </Link>
+              <Link href={ROUTES.testimonials}>
+                Patient stories <ArrowRight size={14} aria-hidden="true" />
+              </Link>
+            </nav>
           </section>
           <section>
             <h2>Frequently asked questions</h2>
-            <Faq items={page.faqs} />
+            <Faq items={faqs} />
           </section>
-          <p className="note">
-            This page is general information written by Dr Vybhav Deraje for patients and families. It does not replace an individual consultation; treatment plans depend on clinical assessment. Last reviewed {new Date(SITE.contentUpdated).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}.
-          </p>
+          <p className="note">This page is general information written by {DOCTOR.name} for patients and families. It does not replace an individual consultation; treatment plans depend on clinical assessment.</p>
         </article>
         <HelpSideCard />
       </section>
