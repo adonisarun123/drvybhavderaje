@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { SITE } from "@/lib/content";
+import { ROUTES } from "@/lib/routes";
 import type { PublicClinic } from "@/lib/clinics";
 
 type FieldErrors = Record<string, string[]>;
@@ -225,7 +226,7 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
         <input id={`${id}-consent`} type="checkbox" name="consent" required aria-invalid={!!err("consent")} disabled={!enabled} />
         <span>
           I agree to be contacted by the clinic about this request and have read the{" "}
-          <Link href="/privacy" style={{ textDecoration: "underline" }}>
+          <Link href={ROUTES.privacy} style={{ textDecoration: "underline" }}>
             privacy notice
           </Link>
           .{err("consent") && <span className="field-error"> {err("consent")}</span>}

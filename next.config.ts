@@ -1,28 +1,24 @@
 import type { NextConfig } from "next";
+import { RETIRED_PATHS, SERVICE_SLUGS, STATIC_LEGACY_STEMS } from "./lib/routes";
 
 /**
- * Legacy URL map from https://drvybhavderaje.com/ (inventoried 21 Oct 2026).
- * Only genuinely equivalent pages are redirected permanently. Old service pages
- * map to the new service page that covers the same topic — never to the homepage.
+ * URL strategy (see lib/routes.ts and docs/SEO-MIGRATION.md).
+ *
+ * Every URL of the legacy site https://drvybhavderaje.com/ keeps serving a 200 at the SAME address:
+ *   /aboutus.html, /craniosynostosis-surgery-bangalore.html, /practice-location.html, …
+ * These `.html` URLs are the canonical URLs. Internally the pages live at the suffix-less path, so
+ *   rewrite  /aboutus.html  →  /aboutus      (URL in the browser is unchanged)
+ *   redirect /aboutus       →  /aboutus.html (301, so only one URL per page is ever indexed)
+ * The clean paths used by the earlier redesign build (/about, /craniosynostosis …) also 301 to the
+ * canonical legacy URL. Nothing redirects to the homepage except the old /index.html.
  */
-const legacyRedirects: { source: string; destination: string }[] = [
-  { source: "/index.html", destination: "/" },
-  { source: "/aboutus.html", destination: "/about" },
-  { source: "/contact-us.html", destination: "/appointment" },
-  { source: "/practice-location.html", destination: "/locations" },
-  { source: "/craniosynostosis-surgery-bangalore.html", destination: "/craniosynostosis" },
-  { source: "/cleft-lip-and-palate-treatment-bangalore.html", destination: "/cleft-care" },
-  { source: "/corrective-jaw-surgery-bangalore.html", destination: "/cleft-care" },
-  { source: "/other-craniofacial-conditions-treatments.html", destination: "/cleft-care" },
-  { source: "/facial-injuries-and-fracture-treatments.html", destination: "/reconstructive-surgery" },
-  { source: "/head-and-neck-cancer-treatment.html", destination: "/reconstructive-surgery" },
-  { source: "/hand-plastic-surgeon-bangalore.html", destination: "/reconstructive-surgery" },
-  { source: "/face-plastic-surgery-bangalore.html", destination: "/cosmetic-surgery" },
-  { source: "/breast-plastic-surgeon-bangalore.html", destination: "/cosmetic-surgery" },
-  { source: "/body-plastic-surgeon-bangalore.html", destination: "/cosmetic-surgery" },
-  { source: "/privacy-policy.html", destination: "/privacy" },
-  // /testimonials.html and /terms-of-use.html have no equivalent page in the redesign (testimonials
-  // intentionally excluded pending consent review). They return 404 rather than a misleading redirect.
+const LEGACY_STEMS: string[] = [...STATIC_LEGACY_STEMS, ...SERVICE_SLUGS];
+
+const legacyRewrites = LEGACY_STEMS.map((stem) => ({ source: `/${stem}.html`, destination: `/${stem}` }));
+
+const canonicalRedirects = [
+  ...LEGACY_STEMS.map((stem) => ({ source: `/${stem}`, destination: `/${stem}.html`, permanent: true })),
+  ...Object.entries(RETIRED_PATHS).map(([source, destination]) => ({ source, destination, permanent: true })),
 ];
 
 const securityHeaders = [
@@ -36,8 +32,12 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   typescript: { ignoreBuildErrors: false },
+  images: { remotePatterns: [{ protocol: "https", hostname: "i.ytimg.com" }] },
   async redirects() {
-    return legacyRedirects.map((r) => ({ ...r, permanent: true }));
+    return canonicalRedirects;
+  },
+  async rewrites() {
+    return { beforeFiles: legacyRewrites, afterFiles: [], fallback: [] };
   },
   async headers() {
     return [
@@ -45,6 +45,7 @@ const nextConfig: NextConfig = {
       { source: "/admin/(.*)", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" }, { key: "Cache-Control", value: "no-store" }] },
       { source: "/admin", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" }, { key: "Cache-Control", value: "no-store" }] },
       { source: "/api/(.*)", headers: [{ key: "X-Robots-Tag", value: "noindex" }] },
+      { source: "/images/pdf/(.*)", headers: [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }] },
     ];
   },
 };

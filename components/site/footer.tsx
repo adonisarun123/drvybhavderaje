@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { CARE_PATHS, SITE } from "@/lib/content";
+import { FacebookIcon, InstagramIcon, LinkedinIcon, YoutubeIcon } from "./social-icons";
+import { CRANIOFACIAL_SERVICES, PLASTIC_SERVICES, SITE } from "@/lib/content";
+import { ROUTES } from "@/lib/routes";
 
 export function SiteFooter() {
   return (
     <footer className="site-footer">
-      <div className="container footer-grid">
+      <div className="container footer-grid footer-grid-4">
         <div>
           <Link href="/" className="footer-name">
             {SITE.name}
@@ -18,29 +20,54 @@ export function SiteFooter() {
           <a href={`tel:${SITE.phoneTel}`}>{SITE.phone}</a>
           <br />
           <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
+          <div className="social" aria-label="Social media">
+            <a href={SITE.social.facebook} target="_blank" rel="noopener noreferrer me" aria-label="Facebook">
+              <FacebookIcon />
+            </a>
+            <a href={SITE.social.instagram} target="_blank" rel="noopener noreferrer me" aria-label="Instagram">
+              <InstagramIcon />
+            </a>
+            <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer me" aria-label="LinkedIn">
+              <LinkedinIcon />
+            </a>
+            <a href={SITE.social.youtube} target="_blank" rel="noopener noreferrer me" aria-label="YouTube">
+              <YoutubeIcon />
+            </a>
+          </div>
         </div>
         <div>
-          <h3>Explore care</h3>
-          {CARE_PATHS.map((c) => (
-            <Link key={c.href} href={c.href}>
-              {c.title}
+          <h3>Craniofacial surgery</h3>
+          {CRANIOFACIAL_SERVICES.map((s) => (
+            <Link key={s.slug} href={s.path}>
+              {s.shortTitle}
+            </Link>
+          ))}
+        </div>
+        <div>
+          <h3>Plastic surgery</h3>
+          {PLASTIC_SERVICES.map((s) => (
+            <Link key={s.slug} href={s.path}>
+              {s.shortTitle}
             </Link>
           ))}
         </div>
         <div>
           <h3>Here to help</h3>
-          <Link href="/about">Meet the doctor</Link>
-          <Link href="/patient-resources">Preparing for your visit</Link>
-          <Link href="/locations">Find a clinic</Link>
-          <Link href="/appointment">
-            Request a consultation <ArrowRight size={14} aria-hidden="true" />
+          <Link href={ROUTES.about}>Meet Dr Vybhav Deraje</Link>
+          <Link href={ROUTES.locations}>Practice locations</Link>
+          <Link href={ROUTES.testimonials}>Patient stories</Link>
+          <Link href={ROUTES.resources}>Preparing for your visit</Link>
+          <Link href={ROUTES.contact}>
+            Book an appointment <ArrowRight size={14} aria-hidden="true" />
           </Link>
         </div>
       </div>
       <div className="container footer-bottom">
         <span>© {new Date().getFullYear()} {SITE.name}</span>
-        <span>Information supports, and does not replace, a medical consultation.</span>
-        <Link href="/privacy">Privacy</Link>
+        <span>Information on this site supports, and does not replace, a medical consultation.</span>
+        <span>
+          <Link href={ROUTES.privacy}>Privacy policy</Link> · <Link href={ROUTES.terms}>Terms of use</Link>
+        </span>
       </div>
     </footer>
   );

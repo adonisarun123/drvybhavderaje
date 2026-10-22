@@ -300,3 +300,83 @@ input[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--er
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; animation: none !important; } .care-card:hover { transform: none; } }
 [hidden] { display: none !important; }
 main:focus { outline: none; }
+
+
+/* ------------------------------------------------------------------------------------------------
+ * Content pages: services, about, testimonials, locations (added with the live-content migration)
+ * ---------------------------------------------------------------------------------------------- */
+.care-grid.compact { grid-template-columns: repeat(3, 1fr); }
+.care-grid.compact .care-card h3 { font-size: 18px; }
+.care-grid + .care-grid { margin-top: 18px; }
+.section + .section[style] { padding-top: 0; }
+
+.prose .intro { font-size: 18px; line-height: 1.75; color: var(--navy); }
+.prose section { margin-top: 42px; }
+.prose section > h2 { margin-bottom: 18px; }
+.prose ol { color: var(--muted); padding-left: 22px; }
+.prose a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.procedure-list { gap: 14px; margin: 24px 0 8px; display: grid; }
+.procedure { border: 1px solid var(--line); border-radius: 6px; padding: 22px 24px; background: #fff; }
+.procedure h3 { margin: 0 0 10px; font-size: 19px; }
+.procedure p { margin: 0; font-size: 15px; line-height: 1.75; color: var(--muted); }
+.callout { background: #f2f7fc; border-left: 3px solid var(--blue); border-radius: 0 6px 6px 0; padding: 16px 20px; margin-top: 22px; font-size: 15px; }
+.contact-inline p { font-size: 16px; }
+.contact-inline a { white-space: nowrap; }
+.sheet-link { color: var(--blue); align-items: center; gap: 8px; margin-top: 14px; font-size: 14px; font-weight: 500; display: inline-flex; min-height: 36px; text-decoration: none !important; }
+.sheet-link:hover { text-decoration: underline !important; }
+.sheet-list { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 2px; }
+.sheet-list .sheet-link { margin-top: 0; }
+.pub-list li { margin: 12px 0; font-size: 14px; line-height: 1.7; }
+.pub-list cite { font-style: normal; }
+.affiliation-line { font-size: 14px; color: var(--muted); }
+.affiliation-line b { color: var(--navy); font-weight: 600; }
+
+.side-card.toc { padding: 22px 28px; }
+.side-card.toc a { display: block; padding: 8px 0; font-size: 15px; color: var(--navy); border-bottom: 1px solid var(--line); margin: 0; }
+.side-card.toc a:last-child { border-bottom: 0; }
+.mini-address { display: grid; gap: 4px; margin: 0 0 18px; font-style: normal; font-size: 14px; line-height: 1.6; }
+.mini-address b { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--navy); }
+.mini-address span { color: var(--muted); }
+.mini-address a { color: var(--blue); margin: 0 !important; }
+
+.testimonial-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; display: grid; }
+.testimonial-card { border: 1px solid var(--line); border-radius: 6px; background: #fff; padding: 26px 24px 22px; margin: 0; display: flex; flex-direction: column; gap: 14px; }
+.testimonial-card > svg { color: var(--blue); }
+.testimonial-card blockquote { margin: 0; }
+.testimonial-card blockquote p { font-size: 15px; line-height: 1.75; color: var(--navy); margin: 0; }
+.testimonial-card figcaption { margin-top: auto; display: grid; font-size: 13px; }
+.testimonial-card figcaption b { font-weight: 600; }
+.testimonial-card figcaption span { color: var(--muted); }
+
+.video-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; display: grid; }
+.video { position: relative; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background: #0b1c2e; }
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-poster { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; cursor: pointer; background: #0b1c2e; display: block; }
+.video-poster img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.92; transition: opacity 0.2s; }
+.video-poster:hover img, .video-poster:focus-visible img { opacity: 1; }
+.video-play { position: absolute; inset: 0; margin: auto; width: 62px; height: 62px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; box-shadow: 0 8px 24px #0c396940; }
+.video-poster:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+.hospital-grid .location-card > p:not(.eyebrow) { min-height: auto; }
+.location-card h3 { font-size: 21px; margin: 6px 0 12px; }
+.footer-grid-4 { grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; }
+.social { display: flex; gap: 6px; margin-top: 16px; }
+.social a { width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 50%; display: inline-grid !important; place-items: center; color: var(--navy); min-height: 40px !important; }
+.social a:hover { color: var(--blue); border-color: var(--blue); }
+.cta p a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 1100px) {
+  .footer-grid-4 { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .footer-grid-4 > div:first-child { grid-column: 1 / -1; }
+}
+@media (max-width: 900px) {
+  .testimonial-grid, .video-grid, .care-grid.compact { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 580px) {
+  .testimonial-grid, .video-grid, .care-grid.compact, .footer-grid-4 { grid-template-columns: 1fr; }
+  .procedure { padding: 18px; }
+  .prose .intro { font-size: 17px; }
+}
+.care-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) { .care-grid.cols-3 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 580px) { .care-grid.cols-3 { grid-template-columns: 1fr; } }

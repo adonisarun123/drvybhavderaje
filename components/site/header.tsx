@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { ArrowUpRight, MapPin, Menu, Phone, X } from "lucide-react";
 import { NAV, SITE } from "@/lib/content";
+import { ROUTES } from "@/lib/routes";
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -24,6 +25,8 @@ export function SiteHeader() {
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
 
+  const isCurrent = (href: string) => href === pathname || `${pathname}.html` === href;
+
   return (
     <>
       <a className="skip" href="#main">
@@ -33,7 +36,7 @@ export function SiteHeader() {
         <div className="container">
           <span>{SITE.utilityLine}</span>
           <div>
-            <Link href="/locations">
+            <Link href={ROUTES.locations}>
               <MapPin size={13} aria-hidden="true" /> {SITE.city}
             </Link>
             <a href={`tel:${SITE.phoneTel}`}>
@@ -66,16 +69,13 @@ export function SiteHeader() {
             {open ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
           </button>
           <nav id={navId} className={`site-nav${open ? " open" : ""}`} aria-label="Main">
-            {NAV.map((item) => {
-              const current = item.href === pathname;
-              return (
-                <Link key={item.href} href={item.href} aria-current={current ? "page" : undefined} onClick={() => setOpen(false)}>
-                  {item.label}
-                </Link>
-              );
-            })}
-            <Link className="button small" href="/appointment" aria-current={pathname === "/appointment" ? "page" : undefined} onClick={() => setOpen(false)}>
-              Book a consultation <ArrowUpRight size={16} aria-hidden="true" />
+            {NAV.map((item) => (
+              <Link key={item.href} href={item.href} aria-current={isCurrent(item.href) ? "page" : undefined} onClick={() => setOpen(false)}>
+                {item.label}
+              </Link>
+            ))}
+            <Link className="button small" href={ROUTES.contact} aria-current={isCurrent(ROUTES.contact) ? "page" : undefined} onClick={() => setOpen(false)}>
+              Book an appointment <ArrowUpRight size={16} aria-hidden="true" />
             </Link>
           </nav>
         </div>

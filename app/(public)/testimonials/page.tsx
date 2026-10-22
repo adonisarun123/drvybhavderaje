@@ -1,0 +1,49 @@
+import type { Metadata } from "next";
+import { ArrowUpRight } from "lucide-react";
+import { CtaBand, PageHero, TestimonialCard } from "@/components/site/blocks";
+import { JsonLd } from "@/components/site/json-ld";
+import { VideoGallery } from "@/components/site/video-gallery";
+import { SITE, TESTIMONIALS, VIDEOS } from "@/lib/content";
+import { ROUTES } from "@/lib/routes";
+import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, videoJsonLd } from "@/lib/seo";
+
+const TITLE = "Patient Stories & Testimonials — Dr Vybhav Deraje, Bangalore";
+const DESCRIPTION = "Patients and families on their experience with Dr Vybhav Deraje, Bangalore: craniosynostosis, hand surgery, facial injury, jaw surgery and more. Plus videos.";
+
+export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: ROUTES.testimonials });
+
+export default function TestimonialsPage() {
+  return (
+    <>
+      <JsonLd
+        data={[
+          breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Patient stories", path: ROUTES.testimonials }]),
+          medicalWebPageJsonLd({ title: TITLE, description: DESCRIPTION, path: ROUTES.testimonials, type: "CollectionPage" }),
+          videoJsonLd(VIDEOS),
+        ]}
+      />
+      <PageHero eyebrow="Our stories" crumb="Patient stories" title="Patients speak." lead="In their own words — experiences shared by patients and families, as published on the practice’s website." />
+      <section className="section container">
+        <div className="testimonial-grid">
+          {TESTIMONIALS.map((t) => (
+            <TestimonialCard key={t.name + t.topic} {...t} />
+          ))}
+        </div>
+        <p className="note">Testimonials are individual experiences shared voluntarily and do not predict the outcome of any treatment. Names are as supplied by the patients.</p>
+      </section>
+      <section className="section container" aria-labelledby="video-heading" style={{ paddingTop: 0 }}>
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">Video gallery</p>
+            <h2 id="video-heading">Testimonial and information videos</h2>
+          </div>
+          <a href={SITE.social.youtube} target="_blank" rel="noopener noreferrer" className="text-link">
+            YouTube channel <ArrowUpRight size={18} aria-hidden="true" />
+          </a>
+        </div>
+        <VideoGallery ids={VIDEOS} />
+      </section>
+      <CtaBand />
+    </>
+  );
+}

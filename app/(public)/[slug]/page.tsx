@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { CtaBand, Faq, HelpSideCard, PageHero, TopicList } from "@/components/site/blocks";
+import { ArrowRight } from "lucide-react";
+import { CtaBand, Faq, HelpSideCard, PageHero, RelatedServices } from "@/components/site/blocks";
+import { InfoSheet } from "@/components/site/info-sheet";
 import { JsonLd } from "@/components/site/json-ld";
-import { SERVICE_PAGES } from "@/lib/content";
-import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata } from "@/lib/seo";
+import { getService, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
+import { ROUTES } from "@/lib/routes";
+import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, serviceEntitiesJsonLd } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -13,37 +17,92 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const page = SERVICE_PAGES.find((p) => p.slug === slug);
+  const page = getService(slug);
   if (!page) return {};
-  return pageMetadata({ title: page.metaTitle, description: page.description, path: `/${page.slug}` });
+  return pageMetadata({ title: page.metaTitle, description: page.description, path: page.path, ogType: "article" });
+}
+
+function Section({ s }: { s: ServiceSection }) {
+  return (
+    <section>
+      <h2>{s.heading}</h2>
+      {s.body?.map((p) => <p key={p.slice(0, 40)}>{p}</p>)}
+      {s.bullets && (
+        <ul>
+          {s.bullets.map((b) => (
+            <li key={b}>{b}</li>
+          ))}
+        </ul>
+      )}
+      {s.items && (
+        <div className="procedure-list">
+          {s.items.map((it) => (
+            <article className="procedure" key={it.title}>
+              <h3>{it.title}</h3>
+              <p>{it.text}</p>
+              {it.sheet && <InfoSheet href={it.sheet} />}
+            </article>
+          ))}
+        </div>
+      )}
+      {s.note && <p className="callout">{s.note}</p>}
+    </section>
+  );
 }
 
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const page = SERVICE_PAGES.find((p) => p.slug === slug);
+  const page = getService(slug);
   if (!page) notFound();
+  const groupLabel = page.group === "craniofacial" ? "Craniofacial surgery" : "Plastic surgery";
+  const groupHref = page.group === "craniofacial" ? "/#craniofacial" : "/#plastic-surgery";
+  const related = page.related.map(getService).filter((p): p is NonNullable<typeof p> => Boolean(p));
   return (
     <>
       <JsonLd
         data={[
-          breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: page.title, path: `/${page.slug}` }]),
-          medicalWebPageJsonLd({ title: page.metaTitle, description: page.description, path: `/${page.slug}` }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: groupLabel, path: groupHref },
+            { name: page.shortTitle, path: page.path },
+          ]),
+          medicalWebPageJsonLd({ title: page.metaTitle, description: page.description, path: page.path }),
           faqJsonLd(page.faqs),
+          ...serviceEntitiesJsonLd(page),
         ]}
       />
-      <PageHero eyebrow={page.eyebrow} crumb={page.eyebrow} title={page.title} lead={page.lead} />
+      <PageHero eyebrow={page.eyebrow} crumb={`${groupLabel} / ${page.shortTitle}`} title={page.title} lead={page.lead} />
       <section className="section container content-grid">
-        <article className="prose">
-          <h2>Start with a conversation.</h2>
-          <p>{page.intro}</p>
-          <h3>What a consultation can cover</h3>
-          <TopicList topics={page.topics} />
-          <h2>Questions you may have</h2>
-          <Faq items={page.faqs} />
-          <p className="note">General information only. Individual assessment is essential. Clinical content should be discussed with your treating doctor.</p>
+        <article className="prose service-prose">
+          {page.intro.map((p) => (
+            <p key={p.slice(0, 40)} className="intro">
+              {p}
+            </p>
+          ))}
+          {page.sections.map((s) => (
+            <Section key={s.heading} s={s} />
+          ))}
+          <section className="contact-inline">
+            <h2>Need more information?</h2>
+            <p>
+              Call <a href={`tel:${SITE.phoneTel}`}>{SITE.phone}</a>, email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or{" "}
+              <Link href={ROUTES.contact}>
+                book an appointment online <ArrowRight size={14} aria-hidden="true" />
+              </Link>
+              .
+            </p>
+          </section>
+          <section>
+            <h2>Frequently asked questions</h2>
+            <Faq items={page.faqs} />
+          </section>
+          <p className="note">
+            This page is general information written by Dr Vybhav Deraje for patients and families. It does not replace an individual consultation; treatment plans depend on clinical assessment. Last reviewed {new Date(SITE.contentUpdated).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" })}.
+          </p>
         </article>
         <HelpSideCard />
       </section>
+      <RelatedServices services={related} />
       <CtaBand />
     </>
   );

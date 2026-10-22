@@ -53,7 +53,7 @@ export async function createClinicAction(formData: FormData) {
     const [row] = await db.insert(clinics).values(values).returning();
     await recordAudit(db, { actor: actorOf(user), action: "clinic.create", entityType: "clinic", entityId: row!.id, summary: `Created clinic ${values.name}`, changes: values });
     return { id: row!.id };
-  }, ["/admin", "/locations", "/appointment", "/"]);
+  }, ["/admin", "/practice-location", "/contact-us", "/aboutus", "/"]);
 }
 
 export async function updateClinicAction(id: string, formData: FormData) {
@@ -65,5 +65,5 @@ export async function updateClinicAction(id: string, formData: FormData) {
     await db.update(clinics).set(values).where(eq(clinics.id, id));
     await recordAudit(db, { actor: actorOf(user), action: "clinic.update", entityType: "clinic", entityId: id, summary: `Updated clinic ${values.name}`, changes: diff(before as unknown as Record<string, unknown>, values) });
     return undefined;
-  }, ["/admin", "/locations", "/appointment", "/"]);
+  }, ["/admin", "/practice-location", "/contact-us", "/aboutus", "/"]);
 }
