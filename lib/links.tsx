@@ -55,6 +55,7 @@ export const TERM_LINKS: TermLink[] = [
   { href: ROUTES.about, phrases: ["Dr Vybhav Deraje"] },
   { href: ROUTES.locations, phrases: ["Aesthetica Veda", "Aster Hospital Whitefield", "Aster Hospital, Whitefield", "Sakra World Hospital", "Gleneagles Global Hospital"] },
   { href: ROUTES.contact, phrases: ["video consultation", "video consultations", "book an appointment", "enquiry form"] },
+  { href: ROUTES.procedures, phrases: ["all procedures", "conditions and procedures", "full range of procedures"] },
   { href: ROUTES.resources, phrases: ["first consultation", "first appointment", "patient information sheet", "patient information sheets"] },
 ];
 

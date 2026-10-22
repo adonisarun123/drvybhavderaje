@@ -118,7 +118,7 @@ export function SiteHeader() {
                       </li>
                     ))}
                     <li>
-                      <Link className="nav-menu-all" href={item.href} onClick={close}>
+                      <Link className="nav-menu-all" href={item.allHref ?? item.href} onClick={close}>
                         All {item.label.toLowerCase()} <ArrowUpRight size={14} aria-hidden="true" />
                       </Link>
                     </li>

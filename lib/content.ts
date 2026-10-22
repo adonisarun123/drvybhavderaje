@@ -45,6 +45,8 @@ export interface NavItem {
   label: string;
   /** Dropdown entries (service pages). */
   children?: { href: string; label: string }[];
+  /** Target of the dropdown's trailing "All …" link (defaults to `href`). */
+  allHref?: string;
 }
 
 /** Main navigation — defined after SERVICE_PAGES, at the end of the services section. */
@@ -769,8 +771,8 @@ export function isFeatured(page: ServicePage): boolean {
 
 export const NAV: NavItem[] = [
   { href: ROUTES.about, label: "Meet the doctor" },
-  { href: SECTION.craniofacial, label: GROUP_LABEL.craniofacial, children: CRANIOFACIAL_SERVICES.map((s) => ({ href: s.path, label: s.shortTitle })) },
-  { href: SECTION.cosmetic, label: GROUP_LABEL.cosmetic, children: COSMETIC_SERVICES.map((s) => ({ href: s.path, label: s.shortTitle })) },
+  { href: SECTION.craniofacial, allHref: `${ROUTES.procedures}#craniofacial`, label: GROUP_LABEL.craniofacial, children: CRANIOFACIAL_SERVICES.map((s) => ({ href: s.path, label: s.shortTitle })) },
+  { href: SECTION.cosmetic, allHref: `${ROUTES.procedures}#cosmetic`, label: GROUP_LABEL.cosmetic, children: COSMETIC_SERVICES.map((s) => ({ href: s.path, label: s.shortTitle })) },
   { href: ROUTES.locations, label: "Locations" },
   { href: ROUTES.testimonials, label: "Patient stories" },
 ];

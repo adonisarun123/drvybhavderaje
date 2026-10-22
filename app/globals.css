@@ -189,6 +189,12 @@ footer.site-footer { background: #f5f7fa; padding: 45px 0 0; font-size: 15px; }
 .service-index-grid ul { list-style: none; padding: 0; margin: 0; }
 .service-index-grid li { margin: 0; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
 .service-index-grid li a { color: var(--blue); }
+.az-index { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 28px; }
+.az-index li { padding: 14px 16px; background: #f5f8fc; border-radius: 10px; line-height: 1.55; margin: 0; }
+.az-index li a { font-weight: 600; font-size: 17px; }
+.az-index li p { margin: 6px 0 0; color: var(--muted); font-size: 15px; }
+.az-index li small { display: block; margin-top: 6px; color: var(--muted); font-size: 13px; }
+@media (max-width: 800px) { .az-index { grid-template-columns: 1fr; } }
 .page-links { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 16px; }
 .page-links a { color: var(--blue); font-weight: 500; display: inline-flex; align-items: center; gap: 4px; }
 @media (max-width: 900px) { .service-index-grid { grid-template-columns: 1fr 1fr; } }

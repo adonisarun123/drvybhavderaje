@@ -24,6 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry("/", 1, "weekly", [doctorImage]),
     entry(ROUTES.about, 0.9, "monthly", [doctorImage, ...ABOUT_GALLERY.map((g) => imageUrl(g.src))]),
     ...SERVICE_PAGES.map((p) => entry(p.path, 0.8, "monthly", p.gallery?.map((g) => imageUrl(g.src)))),
+    entry(ROUTES.procedures, 0.9, "monthly"),
     entry(ROUTES.locations, 0.8, "monthly"),
     entry(ROUTES.contact, 0.9, "monthly"),
     entry(ROUTES.testimonials, 0.6, "monthly"),

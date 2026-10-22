@@ -63,6 +63,7 @@ export function SiteFooter() {
         <div>
           <h3>Here to help</h3>
           <Link href={ROUTES.about}>Meet Dr Vybhav Deraje</Link>
+          <Link href={ROUTES.procedures}>All conditions and procedures</Link>
           <Link href={ROUTES.locations}>Practice locations</Link>
           <Link href={ROUTES.testimonials}>Patient stories</Link>
           <Link href={ROUTES.resources}>Preparing for your visit</Link>

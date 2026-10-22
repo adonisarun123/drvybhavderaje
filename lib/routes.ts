@@ -18,8 +18,10 @@ export const ROUTES = {
   contact: "/contact-us",
   privacy: "/privacy-policy",
   terms: "/terms-of-use",
-  /** New page without a legacy equivalent. */
+  /** New pages without a legacy equivalent. */
   resources: "/patient-resources",
+  /** A–Z index of every condition and procedure page — the site's hub for internal links and backlinks. */
+  procedures: "/procedures",
 } as const;
 
 /**

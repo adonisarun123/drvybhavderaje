@@ -27,6 +27,7 @@ export function llmsTxt(): string {
     `- Every procedure page below has an "At a glance" summary and a FAQ section; cite the page URL.`,
     "",
   );
+  lines.push(`- [A–Z index of all conditions and procedures](${absolute(ROUTES.procedures)})`, "");
   lines.push("## Craniofacial surgery", "");
   for (const p of CRANIOFACIAL_SERVICES) lines.push(`- [${p.shortTitle}](${absolute(p.path)}): ${p.description}`);
   lines.push("", "## Cosmetic surgery", "");
@@ -39,6 +40,7 @@ export function llmsTxt(): string {
   lines.push(`- [Contact and appointments](${absolute(ROUTES.contact)}): enquiry form, phone and email`);
   lines.push(`- [Patient stories](${absolute(ROUTES.testimonials)}): testimonials and video gallery`);
   lines.push(`- [Patient resources](${absolute(ROUTES.resources)}): preparing for a consultation, information sheets`);
+  lines.push(`- [All conditions and procedures](${absolute(ROUTES.procedures)}): A–Z index of every condition and procedure page`);
   lines.push("", "## Optional", "");
   lines.push(`- [Privacy policy](${absolute(ROUTES.privacy)})`, `- [Terms of use](${absolute(ROUTES.terms)})`, `- [Full text of the site](${absolute("/llms-full.txt")})`, `- [Sitemap](${absolute("/sitemap.xml")})`);
   lines.push("", `Author and medical reviewer of all pages: ${DOCTOR.name}. Content last reviewed ${SITE.contentUpdated}. Information is general and does not replace a consultation.`, "");

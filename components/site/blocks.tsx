@@ -183,8 +183,8 @@ export function RelatedServices({ services }: { services: ServicePage[] }) {
           <p className="eyebrow">You may also be looking for</p>
           <h2 id="related-heading">Related care</h2>
         </div>
-        <Link href={SECTION.craniofacial} className="text-link">
-          All services <ArrowRight size={18} aria-hidden="true" />
+        <Link href={ROUTES.procedures} className="text-link">
+          All conditions and procedures <ArrowRight size={18} aria-hidden="true" />
         </Link>
       </div>
       <ServiceGrid services={services} compact columns={services.length % 3 === 0 ? 3 : undefined} />
@@ -203,6 +203,11 @@ export function ServiceIndex({ heading = "Conditions and procedures", intro }: {
     <section className="service-index" aria-labelledby="service-index-heading">
       <h2 id="service-index-heading">{heading}</h2>
       {intro}
+      <p>
+        <Link href={ROUTES.procedures} className="text-link">
+          Full A–Z index of conditions and procedures <ArrowRight size={16} aria-hidden="true" />
+        </Link>
+      </p>
       <div className="service-index-grid">
         {groups.map((g) => (
           <div key={g.label}>
