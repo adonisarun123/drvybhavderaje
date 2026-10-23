@@ -94,3 +94,17 @@ describe("slots", () => {
     expect(out[0]!.start.toISOString()).toBe("2026-11-01T18:45:00.000Z");
   });
 });
+
+describe("slotDates", () => {
+  it("groups slot instants into distinct local dates in the practice zone, sorted", async () => {
+    const { slotDates } = await import("@/lib/scheduling/availability");
+    const slots = [
+      { start: localToUtc("2026-11-03", "10:00", TZ) },
+      { start: localToUtc("2026-11-02", "10:30", TZ) },
+      { start: localToUtc("2026-11-02", "10:00", TZ) },
+      // 00:30 IST on 4 Nov is 19:00 UTC on 3 Nov — must be reported as 4 Nov.
+      { start: localToUtc("2026-11-04", "00:30", TZ) },
+    ];
+    expect(slotDates(slots, TZ)).toEqual(["2026-11-02", "2026-11-03", "2026-11-04"]);
+  });
+});

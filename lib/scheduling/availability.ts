@@ -261,6 +261,14 @@ export interface Slot {
   end: Date;
 }
 
+/** Distinct local dates (YYYY-MM-DD in `zone`) that have at least one slot, ascending. */
+export function slotDates(slots: Pick<Slot, "start">[], zone: string): string[] {
+  const seen = new Set<string>();
+  for (const s of slots) seen.add(DateTime.fromJSDate(s.start, { zone }).toISODate() ?? "");
+  seen.delete("");
+  return [...seen].sort();
+}
+
 /** Bookable slot start times for a window of dates, given full rule + occupancy data. */
 export function computeSlots(
   args: {

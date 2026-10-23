@@ -8,6 +8,7 @@ import { ROUTES } from "@/lib/routes";
 import type { PublicClinic } from "@/lib/clinics";
 import { DIAL_CODES, OTHER_COUNTRY } from "@/lib/dial-codes";
 import { CLINIC_PREFERENCES, isClinicPreference } from "@/lib/enquiries/preferences";
+import { AvailabilityCalendar } from "./availability-calendar";
 
 type FieldErrors = Record<string, string[]>;
 type Status =
@@ -212,8 +213,10 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
         <label className="field full" htmlFor={`${id}-clinic`}>
           Preferred clinic, or video consultation *
           <select id={`${id}-clinic`} name="clinic" required value={clinic} onChange={(e) => {
+              // Availability is per clinic, so a date chosen for one clinic is meaningless for another.
               setClinic(e.target.value);
-              loadSlots(e.target.value, date);
+              setDate("");
+              loadSlots(e.target.value, "");
             }} aria-invalid={!!err("clinic")} aria-describedby={err("clinic") ? `${id}-clinic-err` : undefined} disabled={!enabled}>
             <option value="" disabled>
               Select a clinic
@@ -234,18 +237,27 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
         </label>
         {slotsEnabled && clinic && !isClinicPreference(clinic) && (
           <div className="field full">
-            <label htmlFor={`${id}-date`}>Preferred date (optional)</label>
-            <input id={`${id}-date`} type="date" name="date" min={dateMin} max={dateMax} value={date} onChange={(e) => {
-              setDate(e.target.value);
-              loadSlots(clinic, e.target.value);
-            }} disabled={!enabled} />
-            {slotState === "loading" && <span className="note">Checking published availability…</span>}
+            <span className="field-label">Preferred date and time (optional)</span>
+            <AvailabilityCalendar
+              key={clinic}
+              clinic={clinic}
+              dateMin={dateMin}
+              dateMax={dateMax}
+              value={date}
+              disabled={!enabled}
+              onChange={(next) => {
+                setDate(next);
+                loadSlots(clinic, next);
+              }}
+            />
+            <input type="hidden" name="date" value={date} />
+            {slotState === "loading" && <span className="note">Loading times…</span>}
             {slotState === "none" && <span className="note">No published times for this date. You can still send the request and the clinic will suggest a time.</span>}
             {slotState === "error" && <span className="note">We couldn’t load availability. You can still send the request without a time.</span>}
             {slots && slots.length > 0 && (
               <fieldset style={{ border: 0, padding: 0, margin: 0 }}>
                 <legend className="note" style={{ marginTop: 8 }}>
-                  Preferred time (clinic time, IST / UTC+5:30{visitorTz ? ", with your local time" : ""}) — a preference, not a booking
+                  Available times on {new Intl.DateTimeFormat("en-IN", { timeZone: CLINIC_TZ, weekday: "short", day: "numeric", month: "short" }).format(new Date(slots[0]!.start))} (clinic time, IST / UTC+5:30{visitorTz ? ", with your local time" : ""}) — a preference, not a booking
                 </legend>
                 <div className="slot-grid">
                   {slots.map((s) => (
