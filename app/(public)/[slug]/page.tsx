@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { Byline, CtaBand, Faq, HelpSideCard, KeyFacts, PageHero, PhotoGallery, RelatedServices } from "@/components/site/blocks";
 import { InfoSheet } from "@/components/site/info-sheet";
 import { JsonLd } from "@/components/site/json-ld";
-import { childServices, DOCTOR, getService, GROUP_HREF, GROUP_LABEL, HOSPITALS, isFeatured, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
+import { childServices, DOCTOR, getService, GROUP_HREF, GROUP_LABEL, HOSPITALS, isFeatured, PRACTICES, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
 import { autolink, createLinkBudget, relatedServices } from "@/lib/links";
 import { ROUTES, SECTION } from "@/lib/routes";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, PROCEDURE_ID, CONDITION_ID, serviceEntitiesJsonLd } from "@/lib/seo";
@@ -127,6 +127,24 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               </li>
               <li>
                 <b>Where:</b> consultations at <Link href={ROUTES.locations}>Aesthetica Veda clinics</Link> in Bangalore; surgery at {HOSPITALS.map((h) => h.name.replace(" Hospital", "")).slice(0, 3).join(", ")} and other partner hospitals.
+              </li>
+              <li>
+                <b>Practice:</b>{" "}
+                {PRACTICES.filter((p) => p.groups.includes(page.group)).map((p, i) => (
+                  <span key={p.slug}>
+                    {i > 0 && " · "}
+                    <a href={p.url} target="_blank" rel="noopener noreferrer">
+                      {p.name}
+                    </a>{" "}
+                    ({p.tagline.toLowerCase()})
+                  </span>
+                ))}
+                {page.group === "craniofacial" && (
+                  <>
+                    {" "}· <a href={PRACTICES[1]!.url} target="_blank" rel="noopener noreferrer">Aesthetica Veda</a> for all other consultations
+                  </>
+                )}
+                , both founded by Dr Vybhav Deraje.
               </li>
               <li>
                 <b>Patients from outside Bangalore:</b> <Link href={ROUTES.contact}>video consultations</Link> for an initial opinion; surgery needs an in-person assessment.

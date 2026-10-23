@@ -390,6 +390,10 @@ main:focus { outline: none; }
 .video-poster:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 
 .hospital-grid .location-card > p:not(.eyebrow) { min-height: auto; }
+.practice-grid { grid-template-columns: 1fr 1fr; }
+.practice-grid .location-card > p:not(.eyebrow) { min-height: auto; }
+.practice-grid .location-card small { color: var(--muted); font-size: 14px; display: block; margin-top: 10px; }
+@media (max-width: 760px) { .practice-grid { grid-template-columns: 1fr; } }
 .location-card h3 { font-size: 21px; margin: 6px 0 12px; }
 .footer-grid-4 { grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; }
 .footer-grid-5 { grid-template-columns: 1.4fr 1fr 1fr 1fr 1fr; gap: 36px; }

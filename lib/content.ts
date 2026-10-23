@@ -62,7 +62,7 @@ export const DOCTOR = {
   /** Karnataka Medical Council registration — shown in every byline and in the Physician schema. */
   kmcRegistration: "79493",
   summary:
-    "Dr Vybhav Deraje is a National Board certified plastic surgeon with a special interest in craniofacial surgery. He has practised as a Consultant Craniofacial & Plastic Surgeon in Bangalore since returning from Adelaide, Australia in 2019. He is the Founder of Aesthetica Veda and consults at all its branches in Bangalore.",
+    "Dr Vybhav Deraje is a National Board certified plastic surgeon with a special interest in craniofacial surgery. He has practised as a Consultant Craniofacial & Plastic Surgeon in Bangalore since returning from Adelaide, Australia in 2019. He is the founder of two practices in Bangalore: The Head Shape Clinic, for infant head-shape concerns and craniosynostosis, and Aesthetica Veda, a chain of cosmetic clinics where he consults at all three branches.",
   summary2: "Dr Vybhav is also the driving force behind the craniosynostosis multidisciplinary team at Aster Hospital, Whitefield, Bangalore.",
   values:
     "Dr Vybhav Deraje firmly believes in upholding the privacy, confidentiality and safety of all his patients. He also believes in collaboration and close coordination with other specialists and professionals in order to provide comprehensive, holistic healthcare.",
@@ -71,7 +71,7 @@ export const DOCTOR = {
     "During his surgical residency he was drawn to the art and craft of plastic surgery. He worked as a Registrar in Plastic Surgery at hospitals in Bangalore before entering formal training, and completed his plastic surgery training at Lok Nayak Hospital and the associated Maulana Azad Medical College, Delhi, in 2015. While working in Delhi, treating many children with cleft lip and palate and other craniofacial anomalies, he developed his passion for craniofacial surgery.",
     "He then travelled to the United Kingdom for further training in plastic surgery at Queen Victoria Hospital, East Grinstead, sponsored by the Royal College of Surgeons of Edinburgh under the International Medical Graduate Sponsorship Scheme. Queen Victoria Hospital and the ‘Guinea Pig Club’ are well known in the plastic surgery community for the treatment and rehabilitation of airmen injured in World War II under Sir Archibald McIndoe. Here Dr Deraje trained extensively in breast cancer reconstruction and hand surgery, and also operated on many patients with skin cancer and burns.",
     "After a year in the UK he focused on his area of special interest, craniofacial surgery, completing the Fellowship in Craniomaxillofacial Surgery after a year and a half as Craniofacial Fellow at the world-renowned Australian Craniofacial Unit, Adelaide — one of only two stand-alone craniofacial units in the world. There he trained extensively in the management of craniosynostosis, cleft lip and palate, vascular anomalies, head and neck tumours, facial fractures and orthognathic surgery.",
-    "Since returning from Adelaide in 2019 he has practised as a Consultant Craniofacial & Plastic Surgeon in Bangalore. He is the Founder & Director of Aesthetica Veda, a chain of cosmetic clinics in Bangalore where he primarily consults, and operates at Aster Hospital Whitefield, Gleneagles Global Hospital, Sakra World Hospital, Apollo Spectra Hospital, Kauvery Hospital and Belenus Champion Hospital.",
+    "Since returning from Adelaide in 2019 he has practised as a Consultant Craniofacial & Plastic Surgeon in Bangalore. He is the Founder & Director of Aesthetica Veda, a chain of cosmetic clinics in Bangalore where he primarily consults, and the founder of The Head Shape Clinic, Koramangala, which focuses on infant head-shape problems and craniosynostosis. He operates at Aster Hospital Whitefield, Gleneagles Global Hospital, Sakra World Hospital, Apollo Spectra Hospital, Kauvery Hospital and Belenus Champion Hospital.",
   ],
 };
 
@@ -182,6 +182,48 @@ export const CLINICS_SEED = [
 export function mapsUrl(brand: string, address: string): string {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${brand} ${address}`)}`;
 }
+
+/* ------------------------------------------------------------------------------------------------
+ * Practices founded by Dr Vybhav Deraje (each has its own website; both are linked from this site)
+ * ---------------------------------------------------------------------------------------------- */
+
+export interface Practice {
+  slug: "head-shape-clinic" | "aesthetica-veda";
+  name: string;
+  url: string;
+  tagline: string;
+  /** One-paragraph description, drafted from the practice's own website (see docs/CONTENT-APPROVAL.md). */
+  description: string;
+  where: string;
+  /** Service groups this practice is the natural home for (drives the "Practice" line on service pages). */
+  groups: ServiceGroup[];
+}
+
+export const PRACTICES: Practice[] = [
+  {
+    slug: "head-shape-clinic",
+    name: "The Head Shape Clinic",
+    url: "https://theheadshapeclinic.com/",
+    tagline: "Caring for little heads",
+    description:
+      "Dr Vybhav's dedicated clinic for infant head-shape concerns: flat head syndrome (positional plagiocephaly and brachycephaly) and craniosynostosis. Assessment, helmet therapy and, where surgery is needed, the craniofacial team at Aster Hospital, Whitefield.",
+    where: "Docube Clinic, Koramangala, Bengaluru — with outreach clinics in other Indian cities",
+    groups: ["craniofacial"],
+  },
+  {
+    slug: "aesthetica-veda",
+    name: "Aesthetica Veda",
+    url: "https://aestheticaveda.com/",
+    tagline: "Minimalistic & natural",
+    description:
+      "Dr Vybhav's cosmetic clinics in Bangalore — plastic surgery, skin, hair and dental care under one roof. He consults at all three branches, and most consultations for the procedures on this site take place here.",
+    where: "Whitefield · HRBR Layout · Koramangala, Bengaluru",
+    groups: ["cosmetic", "reconstructive"],
+  },
+];
+
+export const HEAD_SHAPE_CLINIC = PRACTICES[0]!;
+export const AESTHETICA_VEDA = PRACTICES[1]!;
 
 /* ------------------------------------------------------------------------------------------------
  * Service pages
@@ -339,7 +381,7 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
       { q: "What are the signs of craniosynostosis in a baby?", a: "An unusual head shape, a hard ridge along a suture, a soft spot that disappears early, slow head growth or a flat face. Raised pressure can cause developmental delay, vision changes, seizures or sleep apnoea. A craniofacial specialist assessment, usually with imaging, confirms the diagnosis." },
       { q: "Is craniosynostosis surgery done through a keyhole?", a: "For non-syndromic single-suture craniosynostosis diagnosed before 6 months of age, Dr Vybhav Deraje performs minimally invasive endoscope-assisted strip craniectomy followed by 3D-printed helmet therapy. Older children usually need open fronto-orbital or cranial vault remodelling." },
       { q: "How long does the helmet have to be worn after endoscopic surgery?", a: "Helmet therapy after endoscope-assisted strip craniectomy usually continues for 1 to 2 years to mould the skull shape as the brain grows." },
-      { q: "Where is craniosynostosis surgery performed in Bangalore?", a: "Dr Vybhav Deraje leads the craniosynostosis multidisciplinary team at Aster Hospital, Whitefield, Bangalore. Consultations are at Aesthetica Veda clinics in Whitefield, HRBR Layout and Koramangala." },
+      { q: "Where is craniosynostosis surgery performed in Bangalore?", a: "Dr Vybhav Deraje leads the craniosynostosis multidisciplinary team at Aster Hospital, Whitefield, Bangalore. Consultations are at Aesthetica Veda clinics in Whitefield, HRBR Layout and Koramangala, and through The Head Shape Clinic at Docube Clinic, Koramangala, which is dedicated to infant head-shape problems." },
       { q: "We live outside Bangalore. How should we plan?", a: "Call or email the clinic first, send any existing scan reports ahead, and confirm the appointment and clinic location before arranging travel. Many families travel to Bangalore for this care." },
     ],
     conditions: ["Craniosynostosis", "Unicoronal synostosis", "Metopic synostosis", "Sagittal synostosis", "Lambdoid synostosis", "Bicoronal synostosis", "Multisuture synostosis", "Apert syndrome", "Crouzon syndrome", "Pfeiffer syndrome"],
@@ -808,9 +850,9 @@ export const VIDEOS = ["WEoOOLJGKso", "wlmNfJnAsF0", "weHZrxjsNXQ", "-y8L5iJrYA4
  * ---------------------------------------------------------------------------------------------- */
 
 export const HOME_FAQS = [
-  { q: "Who is Dr Vybhav Deraje?", a: "Dr Vybhav Deraje is a National Board certified plastic surgeon in Bangalore with a special interest in craniofacial surgery. He trained in India, at Queen Victoria Hospital in the UK and at the Australian Craniofacial Unit in Adelaide, and has practised in Bangalore since 2019. He is the founder of Aesthetica Veda." },
+  { q: "Who is Dr Vybhav Deraje?", a: "Dr Vybhav Deraje is a National Board certified plastic surgeon in Bangalore with a special interest in craniofacial surgery. He trained in India, at Queen Victoria Hospital in the UK and at the Australian Craniofacial Unit in Adelaide, and has practised in Bangalore since 2019. He is the founder of Aesthetica Veda and The Head Shape Clinic." },
   { q: "What does a craniofacial surgeon treat?", a: "Conditions of the skull and face: craniosynostosis, cleft lip and palate, jaw deformities (orthognathic surgery), facial fractures, head and neck tumour reconstruction, facial palsy and vascular anomalies." },
-  { q: "Where does Dr Vybhav Deraje consult in Bangalore?", a: "At Aesthetica Veda clinics in Whitefield, HRBR Layout and Koramangala. Surgeries are performed at Aster Hospital Whitefield, Gleneagles Global Hospital, Sakra World Hospital, Apollo Spectra Hospital, Kauvery Hospital and Belenus Champion Hospital." },
+  { q: "Where does Dr Vybhav Deraje consult in Bangalore?", a: "At Aesthetica Veda clinics in Whitefield, HRBR Layout and Koramangala. Babies with head-shape concerns or craniosynostosis can also be seen through The Head Shape Clinic at Docube Clinic, Koramangala. Surgeries are performed at Aster Hospital Whitefield, Gleneagles Global Hospital, Sakra World Hospital, Apollo Spectra Hospital, Kauvery Hospital and Belenus Champion Hospital." },
   { q: "Do you see patients from outside India, and are video consultations available?", a: "Yes. Dr Deraje treats patients who travel to Bangalore from abroad and offers video consultations for an initial opinion or for follow-up after surgery. Use the enquiry form, choose “Video consultation”, and select the country of your phone number; the clinic will reply by email or phone to arrange a time. Surgery itself always requires an in-person assessment in Bangalore." },
   { q: "How do I book an appointment with Dr Vybhav Deraje?", a: "Call +91 95355 81616, email connect@drvybhavderaje.com or use the enquiry form on this website. The clinic confirms the location, date and time." },
   { q: "I’m travelling from another city. Where should I start?", a: "Contact the clinic before making travel arrangements, send relevant reports ahead and confirm your appointment and clinic location." },

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Image } from "@imagekit/next";
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight, MapPin, Phone } from "lucide-react";
-import { Byline, CtaBand, PageHero, ServiceIndex } from "@/components/site/blocks";
+import { Byline, CtaBand, PageHero, PracticeCards, ServiceIndex } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { getPublicClinics } from "@/lib/clinics";
 import { CLINICS_SEED, HOSPITALS } from "@/lib/content";
@@ -13,7 +13,7 @@ import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, physicianJsonLd, 
 export const revalidate = 3600;
 
 const TITLE = "Practice Locations in Bangalore — Clinics & Hospitals";
-const DESCRIPTION = "Consult Dr Vybhav Deraje at Aesthetica Veda clinics in Whitefield, HRBR Layout and Koramangala, Bangalore. Surgeries at Aster, Sakra, Gleneagles, Apollo Spectra and more.";
+const DESCRIPTION = "Consult Dr Vybhav Deraje at Aesthetica Veda clinics in Whitefield, HRBR Layout and Koramangala, or The Head Shape Clinic in Koramangala, Bangalore. Surgeries at Aster, Sakra, Gleneagles, Apollo Spectra and more.";
 
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: ROUTES.locations });
 
@@ -29,7 +29,7 @@ export default async function LocationsPage() {
           practiceJsonLd(clinics),
         ]}
       />
-      <PageHero eyebrow="Practice locations" crumb="Practice locations" title="Clinics and hospitals in Bangalore." lead="Consultations at Aesthetica Veda clinics; surgeries at partner hospitals across the city. Please confirm availability with the clinic before you travel." />
+      <PageHero eyebrow="Practice locations" crumb="Practice locations" title="Clinics and hospitals in Bangalore." lead="Consultations at Aesthetica Veda clinics and The Head Shape Clinic; surgeries at partner hospitals across the city. Please confirm availability with the clinic before you travel." />
       <section className="section container" aria-labelledby="consult-heading">
         <Byline />
         <div className="section-heading">
@@ -67,6 +67,7 @@ export default async function LocationsPage() {
           ))}
         </div>
       </section>
+      <PracticeCards intro={<p>Babies and children with head-shape concerns are seen through The Head Shape Clinic (at Docube Clinic, Koramangala); all other consultations are at the Aesthetica Veda clinics above.</p>} />
       <section className="section container" aria-labelledby="surgery-heading" style={{ paddingTop: 0 }}>
         <div className="section-heading">
           <div>

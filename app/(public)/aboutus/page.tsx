@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { AffiliationLogos, Byline, CtaBand, PageHero, PhotoGallery, ServiceIndex } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
-import { ABOUT_GALLERY, AFFILIATIONS, CREDENTIALS, DOCTOR, HOSPITALS, PRESENTATIONS, PUBLICATIONS, PUBLICATIONS_OTHER, SITE } from "@/lib/content";
+import { ABOUT_GALLERY, AFFILIATIONS, CREDENTIALS, DOCTOR, HOSPITALS, PRACTICES, PRESENTATIONS, PUBLICATIONS, PUBLICATIONS_OTHER, SITE } from "@/lib/content";
 import { getPublicClinics } from "@/lib/clinics";
 import { DOCTOR_PHOTO } from "@/lib/images";
 import { autolink, createLinkBudget } from "@/lib/links";
@@ -14,7 +14,7 @@ import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, PHYSICIAN_ID, phy
 export const revalidate = 3600;
 
 const TITLE = "About Dr Vybhav Deraje — Craniofacial & Plastic Surgeon, Bangalore";
-const DESCRIPTION = "Dr Vybhav Deraje: MBBS, MS, DNB (Plastic Surgery), craniofacial fellowship at the Australian Craniofacial Unit, Adelaide. Founder of Aesthetica Veda, Bangalore.";
+const DESCRIPTION = "Dr Vybhav Deraje: MBBS, MS, DNB (Plastic Surgery), craniofacial fellowship at the Australian Craniofacial Unit, Adelaide. Founder of The Head Shape Clinic and Aesthetica Veda, Bangalore.";
 
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: ROUTES.about, ogType: "profile" });
 
@@ -32,7 +32,7 @@ export default async function AboutPage() {
           ...scholarlyArticlesJsonLd(PUBLICATIONS),
         ]}
       />
-      <PageHero eyebrow={`${DOCTOR.honorificSuffix} · ${DOCTOR.fellowship}`} crumb="Dr Vybhav Deraje" title="Dr Vybhav Deraje" lead="Consultant Craniofacial & Plastic Surgeon, Bangalore. Founder & Director, Aesthetica Veda." />
+      <PageHero eyebrow={`${DOCTOR.honorificSuffix} · ${DOCTOR.fellowship}`} crumb="Dr Vybhav Deraje" title="Dr Vybhav Deraje" lead="Consultant Craniofacial & Plastic Surgeon, Bangalore. Founder of The Head Shape Clinic and Aesthetica Veda." />
       <section className="section container content-grid">
         <article className="prose">
           <Byline />
@@ -68,8 +68,23 @@ export default async function AboutPage() {
             ))}
           </div>
 
+          <h2 id="practices">Practices</h2>
+          <p>Dr Vybhav founded and leads two practices in Bangalore:</p>
+          <ul>
+            {PRACTICES.map((p) => (
+              <li key={p.slug}>
+                <b>
+                  <a href={p.url} target="_blank" rel="noopener noreferrer">
+                    {p.name}
+                  </a>
+                </b>{" "}
+                — {p.description} <i>{p.where}.</i>
+              </li>
+            ))}
+          </ul>
+
           <h2 id="hospitals">Hospital affiliations</h2>
-          <p>Dr Vybhav consults at Aesthetica Veda clinics and operates at the following hospitals in Bangalore:</p>
+          <p>Dr Vybhav consults at Aesthetica Veda and The Head Shape Clinic, and operates at the following hospitals in Bangalore:</p>
           <ul>
             {HOSPITALS.map((h) => (
               <li key={h.name}>{h.name}</li>

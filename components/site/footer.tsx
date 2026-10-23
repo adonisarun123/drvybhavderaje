@@ -1,8 +1,8 @@
 import { CookieSettingsLink } from "@/components/site/cookie-banner";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { FacebookIcon, InstagramIcon, LinkedinIcon, YoutubeIcon } from "./social-icons";
-import { COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, OTHER_SERVICES, SITE } from "@/lib/content";
+import { COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, OTHER_SERVICES, PRACTICES, SITE } from "@/lib/content";
 import { ROUTES } from "@/lib/routes";
 
 export function SiteFooter() {
@@ -65,6 +65,11 @@ export function SiteFooter() {
           <Link href={ROUTES.about}>Meet Dr Vybhav Deraje</Link>
           <Link href={ROUTES.procedures}>All conditions and procedures</Link>
           <Link href={ROUTES.locations}>Practice locations</Link>
+          {PRACTICES.map((p) => (
+            <a key={p.slug} href={p.url} target="_blank" rel="noopener noreferrer">
+              {p.name} <ArrowUpRight size={14} aria-hidden="true" />
+            </a>
+          ))}
           <Link href={ROUTES.testimonials}>Patient stories</Link>
           <Link href={ROUTES.resources}>Preparing for your visit</Link>
           <Link href={ROUTES.contact}>

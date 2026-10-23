@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Image } from "@imagekit/next";
 import { ArrowRight, ArrowUpRight, Baby, BadgeCheck, Check, Droplets, Ear, Eye, Hand, Heart, HeartHandshake, PersonStanding, Phone, Quote, Ribbon, ScanFace, Shirt, Smile, Sparkles, Stethoscope, Waves } from "lucide-react";
-import { AFFILIATIONS, COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, DOCTOR, GROUP_LABEL, OTHER_SERVICES, SITE, type Photo, type ServicePage } from "@/lib/content";
+import { AFFILIATIONS, COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, DOCTOR, GROUP_LABEL, OTHER_SERVICES, PRACTICES, SITE, type Photo, type ServicePage } from "@/lib/content";
 import { ROUTES, SECTION } from "@/lib/routes";
 
 export type Crumb = { label: string; href?: string };
@@ -268,5 +268,41 @@ export function AffiliationLogos() {
         </li>
       ))}
     </ul>
+  );
+}
+
+/** The two practices Dr Vybhav founded, each linking out to its own website. */
+export function PracticeCards({ heading = "Dr Vybhav's practices", eyebrow = "Two practices, one surgeon", intro, id = "practices" }: { heading?: string; eyebrow?: string; intro?: ReactNode; id?: string }) {
+  return (
+    <section className="section container" aria-labelledby={`${id}-heading`} id={id}>
+      <div className="section-heading">
+        <div>
+          <p className="eyebrow">{eyebrow}</p>
+          <h2 id={`${id}-heading`}>{heading}</h2>
+        </div>
+        {intro ?? <p>Children with head-shape concerns are seen at The Head Shape Clinic; cosmetic consultations take place at Aesthetica Veda. Both are founded and led by Dr Vybhav Deraje.</p>}
+      </div>
+      <div className="location-grid practice-grid">
+        {PRACTICES.map((p) => (
+          <article className="location-card" key={p.slug} id={p.slug} aria-labelledby={`practice-${p.slug}`}>
+            {p.slug === "head-shape-clinic" ? <Baby size={28} strokeWidth={1.5} aria-hidden="true" /> : <Sparkles size={28} strokeWidth={1.5} aria-hidden="true" />}
+            <p className="eyebrow">{p.tagline}</p>
+            <h3 id={`practice-${p.slug}`}>{p.name}</h3>
+            <p>
+              {p.description}
+              <br />
+              <small>{p.where}</small>
+            </p>
+            <a href={p.url} target="_blank" rel="noopener noreferrer">
+              Visit {p.name.replace(/^The /, "the ")} <ArrowUpRight size={16} aria-hidden="true" />
+              <span className="visually-hidden">(opens in a new tab)</span>
+            </a>
+            <Link href={ROUTES.contact}>
+              Book an appointment <ArrowRight size={16} aria-hidden="true" />
+            </Link>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }

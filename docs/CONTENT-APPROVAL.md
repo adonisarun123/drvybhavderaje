@@ -42,3 +42,7 @@ Source: `lib/procedures.ts`. The ten cosmetic pages expand the doctor's existing
 - Whether to add testimonials/terms pages (legacy URLs currently 404 — see docs/SEO-MIGRATION.md).
 - ~~Whether to add dedicated sub-service pages for long-tail SEO.~~ Done 22 Oct 2026 (11 pages).
 - Notification provider (email/SMS) — none configured; staff contact patients manually.
+
+## Practices (added 23 Oct 2026)
+
+The site now names and links both practices — **The Head Shape Clinic** (theheadshapeclinic.com) and **Aesthetica Veda** (aestheticaveda.com) — on the home page, About, Practice locations, every service page's "At a glance" box, the footer, structured data and llms.txt. The one-paragraph descriptions in `lib/content.ts` (`PRACTICES`) were drafted from the two public websites; please confirm the wording, the Head Shape Clinic's location (Docube Clinic, Koramangala) and the "outreach clinics in other Indian cities" line.

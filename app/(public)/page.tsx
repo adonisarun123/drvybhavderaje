@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Image } from "@imagekit/next";
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight, Baby, Building2, Check, GraduationCap, HeartHandshake, MapPin, Phone, ShieldCheck } from "lucide-react";
-import { AffiliationLogos, Byline, CtaBand, Faq, ServiceGrid, TestimonialCard } from "@/components/site/blocks";
+import { AffiliationLogos, Byline, CtaBand, Faq, PracticeCards, ServiceGrid, TestimonialCard } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { VideoGallery } from "@/components/site/video-gallery";
 import { COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, DOCTOR, HOME_FAQS, HOSPITALS, OTHER_SERVICES, SITE, TESTIMONIALS, VIDEOS } from "@/lib/content";
@@ -159,6 +159,7 @@ export default async function HomePage() {
         </div>
       </section>
 
+      <PracticeCards />
       <section className="feature-section" aria-labelledby="feature-heading">
         <div className="container feature-grid">
           <div className="feature-art" aria-hidden="true">

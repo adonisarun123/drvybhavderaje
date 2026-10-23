@@ -1,4 +1,4 @@
-import { AFFILIATIONS, CLINICS_SEED, COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, CREDENTIALS, DOCTOR, HOME_FAQS, HOSPITALS, OTHER_SERVICES, PUBLICATIONS, SERVICE_PAGES, SITE } from "./content";
+import { AFFILIATIONS, CLINICS_SEED, COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, CREDENTIALS, DOCTOR, HOME_FAQS, HOSPITALS, OTHER_SERVICES, PRACTICES, PUBLICATIONS, SERVICE_PAGES, SITE } from "./content";
 import { ROUTES } from "./routes";
 import { absolute } from "./seo";
 
@@ -21,6 +21,7 @@ export function llmsTxt(): string {
   lines.push(
     `- Surgeon: ${DOCTOR.name}, ${DOCTOR.honorificSuffix}; ${DOCTOR.fellowship}. Karnataka Medical Council Reg. No. ${DOCTOR.kmcRegistration}.`,
     `- Practising in Bangalore since 2019; Founder & Director of Aesthetica Veda; leads the craniosynostosis multidisciplinary team at Aster Hospital, Whitefield.`,
+    `- Practices founded by Dr Vybhav: ${PRACTICES.map((p) => `${p.name} (${p.url}) — ${p.description}`).join(" | ")}`,
     `- Memberships: ${AFFILIATIONS.map((a) => a.org).join(", ")}.`,
     `- Consultations: Aesthetica Veda clinics in ${CLINICS_SEED.map((c) => c.name).join(", ")}. Surgery: ${HOSPITALS.map((h) => h.name).join(", ")}.`,
     `- Overseas patients welcome; video consultations available for an initial opinion or follow-up (${absolute(ROUTES.contact)}).`,
