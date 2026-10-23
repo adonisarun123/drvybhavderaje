@@ -539,6 +539,14 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
 .prose .hospital-tiles li { margin: 0; }
 .prose .hospital-tiles a { display: block; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--navy); text-decoration: none; }
 .prose .hospital-tiles a:hover { border-color: var(--blue); color: var(--blue); }
+.practice-tiles { list-style: none; padding: 0; margin: 20px 0 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.prose .practice-tiles li { margin: 0; border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+.prose .practice-tiles svg { color: var(--blue); }
+.prose .practice-tiles b { font-size: 18px; }
+.prose .practice-tiles span { font-size: 15px; line-height: 1.6; }
+.prose .practice-tiles small { color: var(--muted); font-size: 13px; }
+.prose .practice-tiles a { color: var(--blue); font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; margin-top: auto; text-decoration: none; }
+@media (max-width: 760px) { .practice-tiles { grid-template-columns: 1fr; } }
 .hospital-tiles img { display: block; width: 100%; height: auto; aspect-ratio: 370 / 230; object-fit: cover; }
 .hospital-tiles span { display: block; padding: 12px 14px; font-size: 14px; font-weight: 600; line-height: 1.4; }
 

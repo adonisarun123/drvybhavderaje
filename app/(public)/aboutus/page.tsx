@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { Image } from "@imagekit/next";
 import type { Metadata } from "next";
-import { ArrowRight, ArrowUpRight, Award, BadgeCheck, BookOpen, Building2, GraduationCap, Mic, Plane, Stethoscope } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Award, Baby, BadgeCheck, BookOpen, Building2, GraduationCap, Mic, Plane, Sparkles, Stethoscope } from "lucide-react";
 import { Byline, CtaBand, PhotoGallery, ServiceIndex } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
-import { ABOUT_GALLERY, AFFILIATIONS, CREDENTIALS, DOCTOR, HOSPITALS, PRESENTATIONS, PUBLICATIONS, PUBLICATIONS_OTHER, SITE } from "@/lib/content";
+import { ABOUT_GALLERY, AFFILIATIONS, CREDENTIALS, DOCTOR, HOSPITALS, PRACTICES, PRESENTATIONS, PUBLICATIONS, PUBLICATIONS_OTHER, SITE } from "@/lib/content";
 import { getPublicClinics } from "@/lib/clinics";
 import { DOCTOR_PHOTO } from "@/lib/images";
 import { autolink, createLinkBudget } from "@/lib/links";
@@ -14,7 +14,7 @@ import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, PHYSICIAN_ID, phy
 export const revalidate = 3600;
 
 const TITLE = "About Dr Vybhav Deraje — Craniofacial & Plastic Surgeon, Bangalore";
-const DESCRIPTION = "Dr Vybhav Deraje: MBBS, MS, DNB (Plastic Surgery), craniofacial fellowship at the Australian Craniofacial Unit, Adelaide. Founder of Aesthetica Veda, Bangalore.";
+const DESCRIPTION = "Dr Vybhav Deraje: MBBS, MS, DNB (Plastic Surgery), craniofacial fellowship at the Australian Craniofacial Unit, Adelaide. Founder of The Head Shape Clinic and Aesthetica Veda, Bangalore.";
 
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: ROUTES.about, ogType: "profile" });
 
@@ -62,7 +62,7 @@ export default async function AboutPage() {
               {DOCTOR.honorificSuffix} · {DOCTOR.fellowship}
             </p>
             <h1>Dr Vybhav Deraje</h1>
-            <p className="lead">Consultant Craniofacial &amp; Plastic Surgeon, Bangalore. Founder &amp; Director, Aesthetica Veda.</p>
+            <p className="lead">Consultant Craniofacial &amp; Plastic Surgeon, Bangalore. Founder of The Head Shape Clinic and Aesthetica Veda.</p>
             <ul className="fact-chips" aria-label="At a glance">
               <li>
                 <BadgeCheck size={16} aria-hidden="true" /> KMC Reg. No. {DOCTOR.kmcRegistration} · registered since 2008
@@ -116,7 +116,7 @@ export default async function AboutPage() {
           <div>
             <Building2 aria-hidden="true" />
             <span>
-              {HOSPITALS.length} Bangalore hospitals<small>Plus Aesthetica Veda clinics</small>
+              {HOSPITALS.length} Bangalore hospitals<small>Plus The Head Shape Clinic and Aesthetica Veda</small>
             </span>
           </div>
           <div>
@@ -184,8 +184,25 @@ export default async function AboutPage() {
             ))}
           </ul>
 
+          <h2 id="practices">Practices</h2>
+          <p>Dr Vybhav founded and leads two practices in Bangalore:</p>
+          <ul className="practice-tiles">
+            {PRACTICES.map((p) => (
+              <li key={p.slug}>
+                {p.slug === "head-shape-clinic" ? <Baby size={22} aria-hidden="true" /> : <Sparkles size={22} aria-hidden="true" />}
+                <b>{p.name}</b>
+                <span>{p.description}</span>
+                <small>{p.where}</small>
+                <a href={p.url} target="_blank" rel="noopener noreferrer">
+                  Visit {p.name.replace(/^The /, "the ")} <ArrowUpRight size={14} aria-hidden="true" />
+                  <span className="visually-hidden">(opens in a new tab)</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+
           <h2 id="hospitals">Hospital affiliations</h2>
-          <p>Dr Vybhav consults at Aesthetica Veda clinics and operates at the following hospitals in Bangalore:</p>
+          <p>Dr Vybhav consults at The Head Shape Clinic and Aesthetica Veda, and operates at the following hospitals in Bangalore:</p>
           <ul className="hospital-tiles">
             {HOSPITALS.map((h) => (
               <li key={h.name}>
@@ -241,6 +258,7 @@ export default async function AboutPage() {
             <a href="#practice">Areas of practice</a>
             <a href="#qualifications">Qualifications</a>
             <a href="#affiliations">Affiliations</a>
+            <a href="#practices">Practices</a>
             <a href="#hospitals">Hospitals</a>
             <a href="#publications">Publications</a>
             <a href="#presentations">Presentations</a>
