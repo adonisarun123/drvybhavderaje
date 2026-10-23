@@ -144,7 +144,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                     {" "}· <a href={PRACTICES[1]!.url} target="_blank" rel="noopener noreferrer">Aesthetica Veda</a> for all other consultations
                   </>
                 )}
-                , both founded by Dr Vybhav Deraje.
+                {page.group === "craniofacial" ? " — both founded by Dr Vybhav Deraje." : " — Dr Vybhav Deraje's cosmetic clinics in Bangalore."}
               </li>
               <li>
                 <b>Patients from outside Bangalore:</b> <Link href={ROUTES.contact}>video consultations</Link> for an initial opinion; surgery needs an in-person assessment.
