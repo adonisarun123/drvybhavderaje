@@ -54,3 +54,19 @@ Two new pages under "Also treated" — `/helmet-therapy-flat-head-bangalore` and
 - **Helmet duration after endoscopic craniosynostosis surgery:** theheadshapeclinic.com says 6–15 months; drvybhavderaje.com's craniosynostosis page says 1–2 years. The new page says "from about 6 months and in some cases up to 1–2 years". Please confirm one figure and we will align both pages.
 - Partner names (Orthomerica, KARE Orthotics & Prosthetics, MediTEC Devices, Becon Medical / Dr H. Steven Byrd) and the EarWell 93–95% figure are quoted from theheadshapeclinic.com; confirm they may appear here.
 - Both pages route patients to The Head Shape Clinic; neither page is in the 14 featured procedures.
+
+## 15 procedure pages from the patient-information sheets (added 23 Oct 2026) — REVIEW BEFORE LAUNCH
+
+One page per sheet that had no page of its own, nested under its parent (source: `lib/sub-procedures.ts`; URLs `/<parent>/<procedure>`). Copy is the doctor's own sheet, edited for plain language only; FAQs restate the sheet. Sheets that already feed a page (craniosynostosis types, the 10 cosmetic pages, jaw surgery, facial injuries, head & neck cancer) did not get a second page.
+
+- Cleft (`/cleft-lip-and-palate-treatment-bangalore/…`): cleft-lip-repair, cleft-palate-repair, speech-surgery, alveolar-bone-grafting, cleft-jaw-surgery, cleft-rhinoplasty
+- Hand (`/hand-plastic-surgeon-bangalore/…`): carpal-tunnel-release, trigger-finger-release, syndactyly-release
+- Face (`/face-plastic-surgery-bangalore/…`): endoscopic-scarless-forehead-surgery, fat-grafting
+- Breast (`/breast-plastic-surgeon-bangalore/…`): breast-lift-mastopexy, breast-reconstruction-after-cancer
+- Body (`/body-plastic-surgeon-bangalore/…`): arm-lift-brachioplasty, thigh-lift-thighplasty
+
+Points for the doctor:
+- **Cleft jaw surgery sheet says "discharged after 34 days"** — the page says 3–4 days. Confirm.
+- Breast reconstruction sheet lists giant phyllodes tumour among "cancers"; the page says "other breast tumours include…". Confirm.
+- Arm lift, thigh lift and breast lift are described as day-care procedures, as in the sheets. Confirm.
+- Every page carries the "written and medically reviewed by Dr Vybhav Deraje" byline — it is untrue until he has read them.

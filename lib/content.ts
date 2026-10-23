@@ -12,6 +12,14 @@
  */
 import { FEATURED_COSMETIC, FEATURED_CRANIOFACIAL, OTHER_SERVICES_ORDER, ROUTES, SECTION, servicePath, type ServiceSlug } from "./routes";
 import { PROCEDURE_PAGES } from "./procedures";
+import { subProcedureForSheet, subProcedurePath } from "./sub-procedures";
+
+/** URL of the procedure page built from a patient-information sheet (lib/sub-procedures.ts). */
+function sheetPage(sheet: string): string {
+  const p = subProcedureForSheet(sheet);
+  if (!p) throw new Error(`No procedure page for ${sheet}`);
+  return subProcedurePath(p);
+}
 
 export const SITE = {
   name: "Dr Vybhav Deraje",
@@ -437,31 +445,31 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
       {
         heading: "Treatment Protocol by Age",
         items: [
-          { title: "3–6 Months — Lip Repair", text: "Needs only a one-day hospital stay. Babies can breastfeed immediately after surgery if there is no palatal problem.", sheet: `${PDF}/cleft/Patient-information-sheet-Cleft-lip.pdf` },
+          { title: "3–6 Months — Lip Repair", text: "Needs only a one-day hospital stay. Babies can breastfeed immediately after surgery if there is no palatal problem.", sheet: `${PDF}/cleft/Patient-information-sheet-Cleft-lip.pdf`, href: sheetPage(`${PDF}/cleft/Patient-information-sheet-Cleft-lip.pdf`) },
           {
             title: "9–12 Months — Palate Repair",
             text: "Needs 1–2 days in hospital. This operation is critical for the development of normal speech. Most babies also need ventilation tubes inserted in the ears by an ENT surgeon at the same time, because a cleft palate usually comes with a dysfunctional Eustachian tube and fluid in the ears.",
-            sheet: `${PDF}/cleft/Patient-information-sheet-Cleft-palate.pdf`,
+            sheet: `${PDF}/cleft/Patient-information-sheet-Cleft-palate.pdf`, href: sheetPage(`${PDF}/cleft/Patient-information-sheet-Cleft-palate.pdf`),
           },
           {
             title: "1–12 Years — Speech Therapy and Speech Surgery",
             text: "All children have speech therapy after the palate operation, with periodic speech assessment and nasendoscopy. Where needed, secondary speech surgery such as pharyngoplasty or Furlow’s Z-plasty improves speech.",
-            sheet: `${PDF}/cleft/Patient-information-sheet-Speech-surgery.pdf`,
+            sheet: `${PDF}/cleft/Patient-information-sheet-Speech-surgery.pdf`, href: sheetPage(`${PDF}/cleft/Patient-information-sheet-Speech-surgery.pdf`),
           },
           {
             title: "7–11 Years — Alveolar Bone Grafting with Orthodontics",
             text: "Bone from the hip is transferred to the upper jaw, timed to the eruption of the canine tooth. The orthodontist prepares the jaw before surgery and finishes alignment afterwards.",
-            sheet: `${PDF}/cleft/Patient-information-sheet-Alveolar-bone-grafting.pdf`,
+            sheet: `${PDF}/cleft/Patient-information-sheet-Alveolar-bone-grafting.pdf`, href: sheetPage(`${PDF}/cleft/Patient-information-sheet-Alveolar-bone-grafting.pdf`),
           },
           {
             title: "16–18 Years — Jaw Surgery with Orthodontics",
             text: "Orthognathic surgery corrects the ‘flat face’ (midface hypoplasia) with a Le Fort I maxillary advancement or sometimes double-jaw surgery. The upper jaw is brought forward for a proper bite and better facial balance; the lower jaw is moved when required. This is major surgery with a 3–4 day hospital stay including one day in ICU.",
-            sheet: `${PDF}/cleft/Patient-information-sheet-Corrective-Jaw-surgery.pdf`,
+            sheet: `${PDF}/cleft/Patient-information-sheet-Corrective-Jaw-surgery.pdf`, href: sheetPage(`${PDF}/cleft/Patient-information-sheet-Corrective-Jaw-surgery.pdf`),
           },
           {
             title: "Above 18 Years — Rhinoplasty, with Lip Revision If Needed",
             text: "Rhinoplasty corrects the nasal deformity associated with cleft lip and palate; any adjustments to the lip can be made at the same time.",
-            sheet: `${PDF}/cleft/Patient-information-sheet-Cleft-Rhinoplasty.pdf`,
+            sheet: `${PDF}/cleft/Patient-information-sheet-Cleft-Rhinoplasty.pdf`, href: sheetPage(`${PDF}/cleft/Patient-information-sheet-Cleft-Rhinoplasty.pdf`),
           },
         ],
         note: "Subsidised treatment is available for children with cleft lip and palate from economically disadvantaged families. Please ask the clinic.",
@@ -680,9 +688,9 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
           { title: "Chin Augmentation", text: "Corrects a weak, strong or deviated chin. A day-care procedure under general anaesthesia using an implant (silicone or Medpor) or by repositioning your own bone (genioplasty).", sheet: `${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Chin-Augmentation.pdf` },
           { title: "Otoplasty (Prominent Ear Correction)", text: "Corrects the shape of the external ear in bat ear, prominent ear and Stahl ear deformities. Split ear-lobe repair is also offered. All are day-care procedures.", sheet: `${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Otoplasty.pdf` },
           { title: "Facelift and Necklift", text: "Reverses the skin signs of ageing on the face and neck — jowls, wrinkles, crow’s feet and loose skin. Incisions are placed at strategic points to hide the eventual scars. A day-care procedure under general anaesthesia.", sheet: `${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Facelift-and-Necklift.pdf` },
-          { title: "Fat Grafting", text: "Your own fat, as microfat or nanofat, is used to correct contour deformities and rejuvenate the skin. A day-care procedure that can be done under local anaesthesia. Nanofat and microfat are good alternatives to PRP and fillers for rejuvenation and volume restoration.", sheet: `${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Fat-grafting.pdf` },
+          { title: "Fat Grafting", text: "Your own fat, as microfat or nanofat, is used to correct contour deformities and rejuvenate the skin. A day-care procedure that can be done under local anaesthesia. Nanofat and microfat are good alternatives to PRP and fillers for rejuvenation and volume restoration.", sheet: `${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Fat-grafting.pdf`, href: sheetPage(`${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Fat-grafting.pdf`) },
           { title: "Botox and Fillers", text: "Non-surgical treatments offered to selected individuals. Botox relaxes over-contracting muscles to reduce early wrinkles; hyaluronic acid fillers restore volume to areas such as the lips, around the eyes and the nasal tip. Both are out-patient clinic procedures." },
-          { title: "Endoscopic Scarless Forehead Surgery", text: "Forehead lesions such as lipoma, osteoma and dermoid cyst are removed with an endoscope through an incision beyond the hairline, leaving no scar on the forehead.", sheet: `${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Endoscopic-scarless-forehead-surgery.pdf` },
+          { title: "Endoscopic Scarless Forehead Surgery", text: "Forehead lesions such as lipoma, osteoma and dermoid cyst are removed with an endoscope through an incision beyond the hairline, leaving no scar on the forehead.", sheet: `${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Endoscopic-scarless-forehead-surgery.pdf`, href: sheetPage(`${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Endoscopic-scarless-forehead-surgery.pdf`) },
         ],
       },
     ],
@@ -714,12 +722,12 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
         heading: "Procedures",
         items: [
           { title: "Breast Augmentation", text: "Increases the size, volume and projection of the breasts. A day-care procedure under general anaesthesia, using either a silicone implant or fat from your own body — your surgeon helps you choose.", sheet: `${PDF}/Plastic-surgery-of-Breast/Patient-information-sheet-Breast-augmentation.pdf` },
-          { title: "Breast Lift (Mastopexy)", text: "Restores projection to deflated or sagging breasts for a perkier, more youthful shape. A day-care procedure under general anaesthesia; the scars fade over time.", sheet: `${PDF}/Plastic-surgery-of-Breast/Patient-information-sheet-Breast-lift.pdf` },
+          { title: "Breast Lift (Mastopexy)", text: "Restores projection to deflated or sagging breasts for a perkier, more youthful shape. A day-care procedure under general anaesthesia; the scars fade over time.", sheet: `${PDF}/Plastic-surgery-of-Breast/Patient-information-sheet-Breast-lift.pdf`, href: sheetPage(`${PDF}/Plastic-surgery-of-Breast/Patient-information-sheet-Breast-lift.pdf`) },
           { title: "Breast Reduction", text: "Reduces the size and volume of very large breasts (gigantomastia), relieving back pain, rashes and dermatitis. A day-care procedure under general anaesthesia with strategically placed scars that fade over time.", sheet: `${PDF}/Plastic-surgery-of-Breast/Patient-information-sheet-Breast-reduction.pdf` },
           {
             title: "Breast Reconstruction after Cancer",
             text: "Women who need a mastectomy need not be left without a breast. Dr Vybhav Deraje works with the breast surgeon to reconstruct the breast either during the cancer operation (immediate) or later (delayed). The most common operation uses abdominal tissue (DIEP / MS-TRAM flap), which also gives a tummy tuck; if the abdomen is unsuitable, thigh tissue (TUG flap) or back tissue with an implant (LD flap) can be used. These operations involve 4–5 days in hospital under general anaesthesia. The nipple and areola can later be reconstructed under local anaesthesia, and women having a lumpectomy or partial resection can benefit from oncoplastic techniques to keep the breasts harmonious.",
-            sheet: `${PDF}/Plastic-surgery-of-Breast/Patient-information-sheet-Breast-cancer-reconstruction.pdf`,
+            sheet: `${PDF}/Plastic-surgery-of-Breast/Patient-information-sheet-Breast-cancer-reconstruction.pdf`, href: sheetPage(`${PDF}/Plastic-surgery-of-Breast/Patient-information-sheet-Breast-cancer-reconstruction.pdf`),
           },
           { title: "Gynaecomastia Surgery (Male Breast Reduction)", text: "A day-care procedure for enlarged breasts in men, common in adolescence; a hormonal work-up is sometimes needed first. Treatment is liposuction, surgical excision or both, aiming for a natural masculine chest, usually with no visible scar.", sheet: `${PDF}/Plastic-surgery-of-Breast/Patient-information-sheet-Gynaecomastia-correction.pdf` },
         ],
@@ -753,8 +761,8 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
         items: [
           { title: "Abdominoplasty (Tummy Tuck)", text: "Removes excess, sagging tissue from the abdomen for a flat, fit appearance. The abdominal muscles are tightened and any hernia repaired at the same time; the scar sits below the line of underwear. Often combined with liposuction or a breast lift as a ‘mummy makeover’ after a woman has completed her family. General anaesthesia with a 3–4 day hospital stay; normal activities in about a week and strenuous exercise after 6 weeks.", sheet: `${PDF}/Plastic-Surgery-of-Body/Patient-information-sheet-Abdominoplasty.pdf` },
           { title: "Liposuction", text: "A day-care procedure under general anaesthesia in which excess fat is removed from specific areas for a smoother contour. Dr Vybhav Deraje uses the MicroAire power-assisted liposuction system.", sheet: `${PDF}/Plastic-Surgery-of-Body/Patient-information-sheet-Liposuction.pdf` },
-          { title: "Brachioplasty (Arm Lift)", text: "A day-care procedure under general anaesthesia removing excess skin and tissue from the arms for a slimmer look.", sheet: `${PDF}/Plastic-Surgery-of-Body/Patient-information-sheet-Brachiaplasty.pdf` },
-          { title: "Thighplasty (Thigh Lift)", text: "A day-care procedure under general anaesthesia removing excess skin and tissue from the thighs for a slimmer look and to recreate the gap between the thighs.", sheet: `${PDF}/Plastic-Surgery-of-Body/Patient-information-sheet-Thighplasty.pdf` },
+          { title: "Brachioplasty (Arm Lift)", text: "A day-care procedure under general anaesthesia removing excess skin and tissue from the arms for a slimmer look.", sheet: `${PDF}/Plastic-Surgery-of-Body/Patient-information-sheet-Brachiaplasty.pdf`, href: sheetPage(`${PDF}/Plastic-Surgery-of-Body/Patient-information-sheet-Brachiaplasty.pdf`) },
+          { title: "Thighplasty (Thigh Lift)", text: "A day-care procedure under general anaesthesia removing excess skin and tissue from the thighs for a slimmer look and to recreate the gap between the thighs.", sheet: `${PDF}/Plastic-Surgery-of-Body/Patient-information-sheet-Thighplasty.pdf`, href: sheetPage(`${PDF}/Plastic-Surgery-of-Body/Patient-information-sheet-Thighplasty.pdf`) },
         ],
       },
     ],
@@ -784,9 +792,9 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
       {
         heading: "Procedures",
         items: [
-          { title: "Carpal Tunnel Release", text: "For carpal tunnel syndrome, where the median nerve is compressed in a canal at the wrist. Releasing the tunnel relieves numbness, tingling and weakness. Offered as a day-care WALANT procedure — Wide Awake, Local Anaesthesia, No Tourniquet — the most contemporary approach to elective hand surgery worldwide.", sheet: `${PDF}/Plastic-Surgery-of-Hand/Patient-information-sheet-Carpal-tunnel-release.pdf` },
-          { title: "Trigger Finger Release", text: "Also a day-care WALANT procedure: the pulley that causes the finger to catch and lock is released, with immediate relief of symptoms.", sheet: `${PDF}/Plastic-Surgery-of-Hand/Patient-information-sheet-Trigger-finger-release.pdf` },
-          { title: "Syndactyly Release", text: "Syndactyly is a common congenital deformity in which two or more adjacent fingers have not separated. The fingers are released and the wounds covered with skin grafts, usually before the age of one, as a day-care procedure under general anaesthesia.", sheet: `${PDF}/Plastic-Surgery-of-Hand/Patient-information-sheet-Syndactyly-release.pdf` },
+          { title: "Carpal Tunnel Release", text: "For carpal tunnel syndrome, where the median nerve is compressed in a canal at the wrist. Releasing the tunnel relieves numbness, tingling and weakness. Offered as a day-care WALANT procedure — Wide Awake, Local Anaesthesia, No Tourniquet — the most contemporary approach to elective hand surgery worldwide.", sheet: `${PDF}/Plastic-Surgery-of-Hand/Patient-information-sheet-Carpal-tunnel-release.pdf`, href: sheetPage(`${PDF}/Plastic-Surgery-of-Hand/Patient-information-sheet-Carpal-tunnel-release.pdf`) },
+          { title: "Trigger Finger Release", text: "Also a day-care WALANT procedure: the pulley that causes the finger to catch and lock is released, with immediate relief of symptoms.", sheet: `${PDF}/Plastic-Surgery-of-Hand/Patient-information-sheet-Trigger-finger-release.pdf`, href: sheetPage(`${PDF}/Plastic-Surgery-of-Hand/Patient-information-sheet-Trigger-finger-release.pdf`) },
+          { title: "Syndactyly Release", text: "Syndactyly is a common congenital deformity in which two or more adjacent fingers have not separated. The fingers are released and the wounds covered with skin grafts, usually before the age of one, as a day-care procedure under general anaesthesia.", sheet: `${PDF}/Plastic-Surgery-of-Hand/Patient-information-sheet-Syndactyly-release.pdf`, href: sheetPage(`${PDF}/Plastic-Surgery-of-Hand/Patient-information-sheet-Syndactyly-release.pdf`) },
           { title: "Burnt Hand Deformity Release", text: "Contractures caused by burns are released and the wounds covered with skin grafts or flaps from elsewhere on the body. Rigorous physiotherapy is needed before and after." },
           { title: "Hand Injuries", text: "A hand trauma service for nail-bed injuries, tendon injuries, finger and hand amputations, mangled hand, brachial plexus injuries, nerve and vascular injuries. Dr Vybhav Deraje works with the hospital’s hand therapy unit to provide complete hand care." },
         ],

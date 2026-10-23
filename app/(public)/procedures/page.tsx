@@ -6,6 +6,7 @@ import { JsonLd } from "@/components/site/json-ld";
 import { COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, DOCTOR, GROUP_LABEL, HOME_FAQS, OTHER_SERVICES, SERVICE_PAGES, type ServicePage } from "@/lib/content";
 import { autolink, createLinkBudget } from "@/lib/links";
 import { ROUTES, SECTION } from "@/lib/routes";
+import { SUB_PROCEDURES, subProcedurePath } from "@/lib/sub-procedures";
 import { absolute, breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, PHYSICIAN_ID } from "@/lib/seo";
 
 const TITLE = "All Conditions & Procedures — Dr Vybhav Deraje, Bangalore";
@@ -47,6 +48,11 @@ function Group({ id, label, href, pages, intro }: { id: string; label: string; h
 
 export default function ProceduresIndexPage() {
   const az = [...SERVICE_PAGES].sort((a, b) => a.shortTitle.localeCompare(b.shortTitle));
+  // A–Z list also carries the procedure pages built from the patient-information sheets (nested under their parent).
+  const azAll = [
+    ...SERVICE_PAGES.map((p) => ({ key: p.slug, href: p.path, label: p.shortTitle, description: p.description })),
+    ...SUB_PROCEDURES.map((p) => ({ key: `${p.parent}/${p.slug}`, href: subProcedurePath(p), label: p.shortTitle, description: p.description })),
+  ].sort((a, b) => a.label.localeCompare(b.label));
   const faqs = HOME_FAQS.slice(0, 4).map((f) => ({ q: f.q, a: autolink(f.a, createLinkBudget(ROUTES.procedures)) }));
   return (
     <>
@@ -74,9 +80,9 @@ export default function ProceduresIndexPage() {
           <section id="az">
             <h2>A–Z List</h2>
             <ul>
-              {az.map((p) => (
-                <li key={p.slug}>
-                  <Link href={p.path}>{p.shortTitle}</Link> — {p.description}
+              {azAll.map((p) => (
+                <li key={p.key}>
+                  <Link href={p.href}>{p.label}</Link> — {p.description}
                 </li>
               ))}
             </ul>

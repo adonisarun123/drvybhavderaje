@@ -1,4 +1,5 @@
 import { CRANIO_PARENT, CRANIO_TYPES, cranioTypePath } from "./cranio-types";
+import { SUB_PROCEDURES, subProcedurePath, subProceduresOf } from "./sub-procedures";
 import { AFFILIATIONS, CLINICS_SEED, COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, CREDENTIALS, DOCTOR, HOME_FAQS, HOSPITALS, OTHER_SERVICES, PRACTICES, PUBLICATIONS, SERVICE_PAGES, SITE } from "./content";
 import { ROUTES } from "./routes";
 import { absolute } from "./seo";
@@ -34,11 +35,15 @@ export function llmsTxt(): string {
   for (const p of CRANIOFACIAL_SERVICES) {
     lines.push(`- [${p.shortTitle}](${absolute(p.path)}): ${p.description}`);
     if (p.slug === CRANIO_PARENT) for (const t of CRANIO_TYPES) lines.push(`  - [${t.shortTitle}](${absolute(cranioTypePath(t.slug))}): ${t.description}`);
+    for (const c of subProceduresOf(p.slug)) lines.push(`  - [${c.shortTitle}](${absolute(subProcedurePath(c))}): ${c.description}`);
   }
   lines.push("", "## Cosmetic surgery", "");
   for (const p of COSMETIC_SERVICES) lines.push(`- [${p.shortTitle}](${absolute(p.path)}): ${p.description}`);
   lines.push("", "## Also treated (reconstructive surgery and overview pages)", "");
-  for (const p of OTHER_SERVICES) lines.push(`- [${p.shortTitle}](${absolute(p.path)}): ${p.description}`);
+  for (const p of OTHER_SERVICES) {
+    lines.push(`- [${p.shortTitle}](${absolute(p.path)}): ${p.description}`);
+    for (const c of subProceduresOf(p.slug)) lines.push(`  - [${c.shortTitle}](${absolute(subProcedurePath(c))}): ${c.description}`);
+  }
   lines.push("", "## About the practice", "");
   lines.push(`- [About Dr Vybhav Deraje](${absolute(ROUTES.about)}): training, qualifications, memberships, hospital affiliations, publications and presentations`);
   lines.push(`- [Practice locations](${absolute(ROUTES.locations)}): clinic and hospital addresses and phone numbers`);
@@ -79,6 +84,15 @@ export function llmsFullTxt(): string {
       if (s.bullets?.length) out.push(...s.bullets.map((b) => `- ${b}`), "");
     }
     out.push("## Frequently asked questions", "", ...t.faqs.flatMap((f) => [`**${f.q}**`, "", f.a, ""]));
+  }
+  for (const c of SUB_PROCEDURES) {
+    out.push("---", "", `# ${c.title}`, "", `URL: ${absolute(subProcedurePath(c))}`, "", c.lead, "");
+    for (const s of c.sections) {
+      out.push(`## ${s.heading}`, "");
+      if (s.body?.length) out.push(...s.body, "");
+      if (s.bullets?.length) out.push(...s.bullets.map((b) => `- ${b}`), "");
+    }
+    out.push("## Frequently asked questions", "", ...c.faqs.flatMap((f) => [`**${f.q}**`, "", f.a, ""]));
   }
   out.push("---", "", "# General questions", "", ...HOME_FAQS.flatMap((f) => [`**${f.q}**`, "", f.a, ""]));
   return out.join("\n");

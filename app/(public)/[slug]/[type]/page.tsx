@@ -5,24 +5,31 @@ import { ArrowRight } from "lucide-react";
 import { Byline, CtaBand, Faq, HelpSideCard, KeyFacts, PageHero } from "@/components/site/blocks";
 import { InfoSheet } from "@/components/site/info-sheet";
 import { JsonLd } from "@/components/site/json-ld";
+import { SubProcedureView } from "@/components/site/sub-procedure-page";
 import { VideoSection } from "@/components/site/video-section";
 import { CRANIO_PARENT, CRANIO_TYPES, cranioTypePath, cranioVideoKey, getCranioType } from "@/lib/cranio-types";
 import { DOCTOR, getService, SITE } from "@/lib/content";
 import { autolink, createLinkBudget } from "@/lib/links";
 import { ROUTES, SECTION } from "@/lib/routes";
+import { getSubProcedure, SUB_PROCEDURES, subProcedurePath } from "@/lib/sub-procedures";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, siteOrigin } from "@/lib/seo";
 
-/** Craniosynostosis type pages: /craniosynostosis-surgery-bangalore/<type>. Only that parent has children. */
+/**
+ * Child pages under a service page: the craniosynostosis types (/craniosynostosis-surgery-bangalore/<type>, lib/cranio-types.ts)
+ * and the procedure pages built from the patient-information sheets (/<parent>/<procedure>, lib/sub-procedures.ts).
+ */
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return CRANIO_TYPES.map((t) => ({ slug: CRANIO_PARENT, type: t.slug }));
+  return [...CRANIO_TYPES.map((t) => ({ slug: CRANIO_PARENT, type: t.slug })), ...SUB_PROCEDURES.map((p) => ({ slug: p.parent, type: p.slug }))];
 }
 
 type Params = Promise<{ slug: string; type: string }>;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug, type } = await params;
+  const sub = getSubProcedure(slug, type);
+  if (sub) return pageMetadata({ title: sub.metaTitle, description: sub.description, path: subProcedurePath(sub), ogType: "article" });
   const t = slug === CRANIO_PARENT ? getCranioType(type) : undefined;
   if (!t) return {};
   return pageMetadata({ title: t.metaTitle, description: t.description, path: cranioTypePath(t.slug), ogType: "article" });
@@ -30,6 +37,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
 
 export default async function CranioTypePage({ params }: { params: Params }) {
   const { slug, type } = await params;
+  const sub = getSubProcedure(slug, type);
+  if (sub) return <SubProcedureView p={sub} />;
   const t = slug === CRANIO_PARENT ? getCranioType(type) : undefined;
   const parent = getService(CRANIO_PARENT);
   if (!t || !parent) notFound();
