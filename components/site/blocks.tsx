@@ -24,7 +24,7 @@ export function CtaBand() {
           Call <a href={`tel:${SITE.phoneTel}`}>{SITE.phone}</a>, email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or send an enquiry.
         </p>
       </div>
-      <Link className="button light" href={ROUTES.contact}>
+      <Link className="button light" href={ROUTES.contact} data-analytics-cta="cta_band_book">
         Book an appointment <ArrowUpRight size={18} aria-hidden="true" />
       </Link>
     </section>
@@ -37,7 +37,7 @@ export function HelpSideCard() {
       <p className="eyebrow">Here to help</p>
       <h3>Let’s talk about your care.</h3>
       <p>The clinic can help you choose a location and arrange your consultation with Dr Vybhav Deraje.</p>
-      <Link href={ROUTES.contact} className="button">
+      <Link href={ROUTES.contact} className="button" data-analytics-cta="side_card_book">
         Book an appointment <ArrowUpRight size={18} aria-hidden="true" />
       </Link>
       <br />

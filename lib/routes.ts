@@ -22,6 +22,8 @@ export const ROUTES = {
   resources: "/patient-resources",
   /** A–Z index of every condition and procedure page — the site's hub for internal links and backlinks. */
   procedures: "/procedures",
+  /** Shown after a successful enquiry (noindex; the GA4 conversion destination). Never in the sitemap. */
+  thankYou: "/thank-you",
 } as const;
 
 /**

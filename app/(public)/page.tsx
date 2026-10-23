@@ -51,7 +51,7 @@ export default async function HomePage() {
             </h1>
             <p className="hero-description">{heroCopy}</p>
             <div className="actions">
-              <Link className="button" href={ROUTES.contact}>
+              <Link className="button" href={ROUTES.contact} data-analytics-cta="home_hero_book">
                 Book an appointment <ArrowUpRight size={18} aria-hidden="true" />
               </Link>
               <Link className="text-link" href={ROUTES.about}>

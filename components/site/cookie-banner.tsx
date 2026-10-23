@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CONSENT_EVENT, readConsent, resetConsent, writeConsent } from "@/lib/consent";
 import { ROUTES } from "@/lib/routes";
+import { track } from "@/lib/analytics";
 
 /**
  * Analytics consent banner. Shown until the visitor makes a choice; "Accept" loads Google Analytics,
@@ -43,7 +44,14 @@ export function CookieBanner() {
 /** Footer link that re-opens the banner so a visitor can change their mind. */
 export function CookieSettingsLink() {
   return (
-    <button type="button" className="link-button" onClick={resetConsent}>
+    <button
+      type="button"
+      className="link-button"
+      onClick={() => {
+        track("consent_update", { action: "reopen_banner" });
+        resetConsent();
+      }}
+    >
       Cookie settings
     </button>
   );

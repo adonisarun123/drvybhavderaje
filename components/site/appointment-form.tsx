@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { SITE } from "@/lib/content";
@@ -8,6 +9,8 @@ import { ROUTES } from "@/lib/routes";
 import type { PublicClinic } from "@/lib/clinics";
 import { DIAL_CODES, OTHER_COUNTRY } from "@/lib/dial-codes";
 import { CLINIC_PREFERENCES, isClinicPreference } from "@/lib/enquiries/preferences";
+import { ENQUIRY_FORM_ID, track } from "@/lib/analytics";
+import { rememberEnquiry, thankYouPath } from "@/lib/enquiries/thank-you";
 import { AvailabilityCalendar } from "./availability-calendar";
 
 type FieldErrors = Record<string, string[]>;
@@ -16,6 +19,15 @@ type Status =
   | { kind: "sending" }
   | { kind: "error"; message: string; fieldErrors?: FieldErrors }
   | { kind: "success"; reference: string; duplicate?: boolean };
+
+/** GA4 error_type for a failed submission, from the API's error code / HTTP status. */
+function errorType(code: string | undefined, status: number): string {
+  if (code === "too_fast" || code === "captcha") return "bot_check";
+  if (code === "validation" || status === 400 || status === 422) return "validation";
+  if (code === "rate_limited" || status === 429) return "rate_limited";
+  if (code === "disabled" || status === 503) return "disabled";
+  return "server";
+}
 
 interface Props {
   clinics: PublicClinic[];
@@ -53,6 +65,7 @@ function fmtSlot(iso: string, tz: string | null) {
 }
 
 export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateMax, initialClinic }: Props) {
+  const router = useRouter();
   const [status, setStatus] = useState<Status>({ kind: "idle" });
   // Generated once per mounted form (in the submit handler) so retries reuse the same key.
   const submissionId = useRef<string | null>(null);
@@ -116,15 +129,26 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
       startedAt: startedAt.current ?? Date.now(),
     };
     setStatus({ kind: "sending" });
+    const clinicKind = isClinicPreference(payload.clinic) ? payload.clinic : "clinic";
+    const common = { form_id: ENQUIRY_FORM_ID, clinic: payload.clinic, clinic_kind: clinicKind, phone_country: phoneCountry, has_slot: !!selectedSlot, has_email: !!payload.email, page_path: window.location.pathname };
+    track("form_submit", common);
     try {
       const res = await fetch("/api/enquiries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
-      const data = (await res.json()) as { ok: boolean; data?: { reference: string; duplicate?: boolean }; message?: string; fieldErrors?: FieldErrors };
+      const data = (await res.json()) as { ok: boolean; code?: string; data?: { reference: string; duplicate?: boolean }; message?: string; fieldErrors?: FieldErrors };
       if (data.ok && data.data) {
-        setStatus({ kind: "success", reference: data.data.reference, duplicate: data.data.duplicate });
+        const { reference, duplicate } = data.data;
+        // The conversion: once per saved enquiry (a duplicate resubmission is not a second lead).
+        if (!duplicate) track("generate_lead", { ...common, reference, currency: "INR", value: 0 });
+        setStatus({ kind: "success", reference, duplicate });
+        rememberEnquiry({ reference, clinic: payload.clinic, duplicate: !!duplicate });
+        router.push(thankYouPath({ reference, clinic: payload.clinic, duplicate: !!duplicate }));
       } else {
+        const fields = Object.keys(data.fieldErrors ?? {}).sort().join(",");
+        track("form_error", { ...common, error_type: errorType(data.code, res.status), error_code: data.code, error_fields: fields || undefined });
         setStatus({ kind: "error", message: data.message ?? "Something went wrong. Your details are still in the form.", fieldErrors: data.fieldErrors });
       }
     } catch {
+      track("form_error", { ...common, error_type: "network" });
       setStatus({ kind: "error", message: "We could not reach the server. Nothing has been sent — your details are still in the form. Please try again or call the clinic." });
     }
   }
@@ -133,6 +157,7 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
   const err = (f: string) => errs[f]?.[0];
 
   if (status.kind === "success") {
+    // Shown for the instant before /thank-you renders (and if client-side navigation is ever blocked).
     return (
       <div className="status success" role="status" tabIndex={-1} ref={alertRef}>
         <strong>Thank you — your request has been received.</strong>
@@ -148,7 +173,10 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
   }
 
   return (
-    <form onSubmit={onSubmit} noValidate aria-describedby={`${id}-explain`} onFocusCapture={() => { startedAt.current ??= Date.now(); }}>
+    <form onSubmit={onSubmit} noValidate aria-describedby={`${id}-explain`} onFocusCapture={() => {
+        if (startedAt.current === null) track("form_start", { form_id: ENQUIRY_FORM_ID, page_path: window.location.pathname });
+        startedAt.current ??= Date.now();
+      }}>
       {!enabled && (
         <div className="status" role="status">
           Online requests are not available at the moment. Please call{" "}
@@ -262,7 +290,10 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
                 <div className="slot-grid">
                   {slots.map((s) => (
                     <label key={s.start}>
-                      <input type="radio" name="slot" value={s.start} checked={selectedSlot === s.start} onChange={() => setSelectedSlot(s.start)} />
+                      <input type="radio" name="slot" value={s.start} checked={selectedSlot === s.start} onChange={() => {
+                        setSelectedSlot(s.start);
+                        track("slot_select", { form_id: ENQUIRY_FORM_ID, clinic, slot_start: s.start });
+                      }} />
                       {fmtSlot(s.start, visitorTz)}
                     </label>
                   ))}

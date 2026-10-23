@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Play } from "lucide-react";
+import { track } from "@/lib/analytics";
 
 /** Click-to-load YouTube embeds: a static thumbnail until the viewer presses play, so no third-party scripts load on page view. */
 export function VideoGallery({ ids, title = "Video gallery" }: { ids: string[]; title?: string }) {
@@ -33,7 +34,10 @@ function Video({ id, index }: { id: string; index: number }) {
   }
   return (
     <div className="video" role="listitem">
-      <button type="button" className="video-poster" onClick={() => setPlaying(true)} aria-label={`Play ${label.toLowerCase()}`}>
+      <button type="button" className="video-poster" onClick={() => {
+          track("video_play", { video_id: id, video_index: index, video_provider: "youtube" });
+          setPlaying(true);
+        }} aria-label={`Play ${label.toLowerCase()}`}>
         {/* eslint-disable-next-line @next/next/no-img-element -- YouTube thumbnail; sizes are fixed by YouTube */}
         <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" width={480} height={360} loading="lazy" decoding="async" />
         <span className="video-play" aria-hidden="true">

@@ -126,7 +126,7 @@ export function SiteHeader() {
                 </div>
               );
             })}
-            <Link className="button small" href={ROUTES.contact} aria-current={isCurrent(ROUTES.contact) ? "page" : undefined} onClick={() => setOpen(false)}>
+            <Link className="button small" href={ROUTES.contact} data-analytics-cta="header_book" aria-current={isCurrent(ROUTES.contact) ? "page" : undefined} onClick={() => setOpen(false)}>
               Book an appointment <ArrowUpRight size={16} aria-hidden="true" />
             </Link>
           </nav>

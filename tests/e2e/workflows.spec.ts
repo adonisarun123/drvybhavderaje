@@ -123,11 +123,13 @@ test("public enquiry reaches the admin list", async ({ page }) => {
   await page.check('input[name="consent"]');
   await page.waitForTimeout(2600); // bot-timing threshold
   await page.click('main button[type="submit"]');
-  const status = page.locator('[role="status"]');
-  await expect(status).toContainText("received", { timeout: 15000 });
-  await expect(status).toContainText("not");
-  enquiryRef = (await status.locator("strong").nth(1).textContent())?.trim() ?? "";
+  // A saved enquiry lands on the thank-you page, which carries the reference in the URL and on the page.
+  await page.waitForURL(/\/thank-you\?ref=ENQ-/, { timeout: 15000 });
+  await expect(page.locator("h1")).toContainText("received");
+  await expect(page.locator("main")).toContainText("not");
+  enquiryRef = (await page.locator("[data-enquiry-reference]").textContent())?.trim() ?? "";
   expect(enquiryRef).toMatch(/^ENQ-/);
+  expect(new URL(page.url()).searchParams.get("ref")).toBe(enquiryRef);
 
   await login(page);
   await page.goto(`${BASE}/admin/enquiries?q=${enquiryRef}`);

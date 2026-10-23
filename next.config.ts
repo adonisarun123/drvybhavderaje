@@ -54,6 +54,8 @@ const nextConfig: NextConfig = {
       { source: "/admin/(.*)", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" }, { key: "Cache-Control", value: "no-store" }] },
       { source: "/admin", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow, noarchive" }, { key: "Cache-Control", value: "no-store" }] },
       { source: "/api/(.*)", headers: [{ key: "X-Robots-Tag", value: "noindex" }] },
+      // Post-enquiry page: reachable, but never a search result.
+      { source: "/thank-you", headers: [{ key: "X-Robots-Tag", value: "noindex, follow" }, { key: "Cache-Control", value: "no-store" }] },
       { source: "/images/pdf/(.*)", headers: [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }] },
     ];
   },
