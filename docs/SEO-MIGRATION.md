@@ -140,3 +140,7 @@ The doctor asked the site to lead with 14 named procedures: craniosynostosis, cl
 - Eleven are new pages at clean paths (`lib/routes.ts → NEW_SERVICE_SLUGS`); they never had a `.html` URL. Content lives in `lib/procedures.ts`.
 - The seven other legacy pages (facial injuries, head & neck cancer, other craniofacial conditions, hand surgery, and the face / breast / body hub pages) **stay live at their clean URLs** (the old `.html` URL 308s there) so backlinks and rankings are preserved. They are out of the header menu and listed on the homepage under "Also treated" and in the footer. Hub pages list their procedure pages at the top; procedure pages link back to their hub.
 - Header, homepage, footer, sitemap, `llms.txt` and the Physician schema (`availableService`, `knowsAbout`) all derive from `lib/routes.ts` order constants — nothing is hard-coded in JSX.
+
+## Patient-information PDFs (removed 23 Oct 2026)
+
+The 34 legacy PDFs under `/images/pdf/…` are no longer served or linked. Every one has an HTML page with the same content, and each old PDF URL 308s to that page — table in `lib/pdf-redirects.ts`, wired in `next.config.ts`. After launch, check GSC for any PDF URL still reported as 404.

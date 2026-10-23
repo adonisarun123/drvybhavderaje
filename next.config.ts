@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { imageKitEndpoint } from "./lib/image-config";
+import { LEGACY_PDF_REDIRECTS } from "./lib/pdf-redirects";
 import { LEGACY_HTML_REDIRECTS, RETIRED_PATHS } from "./lib/routes";
 
 /**
@@ -13,7 +14,7 @@ import { LEGACY_HTML_REDIRECTS, RETIRED_PATHS } from "./lib/routes";
  * canonical URL. Nothing redirects to the homepage except /index.html, /index and /home.
  * There are no rewrites: the URL in the address bar is the canonical URL.
  */
-/** Images moved to ImageKit; the legacy /images/… URLs (everything except the PDFs) redirect there. */
+/** Images moved to ImageKit; the legacy /images/… URLs redirect there. The PDFs redirect to their HTML pages (lib/pdf-redirects.ts). */
 const IK = imageKitEndpoint();
 const imageRedirects = [
   { source: "/images/custom/:path*", destination: `${IK}/custom/:path*`, permanent: true },
@@ -31,6 +32,7 @@ const canonicalRedirects = [
   ...imageRedirects,
   ...LEGACY_HTML_REDIRECTS.map(({ source, destination }) => ({ source, destination, permanent: true })),
   ...Object.entries(RETIRED_PATHS).map(([source, destination]) => ({ source, destination, permanent: true })),
+  ...Object.entries(LEGACY_PDF_REDIRECTS).map(([source, destination]) => ({ source, destination, permanent: true })),
 ];
 
 const securityHeaders = [

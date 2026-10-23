@@ -6,8 +6,8 @@
  * language only — no new clinical claims were added. FAQs restate what the page already says in the
  * way patients ask the question (answer-engine optimisation); they do not introduce new facts.
  *
- * Patient-information PDFs keep their legacy URLs under /images/pdf/… so existing links keep working.
- * They are rendered only when the file is present in /public (see components/site/info-sheet.tsx).
+ * The patient-information PDFs were removed on 23 Oct 2026; each legacy /images/pdf/… URL 308s to the page
+ * carrying the same content (lib/pdf-redirects.ts).
  * Image paths are relative to the ImageKit folder (see lib/images.ts), e.g. "/custom/gallery_1.png".
  */
 import { FEATURED_COSMETIC, FEATURED_CRANIOFACIAL, OTHER_SERVICES_ORDER, ROUTES, SECTION, servicePath, type ServiceSlug } from "./routes";
@@ -255,7 +255,7 @@ export const AESTHETICA_VEDA = PRACTICES[1]!;
 export interface ServiceItem {
   title: string;
   text: string;
-  /** Legacy patient-information PDF path under /public, e.g. "/images/pdf/cleft/Patient-information-sheet-Cleft-lip.pdf". */
+  /** Source patient-information sheet (legacy PDF URL). The PDFs were removed 23 Oct 2026; the URL redirects to the page (lib/pdf-redirects.ts). Not rendered. */
   sheet?: string;
   /** Dedicated sub-page for this item (craniosynostosis types). */
   href?: string;
@@ -297,7 +297,7 @@ export interface ServicePage {
   related: ServiceSlug[];
   /** Optional photo gallery (ImageKit paths). */
   gallery?: Photo[];
-  /** Page-level patient-information PDF (legacy path under /public/images/pdf). */
+  /** Source patient-information sheet (legacy PDF URL, now a redirect — lib/pdf-redirects.ts). Not rendered. */
   infoSheet?: string;
 }
 
@@ -529,10 +529,6 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
         ],
         note: "All incisions are inside the mouth, so there are no external skin scars. These operations involve 3–4 days in hospital including one day in ICU; a blood transfusion is occasionally needed.",
       },
-      {
-        heading: "Patient Information",
-        items: [{ title: "Patient Information Sheet", text: "Corrective jaw surgery — what to expect before and after the operation.", sheet: `${PDF}/Corrective-Jaw-Surgery/Patient-information-sheet-Jaw-surgery.pdf` }],
-      },
     ],
     faqs: [
       { q: "What is orthognathic surgery?", a: "Orthognathic (corrective jaw) surgery moves the bones of the upper jaw, lower jaw or both to realign the teeth and improve the balance of the face. The main operations are Le Fort I osteotomy, bilateral sagittal split osteotomy (BSSO), double-jaw surgery and genioplasty." },
@@ -571,7 +567,6 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
           "Displaced facial fractures that cause a functional or aesthetic problem usually need reduction and fixation. The common fractures are of the frontal bone (forehead), orbit (eye socket), nose, maxilla (upper jaw), zygoma (cheek) and mandible (lower jaw).",
           "A CT scan and X-rays may be needed for assessment. The bones are brought back into position and stabilised with titanium plates and screws. Dr Vybhav Deraje uses the Synthes plating system. Surgery usually needs a one-day admission and most patients are back to normal within about a week.",
         ],
-        items: [{ title: "Patient Information Sheet", text: "Facial injuries and fractures — what to expect before and after surgery.", sheet: `${PDF}/Facial-Injuries-and-fracture/Patient-information-sheet-Facial-injuries-and-fractures.pdf` }],
       },
     ],
     faqs: [
@@ -608,10 +603,6 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
           { title: "When Muscle Is Needed", text: "Muscle is borrowed from the thigh (gracilis flap) or the back (latissimus dorsi flap)." },
         ],
         body: ["Dr Vybhav Deraje uses an advanced Leica operating microscope for these complex procedures and, for suitable patients, the GEM microvascular anastomotic coupler."],
-      },
-      {
-        heading: "Patient Information",
-        items: [{ title: "Patient Information Sheet", text: "Head and neck cancer reconstruction — what to expect.", sheet: `${PDF}/Head-and-Neck-Cancer/Patient-information-sheet-Head-and-Neck-Cancer.pdf` }],
       },
     ],
     faqs: [

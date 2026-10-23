@@ -49,7 +49,7 @@ export function llmsTxt(): string {
   lines.push(`- [Practice locations](${absolute(ROUTES.locations)}): clinic and hospital addresses and phone numbers`);
   lines.push(`- [Contact and appointments](${absolute(ROUTES.contact)}): enquiry form, phone and email`);
   lines.push(`- [Patient stories](${absolute(ROUTES.testimonials)}): testimonials and video gallery`);
-  lines.push(`- [Patient resources](${absolute(ROUTES.resources)}): preparing for a consultation, information sheets`);
+  lines.push(`- [Patient resources](${absolute(ROUTES.resources)}): preparing for a consultation, procedure guides`);
   lines.push(`- [All conditions and procedures](${absolute(ROUTES.procedures)}): A–Z index of every condition and procedure page`);
   lines.push("", "## Optional", "");
   lines.push(`- [Privacy policy](${absolute(ROUTES.privacy)})`, `- [Terms of use](${absolute(ROUTES.terms)})`, `- [Full text of the site](${absolute("/llms-full.txt")})`, `- [Sitemap](${absolute("/sitemap.xml")})`);

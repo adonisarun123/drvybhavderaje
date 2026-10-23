@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { Byline, CtaBand, Faq, HelpSideCard, KeyFacts, PageHero, PhotoGallery, RelatedServices } from "@/components/site/blocks";
-import { InfoSheet } from "@/components/site/info-sheet";
 import { VideoSection } from "@/components/site/video-section";
 import { JsonLd } from "@/components/site/json-ld";
 import { childServices, DOCTOR, getService, GROUP_HREF, GROUP_LABEL, HOSPITALS, isFeatured, PRACTICES, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
@@ -31,7 +30,7 @@ interface LinkedSection {
   heading: string;
   body?: ReactNode[];
   bullets?: ReactNode[];
-  items?: { title: string; text: ReactNode; sheet?: string; href?: string }[];
+  items?: { title: string; text: ReactNode; href?: string }[];
   note?: ReactNode;
 }
 
@@ -58,7 +57,6 @@ function Section({ s }: { s: LinkedSection }) {
                   Read more about {it.title.replace(/ Synostosis$/, " synostosis")} <ArrowRight size={14} aria-hidden="true" />
                 </Link>
               )}
-              {it.sheet && <InfoSheet href={it.sheet} />}
             </article>
           ))}
         </div>
@@ -86,7 +84,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     heading: s.heading,
     body: s.body?.map((p) => autolink(p, budget)),
     bullets: s.bullets?.map((b) => autolink(b, budget)),
-    items: s.items?.map((it) => ({ title: it.title, text: autolink(it.text, budget), sheet: it.sheet, href: it.href })),
+    items: s.items?.map((it) => ({ title: it.title, text: autolink(it.text, budget), href: it.href })),
     note: s.note ? autolink(s.note, budget) : undefined,
   }));
   const faqs = page.faqs.map((f) => ({ q: f.q, a: autolink(f.a, budget) }));
@@ -166,7 +164,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               {p}
             </p>
           ))}
-          {page.infoSheet && <InfoSheet href={page.infoSheet} />}
           {children.length > 0 && (
             <section>
               <h2>Procedure Pages</h2>

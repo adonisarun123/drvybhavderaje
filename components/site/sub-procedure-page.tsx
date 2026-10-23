@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Byline, CtaBand, Faq, HelpSideCard, KeyFacts, PageHero } from "@/components/site/blocks";
-import { InfoSheet } from "@/components/site/info-sheet";
 import { JsonLd } from "@/components/site/json-ld";
 import { DOCTOR, getService, GROUP_HREF, GROUP_LABEL, isFeatured, SITE } from "@/lib/content";
 import { autolink, createLinkBudget } from "@/lib/links";
@@ -99,7 +98,6 @@ export function SubProcedureView({ p }: { p: SubProcedure }) {
               )}
             </section>
           ))}
-          <InfoSheet href={p.sheet} />
 
           {seeAlso && (
             <p className="callout">

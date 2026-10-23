@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { Byline, CtaBand, Faq, HelpSideCard, KeyFacts, PageHero } from "@/components/site/blocks";
-import { InfoSheet } from "@/components/site/info-sheet";
 import { JsonLd } from "@/components/site/json-ld";
 import { SubProcedureView } from "@/components/site/sub-procedure-page";
 import { VideoSection } from "@/components/site/video-section";
@@ -143,7 +142,6 @@ export default async function CranioTypePage({ params }: { params: Params }) {
               )}
             </section>
           ))}
-          <InfoSheet href={t.sheet} />
 
           <VideoSection page={cranioVideoKey(t)} heading={`Videos on ${t.shortTitle}`} />
 

@@ -370,10 +370,6 @@ main:focus { outline: none; }
 .callout { background: #f2f7fc; border-left: 3px solid var(--blue); border-radius: 0 6px 6px 0; padding: 16px 20px; margin-top: 22px; font-size: 16px; }
 .contact-inline p { font-size: 16px; }
 .contact-inline a { white-space: nowrap; }
-.sheet-link { color: var(--blue); align-items: center; gap: 8px; margin-top: 14px; font-size: 15px; font-weight: 500; display: inline-flex; min-height: 36px; text-decoration: none !important; }
-.sheet-link:hover { text-decoration: underline !important; }
-.sheet-list { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 2px; }
-.sheet-list .sheet-link { margin-top: 0; }
 .pub-list li { margin: 12px 0; font-size: 15px; line-height: 1.7; }
 .pub-list cite { font-style: normal; }
 .affiliation-line { font-size: 15px; color: var(--muted); }
