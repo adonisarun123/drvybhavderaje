@@ -83,6 +83,9 @@ export function SiteFooter() {
         <span>
           <Link href={ROUTES.privacy}>Privacy policy</Link> · <Link href={ROUTES.terms}>Terms of use</Link> · <CookieSettingsLink />
         </span>
+        <span className="footer-credit">
+          Website by <a href="https://www.monkmantra.com" target="_blank" rel="noopener noreferrer" title="Monk Mantra — healthcare digital marketing, Bangalore">Monk Mantra</a>
+        </span>
       </div>
     </footer>
   );
