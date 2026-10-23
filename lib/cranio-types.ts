@@ -5,7 +5,7 @@
  * Source: Dr Vybhav Deraje's own patient-information sheets (public/images/pdf/Craniosynthosis/*.pdf), edited for
  * plain language and consistency only. One deliberate change: the sheets name Sakra World Hospital for keyhole
  * surgery; that sentence is replaced with the current position stated elsewhere on the site (Dr Deraje leads the
- * craniosynostosis team at Aster Whitefield Hospital). NEEDS THE DOCTOR'S SIGN-OFF before the site goes live.
+ * craniosynostosis team at Aster Whitefield Hospital). Approved by Dr Deraje on 23 Oct 2026, including the added FAQs.
  *
  * URLs: /craniosynostosis-surgery-bangalore/<type> — nested under the parent so the hierarchy is in the address.
  */
