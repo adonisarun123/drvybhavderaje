@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CtaBand, Faq, HelpSideCard, PageHero, ServiceIndex } from "@/components/site/blocks";
+import { Byline, CtaBand, Faq, HelpSideCard, PageHero, ServiceIndex } from "@/components/site/blocks";
 import { InfoSheet, sheetExists } from "@/components/site/info-sheet";
 import { JsonLd } from "@/components/site/json-ld";
 import { HOME_FAQS, RESOURCES, SERVICE_PAGES } from "@/lib/content";
@@ -27,6 +27,7 @@ export default function PatientResourcesPage() {
       <PageHero eyebrow="Patient resources" crumb="Patient resources" title="A little preparation. A clearer conversation." lead="Practical information to help you feel ready for your first consultation." />
       <section className="section container content-grid">
         <article className="prose">
+          <Byline />
           <div className="resource-list">
             {RESOURCES.map((r) => (
               <div className="resource-item" key={r.title}>

@@ -175,6 +175,8 @@ footer.site-footer { background: #f5f7fa; padding: 45px 0 0; font-size: 15px; }
 .byline { display: flex; gap: 8px; align-items: flex-start; color: var(--muted); font-size: 14px; line-height: 1.6; margin: 0 0 22px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
 .byline svg { flex: none; color: var(--blue); margin-top: 3px; }
 .byline a { color: var(--blue); font-weight: 600; }
+.faq-section .byline, .section > .byline { margin: 24px 0 0 !important; padding: 18px 0 0; border-bottom: 0; border-top: 1px solid var(--line); }
+.section > .byline { margin: 0 0 28px !important; padding: 0 0 18px; border-top: 0; border-bottom: 1px solid var(--line); }
 .key-facts { background: #f2f7fc; border: 1px solid #dbe6f1; border-radius: 10px; padding: 22px 26px; margin: 0 0 30px; }
 .key-facts h2 { font-size: 22px; margin: 4px 0 10px; }
 .key-facts p { margin: 0 0 8px; font-size: 16px; line-height: 1.7; }

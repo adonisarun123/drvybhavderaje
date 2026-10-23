@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Image } from "@imagekit/next";
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight, Baby, Building2, Check, GraduationCap, HeartHandshake, MapPin, Phone, ShieldCheck } from "lucide-react";
-import { AffiliationLogos, CtaBand, Faq, ServiceGrid, TestimonialCard } from "@/components/site/blocks";
+import { AffiliationLogos, Byline, CtaBand, Faq, ServiceGrid, TestimonialCard } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { VideoGallery } from "@/components/site/video-gallery";
 import { COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, DOCTOR, HOME_FAQS, HOSPITALS, OTHER_SERVICES, SITE, TESTIMONIALS, VIDEOS } from "@/lib/content";
@@ -308,7 +308,10 @@ export default async function HomePage() {
             <HeartHandshake size={14} aria-hidden="true" /> Empathy. Integrity. Collaboration.
           </span>
         </div>
-        <Faq items={faqs} />
+        <div>
+          <Faq items={faqs} />
+          <Byline />
+        </div>
       </section>
 
       <CtaBand />

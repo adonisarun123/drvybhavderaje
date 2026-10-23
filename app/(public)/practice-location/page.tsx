@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Image } from "@imagekit/next";
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight, MapPin, Phone } from "lucide-react";
-import { CtaBand, PageHero, ServiceIndex } from "@/components/site/blocks";
+import { Byline, CtaBand, PageHero, ServiceIndex } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { getPublicClinics } from "@/lib/clinics";
 import { CLINICS_SEED, HOSPITALS } from "@/lib/content";
@@ -31,6 +31,7 @@ export default async function LocationsPage() {
       />
       <PageHero eyebrow="Practice locations" crumb="Practice locations" title="Clinics and hospitals in Bangalore." lead="Consultations at Aesthetica Veda clinics; surgeries at partner hospitals across the city. Please confirm availability with the clinic before you travel." />
       <section className="section container" aria-labelledby="consult-heading">
+        <Byline />
         <div className="section-heading">
           <div>
             <p className="eyebrow">Consultations</p>

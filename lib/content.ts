@@ -59,6 +59,8 @@ export const DOCTOR = {
   name: "Dr Vybhav Deraje",
   honorificSuffix: "MBBS, MS (General Surgery), DNB (Plastic Surgery)",
   fellowship: "Fellowship in Craniofacial Surgery (ACFU, Adelaide)",
+  /** Karnataka Medical Council registration — shown in every byline and in the Physician schema. */
+  kmcRegistration: "79493",
   summary:
     "Dr Vybhav Deraje is a National Board certified plastic surgeon with a special interest in craniofacial surgery. He has practised as a Consultant Craniofacial & Plastic Surgeon in Bangalore since returning from Adelaide, Australia in 2019. He is the Founder of Aesthetica Veda and consults at all its branches in Bangalore.",
   summary2: "Dr Vybhav is also the driving force behind the craniosynostosis multidisciplinary team at Aster Hospital, Whitefield, Bangalore.",

@@ -19,7 +19,7 @@ export function llmsTxt(): string {
   );
   lines.push("## Key facts", "");
   lines.push(
-    `- Surgeon: ${DOCTOR.name}, ${DOCTOR.honorificSuffix}; ${DOCTOR.fellowship}. Karnataka Medical Council Reg. No. 79493.`,
+    `- Surgeon: ${DOCTOR.name}, ${DOCTOR.honorificSuffix}; ${DOCTOR.fellowship}. Karnataka Medical Council Reg. No. ${DOCTOR.kmcRegistration}.`,
     `- Practising in Bangalore since 2019; Founder & Director of Aesthetica Veda; leads the craniosynostosis multidisciplinary team at Aster Hospital, Whitefield.`,
     `- Memberships: ${AFFILIATIONS.map((a) => a.org).join(", ")}.`,
     `- Consultations: Aesthetica Veda clinics in ${CLINICS_SEED.map((c) => c.name).join(", ")}. Surgery: ${HOSPITALS.map((h) => h.name).join(", ")}.`,
@@ -43,7 +43,7 @@ export function llmsTxt(): string {
   lines.push(`- [All conditions and procedures](${absolute(ROUTES.procedures)}): A–Z index of every condition and procedure page`);
   lines.push("", "## Optional", "");
   lines.push(`- [Privacy policy](${absolute(ROUTES.privacy)})`, `- [Terms of use](${absolute(ROUTES.terms)})`, `- [Full text of the site](${absolute("/llms-full.txt")})`, `- [Sitemap](${absolute("/sitemap.xml")})`);
-  lines.push("", `Author and medical reviewer of all pages: ${DOCTOR.name}. Content last reviewed ${SITE.contentUpdated}. Information is general and does not replace a consultation.`, "");
+  lines.push("", `Author and medical reviewer of all pages: ${DOCTOR.name}, ${DOCTOR.honorificSuffix} (KMC Reg. No. ${DOCTOR.kmcRegistration}). Content last reviewed ${SITE.contentUpdated}. Information is general and does not replace a consultation.`, "");
   return lines.join("\n");
 }
 

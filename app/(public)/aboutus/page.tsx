@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Image } from "@imagekit/next";
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { AffiliationLogos, CtaBand, PageHero, PhotoGallery, ServiceIndex } from "@/components/site/blocks";
+import { AffiliationLogos, Byline, CtaBand, PageHero, PhotoGallery, ServiceIndex } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { ABOUT_GALLERY, AFFILIATIONS, CREDENTIALS, DOCTOR, HOSPITALS, PRESENTATIONS, PUBLICATIONS, PUBLICATIONS_OTHER, SITE } from "@/lib/content";
 import { getPublicClinics } from "@/lib/clinics";
@@ -35,6 +35,7 @@ export default async function AboutPage() {
       <PageHero eyebrow={`${DOCTOR.honorificSuffix} · ${DOCTOR.fellowship}`} crumb="Dr Vybhav Deraje" title="Dr Vybhav Deraje" lead="Consultant Craniofacial & Plastic Surgeon, Bangalore. Founder & Director, Aesthetica Veda." />
       <section className="section container content-grid">
         <article className="prose">
+          <Byline />
           <h2>Training and career</h2>
           {bio.map((p, i) => (
             <p key={i}>{p}</p>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { CtaBand, PageHero, TestimonialCard } from "@/components/site/blocks";
+import { Byline, CtaBand, PageHero, TestimonialCard } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { VideoGallery } from "@/components/site/video-gallery";
 import { SITE, TESTIMONIALS, VIDEOS } from "@/lib/content";
@@ -26,6 +26,7 @@ export default function TestimonialsPage() {
       />
       <PageHero eyebrow="Our stories" crumb="Patient stories" title="Patients speak." lead="In their own words — experiences shared by patients and families, as published on the practice’s website." />
       <section className="section container">
+        <Byline />
         <div className="testimonial-grid">
           {TESTIMONIALS.map((t) => (
             <TestimonialCard key={t.name + t.topic} {...t} href={linkTargetFor(t.topic)} />

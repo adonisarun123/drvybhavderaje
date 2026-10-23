@@ -84,7 +84,7 @@ export function Byline() {
     <p className="byline">
       <BadgeCheck size={16} aria-hidden="true" />
       <span>
-        Written and medically reviewed by <Link href={ROUTES.about}>{DOCTOR.name}</Link>, {DOCTOR.honorificSuffix} · Consultant Craniofacial &amp; Plastic Surgeon, Bangalore · Last reviewed {reviewedOn()}
+        Written and medically reviewed by <Link href={ROUTES.about}>{DOCTOR.name}</Link>, {DOCTOR.honorificSuffix} · Consultant Craniofacial &amp; Plastic Surgeon, Bangalore · KMC Reg. No. {DOCTOR.kmcRegistration} · Last reviewed {reviewedOn()}
       </span>
     </p>
   );

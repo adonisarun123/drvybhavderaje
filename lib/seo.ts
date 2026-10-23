@@ -78,7 +78,7 @@ export function physicianJsonLd(clinics: ClinicLike[]) {
     description: SITE.defaultDescription,
     medicalSpecialty: ["PlasticSurgery", "Surgical"],
     identifier: [
-      { "@type": "PropertyValue", propertyID: "Karnataka Medical Council registration", value: "79493" },
+      { "@type": "PropertyValue", propertyID: "Karnataka Medical Council registration", value: DOCTOR.kmcRegistration },
       { "@type": "PropertyValue", propertyID: "Association of Plastic Surgeons of India membership", value: "D089FL2019" },
     ],
     knowsAbout: SERVICE_PAGES.flatMap((p) => [...p.conditions, ...p.procedures]).filter((v, i, a) => a.indexOf(v) === i),
