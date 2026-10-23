@@ -46,9 +46,11 @@ export default async function AboutPage() {
         ]}
       />
 
-      {/* Hero: copy + portrait. Keeps the .page-hero class so the speakable selector and shared styles still apply. */}
+      {/* Hero: navy band, portrait on the left with a candid second photo, copy on the right.
+          Deliberately unlike the home hero (pale split, arched portrait on the right). Keeps .page-hero
+          so the speakable selector (.page-hero .lead) and breadcrumb styles still apply. */}
       <section className="page-hero about-hero">
-        <div className="container about-hero-grid">
+        <div className="container">
           <nav className="breadcrumb" aria-label="Breadcrumb">
             <ol>
               <li>
@@ -57,41 +59,44 @@ export default async function AboutPage() {
               <li aria-current="page">DR VYBHAV DERAJE</li>
             </ol>
           </nav>
-          <div className="about-hero-copy">
-            <p className="eyebrow">
-              {DOCTOR.honorificSuffix} · {DOCTOR.fellowship}
-            </p>
-            <h1>Dr Vybhav Deraje</h1>
-            <p className="lead">Consultant Craniofacial &amp; Plastic Surgeon, Bangalore. Founder of The Head Shape Clinic and Aesthetica Veda.</p>
-            <ul className="fact-chips" aria-label="At a glance">
-              <li>
-                <BadgeCheck size={16} aria-hidden="true" /> KMC Reg. No. {DOCTOR.kmcRegistration} · registered since 2008
-              </li>
-              <li>
-                <Award size={16} aria-hidden="true" /> Craniofacial fellowship, ACFU Adelaide
-              </li>
-              <li>
-                <Stethoscope size={16} aria-hidden="true" /> Consultant in Bangalore since 2019
-              </li>
-            </ul>
-            <div className="actions">
-              <Link className="button" href={ROUTES.contact}>
-                Book an appointment <ArrowUpRight size={18} aria-hidden="true" />
-              </Link>
-              <Link className="text-link" href={ROUTES.locations}>
-                Where he consults <ArrowRight size={16} aria-hidden="true" />
-              </Link>
+          <div className="about-hero-grid">
+            <div className="about-portrait">
+              <div className="portrait-main">
+                <Image className="portrait-img" src={DOCTOR_PHOTO} alt="Dr Vybhav Deraje, craniofacial and plastic surgeon, in blue surgical scrubs" width={466} height={588} priority sizes="(max-width: 580px) 90vw, (max-width: 1080px) 40vw, 420px" />
+              </div>
+              <figure className="portrait-candid">
+                <Image src={ABOUT_GALLERY[0]!.src} alt="" width={370} height={260} sizes="220px" />
+                <figcaption>Craniofacial Fellowship, Australian Craniofacial Unit, Adelaide</figcaption>
+              </figure>
             </div>
-          </div>
-          <div className="about-portrait">
-            <div className="image-frame">
-              <Image className="doctor-hero" src={DOCTOR_PHOTO} alt="Dr Vybhav Deraje, craniofacial and plastic surgeon, in blue surgical scrubs" width={466} height={588} priority sizes="(max-width: 580px) 90vw, (max-width: 1080px) 40vw, 420px" />
-            </div>
-            <div className="portrait-label">
-              <span className="label-line" aria-hidden="true" />
-              <div>
-                <strong>{SITE.name}</strong>
-                <span>Craniofacial &amp; Plastic Surgeon</span>
+            <div className="about-hero-copy">
+              <p className="eyebrow">Meet the doctor</p>
+              <h1>Dr Vybhav Deraje</h1>
+              <p className="credentials">
+                {DOCTOR.honorificSuffix} · {DOCTOR.fellowship}
+              </p>
+              <p className="lead">Consultant Craniofacial &amp; Plastic Surgeon, Bangalore. Founder of The Head Shape Clinic and Aesthetica Veda.</p>
+              <ul className="fact-chips" aria-label="At a glance">
+                <li>
+                  <BadgeCheck size={16} aria-hidden="true" /> KMC Reg. No. {DOCTOR.kmcRegistration} · registered since 2008
+                </li>
+                <li>
+                  <Award size={16} aria-hidden="true" /> Craniofacial fellowship, ACFU Adelaide
+                </li>
+                <li>
+                  <Stethoscope size={16} aria-hidden="true" /> Consultant in Bangalore since 2019
+                </li>
+              </ul>
+              <blockquote className="hero-quote">
+                <p>{DOCTOR.values}</p>
+              </blockquote>
+              <div className="actions">
+                <Link className="button light" href={ROUTES.contact}>
+                  Book an appointment <ArrowUpRight size={18} aria-hidden="true" />
+                </Link>
+                <Link className="text-link on-dark" href={ROUTES.locations}>
+                  Where he consults <ArrowRight size={16} aria-hidden="true" />
+                </Link>
               </div>
             </div>
           </div>
