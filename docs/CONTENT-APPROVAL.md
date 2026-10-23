@@ -55,7 +55,7 @@ Two new pages under "Also treated" — `/helmet-therapy-flat-head-bangalore` and
 - Partner names (Orthomerica, KARE Orthotics & Prosthetics, MediTEC Devices, Becon Medical / Dr H. Steven Byrd) and the EarWell 93–95% figure are quoted from theheadshapeclinic.com; confirm they may appear here.
 - Both pages route patients to The Head Shape Clinic; neither page is in the 14 featured procedures.
 
-## 15 procedure pages from the patient-information sheets (added 23 Oct 2026) — REVIEW BEFORE LAUNCH
+## 15 procedure pages from the patient-information sheets (added 23 Oct 2026) — APPROVED 23 Oct 2026
 
 One page per sheet that had no page of its own, nested under its parent (source: `lib/sub-procedures.ts`; URLs `/<parent>/<procedure>`). Copy is the doctor's own sheet, edited for plain language only; FAQs restate the sheet. Sheets that already feed a page (craniosynostosis types, the 10 cosmetic pages, jaw surgery, facial injuries, head & neck cancer) did not get a second page.
 
@@ -70,5 +70,4 @@ Points approved by the doctor (23 Oct 2026):
 - Breast reconstruction: phyllodes tumour listed under "other breast tumours", not cancers.
 - Arm lift, thigh lift and breast lift are day-care procedures.
 
-Still open:
-- Every page carries the "written and medically reviewed by Dr Vybhav Deraje" byline — it is untrue until he has read them.
+Full sign-off: the doctor has read all 15 pages (confirmed by Arun, 23 Oct 2026). Cleared for launch.

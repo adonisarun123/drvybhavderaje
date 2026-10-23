@@ -6,7 +6,7 @@
  * Source: Dr Vybhav Deraje's own sheets in public/images/pdf/, edited for plain language and consistency only.
  * Nothing clinical is added beyond the sheets. The doctor approved (23 Oct 2026) the three flagged points: cleft jaw
  * discharge 3–4 days (sheet typo "34"), phyllodes as a breast tumour not a cancer, and day-care for arm/thigh/breast lift.
- * Full-page sign-off status: see docs/CONTENT-APPROVAL.md.
+ * The doctor read and signed off all 15 pages on 23 Oct 2026 (docs/CONTENT-APPROVAL.md).
  */
 import { servicePath, type ServiceSlug } from "./routes";
 
