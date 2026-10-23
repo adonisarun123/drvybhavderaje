@@ -52,27 +52,27 @@ export default function ProceduresIndexPage() {
     <>
       <JsonLd
         data={[
-          breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "All conditions and procedures", path: ROUTES.procedures }]),
+          breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "All Conditions and Procedures", path: ROUTES.procedures }]),
           medicalWebPageJsonLd({ title: TITLE, description: DESCRIPTION, path: ROUTES.procedures, type: "CollectionPage", mainEntityId: `${absolute(ROUTES.procedures)}#list`, speakable: [".page-hero .lead", ".faq"], relatedPaths: SERVICE_PAGES.map((p) => p.path), aboutIds: [PHYSICIAN_ID()] }),
           itemListJsonLd(az),
           faqJsonLd(HOME_FAQS.slice(0, 4)),
         ]}
       />
-      <PageHero eyebrow="Conditions and procedures" crumb="All conditions and procedures" title="Every condition and procedure, in one place." lead={`${SERVICE_PAGES.length} pages written by ${DOCTOR.name}: what each condition is, who the procedure suits, how it is done in Bangalore, recovery and limitations.`} />
+      <PageHero eyebrow="Conditions and Procedures" crumb="All Conditions and Procedures" title="Every condition and procedure, in one place." lead={`${SERVICE_PAGES.length} pages written by ${DOCTOR.name}: what each condition is, who the procedure suits, how it is done in Bangalore, recovery and limitations.`} />
       <section className="section container content-grid">
         <article className="prose service-prose">
           <Byline />
           <nav className="page-links" aria-label="Sections on this page">
             <a href="#craniofacial">{GROUP_LABEL.craniofacial}</a>
             <a href="#cosmetic">{GROUP_LABEL.cosmetic}</a>
-            <a href="#other">Also treated</a>
-            <a href="#az">A–Z list</a>
+            <a href="#other">Also Treated</a>
+            <a href="#az">A–Z List</a>
           </nav>
           <Group id="craniofacial" label={GROUP_LABEL.craniofacial} href={SECTION.craniofacial} pages={CRANIOFACIAL_SERVICES} intro="Conditions of the skull, face, jaws and ears in children and adults, managed with a multidisciplinary team." />
           <Group id="cosmetic" label={GROUP_LABEL.cosmetic} href={SECTION.cosmetic} pages={COSMETIC_SERVICES} intro="Face, breast and body procedures by a National Board certified plastic surgeon." />
-          <Group id="other" label="Also treated" href={SECTION.other} pages={OTHER_SERVICES} intro="Reconstructive surgery and overview pages for the full range of face, breast, body and hand procedures." />
+          <Group id="other" label="Also Treated" href={SECTION.other} pages={OTHER_SERVICES} intro="Reconstructive surgery and overview pages for the full range of face, breast, body and hand procedures." />
           <section id="az">
-            <h2>A–Z list</h2>
+            <h2>A–Z List</h2>
             <ul>
               {az.map((p) => (
                 <li key={p.slug}>
@@ -88,12 +88,12 @@ export default function ProceduresIndexPage() {
             </p>
             <p>
               <Link href={ROUTES.contact} className="text-link">
-                Book an appointment <ArrowRight size={16} aria-hidden="true" />
+                Book an Appointment <ArrowRight size={16} aria-hidden="true" />
               </Link>
             </p>
           </section>
           <section>
-            <h2>Frequently asked questions</h2>
+            <h2>Frequently Asked Questions</h2>
             <Faq items={faqs} />
           </section>
         </article>

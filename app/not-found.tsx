@@ -20,7 +20,7 @@ export default function NotFound() {
           Back to home
         </Link>{" "}
         <Link className="text-link" href={ROUTES.contact} style={{ marginLeft: 16 }}>
-          Book an appointment
+          Book an Appointment
         </Link>
         <ServiceIndex heading="Looking for a procedure page?" />
       </main>

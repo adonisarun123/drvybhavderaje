@@ -19,12 +19,12 @@ export default function TestimonialsPage() {
     <>
       <JsonLd
         data={[
-          breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Patient stories", path: ROUTES.testimonials }]),
+          breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Patient Stories", path: ROUTES.testimonials }]),
           medicalWebPageJsonLd({ title: TITLE, description: DESCRIPTION, path: ROUTES.testimonials, type: "CollectionPage" }),
           videoJsonLd(VIDEOS),
         ]}
       />
-      <PageHero eyebrow="Our stories" crumb="Patient stories" title="Patients speak." lead="In their own words — experiences shared by patients and families, as published on the practice’s website." />
+      <PageHero eyebrow="Our Stories" crumb="Patient Stories" title="Patients speak." lead="In their own words — experiences shared by patients and families, as published on the practice’s website." />
       <section className="section container">
         <Byline />
         <div className="testimonial-grid">
@@ -40,11 +40,11 @@ export default function TestimonialsPage() {
       <section className="section container" aria-labelledby="video-heading" style={{ paddingTop: 0 }}>
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Video gallery</p>
-            <h2 id="video-heading">Testimonial and information videos</h2>
+            <p className="eyebrow">Video Gallery</p>
+            <h2 id="video-heading">Testimonial and Information Videos</h2>
           </div>
           <a href={SITE.social.youtube} target="_blank" rel="noopener noreferrer" className="text-link">
-            YouTube channel <ArrowUpRight size={18} aria-hidden="true" />
+            YouTube Channel <ArrowUpRight size={18} aria-hidden="true" />
           </a>
         </div>
         <VideoGallery ids={VIDEOS} />

@@ -7,7 +7,7 @@
  *    entity signal for answer engines. Rules keep it from looking spammy: one link per target per
  *    page, at most MAX_PER_BLOCK links in any one paragraph, never the page you are on, never
  *    inside headings.
- * 2. relatedServices() — the "Related care" grid: the editor's picks plus parent, siblings and the
+ * 2. relatedServices() — the "Related Care" grid: the editor's picks plus parent, siblings and the
  *    rest of the group, so every service page reaches every other page of its group within one
  *    click and every hub page reaches its children.
  *
@@ -55,7 +55,7 @@ export const TERM_LINKS: TermLink[] = [
   svc("body-plastic-surgeon-bangalore", "body contouring", "body plastic surgery"),
   // Practice pages
   { href: ROUTES.about, phrases: ["Dr Vybhav Deraje"] },
-  { href: ROUTES.locations, phrases: ["Aesthetica Veda", "Aster Hospital Whitefield", "Aster Hospital, Whitefield", "Sakra World Hospital", "Gleneagles Global Hospital"] },
+  { href: ROUTES.locations, phrases: ["Aesthetica Veda", "Aster Whitefield Hospital", "Aster Hospital Whitefield", "Aster Hospital, Whitefield", "Gifted Hands Hospital", "Aarogya Hastha Hospital", "Medicover Hospital", "Apollo Spectra Hospital"] },
   { href: ROUTES.contact, phrases: ["video consultation", "video consultations", "book an appointment", "enquiry form"] },
   { href: ROUTES.procedures, phrases: ["all procedures", "conditions and procedures", "full range of procedures"] },
   { href: ROUTES.resources, phrases: ["first consultation", "first appointment", "patient information sheet", "patient information sheets"] },
@@ -113,7 +113,7 @@ export function linkTargetFor(label: string): string | undefined {
 }
 
 /**
- * Related pages for the "Related care" grid: editor's picks → parent hub → sibling procedures of the
+ * Related pages for the "Related Care" grid: editor's picks → parent hub → sibling procedures of the
  * same hub → other pages of the same group → the rest. Never the page itself; capped at `max`.
  */
 export function relatedServices(page: ServicePage, max = 6): ServicePage[] {

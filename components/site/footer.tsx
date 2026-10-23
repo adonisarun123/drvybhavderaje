@@ -37,7 +37,7 @@ export function SiteFooter() {
           </div>
         </div>
         <div>
-          <h3>Craniofacial surgery</h3>
+          <h3>Craniofacial Surgery</h3>
           {CRANIOFACIAL_SERVICES.map((s) => (
             <Link key={s.slug} href={s.path}>
               {s.shortTitle}
@@ -45,7 +45,7 @@ export function SiteFooter() {
           ))}
         </div>
         <div>
-          <h3>Cosmetic surgery</h3>
+          <h3>Cosmetic Surgery</h3>
           {COSMETIC_SERVICES.map((s) => (
             <Link key={s.slug} href={s.path}>
               {s.shortTitle}
@@ -53,7 +53,7 @@ export function SiteFooter() {
           ))}
         </div>
         <div>
-          <h3>Also treated</h3>
+          <h3>Also Treated</h3>
           {OTHER_SERVICES.map((s) => (
             <Link key={s.slug} href={s.path}>
               {s.shortTitle}
@@ -61,19 +61,19 @@ export function SiteFooter() {
           ))}
         </div>
         <div>
-          <h3>Here to help</h3>
+          <h3>Here to Help</h3>
           <Link href={ROUTES.about}>Meet Dr Vybhav Deraje</Link>
-          <Link href={ROUTES.procedures}>All conditions and procedures</Link>
-          <Link href={ROUTES.locations}>Practice locations</Link>
+          <Link href={ROUTES.procedures}>All Conditions and Procedures</Link>
+          <Link href={ROUTES.locations}>Practice Locations</Link>
           {PRACTICES.map((p) => (
             <a key={p.slug} href={p.url} target="_blank" rel="noopener noreferrer">
               {p.name} <ArrowUpRight size={14} aria-hidden="true" />
             </a>
           ))}
-          <Link href={ROUTES.testimonials}>Patient stories</Link>
-          <Link href={ROUTES.resources}>Preparing for your visit</Link>
+          <Link href={ROUTES.testimonials}>Patient Stories</Link>
+          <Link href={ROUTES.resources}>Preparing for Your Visit</Link>
           <Link href={ROUTES.contact}>
-            Book an appointment <ArrowRight size={14} aria-hidden="true" />
+            Book an Appointment <ArrowRight size={14} aria-hidden="true" />
           </Link>
         </div>
       </div>
@@ -81,7 +81,7 @@ export function SiteFooter() {
         <span>© {new Date().getFullYear()} {SITE.name}</span>
         <span>Information on this site supports, and does not replace, a medical consultation.</span>
         <span>
-          <Link href={ROUTES.privacy}>Privacy policy</Link> · <Link href={ROUTES.terms}>Terms of use</Link> · <CookieSettingsLink />
+          <Link href={ROUTES.privacy}>Privacy Policy</Link> · <Link href={ROUTES.terms}>Terms of Use</Link> · <CookieSettingsLink />
         </span>
         <span className="footer-credit">
           Website by <a href="https://www.monkmantra.com" target="_blank" rel="noopener noreferrer" title="Monk Mantra — healthcare digital marketing, Bangalore">Monk Mantra</a>

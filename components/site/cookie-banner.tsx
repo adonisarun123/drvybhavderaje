@@ -52,7 +52,7 @@ export function CookieSettingsLink() {
         resetConsent();
       }}
     >
-      Cookie settings
+      Cookie Settings
     </button>
   );
 }

@@ -119,7 +119,7 @@ export function SiteHeader() {
                     ))}
                     <li>
                       <Link className="nav-menu-all" href={item.allHref ?? item.href} onClick={close}>
-                        All {item.label.toLowerCase()} <ArrowUpRight size={14} aria-hidden="true" />
+                        All {item.label} <ArrowUpRight size={14} aria-hidden="true" />
                       </Link>
                     </li>
                   </ul>
@@ -127,7 +127,7 @@ export function SiteHeader() {
               );
             })}
             <Link className="button small" href={ROUTES.contact} data-analytics-cta="header_book" aria-current={isCurrent(ROUTES.contact) ? "page" : undefined} onClick={() => setOpen(false)}>
-              Book an appointment <ArrowUpRight size={16} aria-hidden="true" />
+              Book an Appointment <ArrowUpRight size={16} aria-hidden="true" />
             </Link>
           </nav>
         </div>

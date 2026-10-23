@@ -36,11 +36,11 @@ export const PROCEDURE_PAGES: ServicePage[] = [
   page({
     slug: "ear-reconstruction-surgery-bangalore",
     group: "craniofacial",
-    shortTitle: "Ear reconstruction",
-    title: "Ear reconstruction for microtia and ear loss in Bangalore",
+    shortTitle: "Ear Reconstruction",
+    title: "Ear Reconstruction for Microtia and Ear Loss in Bangalore",
     metaTitle: "Ear Reconstruction in Bangalore — Microtia Surgery | Dr Vybhav Deraje",
     description: "Ear reconstruction in Bangalore by Dr Vybhav Deraje: staged rib-cartilage reconstruction for microtia, options after injury or cancer, and the hearing pathway.",
-    eyebrow: "Craniofacial surgery · Ear reconstruction",
+    eyebrow: "Craniofacial Surgery · Ear Reconstruction",
     lead: "Rebuilding an ear that is small or absent from birth (microtia), or lost through injury or cancer surgery — planned together with the hearing team.",
     cardText: "Staged reconstruction for microtia and for ears lost to injury or cancer surgery.",
     intro: [
@@ -49,7 +49,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     ],
     sections: [
       {
-        heading: "Who ear reconstruction is for",
+        heading: "Who Ear Reconstruction Is For",
         bullets: [
           "Children born with microtia (grade II–III) or anotia, once they are old enough for reconstruction.",
           "Adults with untreated microtia.",
@@ -58,7 +58,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
         ],
       },
       {
-        heading: "How the ear is reconstructed",
+        heading: "How the Ear Is Reconstructed",
         body: [
           "The standard technique uses the patient's own rib cartilage. Cartilage is taken from the chest, carved into a framework that mirrors the other ear, and placed under the skin where the ear should be. In a second stage some months later, the framework is lifted away from the head and a skin graft is used to create the groove behind the ear so it projects like the normal side.",
           "Reconstruction with the patient's own cartilage is usually done from about 8–10 years of age, when the chest is large enough to provide the cartilage and the child can take part in the decision. An alternative using a porous polyethylene implant covered by a tissue flap can be considered in selected cases; the choice depends on age, the other ear, the available skin and the family's preferences, and is discussed in detail at consultation.",
@@ -66,21 +66,21 @@ export const PROCEDURE_PAGES: ServicePage[] = [
         ],
       },
       {
-        heading: "Hearing and the wider team",
+        heading: "Hearing and the Wider Team",
         body: [
           "Children with microtia should have a hearing assessment early in life, and a bone-conduction hearing aid may be recommended long before ear reconstruction is possible. Where the ear canal is closed, the decision about canal surgery is made with the ENT surgeon and is sequenced around the reconstruction so that neither compromises the other.",
           "Dr Vybhav Deraje plans ear reconstruction with the ENT and audiology team, drawing on his craniofacial fellowship training at the Australian Craniofacial Unit, Adelaide.",
         ],
       },
       {
-        heading: "Anaesthesia, hospital stay and recovery",
+        heading: "Anaesthesia, Hospital Stay and Recovery",
         body: [
           "Each stage is done under general anaesthesia with a short hospital stay. The chest wound from cartilage harvest is the most uncomfortable part of the first stage and settles over one to two weeks. A dressing protects the new ear for the first weeks, and contact sports and pressure on the ear are avoided for several months.",
           "The reconstructed ear continues to settle for a year or more. Minor refinements are sometimes offered once it has matured.",
         ],
       },
       {
-        heading: "Limitations to understand",
+        heading: "Limitations to Understand",
         body: [
           "A reconstructed ear is made from cartilage and skin graft and will not be identical to the normal ear; the aim is a natural-looking ear of similar size and position. It does not itself improve hearing. The chest leaves a scar, and there is a small risk of infection, skin breakdown over the framework or cartilage absorption, any of which can need further surgery. These points are discussed openly before any decision is made.",
         ],
@@ -107,10 +107,10 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     group: "cosmetic",
     parent: FACE,
     shortTitle: "Rhinoplasty",
-    title: "Rhinoplasty (nose reshaping surgery) in Bangalore",
+    title: "Rhinoplasty (Nose Reshaping Surgery) in Bangalore",
     metaTitle: "Rhinoplasty in Bangalore — Nose Reshaping Surgery | Dr Vybhav Deraje",
     description: "Rhinoplasty in Bangalore by Dr Vybhav Deraje, plastic & craniofacial surgeon: reshaping the nose, septoplasty for breathing, anaesthesia, splint and recovery explained.",
-    eyebrow: "Cosmetic surgery · Face",
+    eyebrow: "Cosmetic Surgery · Face",
     lead: "Surgery to correct the shape of the nose or refine its appearance — often combined with septoplasty when breathing is also a problem.",
     cardText: "Reshaping the nose, with septoplasty when breathing is affected. One-day admission.",
     intro: [
@@ -119,11 +119,11 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     ],
     sections: [
       {
-        heading: "What rhinoplasty can address",
+        heading: "What Rhinoplasty Can Address",
         bullets: ["A hump or bump on the bridge of the nose", "A bulbous, wide or drooping nasal tip", "A nose that is crooked or deviated, often after an injury", "A nose that is too large or too long for the face", "Nasal blockage from a deviated septum (combined septorhinoplasty)", "Deformity after a previous nose operation (revision rhinoplasty)"],
       },
       {
-        heading: "How the surgery is done",
+        heading: "How the Surgery Is Done",
         body: [
           "Rhinoplasty reshapes the bone and cartilage framework of the nose. Depending on what needs changing, the incisions are placed inside the nostrils (closed approach) or with a small additional incision across the strip of skin between the nostrils (open approach), which heals as a fine line. Cartilage grafts, usually from the septum, are used to support and define the tip where needed.",
           "The operation is done under general anaesthesia with a one-day admission. You may have a nasal pack for one day and a nasal splint on the bridge for about a week.",
@@ -136,7 +136,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
         ],
       },
       {
-        heading: "Risks and limitations",
+        heading: "Risks and Limitations",
         body: [
           "Rhinoplasty is a precise operation on a small structure, and the final shape depends on how your tissues heal. Minor asymmetry can persist, and a small proportion of patients need a touch-up procedure. Bleeding, infection, breathing changes and numbness of the tip are uncommon but discussed before surgery. Realistic expectations — a nose that suits your face rather than a particular 'look' — are the basis of a good result.",
         ],
@@ -161,10 +161,10 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     group: "cosmetic",
     parent: FACE,
     shortTitle: "Blepharoplasty",
-    title: "Blepharoplasty (eyelid surgery) in Bangalore",
+    title: "Blepharoplasty (Eyelid Surgery) in Bangalore",
     metaTitle: "Blepharoplasty in Bangalore — Eyelid Surgery for Eye Bags & Hooded Lids | Dr Vybhav Deraje",
     description: "Blepharoplasty in Bangalore by Dr Vybhav Deraje: upper and lower eyelid surgery for hooded lids and eye bags, done as a day-care procedure under local anaesthesia.",
-    eyebrow: "Cosmetic surgery · Face",
+    eyebrow: "Cosmetic Surgery · Face",
     lead: "A day-care procedure that removes excess skin and fat from the upper and/or lower eyelids to correct hooded lids, puffy eye bags and a tired look.",
     cardText: "Upper and lower eyelid surgery for hooded lids and eye bags. Day-care, local anaesthesia.",
     intro: [
@@ -173,26 +173,26 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     ],
     sections: [
       {
-        heading: "Upper and lower eyelid surgery",
+        heading: "Upper and Lower Eyelid Surgery",
         items: [
-          { title: "Upper blepharoplasty", text: "Excess skin and a small amount of fat are removed through an incision in the natural crease of the upper lid, so the scar sits in the fold and is hidden when the eye is open. It addresses hooded, heavy lids and can improve the upper field of vision when the skin hangs over the lashes." },
-          { title: "Lower blepharoplasty", text: "Bulging fat under the eye is removed or redistributed, and loose skin is tightened. The incision is placed just below the lash line or on the inside of the lid (transconjunctival approach) when only fat needs treating, leaving no external scar." },
+          { title: "Upper Blepharoplasty", text: "Excess skin and a small amount of fat are removed through an incision in the natural crease of the upper lid, so the scar sits in the fold and is hidden when the eye is open. It addresses hooded, heavy lids and can improve the upper field of vision when the skin hangs over the lashes." },
+          { title: "Lower Blepharoplasty", text: "Bulging fat under the eye is removed or redistributed, and loose skin is tightened. The incision is placed just below the lash line or on the inside of the lid (transconjunctival approach) when only fat needs treating, leaving no external scar." },
         ],
       },
       {
-        heading: "Anaesthesia and recovery",
+        heading: "Anaesthesia and Recovery",
         body: [
           "Blepharoplasty is a day-care procedure under local anaesthesia, with light sedation if preferred. Stitches, where used, are removed at about 5–7 days. Expect bruising and swelling for one to two weeks; cold compresses and keeping the head raised help. Most people return to desk work within a week and resume contact lenses and eye make-up after the surgeon's review.",
         ],
       },
       {
-        heading: "Who it suits — and who should wait",
+        heading: "Who It Suits — And Who Should Wait",
         body: [
           "Blepharoplasty suits healthy adults bothered by excess eyelid skin or under-eye bags. Dry eyes, thyroid eye disease, uncontrolled blood pressure or diabetes, and certain blood thinners need assessment first. Dark circles caused by pigmentation rather than bulging fat are not corrected by surgery; fat grafting or non-surgical treatment may be more appropriate, and the consultation is where that distinction is made.",
         ],
       },
       {
-        heading: "Risks and limitations",
+        heading: "Risks and Limitations",
         body: ["Temporary dryness or watering of the eyes, bruising, small asymmetries and, rarely, a lower lid that sits slightly low after surgery are the main risks. Blepharoplasty does not remove crow's feet or lift the brow; those are addressed with Botox or a brow lift if needed."],
       },
     ],
@@ -205,7 +205,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
       COST_FAQ,
     ],
     conditions: ["Dermatochalasis", "Lower eyelid fat prolapse (eye bags)", "Hooded eyelids"],
-    procedures: ["Upper blepharoplasty", "Lower blepharoplasty", "Transconjunctival blepharoplasty"],
+    procedures: ["Upper Blepharoplasty", "Lower Blepharoplasty", "Transconjunctival blepharoplasty"],
     related: ["facelift-surgery-bangalore", "rhinoplasty-surgery-bangalore", "chin-augmentation-surgery-bangalore"],
   }),
 
@@ -215,10 +215,10 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     group: "cosmetic",
     parent: FACE,
     shortTitle: "Otoplasty",
-    title: "Otoplasty (prominent ear correction) in Bangalore",
+    title: "Otoplasty (Prominent Ear Correction) in Bangalore",
     metaTitle: "Otoplasty in Bangalore — Prominent & Bat Ear Correction | Dr Vybhav Deraje",
     description: "Otoplasty in Bangalore by Dr Vybhav Deraje: correction of prominent (bat) ears, Stahl ear and split ear lobes for children and adults as a day-care procedure.",
-    eyebrow: "Cosmetic surgery · Face",
+    eyebrow: "Cosmetic Surgery · Face",
     lead: "Day-care surgery to set back prominent ears and correct ear shape deformities — for children once the ear is fully grown, and for adults at any age.",
     cardText: "Setting back prominent (bat) ears and correcting ear shape. Day-care for children and adults.",
     intro: [
@@ -227,11 +227,11 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     ],
     sections: [
       {
-        heading: "What otoplasty corrects",
+        heading: "What Otoplasty Corrects",
         bullets: ["Prominent or 'bat' ears on one or both sides", "A missing or weak antihelical fold", "A deep conchal bowl pushing the ear outward", "Stahl ear and other cartilage shape deformities", "Split, torn or stretched ear lobes (lobe repair)"],
       },
       {
-        heading: "How the surgery is done",
+        heading: "How the Surgery Is Done",
         body: [
           "Through an incision hidden in the groove behind the ear, the cartilage is scored and shaped with permanent stitches to recreate the fold and, where needed, to set the bowl of the ear back toward the head. The two ears are matched so they sit symmetrically. The scar lies behind the ear and is not visible from the front.",
           "Otoplasty is a day-care procedure. Children are treated under general anaesthesia; adults can usually have the procedure under local anaesthesia with sedation.",
@@ -242,11 +242,11 @@ export const PROCEDURE_PAGES: ServicePage[] = [
         body: ["A padded head bandage protects the ears for a few days, after which a soft headband is worn at night for several weeks to keep the ears in position while they heal. Discomfort is mild and controlled with simple painkillers. Children can return to school within a week; contact sports and swimming are avoided for about six weeks."],
       },
       {
-        heading: "Timing for children",
+        heading: "Timing for Children",
         body: ["The ear reaches almost adult size by about 5–6 years, so otoplasty is commonly offered from that age — before the start of school, when teasing tends to begin — provided the child is also keen on the surgery. There is no upper age limit; adults are treated in the same way."],
       },
       {
-        heading: "Risks and limitations",
+        heading: "Risks and Limitations",
         body: ["Bleeding under the skin, infection, a stitch working its way to the surface, minor asymmetry and, rarely, partial recurrence of the prominence are the main risks. Otoplasty changes the position and fold of the ear; it does not change ear size, and it is a different operation from ear reconstruction for microtia."],
       },
     ],
@@ -268,11 +268,11 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     infoSheet: `${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Chin-Augmentation.pdf`,
     group: "cosmetic",
     parent: FACE,
-    shortTitle: "Chin augmentation",
-    title: "Chin augmentation and genioplasty in Bangalore",
+    shortTitle: "Chin Augmentation",
+    title: "Chin Augmentation and Genioplasty in Bangalore",
     metaTitle: "Chin Augmentation in Bangalore — Chin Implant & Genioplasty | Dr Vybhav Deraje",
     description: "Chin augmentation in Bangalore by Dr Vybhav Deraje: correction of a weak, strong or deviated chin with an implant or by repositioning your own bone (genioplasty).",
-    eyebrow: "Cosmetic surgery · Face",
+    eyebrow: "Cosmetic Surgery · Face",
     lead: "Correcting a weak, over-strong or deviated chin — with an implant or by moving your own bone — to bring the lower face into balance with the nose and lips.",
     cardText: "Correcting a weak or deviated chin with an implant or genioplasty. Day-care.",
     intro: [
@@ -281,22 +281,22 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     ],
     sections: [
       {
-        heading: "Two ways to correct the chin",
+        heading: "Two Ways to Correct the Chin",
         items: [
-          { title: "Chin implant", text: "A shaped silicone or porous polyethylene (Medpor) implant is placed over the bone through a small incision inside the lower lip or under the chin. It adds forward projection and width and suits a chin that is only mildly to moderately weak." },
-          { title: "Sliding genioplasty", text: "The lower edge of the chin bone is cut and moved — forward, back, up, down or sideways — and fixed with small titanium plates. Because it uses your own bone, it can correct deviation and vertical length as well as projection, and there is no implant to shift or wear." },
+          { title: "Chin Implant", text: "A shaped silicone or porous polyethylene (Medpor) implant is placed over the bone through a small incision inside the lower lip or under the chin. It adds forward projection and width and suits a chin that is only mildly to moderately weak." },
+          { title: "Sliding Genioplasty", text: "The lower edge of the chin bone is cut and moved — forward, back, up, down or sideways — and fixed with small titanium plates. Because it uses your own bone, it can correct deviation and vertical length as well as projection, and there is no implant to shift or wear." },
         ],
       },
       {
-        heading: "Anaesthesia and recovery",
+        heading: "Anaesthesia and Recovery",
         body: ["Both procedures are done as day-care surgery under general anaesthesia. Expect swelling and some numbness of the lower lip for a few weeks, a soft diet for the first days after an intra-oral incision, and a return to normal activities within a week. The final contour is visible once swelling settles over 6–8 weeks."],
       },
       {
-        heading: "Combining chin surgery with other procedures",
+        heading: "Combining Chin Surgery with Other Procedures",
         body: ["Chin augmentation is often planned together with rhinoplasty, because the nose and chin are judged against each other in profile, or with liposuction under the chin to define the jawline. When the bite is also affected, correction of the chin forms part of orthognathic (jaw) surgery rather than a stand-alone procedure."],
       },
       {
-        heading: "Risks and limitations",
+        heading: "Risks and Limitations",
         body: ["Infection, temporary or (rarely) lasting numbness of the lower lip, asymmetry and, with implants, movement or bony change under the implant are the main risks. A chin procedure changes the chin only; if the whole lower jaw is retruded, orthognathic surgery is needed to correct both appearance and bite."],
       },
     ],
@@ -309,7 +309,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
       COST_FAQ,
     ],
     conditions: ["Microgenia (weak chin)", "Chin deviation", "Macrogenia (prominent chin)"],
-    procedures: ["Chin implant augmentation", "Sliding genioplasty"],
+    procedures: ["Chin implant augmentation", "Sliding Genioplasty"],
     related: ["rhinoplasty-surgery-bangalore", "corrective-jaw-surgery-bangalore", "liposuction-surgery-bangalore"],
   }),
 
@@ -319,10 +319,10 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     group: "cosmetic",
     parent: FACE,
     shortTitle: "Facelift",
-    title: "Facelift and neck lift in Bangalore",
+    title: "Facelift and Neck Lift in Bangalore",
     metaTitle: "Facelift in Bangalore — Face & Neck Lift Surgery | Dr Vybhav Deraje",
     description: "Facelift and neck lift in Bangalore by Dr Vybhav Deraje: lifting jowls, loose neck skin and deep folds with incisions hidden around the ear. Day-care, general anaesthesia.",
-    eyebrow: "Cosmetic surgery · Face",
+    eyebrow: "Cosmetic Surgery · Face",
     lead: "Reversing the skin and soft-tissue signs of ageing on the lower face and neck — jowls, deep folds and loose neck skin — with incisions placed to hide the eventual scars.",
     cardText: "Lifting jowls, deep folds and loose neck skin; scars hidden around the ear. Day-care.",
     intro: [
@@ -331,11 +331,11 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     ],
     sections: [
       {
-        heading: "What a facelift addresses",
+        heading: "What a Facelift Addresses",
         bullets: ["Jowls and loss of a clean jawline", "Deep nose-to-mouth and marionette folds", "Loose, hanging skin and bands in the neck", "Descended cheeks and a hollow look under the cheekbones", "Early wrinkles and crow's feet, as part of the overall rejuvenation"],
       },
       {
-        heading: "How the surgery is done",
+        heading: "How the Surgery Is Done",
         body: [
           "Incisions start in the hairline at the temple, follow the natural crease in front of the ear, pass behind the ear lobe and end in the hair behind the ear, so the scars sit at the edges of the face. Through these the deeper SMAS layer is tightened and repositioned and the skin is re-draped without tension. For the neck, a small incision under the chin allows the muscle bands to be tightened and excess fat removed.",
           "Facelift and neck lift are done under general anaesthesia as a day-care procedure. Fat grafting to the cheeks and temples is often added to restore lost volume.",
@@ -350,7 +350,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
         body: ["In the early stages of ageing, Botox, fillers, nanofat and skin treatments can be enough. Once tissue has descended, a facelift is the only treatment that lifts it. A mini-lift with shorter scars suits early jowling; a full face and neck lift suits more advanced change. The consultation is about matching the procedure to the degree of ageing and to the recovery time you can afford."],
       },
       {
-        heading: "Risks and limitations",
+        heading: "Risks and Limitations",
         body: ["Bleeding under the skin, infection, delayed healing behind the ear (especially in smokers), temporary weakness of a facial nerve branch, numbness and visible scarring are the recognised risks and are discussed before surgery. A facelift does not stop ageing; it resets the clock, and the face continues to age naturally from the new starting point."],
       },
     ],
@@ -363,7 +363,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
       CONSULT_FAQ,
     ],
     conditions: ["Facial ageing", "Jowls", "Platysmal bands", "Skin laxity of the neck"],
-    procedures: ["Facelift (rhytidectomy)", "Neck lift", "SMAS plication", "Fat grafting"],
+    procedures: ["Facelift (rhytidectomy)", "Neck lift", "SMAS plication", "Fat Grafting"],
     related: ["blepharoplasty-eyelid-surgery-bangalore", "liposuction-surgery-bangalore", "chin-augmentation-surgery-bangalore"],
   }),
 
@@ -375,11 +375,11 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     infoSheet: `${PDF}/Plastic-Surgery-of-Body/Patient-information-sheet-Abdominoplasty.pdf`,
     group: "cosmetic",
     parent: BODY,
-    shortTitle: "Tummy tuck",
-    title: "Tummy tuck (abdominoplasty) in Bangalore",
+    shortTitle: "Tummy Tuck",
+    title: "Tummy Tuck (Abdominoplasty) in Bangalore",
     metaTitle: "Tummy Tuck in Bangalore — Abdominoplasty Surgery | Dr Vybhav Deraje",
     description: "Tummy tuck (abdominoplasty) in Bangalore by Dr Vybhav Deraje: removing loose skin, tightening separated muscles and repairing hernia, with a scar hidden below the underwear line.",
-    eyebrow: "Cosmetic surgery · Body",
+    eyebrow: "Cosmetic Surgery · Body",
     lead: "Removing excess, sagging skin from the abdomen, tightening the muscles that have separated after pregnancy or weight loss, and repairing any hernia at the same time.",
     cardText: "Loose skin removed, abdominal muscles tightened, scar below the underwear line. 3–4 day stay.",
     intro: [
@@ -388,11 +388,11 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     ],
     sections: [
       {
-        heading: "Who a tummy tuck is for",
+        heading: "Who a Tummy Tuck Is For",
         bullets: ["Loose, overhanging abdominal skin after pregnancy or weight loss", "Separated abdominal muscles (diastasis recti) causing a persistent bulge", "Stretch marks on the lower abdomen (those below the navel are removed with the skin)", "An umbilical or incisional hernia that can be repaired at the same time", "A stable weight, no plans for further pregnancy, and a non-smoker (or willing to stop)"],
       },
       {
-        heading: "How the surgery is done",
+        heading: "How the Surgery Is Done",
         body: [
           "Through an incision placed low on the abdomen, below the line of underwear, the skin and fat are lifted off the muscle wall up to the ribs. The separated muscles are stitched back together along their full length, any hernia is repaired, the excess skin is removed and the remaining skin is re-draped; the navel is brought out through a new opening. A mini-abdominoplasty with a shorter scar and no navel repositioning suits patients whose laxity is confined to below the navel.",
           "The operation is done under general anaesthesia with a 3–4 day hospital stay.",
@@ -403,7 +403,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
         body: ["Drains, if used, come out before discharge. A compression garment is worn for about six weeks. Most people return to normal daily activities in about a week and to desk work in two; strenuous exercise and heavy lifting wait for six weeks. The scar is red for some months and fades over a year or more; it sits low enough to be hidden by underwear and most swimwear."],
       },
       {
-        heading: "Risks and limitations",
+        heading: "Risks and Limitations",
         body: ["Wound-healing problems (higher in smokers and diabetics), fluid collection (seroma), infection, numbness of the lower abdomen and the risk of blood clots are the main concerns, and preventive measures are routine. A tummy tuck is not a weight-loss operation and does not remove fat from the flanks or back unless liposuction is added; weight gain or a later pregnancy can stretch the result."],
       },
     ],
@@ -425,11 +425,11 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     infoSheet: `${PDF}/Plastic-surgery-of-Breast/Patient-information-sheet-Breast-augmentation.pdf`,
     group: "cosmetic",
     parent: BREAST,
-    shortTitle: "Breast augmentation",
-    title: "Breast augmentation in Bangalore",
+    shortTitle: "Breast Augmentation",
+    title: "Breast Augmentation in Bangalore",
     metaTitle: "Breast Augmentation in Bangalore — Implants or Fat Transfer | Dr Vybhav Deraje",
     description: "Breast augmentation in Bangalore by Dr Vybhav Deraje: increasing breast size and projection with a silicone implant or your own fat. Day-care, general anaesthesia.",
-    eyebrow: "Cosmetic surgery · Breast",
+    eyebrow: "Cosmetic Surgery · Breast",
     lead: "Increasing the size, volume and projection of the breasts — with a silicone implant or fat from your own body — as a day-care procedure under general anaesthesia.",
     cardText: "Increasing breast size with a silicone implant or your own fat. Day-care.",
     intro: [
@@ -440,20 +440,20 @@ export const PROCEDURE_PAGES: ServicePage[] = [
       {
         heading: "Implant or fat transfer?",
         items: [
-          { title: "Silicone implants", text: "Give a predictable increase of one or more cup sizes in a single operation. Implant size and shape (round or anatomical), placement in front of or behind the chest muscle, and the incision — usually in the fold under the breast — are planned to your measurements. Modern cohesive-gel implants hold their shape and are expected to last many years, though they are not lifetime devices." },
-          { title: "Fat transfer (autologous fat grafting)", text: "Fat is removed by liposuction from the tummy, flanks or thighs, prepared and injected into the breasts. It gives a modest, natural increase with no implant and slims the donor area, but needs enough spare fat, and a proportion of the graft is absorbed, so more than one session may be needed for a larger change." },
+          { title: "Silicone Implants", text: "Give a predictable increase of one or more cup sizes in a single operation. Implant size and shape (round or anatomical), placement in front of or behind the chest muscle, and the incision — usually in the fold under the breast — are planned to your measurements. Modern cohesive-gel implants hold their shape and are expected to last many years, though they are not lifetime devices." },
+          { title: "Fat Transfer (Autologous Fat Grafting)", text: "Fat is removed by liposuction from the tummy, flanks or thighs, prepared and injected into the breasts. It gives a modest, natural increase with no implant and slims the donor area, but needs enough spare fat, and a proportion of the graft is absorbed, so more than one session may be needed for a larger change." },
         ],
       },
       {
-        heading: "Anaesthesia and recovery",
+        heading: "Anaesthesia and Recovery",
         body: ["Breast augmentation is a day-care procedure under general anaesthesia. A supportive bra is worn for about six weeks. Discomfort is greatest in the first few days, especially when the implant sits behind the muscle; most women return to desk work within a week and to exercise at four to six weeks. Implants settle into their final position over about three months."],
       },
       {
-        heading: "Combining with a lift",
+        heading: "Combining with a Lift",
         body: ["When the breasts have dropped as well as deflated, an implant alone can leave the nipple sitting low. A breast lift (mastopexy) can be combined with augmentation to reposition the nipple and remove loose skin; this adds scars around the areola and sometimes vertically beneath it."],
       },
       {
-        heading: "Risks and limitations",
+        heading: "Risks and Limitations",
         body: ["With implants: capsular contracture (firm scar tissue around the implant), rippling, changes in nipple sensation, implant rotation or rupture, and the need for replacement surgery at some point in the future; regular follow-up is advised. With fat transfer: partial absorption, oil cysts and the need for repeat sessions. Mammography remains possible after both; inform the radiographer. Future pregnancy and breastfeeding are usually unaffected."],
       },
     ],
@@ -476,11 +476,11 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     infoSheet: `${PDF}/Plastic-surgery-of-Breast/Patient-information-sheet-Breast-reduction.pdf`,
     group: "cosmetic",
     parent: BREAST,
-    shortTitle: "Breast reduction",
-    title: "Breast reduction surgery in Bangalore",
+    shortTitle: "Breast Reduction",
+    title: "Breast Reduction Surgery in Bangalore",
     metaTitle: "Breast Reduction in Bangalore — Surgery for Large, Heavy Breasts | Dr Vybhav Deraje",
     description: "Breast reduction in Bangalore by Dr Vybhav Deraje: reducing very large breasts to relieve back and neck pain, rashes and dermatitis. Day-care, general anaesthesia.",
-    eyebrow: "Cosmetic surgery · Breast",
+    eyebrow: "Cosmetic Surgery · Breast",
     lead: "Reducing the size and weight of very large breasts to relieve back, neck and shoulder pain, rashes under the breast and the limits they place on exercise and clothing.",
     cardText: "Reducing very large breasts to relieve back pain, rashes and dermatitis. Day-care.",
     intro: [
@@ -489,11 +489,11 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     ],
     sections: [
       {
-        heading: "Who breast reduction is for",
+        heading: "Who Breast Reduction Is For",
         bullets: ["Back, neck or shoulder pain attributable to breast weight", "Recurrent rashes or dermatitis under the breasts", "Bra-strap grooving on the shoulders", "Difficulty exercising or finding clothes because of breast size", "Marked asymmetry, where one breast is reduced to match the other", "A stable weight; family complete if breastfeeding is important to you"],
       },
       {
-        heading: "How the surgery is done",
+        heading: "How the Surgery Is Done",
         body: [
           "The excess tissue is removed and the breast reshaped around a pedicle that carries the nipple and areola to their new position, preserving their blood supply and, in most cases, sensation. The scars run around the areola and vertically down to the fold under the breast; for larger reductions a scar along the fold is added (the 'anchor' pattern). They are placed strategically and fade over time. Liposuction of the side of the chest is often added to blend the contour.",
           "Breast reduction is done under general anaesthesia as a day-care procedure.",
@@ -504,7 +504,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
         body: ["A supportive bra is worn day and night for about six weeks. Pain is moderate for the first few days and relief from back and shoulder strain is often noticed almost immediately. Most women return to desk work in one to two weeks and to exercise at four to six weeks. Scars are red and raised for a few months and continue to fade for a year or more."],
       },
       {
-        heading: "Risks and limitations",
+        heading: "Risks and Limitations",
         body: ["Changes in nipple sensation, wound-healing delay at the junction of the scars, asymmetry, inability to breastfeed and, rarely, loss of part of the nipple are the recognised risks and are discussed before surgery. The breasts remain subject to the effects of weight change, pregnancy and ageing."],
       },
     ],
@@ -526,11 +526,11 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     infoSheet: `${PDF}/Plastic-surgery-of-Breast/Patient-information-sheet-Gynaecomastia-correction.pdf`,
     group: "cosmetic",
     parent: BREAST,
-    shortTitle: "Gynaecomastia surgery",
-    title: "Gynaecomastia (male breast reduction) surgery in Bangalore",
+    shortTitle: "Gynaecomastia Surgery",
+    title: "Gynaecomastia (Male Breast Reduction) Surgery in Bangalore",
     metaTitle: "Gynecomastia Surgery in Bangalore — Male Breast Reduction | Dr Vybhav Deraje",
     description: "Gynecomastia (male breast) surgery in Bangalore by Dr Vybhav Deraje: liposuction and gland excision for a natural masculine chest, usually with no visible scar. Day-care.",
-    eyebrow: "Cosmetic surgery · Chest",
+    eyebrow: "Cosmetic Surgery · Chest",
     lead: "Day-care surgery for enlarged male breasts — liposuction, gland removal or both — aiming for a flat, natural masculine chest, usually with no visible scar.",
     cardText: "Male breast reduction by liposuction and gland excision; usually no visible scar. Day-care.",
     intro: [
@@ -539,7 +539,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     ],
     sections: [
       {
-        heading: "What is removed, and how",
+        heading: "What Is Removed, and How",
         body: [
           "Gynaecomastia is a mix of firm glandular tissue beneath the nipple and softer fat around it; the proportion differs from person to person. Fat is removed with liposuction through tiny incisions at the side of the chest. Gland is removed through a small incision at the edge of the areola, which heals to be almost invisible. Most men need a combination of the two. Where the skin is very loose after major weight loss, skin removal with a longer scar may be needed, and this is discussed beforehand.",
           "The procedure is done as day-care surgery under general anaesthesia.",
@@ -550,11 +550,11 @@ export const PROCEDURE_PAGES: ServicePage[] = [
         body: ["A compression vest is worn for about four to six weeks to help the skin settle flat. Bruising and swelling subside over two to three weeks. Desk work is possible within a few days; upper-body exercise and chest workouts resume at about four weeks. The final contour is visible once swelling has gone, at around three months."],
       },
       {
-        heading: "Timing in adolescence",
+        heading: "Timing in Adolescence",
         body: ["Gynaecomastia that appears in puberty resolves on its own in the majority of boys within a year or two, so surgery is usually deferred until it has clearly persisted and growth is complete, unless it is causing significant distress. A hormonal assessment is arranged when the history or examination suggests a cause."],
       },
       {
-        heading: "Risks and limitations",
+        heading: "Risks and Limitations",
         body: ["Fluid collection, bruising, a slight dip under the nipple if too much gland is removed, asymmetry, changes in nipple sensation and recurrence with weight gain or continued use of a causative drug are the main concerns. Surgery treats the chest; it does not correct an underlying hormonal condition, which is managed separately."],
       },
     ],
@@ -567,7 +567,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
       CONSULT_FAQ,
     ],
     conditions: ["Gynaecomastia", "Pseudogynaecomastia", "Adolescent gynaecomastia"],
-    procedures: ["Gynaecomastia surgery", "Liposuction of the chest", "Subcutaneous mastectomy (gland excision)"],
+    procedures: ["Gynaecomastia Surgery", "Liposuction of the chest", "Subcutaneous mastectomy (gland excision)"],
     related: ["liposuction-surgery-bangalore", "breast-reduction-surgery-bangalore", "tummy-tuck-abdominoplasty-bangalore"],
   }),
 
@@ -580,7 +580,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     title: "Liposuction in Bangalore",
     metaTitle: "Liposuction in Bangalore — Power-Assisted Fat Removal | Dr Vybhav Deraje",
     description: "Liposuction in Bangalore by Dr Vybhav Deraje using the MicroAire power-assisted system: removing stubborn fat from the abdomen, flanks, thighs, arms and chin as a day-care procedure.",
-    eyebrow: "Cosmetic surgery · Body",
+    eyebrow: "Cosmetic Surgery · Body",
     lead: "Day-care removal of stubborn pockets of fat that diet and exercise have not shifted — abdomen, flanks, thighs, arms, back, chin — for a smoother, more defined contour.",
     cardText: "Removing stubborn fat for a smoother contour with power-assisted liposuction. Day-care.",
     intro: [
@@ -589,11 +589,11 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     ],
     sections: [
       {
-        heading: "Areas commonly treated",
+        heading: "Areas Commonly Treated",
         bullets: ["Abdomen and flanks (love handles)", "Inner and outer thighs and knees", "Upper arms", "Back and bra rolls", "Chin and neck (submental liposuction)", "Male chest, as part of gynaecomastia surgery", "Fat harvest for grafting to the face or breast"],
       },
       {
-        heading: "How the procedure is done",
+        heading: "How the Procedure Is Done",
         body: [
           "A dilute local anaesthetic solution is first infiltrated into the fat to reduce bleeding and discomfort. Through incisions a few millimetres long, hidden in skin creases, the power-assisted cannula loosens and removes the fat in a controlled, even pattern. Several areas can be treated in one session; the total volume removed is kept within safe limits.",
           "Liposuction is a day-care procedure under general anaesthesia.",
@@ -608,7 +608,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
         body: ["Liposuction removes fat but relies on the skin to shrink back. Where the skin is already loose — after pregnancy or major weight loss — removing fat alone can leave it looser still. In those cases a tummy tuck, arm lift or thigh lift, with or without liposuction, gives a better result; the consultation is where skin quality is assessed."],
       },
       {
-        heading: "Risks and limitations",
+        heading: "Risks and Limitations",
         body: ["Contour irregularities, lumpiness, prolonged swelling, numbness, fluid collection and infection are the main risks; they are minimised by careful technique and compression. Liposuction permanently removes fat cells from the treated area, but remaining cells can enlarge with weight gain, so a stable weight protects the result."],
       },
     ],
@@ -635,8 +635,8 @@ export const PROCEDURE_PAGES: ServicePage[] = [
   page({
     slug: "helmet-therapy-flat-head-bangalore",
     group: "craniofacial",
-    shortTitle: "Helmet therapy",
-    title: "Helmet therapy for flat head syndrome in Bangalore",
+    shortTitle: "Helmet Therapy",
+    title: "Helmet Therapy for Flat Head Syndrome in Bangalore",
     metaTitle: "Helmet Therapy for Flat Head Syndrome in Bangalore | The Head Shape Clinic · Dr Vybhav Deraje",
     description: "Cranial helmet therapy in Bangalore through The Head Shape Clinic (Dr Vybhav Deraje): for moderate-to-severe positional plagiocephaly and brachycephaly, and after endoscopic craniosynostosis surgery. 3D-scanned, custom-made helmets.",
     eyebrow: "Craniofacial · The Head Shape Clinic",
@@ -648,7 +648,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     ],
     sections: [
       {
-        heading: "Who helmet therapy is for",
+        heading: "Who Helmet Therapy Is For",
         bullets: [
           "Moderate to severe positional (deformational) plagiocephaly — flattening on one side of the back of the head, often with the ear and forehead pushed forward on that side",
           "Moderate to severe positional brachycephaly — symmetrical flattening of the whole back of the head",
@@ -657,14 +657,14 @@ export const PROCEDURE_PAGES: ServicePage[] = [
         note: "Positional flattening is a shape problem, not a brain or developmental problem, and it is not the same as craniosynostosis. Telling the two apart is the first job of the consultation.",
       },
       {
-        heading: "How the helmet is made and fitted",
+        heading: "How the Helmet Is Made and Fitted",
         body: [
           "An orthotist assesses the baby and captures the head shape with a handheld 3D scanner — no plaster casting and nothing uncomfortable for the baby. The scan goes to the manufacturing partner, Orthomerica (USA), which fabricates the helmet to that scan, and American Board certified orthotists at KARE Orthotics & Prosthetics complete the fitting in Bangalore.",
           "As the baby grows, the helmet is adjusted at each orthotist visit; most babies need two or three helmets over the course of treatment.",
         ],
       },
       {
-        heading: "What treatment involves",
+        heading: "What Treatment Involves",
         bullets: [
           "The helmet is worn 23 hours a day; it comes off for bathing and cleaning",
           "Positional plagiocephaly or brachycephaly: typically 3 to 4 months of wear",
@@ -674,11 +674,11 @@ export const PROCEDURE_PAGES: ServicePage[] = [
         ],
       },
       {
-        heading: "Side effects",
+        heading: "Side Effects",
         body: ["Redness, rashes and, occasionally, pressure sores on the scalp are the common side effects; they are managed by adjusting the helmet and keeping it clean and dry. A temporary slowing of head-circumference growth and temporary thinning of hair under the helmet have been reported but are not proven effects."],
       },
       {
-        heading: "Timing matters",
+        heading: "Timing Matters",
         body: ["Helmets work by directing growth, so they are most effective while the skull is growing fastest — in the first year of life. For craniosynostosis, the keyhole operation followed by a helmet is only possible in babies who present before about 6 months of age; after that, open cranial remodelling is the usual operation. If you are worried about your baby's head shape, an early assessment keeps every option open."],
       },
     ],
@@ -699,8 +699,8 @@ export const PROCEDURE_PAGES: ServicePage[] = [
   page({
     slug: "earwell-infant-ear-correction-bangalore",
     group: "craniofacial",
-    shortTitle: "EarWell infant ear moulding",
-    title: "EarWell infant ear correction in Bangalore",
+    shortTitle: "EarWell Infant Ear Moulding",
+    title: "EarWell Infant Ear Correction in Bangalore",
     metaTitle: "EarWell Infant Ear Moulding in Bangalore — Non-Surgical Ear Correction | Dr Vybhav Deraje",
     description: "EarWell non-surgical ear moulding for newborns in Bangalore through The Head Shape Clinic (Dr Vybhav Deraje): corrects prominent, cup, Stahl and folded ears in 4–6 weeks when started within the first 14 days of life.",
     eyebrow: "Craniofacial · The Head Shape Clinic",
@@ -712,16 +712,16 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     ],
     sections: [
       {
-        heading: "Ear deformities EarWell can correct",
+        heading: "Ear Deformities EarWell Can Correct",
         bullets: ["Prominent or 'bat' ears", "Cup ear and cryptotia (an upper ear partly buried under the scalp skin)", "Stahl ear (an extra fold giving a pointed upper ear)", "Folded or lidded ears (the top of the ear folded over)"],
         note: "Most ear deformities arise in the upper third of the ear during fetal development; some are due to position in the womb and others, such as prominent ears, run in families. Missing or very small ears (microtia) are a different problem — see ear reconstruction.",
       },
       {
-        heading: "Why the first 14 days matter",
+        heading: "Why the First 14 Days Matter",
         body: ["Correction rates of 93–95% are reported when EarWell is started within the first 14 days of birth. After that the cartilage stiffens week by week and moulding becomes progressively less effective. If your newborn's ear looks folded, cupped or very prominent, ask for an assessment in the first week rather than waiting to see whether it settles."],
       },
       {
-        heading: "What treatment involves",
+        heading: "What Treatment Involves",
         bullets: [
           "The device is fitted at the clinic; no anaesthesia and no cuts — the baby may cry from the handling but the fitting is not painful",
           "Worn continuously for 4 to 6 weeks; it does not interfere with sleep or feeding",
@@ -730,11 +730,11 @@ export const PROCEDURE_PAGES: ServicePage[] = [
         ],
       },
       {
-        heading: "Side effects",
+        heading: "Side Effects",
         body: ["Mild skin irritation, sweat rash and redness under the device are the usual issues and settle with cleaning and adjustment. There is no scarring."],
       },
       {
-        heading: "If the window has passed",
+        heading: "If the Window Has Passed",
         body: ["Beyond the first few weeks, moulding no longer works and the ear shape is addressed surgically. Prominent ears, Stahl ear and similar shape deformities are corrected by otoplasty as a day-care procedure, usually from 5–6 years of age once the ear is close to adult size."],
       },
     ],
@@ -748,7 +748,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
       { q: "Where is EarWell available in Bangalore?", a: "Through The Head Shape Clinic, Dr Vybhav Deraje's clinic at Docube Clinic, Koramangala, Bangalore." },
     ],
     conditions: ["Prominent ears", "Cup ear", "Cryptotia", "Stahl ear", "Folded ear"],
-    procedures: ["EarWell infant ear moulding", "Non-surgical ear correction"],
+    procedures: ["EarWell Infant Ear Moulding", "Non-surgical ear correction"],
     related: ["otoplasty-ear-correction-bangalore", "ear-reconstruction-surgery-bangalore", "helmet-therapy-flat-head-bangalore"],
   }),
 ];

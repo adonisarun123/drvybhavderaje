@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Image } from "@imagekit/next";
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight, Award, Baby, BadgeCheck, BookOpen, Building2, GraduationCap, Mic, Plane, Sparkles, Stethoscope } from "lucide-react";
-import { Byline, CtaBand, PhotoGallery, ServiceIndex } from "@/components/site/blocks";
+import { AffiliationLogo, Byline, CtaBand, PhotoGallery, ServiceIndex } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { ABOUT_GALLERY, AFFILIATIONS, CREDENTIALS, DOCTOR, HOSPITALS, PRACTICES, PRESENTATIONS, PUBLICATIONS, PUBLICATIONS_OTHER, SITE } from "@/lib/content";
 import { getPublicClinics } from "@/lib/clinics";
@@ -21,14 +21,15 @@ export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESC
 /**
  * Presentation-only labels for the career timeline. Each entry pairs with the same-index paragraph of
  * DOCTOR.bio (lib/content.ts); the paragraphs themselves are the live-site copy and are not edited here.
- * Years and places are the ones stated in those paragraphs — nothing is added.
+ * Years are the ones the doctor supplied on 23 Oct 2026.
  */
 const CAREER: { when: string; where: string; title: string }[] = [
-  { when: "2008 – 2012", where: "Bangalore & Mysore", title: "Medical degree and general surgical residency" },
-  { when: "2015", where: "Delhi", title: "Plastic surgery training, Lok Nayak Hospital & MAMC" },
-  { when: "United Kingdom", where: "East Grinstead", title: "Advanced plastic surgery, Queen Victoria Hospital" },
-  { when: "Australia", where: "Adelaide", title: "Craniofacial Fellow, Australian Craniofacial Unit" },
-  { when: "2019 – present", where: "Bangalore", title: "Consultant Craniofacial & Plastic Surgeon" },
+  { when: "2002 – 2008", where: "Bangalore", title: "Medical Training — MBBS, Kempegowda Institute of Medical Sciences" },
+  { when: "2009 – 2012", where: "Mysore", title: "Surgical Training — MS (General Surgery), Mysore Medical College" },
+  { when: "2013 – 2015", where: "Delhi", title: "Plastic Surgical Training — DNB, Lok Nayak Hospital & MAMC" },
+  { when: "2016 – 2017", where: "East Grinstead, UK", title: "UK Fellowship — Queen Victoria Hospital" },
+  { when: "2018 – 2019", where: "Adelaide, Australia", title: "Australian Fellowship — Australian Craniofacial Unit" },
+  { when: "2019 onwards", where: "Bangalore", title: "Practice — Consultant Craniofacial & Plastic Surgeon" },
 ];
 
 export default async function AboutPage() {
@@ -70,21 +71,21 @@ export default async function AboutPage() {
               </figure>
             </div>
             <div className="about-hero-copy">
-              <p className="eyebrow">Meet the doctor</p>
+              <p className="eyebrow">Meet the Doctor</p>
               <h1>Dr Vybhav Deraje</h1>
               <p className="credentials">
                 {DOCTOR.honorificSuffix} · {DOCTOR.fellowship}
               </p>
               <p className="lead">Consultant Craniofacial &amp; Plastic Surgeon, Bangalore. Founder of The Head Shape Clinic and Aesthetica Veda.</p>
-              <ul className="fact-chips" aria-label="At a glance">
+              <ul className="fact-chips" aria-label="At a Glance">
                 <li>
-                  <BadgeCheck size={16} aria-hidden="true" /> KMC Reg. No. {DOCTOR.kmcRegistration} · registered since 2008
+                  <BadgeCheck size={16} aria-hidden="true" /> KMC Reg. No. {DOCTOR.kmcRegistration} · Registered since 2008
                 </li>
                 <li>
-                  <Award size={16} aria-hidden="true" /> Craniofacial fellowship, ACFU Adelaide
+                  <Award size={16} aria-hidden="true" /> Craniofacial Fellowship, ACFU Adelaide
                 </li>
                 <li>
-                  <Stethoscope size={16} aria-hidden="true" /> Consultant in Bangalore since 2019
+                  <Stethoscope size={16} aria-hidden="true" /> Consultant in Bangalore Since 2019
                 </li>
               </ul>
               <blockquote className="hero-quote">
@@ -92,10 +93,10 @@ export default async function AboutPage() {
               </blockquote>
               <div className="actions">
                 <Link className="button light" href={ROUTES.contact}>
-                  Book an appointment <ArrowUpRight size={18} aria-hidden="true" />
+                  Book an Appointment <ArrowUpRight size={18} aria-hidden="true" />
                 </Link>
                 <Link className="text-link on-dark" href={ROUTES.locations}>
-                  Where he consults <ArrowRight size={16} aria-hidden="true" />
+                  Where He Consults <ArrowRight size={16} aria-hidden="true" />
                 </Link>
               </div>
             </div>
@@ -109,7 +110,7 @@ export default async function AboutPage() {
           <div>
             <GraduationCap aria-hidden="true" />
             <span>
-              National Board certified<small>DNB — Plastic Surgery, 2015</small>
+              National Board Certified<small>DNB — Plastic Surgery, 2015</small>
             </span>
           </div>
           <div>
@@ -121,13 +122,13 @@ export default async function AboutPage() {
           <div>
             <Building2 aria-hidden="true" />
             <span>
-              {HOSPITALS.length} Bangalore hospitals<small>Plus The Head Shape Clinic and Aesthetica Veda</small>
+              {HOSPITALS.length} Bangalore Hospitals<small>Plus The Head Shape Clinic and Aesthetica Veda</small>
             </span>
           </div>
           <div>
             <BookOpen aria-hidden="true" />
             <span>
-              {PUBLICATIONS.length} peer-reviewed papers<small>Craniofacial and plastic surgery</small>
+              {PUBLICATIONS.length} Peer-Reviewed Papers<small>Craniofacial and plastic surgery</small>
             </span>
           </div>
         </div>
@@ -137,7 +138,7 @@ export default async function AboutPage() {
         <article className="prose">
           <Byline />
 
-          <h2 id="training">Training and career</h2>
+          <h2 id="training">Training and Career</h2>
           <ol className="timeline">
             {bio.map((p, i) => {
               const step = CAREER[i];
@@ -157,11 +158,11 @@ export default async function AboutPage() {
             })}
           </ol>
 
-          <h2 id="practice">Areas of practice</h2>
+          <h2 id="practice">Areas of Practice</h2>
           <p>
             Dr Vybhav’s work spans two fields: craniofacial surgery for conditions of the skull, face, jaws and ears in children and adults, and cosmetic surgery of the face, breast and body. Each condition and procedure has its own page explaining who it suits, how it is done and what recovery involves.
           </p>
-          <ServiceIndex heading="Conditions and procedures treated" />
+          <ServiceIndex heading="Conditions and Procedures Treated" />
 
           <h2 id="qualifications">Qualifications</h2>
           <ul className="qual-grid">
@@ -174,12 +175,12 @@ export default async function AboutPage() {
             ))}
           </ul>
 
-          <h2 id="affiliations">Affiliations and memberships</h2>
+          <h2 id="affiliations">Affiliations and Memberships</h2>
           <ul className="affiliation-cards" aria-label="Memberships and registrations">
             {AFFILIATIONS.map((a) => (
               <li key={a.org}>
                 <a href={a.url} target="_blank" rel="noopener noreferrer">
-                  <Image src={a.logo} alt="" width={154} height={155} sizes="64px" />
+                  <AffiliationLogo a={a} alt="" sizes="64px" />
                   <span>
                     <b>{a.org}</b>
                     <small>{a.detail}</small>
@@ -206,13 +207,19 @@ export default async function AboutPage() {
             ))}
           </ul>
 
-          <h2 id="hospitals">Hospital affiliations</h2>
+          <h2 id="hospitals">Hospital Affiliations</h2>
           <p>Dr Vybhav consults at The Head Shape Clinic and Aesthetica Veda, and operates at the following hospitals in Bangalore:</p>
           <ul className="hospital-tiles">
             {HOSPITALS.map((h) => (
               <li key={h.name}>
                 <Link href={ROUTES.locations}>
-                  <Image src={h.image} alt="" width={370} height={260} sizes="(max-width: 580px) 90vw, 240px" />
+                  {h.image ? (
+                    <Image src={h.image} alt="" width={370} height={260} sizes="(max-width: 580px) 90vw, 240px" />
+                  ) : (
+                    <span className="hospital-noimg" aria-hidden="true">
+                      <Building2 size={34} />
+                    </span>
+                  )}
                   <span>{h.name}</span>
                 </Link>
               </li>
@@ -220,7 +227,7 @@ export default async function AboutPage() {
           </ul>
           <p>
             <Link className="text-link" href={ROUTES.locations}>
-              Addresses and phone numbers <ArrowRight size={16} aria-hidden="true" />
+              Addresses and Phone Numbers <ArrowRight size={16} aria-hidden="true" />
             </Link>
           </p>
 
@@ -257,10 +264,10 @@ export default async function AboutPage() {
         </article>
 
         <aside className="about-side">
-          <nav className="side-card toc" aria-label="On this page">
-            <p className="eyebrow">On this page</p>
-            <a href="#training">Training and career</a>
-            <a href="#practice">Areas of practice</a>
+          <nav className="side-card toc" aria-label="On This Page">
+            <p className="eyebrow">On This Page</p>
+            <a href="#training">Training and Career</a>
+            <a href="#practice">Areas of Practice</a>
             <a href="#qualifications">Qualifications</a>
             <a href="#affiliations">Affiliations</a>
             <a href="#practices">Practices</a>
@@ -273,7 +280,7 @@ export default async function AboutPage() {
             <h3>Care begins with listening.</h3>
             <p>Bring your questions, your concerns and your expectations. The consultation is your space to understand your options.</p>
             <Link className="button" href={ROUTES.contact}>
-              Book an appointment <ArrowUpRight size={18} aria-hidden="true" />
+              Book an Appointment <ArrowUpRight size={18} aria-hidden="true" />
             </Link>
           </div>
         </aside>
@@ -283,7 +290,7 @@ export default async function AboutPage() {
       <section className="section container about-gallery" id="gallery" aria-labelledby="gallery-heading">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Teachers, colleagues and conferences</p>
+            <p className="eyebrow">Teachers, Colleagues and Conferences</p>
             <h2 id="gallery-heading">Gallery</h2>
           </div>
         </div>

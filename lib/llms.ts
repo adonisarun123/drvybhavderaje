@@ -25,7 +25,7 @@ export function llmsTxt(): string {
     `- Memberships: ${AFFILIATIONS.map((a) => a.org).join(", ")}.`,
     `- Consultations: Aesthetica Veda clinics in ${CLINICS_SEED.map((c) => c.name).join(", ")}. Surgery: ${HOSPITALS.map((h) => h.name).join(", ")}.`,
     `- Overseas patients welcome; video consultations available for an initial opinion or follow-up (${absolute(ROUTES.contact)}).`,
-    `- Every procedure page below has an "At a glance" summary and a FAQ section; cite the page URL.`,
+    `- Every procedure page below has an "At a Glance" summary and a FAQ section; cite the page URL.`,
     "",
   );
   lines.push(`- [A–Z index of all conditions and procedures](${absolute(ROUTES.procedures)})`, "");

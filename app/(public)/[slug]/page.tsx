@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { titleCase } from "@/lib/title-case";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
@@ -66,7 +67,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const page = getService(slug);
   if (!page) notFound();
   const featured = isFeatured(page);
-  const groupLabel = featured ? GROUP_LABEL[page.group] : "Also treated";
+  const groupLabel = featured ? GROUP_LABEL[page.group] : "Also Treated";
   const groupHref = featured ? GROUP_HREF[page.group] : SECTION.other;
   const parent = page.parent ? getService(page.parent) : undefined;
   const children = childServices(page.slug);
@@ -119,14 +120,14 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <section className="section container content-grid">
         <article className="prose service-prose">
           <Byline />
-          <KeyFacts title={`${page.shortTitle} in Bangalore`}>
+          <KeyFacts title={titleCase(`${page.shortTitle} in Bangalore`)}>
             <p>{page.description}</p>
             <ul>
               <li>
                 <b>Surgeon:</b> <Link href={ROUTES.about}>{DOCTOR.name}</Link>, {DOCTOR.honorificSuffix}; {DOCTOR.fellowship}.
               </li>
               <li>
-                <b>Where:</b> consultations at <Link href={ROUTES.locations}>Aesthetica Veda clinics</Link> in Bangalore; surgery at {HOSPITALS.map((h) => h.name.replace(" Hospital", "")).slice(0, 3).join(", ")} and other partner hospitals.
+                <b>Where:</b> consultations at <Link href={ROUTES.locations}>Aesthetica Veda Clinics</Link> in Bangalore; surgery at {HOSPITALS.map((h) => h.name.replace(" Hospital", "")).slice(0, 3).join(", ")} and other partner hospitals.
               </li>
               <li>
                 <b>Practice:</b>{" "}
@@ -147,7 +148,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 {page.group === "craniofacial" ? " — both founded by Dr Vybhav Deraje." : " — Dr Vybhav Deraje's cosmetic clinics in Bangalore."}
               </li>
               <li>
-                <b>Patients from outside Bangalore:</b> <Link href={ROUTES.contact}>video consultations</Link> for an initial opinion; surgery needs an in-person assessment.
+                <b>Patients from Outside Bangalore:</b> <Link href={ROUTES.contact}>video consultations</Link> for an initial opinion; surgery needs an in-person assessment.
               </li>
               <li>
                 <b>Contact:</b> <a href={`tel:${SITE.phoneTel}`}>{SITE.phone}</a> · <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
@@ -162,7 +163,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           {page.infoSheet && <InfoSheet href={page.infoSheet} />}
           {children.length > 0 && (
             <section>
-              <h2>Procedure pages</h2>
+              <h2>Procedure Pages</h2>
               <p>Each of these procedures has its own page with candidacy, technique, recovery and limitations explained in full.</p>
               <ul className="child-list">
                 {children.map((c) => (
@@ -205,18 +206,18 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 About {DOCTOR.name} <ArrowRight size={14} aria-hidden="true" />
               </Link>
               <Link href={ROUTES.locations}>
-                Clinics and hospitals <ArrowRight size={14} aria-hidden="true" />
+                Clinics and Hospitals <ArrowRight size={14} aria-hidden="true" />
               </Link>
               <Link href={ROUTES.resources}>
-                Preparing for your consultation <ArrowRight size={14} aria-hidden="true" />
+                Preparing for Your Consultation <ArrowRight size={14} aria-hidden="true" />
               </Link>
               <Link href={ROUTES.testimonials}>
-                Patient stories <ArrowRight size={14} aria-hidden="true" />
+                Patient Stories <ArrowRight size={14} aria-hidden="true" />
               </Link>
             </nav>
           </section>
           <section>
-            <h2>Frequently asked questions</h2>
+            <h2>Frequently Asked Questions</h2>
             <Faq items={faqs} />
           </section>
           <p className="note">This page is general information written by {DOCTOR.name} for patients and families. It does not replace an individual consultation; treatment plans depend on clinical assessment.</p>

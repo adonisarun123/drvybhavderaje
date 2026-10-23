@@ -20,7 +20,7 @@
  *   outbound_click     any link leaving the site (practice sites, hospitals, social, Monk Mantra)
  *   cta_click          links marked data-analytics-cta="…" (Book an appointment buttons)
  *   video_play         a YouTube embed was started — video_id, video_index
- *   consent_update     visitor used "Cookie settings" (only reaches GA while consent is granted)
+ *   consent_update     visitor used "Cookie Settings" (only reaches GA while consent is granted)
  *   thank_you_view     the /thank-you page rendered for a fresh enquiry (deduplicated per reference)
  */
 export type AnalyticsEventName =

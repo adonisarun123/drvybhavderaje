@@ -42,7 +42,7 @@ export default async function HomePage() {
         <div className="container hero-grid">
           <div className="hero-copy">
             <p className="eyebrow">
-              <span className="blue-line" aria-hidden="true" /> Craniofacial &amp; plastic surgeon, Bangalore
+              <span className="blue-line" aria-hidden="true" /> Craniofacial &amp; Plastic Surgeon, Bangalore
             </p>
             <h1>
               Reconstructing faces.
@@ -52,7 +52,7 @@ export default async function HomePage() {
             <p className="hero-description">{heroCopy}</p>
             <div className="actions">
               <Link className="button" href={ROUTES.contact} data-analytics-cta="home_hero_book">
-                Book an appointment <ArrowUpRight size={18} aria-hidden="true" />
+                Book an Appointment <ArrowUpRight size={18} aria-hidden="true" />
               </Link>
               <Link className="text-link" href={ROUTES.about}>
                 Meet Dr Vybhav <ArrowRight size={17} aria-hidden="true" />
@@ -95,7 +95,7 @@ export default async function HomePage() {
           <div>
             <Building2 size={24} aria-hidden="true" />
             <span>
-              Operates at {HOSPITALS.length} Bangalore hospitals<small>Aster Whitefield · Sakra World · Gleneagles Global · Apollo Spectra · Kauvery · Belenus</small>
+              Operates at {HOSPITALS.length} Bangalore Hospitals<small>{HOSPITALS.map((h) => h.name.replace(/ Hospital$/, "")).join(" · ")}</small>
             </span>
           </div>
           <Link href={ROUTES.locations}>
@@ -111,8 +111,8 @@ export default async function HomePage() {
       <section id="craniofacial" className="section container" aria-labelledby="craniofacial-heading">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Our services</p>
-            <h2 id="craniofacial-heading">Craniofacial surgery</h2>
+            <p className="eyebrow">Our Services</p>
+            <h2 id="craniofacial-heading">Craniofacial Surgery</h2>
           </div>
           <p>
             Conditions of the skull, face, jaws and ears — in children and adults.
@@ -126,8 +126,8 @@ export default async function HomePage() {
       <section id="cosmetic-surgery" className="section container" aria-labelledby="cosmetic-heading" style={{ paddingTop: 0 }}>
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Our services</p>
-            <h2 id="cosmetic-heading">Cosmetic surgery</h2>
+            <p className="eyebrow">Our Services</p>
+            <h2 id="cosmetic-heading">Cosmetic Surgery</h2>
           </div>
           <p>
             Face, breast and body procedures by a board-certified plastic surgeon.
@@ -141,8 +141,8 @@ export default async function HomePage() {
       <section id="also-treated" className="section container" aria-labelledby="also-treated-heading" style={{ paddingTop: 0 }}>
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Also treated</p>
-            <h2 id="also-treated-heading">Reconstructive and other conditions</h2>
+            <p className="eyebrow">Also Treated</p>
+            <h2 id="also-treated-heading">Reconstructive and Other Conditions</h2>
           </div>
           <p>
             Facial injuries, head and neck cancer, facial palsy, vascular anomalies and hand surgery.
@@ -177,7 +177,7 @@ export default async function HomePage() {
             <span className="art-bottom">Craniosynostosis care, centred on your child.</span>
           </div>
           <div className="feature-copy">
-            <p className="eyebrow">Craniosynostosis — endoscopic surgery and helmet therapy</p>
+            <p className="eyebrow">Craniosynostosis — Endoscopic Surgery and Helmet Therapy</p>
             <h2 id="feature-heading">
               When it’s your child,
               <br />
@@ -201,7 +201,7 @@ export default async function HomePage() {
               </li>
             </ul>
             <Link href={servicePath("craniosynostosis-surgery-bangalore")} className="text-link">
-              Read about craniosynostosis care <ArrowRight size={18} aria-hidden="true" />
+              Read About Craniosynostosis Care <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </div>
         </div>
@@ -222,7 +222,7 @@ export default async function HomePage() {
           <p>{DOCTOR.values}</p>
           <AffiliationLogos />
           <Link href={ROUTES.about} className="text-link">
-            Read the full profile, publications and training <ArrowRight size={18} aria-hidden="true" />
+            Read the Full Profile, Publications and Training <ArrowRight size={18} aria-hidden="true" />
           </Link>
         </div>
       </section>
@@ -231,27 +231,27 @@ export default async function HomePage() {
         <div className="container">
           <div className="section-heading">
             <div>
-              <p className="eyebrow">Your visit, made simpler</p>
+              <p className="eyebrow">Your Visit, Made Simpler</p>
               <h2 id="journey-heading">A clear next step. At every step.</h2>
             </div>
             <Link href={ROUTES.resources} className="text-link">
-              Plan your visit <ArrowUpRight size={18} aria-hidden="true" />
+              Plan Your Visit <ArrowUpRight size={18} aria-hidden="true" />
             </Link>
           </div>
           <div className="steps">
             <div>
               <span className="step-number">01</span>
-              <h3>Let’s connect</h3>
+              <h3>Let’s Connect</h3>
               <p>Call, email or send an enquiry. Tell the clinic what you’d like to discuss and choose a convenient clinic.</p>
             </div>
             <div>
               <span className="step-number">02</span>
-              <h3>Let’s understand</h3>
+              <h3>Let’s Understand</h3>
               <p>Bring your reports and questions for an individual consultation with Dr Vybhav.</p>
             </div>
             <div>
               <span className="step-number">03</span>
-              <h3>Let’s plan</h3>
+              <h3>Let’s Plan</h3>
               <p>Discuss your options, expectations, hospital and follow-up before deciding.</p>
             </div>
           </div>
@@ -261,11 +261,11 @@ export default async function HomePage() {
       <section className="section container" aria-labelledby="stories-heading">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Patient stories</p>
-            <h2 id="stories-heading">What patients say</h2>
+            <p className="eyebrow">Patient Stories</p>
+            <h2 id="stories-heading">What Patients Say</h2>
           </div>
           <Link href={ROUTES.testimonials} className="text-link">
-            All testimonials and videos <ArrowUpRight size={18} aria-hidden="true" />
+            All Testimonials and Videos <ArrowUpRight size={18} aria-hidden="true" />
           </Link>
         </div>
         <div className="testimonial-grid">
@@ -278,11 +278,11 @@ export default async function HomePage() {
       <section className="section container" aria-labelledby="video-heading" style={{ paddingTop: 0 }}>
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Video gallery</p>
-            <h2 id="video-heading">Watch and learn</h2>
+            <p className="eyebrow">Video Gallery</p>
+            <h2 id="video-heading">Watch and Learn</h2>
           </div>
           <a href={SITE.social.youtube} target="_blank" rel="noopener noreferrer" className="text-link">
-            YouTube channel <ArrowUpRight size={18} aria-hidden="true" />
+            YouTube Channel <ArrowUpRight size={18} aria-hidden="true" />
           </a>
         </div>
         <VideoGallery ids={VIDEOS.slice(0, 3)} />
@@ -290,7 +290,7 @@ export default async function HomePage() {
 
       <section className="section container faq-section" aria-labelledby="faq-heading">
         <div>
-          <p className="eyebrow">A little more clarity</p>
+          <p className="eyebrow">A Little More Clarity</p>
           <h2 id="faq-heading">
             Questions?
             <br />{" "}

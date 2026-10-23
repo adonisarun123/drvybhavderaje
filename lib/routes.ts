@@ -76,7 +76,7 @@ export function servicePath(slug: ServiceSlug): string {
 /**
  * Display order of the 14 procedures the practice leads with (header, homepage, footer), as
  * specified by the doctor on 22 Oct 2026. Everything else in SERVICE_SLUGS stays live at its clean
- * URL and is listed under "Also treated".
+ * URL and is listed under "Also Treated".
  */
 export const FEATURED_CRANIOFACIAL: readonly ServiceSlug[] = [
   "craniosynostosis-surgery-bangalore",

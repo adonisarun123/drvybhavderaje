@@ -1,5 +1,5 @@
 /**
- * Analytics consent, shared by the cookie banner, the footer "Cookie settings" link and the GA loader.
+ * Analytics consent, shared by the cookie banner, the footer "Cookie Settings" link and the GA loader.
  *
  * The choice is stored in a first-party cookie (so it survives across tabs and is readable without
  * JavaScript frameworks) and mirrored in localStorage as a fallback. Nothing from Google is loaded
@@ -52,7 +52,7 @@ export function writeConsent(choice: ConsentChoice): void {
   window.dispatchEvent(new CustomEvent(CONSENT_EVENT, { detail: choice }));
 }
 
-/** Clears the stored choice so the banner shows again (used by "Cookie settings"). */
+/** Clears the stored choice so the banner shows again (used by "Cookie Settings"). */
 export function resetConsent(): void {
   document.cookie = `${CONSENT_COOKIE}=; Max-Age=0; Path=/; SameSite=Lax`;
   try {

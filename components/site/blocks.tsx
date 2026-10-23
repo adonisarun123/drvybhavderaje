@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Image } from "@imagekit/next";
+import NextImage from "next/image";
 import { ArrowRight, ArrowUpRight, Baby, BadgeCheck, Check, Droplets, Ear, Eye, Hand, Heart, HeartHandshake, PersonStanding, Phone, Quote, Ribbon, ScanFace, Shirt, Smile, Sparkles, Stethoscope, Waves } from "lucide-react";
 import { AFFILIATIONS, COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, DOCTOR, GROUP_LABEL, OTHER_SERVICES, PRACTICES, SITE, type Photo, type ServicePage } from "@/lib/content";
 import { ROUTES, SECTION } from "@/lib/routes";
@@ -18,14 +19,14 @@ export function CtaBand() {
         <HeartHandshake size={48} strokeWidth={1} aria-hidden="true" />
       </div>
       <div>
-        <p className="eyebrow">Let’s take the next step, together</p>
+        <p className="eyebrow">Let’s Take the Next Step, Together</p>
         <h2 id="cta-heading">Your questions are a good place to start.</h2>
         <p>
           Call <a href={`tel:${SITE.phoneTel}`}>{SITE.phone}</a>, email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or send an enquiry.
         </p>
       </div>
       <Link className="button light" href={ROUTES.contact} data-analytics-cta="cta_band_book">
-        Book an appointment <ArrowUpRight size={18} aria-hidden="true" />
+        Book an Appointment <ArrowUpRight size={18} aria-hidden="true" />
       </Link>
     </section>
   );
@@ -34,11 +35,11 @@ export function CtaBand() {
 export function HelpSideCard() {
   return (
     <aside className="side-card" aria-label="Contact the clinic">
-      <p className="eyebrow">Here to help</p>
+      <p className="eyebrow">Here to Help</p>
       <h3>Let’s talk about your care.</h3>
       <p>The clinic can help you choose a location and arrange your consultation with Dr Vybhav Deraje.</p>
       <Link href={ROUTES.contact} className="button" data-analytics-cta="side_card_book">
-        Book an appointment <ArrowUpRight size={18} aria-hidden="true" />
+        Book an Appointment <ArrowUpRight size={18} aria-hidden="true" />
       </Link>
       <br />
       <a className="text-link" href={`tel:${SITE.phoneTel}`}>
@@ -93,8 +94,8 @@ export function Byline() {
 /** Answer-first summary block: the 40–60 words an assistant can quote as the direct answer. */
 export function KeyFacts({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <aside className="key-facts" id="summary" aria-label="At a glance">
-      <p className="eyebrow">At a glance</p>
+    <aside className="key-facts" id="summary" aria-label="At a Glance">
+      <p className="eyebrow">At a Glance</p>
       <h2>{title}</h2>
       {children}
     </aside>
@@ -182,11 +183,11 @@ export function RelatedServices({ services }: { services: ServicePage[] }) {
     <section className="section container" aria-labelledby="related-heading">
       <div className="section-heading">
         <div>
-          <p className="eyebrow">You may also be looking for</p>
-          <h2 id="related-heading">Related care</h2>
+          <p className="eyebrow">You May Also Be Looking For</p>
+          <h2 id="related-heading">Related Care</h2>
         </div>
         <Link href={ROUTES.procedures} className="text-link">
-          All conditions and procedures <ArrowRight size={18} aria-hidden="true" />
+          All Conditions and Procedures <ArrowRight size={18} aria-hidden="true" />
         </Link>
       </div>
       <ServiceGrid services={services} compact columns={services.length % 3 === 0 ? 3 : undefined} />
@@ -195,11 +196,11 @@ export function RelatedServices({ services }: { services: ServicePage[] }) {
 }
 
 /** Every public service page, grouped — used wherever a page should act as a hub (About, Resources, Locations, 404). */
-export function ServiceIndex({ heading = "Conditions and procedures", intro }: { heading?: string; intro?: ReactNode }) {
+export function ServiceIndex({ heading = "Conditions and Procedures", intro }: { heading?: string; intro?: ReactNode }) {
   const groups: { label: string; href: string; pages: ServicePage[] }[] = [
     { label: GROUP_LABEL.craniofacial, href: SECTION.craniofacial, pages: CRANIOFACIAL_SERVICES },
     { label: GROUP_LABEL.cosmetic, href: SECTION.cosmetic, pages: COSMETIC_SERVICES },
-    { label: "Also treated", href: SECTION.other, pages: OTHER_SERVICES },
+    { label: "Also Treated", href: SECTION.other, pages: OTHER_SERVICES },
   ];
   return (
     <section className="service-index" aria-labelledby="service-index-heading">
@@ -207,7 +208,7 @@ export function ServiceIndex({ heading = "Conditions and procedures", intro }: {
       {intro}
       <p>
         <Link href={ROUTES.procedures} className="text-link">
-          Full A–Z index of conditions and procedures <ArrowRight size={16} aria-hidden="true" />
+          Full A–Z Index of Conditions and Procedures <ArrowRight size={16} aria-hidden="true" />
         </Link>
       </p>
       <div className="service-index-grid">
@@ -258,13 +259,22 @@ export function PhotoGallery({ photos, columns = 3 }: { photos: Photo[]; columns
   );
 }
 
+/** Membership logo: local files under /logos/ go through next/image, older ones through ImageKit. */
+export function AffiliationLogo({ a, alt, sizes }: { a: (typeof AFFILIATIONS)[number]; alt: string; sizes: string }) {
+  return a.logo.startsWith("/logos/") ? (
+    <NextImage src={a.logo} alt={alt} width={a.logoWidth} height={a.logoHeight} sizes={sizes} />
+  ) : (
+    <Image src={a.logo} alt={alt} width={a.logoWidth} height={a.logoHeight} sizes={sizes} />
+  );
+}
+
 export function AffiliationLogos() {
   return (
     <ul className="logo-row" aria-label="Memberships and registrations">
       {AFFILIATIONS.map((a) => (
         <li key={a.org}>
           <a href={a.url} target="_blank" rel="noopener noreferrer">
-            <Image src={a.logo} alt={a.org} width={154} height={155} sizes="120px" />
+            <AffiliationLogo a={a} alt={a.org} sizes="120px" />
             <span>{a.org}</span>
           </a>
         </li>
@@ -274,7 +284,7 @@ export function AffiliationLogos() {
 }
 
 /** The two practices Dr Vybhav founded, each linking out to its own website. */
-export function PracticeCards({ heading = "Dr Vybhav's practices", eyebrow = "Two practices, one surgeon", intro, id = "practices" }: { heading?: string; eyebrow?: string; intro?: ReactNode; id?: string }) {
+export function PracticeCards({ heading = "Dr Vybhav's Practices", eyebrow = "Two Practices, One Surgeon", intro, id = "practices" }: { heading?: string; eyebrow?: string; intro?: ReactNode; id?: string }) {
   return (
     <section className="section container" aria-labelledby={`${id}-heading`} id={id}>
       <div className="section-heading">
@@ -300,7 +310,7 @@ export function PracticeCards({ heading = "Dr Vybhav's practices", eyebrow = "Tw
               <span className="visually-hidden">(opens in a new tab)</span>
             </a>
             <Link href={ROUTES.contact}>
-              Book an appointment <ArrowRight size={16} aria-hidden="true" />
+              Book an Appointment <ArrowRight size={16} aria-hidden="true" />
             </Link>
           </article>
         ))}

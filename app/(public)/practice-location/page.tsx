@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Image } from "@imagekit/next";
 import type { Metadata } from "next";
-import { ArrowRight, ArrowUpRight, MapPin, Phone } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Building2, MapPin, Phone } from "lucide-react";
 import { Byline, CtaBand, PageHero, PracticeCards, ServiceIndex } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { getPublicClinics } from "@/lib/clinics";
@@ -13,7 +13,7 @@ import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, physicianJsonLd, 
 export const revalidate = 3600;
 
 const TITLE = "Practice Locations in Bangalore — Clinics & Hospitals";
-const DESCRIPTION = "Consult Dr Vybhav Deraje at Aesthetica Veda clinics in Whitefield, HRBR Layout and Koramangala, or The Head Shape Clinic in Koramangala, Bangalore. Surgeries at Aster, Sakra, Gleneagles, Apollo Spectra and more.";
+const DESCRIPTION = "Consult Dr Vybhav Deraje at Aesthetica Veda clinics in Whitefield, HRBR Layout and Koramangala, or The Head Shape Clinic in Koramangala, Bangalore. Surgery at Aster Whitefield, Gifted Hands, Aarogya Hastha, Medicover and Apollo Spectra.";
 
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: ROUTES.locations });
 
@@ -23,19 +23,19 @@ export default async function LocationsPage() {
     <>
       <JsonLd
         data={[
-          breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Practice locations", path: ROUTES.locations }]),
+          breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Practice Locations", path: ROUTES.locations }]),
           medicalWebPageJsonLd({ title: TITLE, description: DESCRIPTION, path: ROUTES.locations, type: "WebPage" }),
           physicianJsonLd(clinics),
           practiceJsonLd(clinics),
         ]}
       />
-      <PageHero eyebrow="Practice locations" crumb="Practice locations" title="Clinics and hospitals in Bangalore." lead="Consultations at Aesthetica Veda clinics and The Head Shape Clinic; surgeries at partner hospitals across the city. Please confirm availability with the clinic before you travel." />
+      <PageHero eyebrow="Practice Locations" crumb="Practice Locations" title="Clinics and hospitals in Bangalore." lead="Consultations at Aesthetica Veda clinics and The Head Shape Clinic; surgeries at partner hospitals across the city. Please confirm availability with the clinic before you travel." />
       <section className="section container" aria-labelledby="consult-heading">
         <Byline />
         <div className="section-heading">
           <div>
             <p className="eyebrow">Consultations</p>
-            <h2 id="consult-heading">Aesthetica Veda clinics</h2>
+            <h2 id="consult-heading">Aesthetica Veda Clinics</h2>
           </div>
           <p>Founded by Dr Vybhav Deraje. He consults at all three branches.</p>
         </div>
@@ -61,7 +61,7 @@ export default async function LocationsPage() {
                 <span className="visually-hidden">(opens Google Maps in a new tab)</span>
               </a>
               <Link href={`${ROUTES.contact}?clinic=${c.slug}`}>
-                Book an appointment <ArrowRight size={16} aria-hidden="true" />
+                Book an Appointment <ArrowRight size={16} aria-hidden="true" />
               </Link>
             </article>
           ))}
@@ -72,14 +72,20 @@ export default async function LocationsPage() {
         <div className="section-heading">
           <div>
             <p className="eyebrow">Surgeries</p>
-            <h2 id="surgery-heading">Partner hospitals</h2>
+            <h2 id="surgery-heading">Partner Hospitals</h2>
           </div>
           <p>Operations are performed at the hospital best suited to your procedure; the clinic will guide you.</p>
         </div>
         <div className="location-grid hospital-grid">
           {HOSPITALS.map((h) => (
             <article className="location-card has-photo" key={h.name}>
-              <Image className="location-photo" src={h.image} alt={h.name} width={370} height={260} sizes="(max-width: 580px) 90vw, 370px" />
+              {h.image ? (
+                <Image className="location-photo" src={h.image} alt={h.name} width={370} height={260} sizes="(max-width: 580px) 90vw, 370px" />
+              ) : (
+                <span className="location-photo hospital-noimg" aria-hidden="true">
+                  <Building2 size={40} />
+                </span>
+              )}
               <h3>{h.name}</h3>
               <p>{h.address}</p>
               <a href={`tel:${h.phone}`}>
@@ -90,7 +96,7 @@ export default async function LocationsPage() {
           ))}
         </div>
         <p className="note">Appointment timings must be confirmed with the clinic. Hospital phone numbers connect to the hospital’s own front desk.</p>
-        <ServiceIndex heading="What is treated at these locations" intro={<p>Consultations for every condition and procedure take place at the Aesthetica Veda clinics; surgery is scheduled at the partner hospital best suited to it.</p>} />
+        <ServiceIndex heading="What Is Treated at These Locations" intro={<p>Consultations for every condition and procedure take place at the Aesthetica Veda clinics; surgery is scheduled at the partner hospital best suited to it.</p>} />
       </section>
       <CtaBand />
     </>

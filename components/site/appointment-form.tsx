@@ -197,7 +197,7 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
       )}
       <div className="fields">
         <label className="field" htmlFor={`${id}-name`}>
-          Your name *
+          Your Name *
           <input id={`${id}-name`} name="name" autoComplete="name" placeholder="Full name" required minLength={2} maxLength={80} aria-invalid={!!err("name")} aria-describedby={err("name") ? `${id}-name-err` : undefined} disabled={!enabled} />
           {err("name") && (
             <span className="field-error" id={`${id}-name-err`}>
@@ -206,7 +206,7 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
           )}
         </label>
         <label className="field" htmlFor={`${id}-phone-country`}>
-          Country of your phone number *
+          Country of Your Phone Number *
           <select id={`${id}-phone-country`} name="phoneCountry" autoComplete="tel-country-code" value={phoneCountry} onChange={(e) => setPhoneCountry(e.target.value)} disabled={!enabled}>
             {DIAL_CODES.map((d) => (
               <option key={d.iso} value={d.iso}>
@@ -217,7 +217,7 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
           </select>
         </label>
         <label className="field" htmlFor={`${id}-phone`}>
-          Phone number *
+          Phone Number *
           <input id={`${id}-phone`} name="phone" type="tel" autoComplete={phoneCountry === OTHER_COUNTRY ? "tel" : "tel-national"} placeholder={phoneCountry === OTHER_COUNTRY ? "+ country code and number" : phoneCountry === "IN" ? "10-digit mobile number" : "Number without the country code"} required maxLength={20} aria-invalid={!!err("phone")} aria-describedby={err("phone") ? `${id}-phone-err` : `${id}-phone-help`} disabled={!enabled} />
           {err("phone") ? (
             <span className="field-error" id={`${id}-phone-err`}>
@@ -230,7 +230,7 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
           )}
         </label>
         <label className="field full" htmlFor={`${id}-email`}>
-          Email address (optional)
+          Email Address (Optional)
           <input id={`${id}-email`} name="email" type="email" autoComplete="email" placeholder="Optional" maxLength={254} aria-invalid={!!err("email")} aria-describedby={err("email") ? `${id}-email-err` : undefined} disabled={!enabled} />
           {err("email") && (
             <span className="field-error" id={`${id}-email-err`}>
@@ -239,7 +239,7 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
           )}
         </label>
         <label className="field full" htmlFor={`${id}-clinic`}>
-          Preferred clinic, or video consultation *
+          Preferred Clinic, or Video Consultation *
           <select id={`${id}-clinic`} name="clinic" required value={clinic} onChange={(e) => {
               // Availability is per clinic, so a date chosen for one clinic is meaningless for another.
               setClinic(e.target.value);
@@ -320,7 +320,7 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
         </span>
       </label>
       <button className="button" type="submit" disabled={!enabled || status.kind === "sending"}>
-        {status.kind === "sending" ? "Sending…" : "Send consultation request"} <ArrowUpRight size={18} aria-hidden="true" />
+        {status.kind === "sending" ? "Sending…" : "Send Consultation Request"} <ArrowUpRight size={18} aria-hidden="true" />
       </button>
       <p id={`${id}-explain`} className="note">
         Sending a request does not confirm an appointment. The clinic will contact you to confirm availability. For an emergency, seek urgent medical care.

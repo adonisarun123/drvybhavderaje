@@ -33,7 +33,7 @@ export default async function ThankYouPage({ searchParams }: { searchParams: Pro
       <ThankYouTracker reference={reference} clinic={clinic ?? null} duplicate={duplicate} />
       <PageHero
         eyebrow="Thank you"
-        crumb={[{ label: "Contact us", href: ROUTES.contact }, { label: "Thank you" }]}
+        crumb={[{ label: "Contact Us", href: ROUTES.contact }, { label: "Thank you" }]}
         title={reference ? "Your request has been received." : "Thank you for getting in touch."}
         lead={reference ? "The clinic has your details and will contact you to arrange the consultation. Nothing more is needed from you right now." : "If you have just sent an enquiry, the clinic has your details and will be in touch. If you reached this page another way, the contact page is the place to start."}
       />
@@ -83,7 +83,7 @@ export default async function ThankYouPage({ searchParams }: { searchParams: Pro
           <p>
             A little preparation makes the first visit more useful. The <Link href={ROUTES.resources}>patient resources</Link> page covers what to bring, questions worth asking and travelling to Bangalore from another city or country. Each procedure page explains who it suits, what the surgery involves and what recovery looks like:
           </p>
-          <nav className="page-links" aria-label="Procedure pages">
+          <nav className="page-links" aria-label="Procedure Pages">
             {[...CRANIOFACIAL_SERVICES, ...COSMETIC_SERVICES].map((s) => (
               <Link key={s.slug} href={s.path}>
                 {s.shortTitle}
@@ -130,7 +130,7 @@ export default async function ThankYouPage({ searchParams }: { searchParams: Pro
             </Link>
             <br />
             <Link className="text-link" href={ROUTES.testimonials}>
-              Patient stories <ArrowRight size={16} aria-hidden="true" />
+              Patient Stories <ArrowRight size={16} aria-hidden="true" />
             </Link>
           </aside>
         </div>

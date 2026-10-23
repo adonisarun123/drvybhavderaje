@@ -29,11 +29,11 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
   const initialClinic = clinics.some((c) => c.slug === clinic) ? clinic : undefined;
   return (
     <>
-      <JsonLd data={[breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Contact us", path: ROUTES.contact }]), medicalWebPageJsonLd({ title: TITLE, description: DESCRIPTION, path: ROUTES.contact, type: "ContactPage" })]} />
-      <PageHero eyebrow="Contact us" crumb="Contact us" title="Book an appointment." lead="Use the enquiry form, or call or email the clinic, to arrange a consultation with Dr Vybhav Deraje." />
+      <JsonLd data={[breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Contact Us", path: ROUTES.contact }]), medicalWebPageJsonLd({ title: TITLE, description: DESCRIPTION, path: ROUTES.contact, type: "ContactPage" })]} />
+      <PageHero eyebrow="Contact Us" crumb="Contact Us" title="Book an appointment." lead="Use the enquiry form, or call or email the clinic, to arrange a consultation with Dr Vybhav Deraje." />
       <section className="section container content-grid">
         <div className="form-card">
-          <h2>Online enquiry</h2>
+          <h2>Online Enquiry</h2>
           <p>Share your contact details, the reason for your enquiry and your preferred clinic. Please do not include medical reports or detailed health information — bring those to your appointment.</p>
           <AppointmentForm clinics={clinics} enabled={enabled} slotsEnabled={slotsEnabled} dateMin={bounds.min} dateMax={bounds.max} initialClinic={initialClinic} />
         </div>
@@ -70,7 +70,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
             </p>
           </aside>
           <aside className="side-card" aria-label="Clinic addresses" style={{ marginTop: 24 }}>
-            <p className="eyebrow">Consultation clinics</p>
+            <p className="eyebrow">Consultation Clinics</p>
             {clinics.map((c) => (
               <address key={c.slug} className="mini-address">
                 <b>
@@ -81,14 +81,14 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
               </address>
             ))}
             <Link className="text-link" href={ROUTES.locations}>
-              All locations and hospitals <ArrowRight size={16} aria-hidden="true" />
+              All Locations and Hospitals <ArrowRight size={16} aria-hidden="true" />
             </Link>
           </aside>
           <aside className="side-card" aria-label="Not sure which procedure?" style={{ marginTop: 24 }}>
-            <p className="eyebrow">Before you write</p>
+            <p className="eyebrow">Before You Write</p>
             <h3>Read about the procedure first.</h3>
             <p>Each page explains who it suits, what the surgery involves and what recovery looks like, so your enquiry can be specific.</p>
-            <nav className="page-links" aria-label="Procedure pages">
+            <nav className="page-links" aria-label="Procedure Pages">
               {[...CRANIOFACIAL_SERVICES, ...COSMETIC_SERVICES].map((s) => (
                 <Link key={s.slug} href={s.path}>
                   {s.shortTitle}

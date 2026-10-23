@@ -5,7 +5,7 @@ import { Play } from "lucide-react";
 import { track } from "@/lib/analytics";
 
 /** Click-to-load YouTube embeds: a static thumbnail until the viewer presses play, so no third-party scripts load on page view. */
-export function VideoGallery({ ids, title = "Video gallery" }: { ids: string[]; title?: string }) {
+export function VideoGallery({ ids, title = "Video Gallery" }: { ids: string[]; title?: string }) {
   return (
     <div className="video-grid" role="list" aria-label={title}>
       {ids.map((id, i) => (

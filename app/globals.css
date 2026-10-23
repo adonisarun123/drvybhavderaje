@@ -440,10 +440,10 @@ main:focus { outline: none; }
 .photo { margin: 0; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; background: #fff; }
 .photo img { width: 100%; height: auto; display: block; aspect-ratio: 370 / 260; object-fit: cover; }
 .photo figcaption { padding: 12px 14px; font-size: 14px; line-height: 1.5; color: var(--muted); }
-.logo-row { list-style: none; padding: 0; margin: 20px 0 28px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.logo-row { list-style: none; padding: 0; margin: 20px 0 28px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
 .logo-row li a { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; padding: 16px 10px; border: 1px solid var(--line); border-radius: 6px; background: #fff; color: var(--muted); font-size: 13px; line-height: 1.4; text-decoration: none; min-height: 44px; }
 .logo-row li a:hover { border-color: var(--blue); color: var(--navy); }
-.logo-row img { width: 72px; height: 72px; object-fit: contain; }
+.logo-row img { width: 100%; max-width: 120px; height: 72px; object-fit: contain; }
 .location-card.has-photo { padding-top: 0; }
 .location-card .location-photo { width: calc(100% + 60px); max-width: none; height: auto; margin: 0 -30px 18px; display: block; aspect-ratio: 370 / 260; object-fit: cover; border-radius: 6px 6px 0 0; }
 @media (max-width: 900px) { .logo-row { grid-template-columns: 1fr 1fr; } .photo-grid.cols-3, .photo-grid.cols-4 { grid-template-columns: 1fr 1fr; } }
@@ -561,7 +561,7 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
 .prose .affiliation-cards li { margin: 0; }
 .prose .affiliation-cards a { display: flex; align-items: center; gap: 16px; height: 100%; min-height: 44px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--navy); text-decoration: none; }
 .prose .affiliation-cards a:hover { border-color: var(--blue); }
-.affiliation-cards img { width: 60px; height: 60px; object-fit: contain; flex: none; }
+.affiliation-cards img { width: 84px; height: 60px; object-fit: contain; flex: none; }
 .affiliation-cards b { display: block; font-size: 15px; font-weight: 600; line-height: 1.35; }
 .affiliation-cards small { display: block; color: var(--muted); font-size: 13px; line-height: 1.5; margin-top: 4px; }
 
@@ -579,6 +579,9 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
 @media (max-width: 760px) { .practice-tiles { grid-template-columns: 1fr; } }
 .hospital-tiles img { display: block; width: 100%; height: auto; aspect-ratio: 370 / 230; object-fit: cover; }
 .hospital-tiles span { display: block; padding: 12px 14px; font-size: 14px; font-weight: 600; line-height: 1.4; }
+/* Hospitals without a photograph yet: neutral tile in the photo slot. */
+.hospital-noimg { display: flex !important; align-items: center; justify-content: center; aspect-ratio: 370 / 230; padding: 0 !important; background: var(--soft, #eef3f8); color: var(--blue); }
+.location-card .hospital-noimg { aspect-ratio: 370 / 260; border-radius: 6px 6px 0 0; }
 
 .about-grid .pub-list { list-style: none; padding: 0; margin: 0 0 8px; counter-reset: pub; }
 .about-grid .pub-list li { counter-increment: pub; display: grid; grid-template-columns: 30px 1fr; column-gap: 10px; margin: 0; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.65; }

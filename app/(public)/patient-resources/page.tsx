@@ -19,12 +19,12 @@ export default function PatientResourcesPage() {
     <>
       <JsonLd
         data={[
-          breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Patient resources", path: ROUTES.resources }]),
+          breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Patient Resources", path: ROUTES.resources }]),
           medicalWebPageJsonLd({ title: TITLE, description: DESCRIPTION, path: ROUTES.resources }),
           faqJsonLd(HOME_FAQS),
         ]}
       />
-      <PageHero eyebrow="Patient resources" crumb="Patient resources" title="A little preparation. A clearer conversation." lead="Practical information to help you feel ready for your first consultation." />
+      <PageHero eyebrow="Patient Resources" crumb="Patient Resources" title="A little preparation. A clearer conversation." lead="Practical information to help you feel ready for your first consultation." />
       <section className="section container content-grid">
         <article className="prose">
           <Byline />
@@ -38,7 +38,7 @@ export default function PatientResourcesPage() {
           </div>
           {sheets.length > 0 && (
             <>
-              <h2 style={{ marginTop: 40 }}>Patient information sheets</h2>
+              <h2 style={{ marginTop: 40 }}>Patient Information Sheets</h2>
               <p>Written by Dr Vybhav Deraje for patients and families. Download the sheet for your procedure and bring your questions to the consultation.</p>
               <ul className="sheet-list">
                 {sheets.map((s) => (
@@ -49,8 +49,8 @@ export default function PatientResourcesPage() {
               </ul>
             </>
           )}
-          <ServiceIndex heading="Procedure guides" intro={<p>Every condition and procedure Dr Vybhav Deraje treats has its own page: who it suits, how it is done, recovery, limitations and the questions patients ask most.</p>} />
-          <h2 style={{ marginTop: 40 }}>Frequently asked questions</h2>
+          <ServiceIndex heading="Procedure Guides" intro={<p>Every condition and procedure Dr Vybhav Deraje treats has its own page: who it suits, how it is done, recovery, limitations and the questions patients ask most.</p>} />
+          <h2 style={{ marginTop: 40 }}>Frequently Asked Questions</h2>
           <Faq items={faqs} />
         </article>
         <HelpSideCard />
