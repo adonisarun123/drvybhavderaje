@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { HelpSideCard, PageHero } from "@/components/site/blocks";
+import { Byline, HelpSideCard, PageHero } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { SITE } from "@/lib/content";
 import { ROUTES } from "@/lib/routes";
@@ -19,6 +19,7 @@ export default function TermsPage() {
       <PageHero eyebrow="Terms of use" crumb="Terms of use" title="Terms of use and disclaimer." lead="Please read these terms before using this website or acting on any information it contains." />
       <section className="section container content-grid">
         <article className="prose">
+          <Byline />
           <h2>Disclaimer</h2>
           <p>Any information, response or advice provided by ‘{NAME}’ in reply to a query posted or emailed through this website is based solely on the information you provide and is meant for general information only. The term ‘{NAME}’ includes its affiliate and associate companies, directors, officers, employees and consulting doctors.</p>
           <p>The content on this website and any advice given by ‘{NAME}’ is not intended to be, and is not, a substitute for professional medical advice, diagnosis or hands-on treatment. This website does not replace a doctor’s judgement or the care that only a qualified healthcare provider can give after clinical examination and correlation with your reports. You agree to provide full and complete information about your condition, including your medical history, and ‘{NAME}’ is entitled to presume that the information you provide is true and correct.</p>

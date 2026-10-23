@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { HelpSideCard, PageHero } from "@/components/site/blocks";
+import { Byline, HelpSideCard, PageHero } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { SITE } from "@/lib/content";
 import { ROUTES } from "@/lib/routes";
@@ -17,6 +17,7 @@ export default function PrivacyPage() {
       <PageHero eyebrow="Website privacy" crumb="Privacy policy" title="Privacy policy." lead="How this website handles the information you share with the practice." />
       <section className="section container content-grid">
         <article className="prose">
+          <Byline />
           <p>
             {SITE.legalName} (“we”, “us”, “our”) operates the website www.drvybhavderaje.com (the “Service”). This page explains what personal data we collect when you use the Service, how we use it and the choices you have. By using the Service you agree to the collection and use of information in accordance with this policy. Terms used here have the same meaning as in our{" "}
             <a href={ROUTES.terms}>Terms of Use</a>.
