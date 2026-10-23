@@ -3,7 +3,7 @@ import { Image } from "@imagekit/next";
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight, Building2, MapPin, Phone } from "lucide-react";
 import { VideoSection } from "@/components/site/video-section";
-import { Byline, CtaBand, PageHero, PracticeCards, ServiceIndex } from "@/components/site/blocks";
+import { Byline, CtaBand, HospitalPhoto, PageHero, PracticeCards, ServiceIndex } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { getPublicClinics } from "@/lib/clinics";
 import { CLINICS_SEED, HOSPITALS } from "@/lib/content";
@@ -82,7 +82,7 @@ export default async function LocationsPage() {
           {HOSPITALS.map((h) => (
             <article className="location-card has-photo" key={h.name}>
               {h.image ? (
-                <Image className="location-photo" src={h.image} alt={h.name} width={370} height={260} sizes="(max-width: 580px) 90vw, 370px" />
+                <HospitalPhoto className="location-photo" src={h.image} alt={h.name} sizes="(max-width: 580px) 90vw, 370px" />
               ) : (
                 <span className="location-photo hospital-noimg" aria-hidden="true">
                   <Building2 size={40} />

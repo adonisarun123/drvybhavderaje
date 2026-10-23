@@ -106,7 +106,7 @@ export const AFFILIATIONS: { org: string; detail: string; url: string; logo: str
 
 export interface Hospital {
   name: string;
-  /** ImageKit path; omitted when the practice has no photograph yet (a neutral tile is shown instead). */
+  /** ImageKit path, or a local /hospitals/… file in /public (served by next/image); omitted when there is no photograph (a neutral tile is shown instead). */
   image?: string;
   address: string;
   phone: string;
@@ -116,9 +116,9 @@ export interface Hospital {
 /** Hospitals where Dr Deraje operates — list confirmed by the doctor, 23 Oct 2026. */
 export const HOSPITALS: Hospital[] = [
   { name: "Aster Whitefield Hospital", image: "/custom/aster1.webp", address: "Plot No. 2, 3 & 4, Survey No. 76, Sadaramangala Industrial Area, Opp. ITPL Main Road, Kadugodi, Bengaluru, Karnataka 560066", phone: "+918045108888", phoneDisplay: "+91 80 4510 8888" },
-  { name: "Gifted Hands Hospital", address: "No. 5AC-908, Hennur Banasawadi Road Extension, HRBR Layout 1st Block, Bengaluru, Karnataka 560043", phone: "+919187207454", phoneDisplay: "+91 91872 07454" },
-  { name: "Aarogya Hastha Hospital", address: "No. 2816/2, Kasavanahalli Main Road, near 1st Cross Road, opp. HM Symphony, Off Sarjapur Road, Bengaluru, Karnataka 560035", phone: "+918066668800", phoneDisplay: "+91 80 6666 8800" },
-  { name: "Medicover Hospital", address: "351 ITPL Main Road, Hoodi Village, Whitefield, Bengaluru, Karnataka 560048", phone: "+914068334455", phoneDisplay: "+91 40 6833 4455" },
+  { name: "Gifted Hands Hospital", image: "/hospitals/gifted-hands.jpg", address: "No. 5AC-908, Hennur Banasawadi Road Extension, HRBR Layout 1st Block, Bengaluru, Karnataka 560043", phone: "+919187207454", phoneDisplay: "+91 91872 07454" },
+  { name: "Aarogya Hastha Hospital", image: "/hospitals/aarogya-hastha.jpg", address: "No. 2816/2, Kasavanahalli Main Road, near 1st Cross Road, opp. HM Symphony, Off Sarjapur Road, Bengaluru, Karnataka 560035", phone: "+918066668800", phoneDisplay: "+91 80 6666 8800" },
+  { name: "Medicover Hospital", image: "/hospitals/medicover-whitefield.jpg", address: "351 ITPL Main Road, Hoodi Village, Whitefield, Bengaluru, Karnataka 560048", phone: "+914068334455", phoneDisplay: "+91 40 6833 4455" },
   { name: "Apollo Spectra Hospital", image: "/custom/appolo1.webp", address: "143, 1st Cross, Near Nagarjuna Hotel, 5th Block, Koramangala, Bengaluru, Karnataka 560034", phone: "+918448440991", phoneDisplay: "+91 84484 40991" },
 ];
 
@@ -218,6 +218,10 @@ export interface Practice {
   /** One-paragraph description, drafted from the practice's own website (see docs/CONTENT-APPROVAL.md). */
   description: string;
   where: string;
+  /** The practice's own logo, served from /public/logos (intrinsic size; CSS sets the box). */
+  logo: string;
+  logoWidth: number;
+  logoHeight: number;
   /** Service groups this practice is the natural home for (drives the "Practice" line on service pages). */
   groups: ServiceGroup[];
 }
@@ -227,6 +231,9 @@ export const PRACTICES: Practice[] = [
     slug: "head-shape-clinic",
     name: "The Head Shape Clinic",
     url: "https://theheadshapeclinic.com/",
+    logo: "/logos/head-shape-clinic.jpg",
+    logoWidth: 392,
+    logoHeight: 392,
     tagline: "Caring for Little Heads",
     description:
       "Dr Vybhav's dedicated clinic for infant head-shape concerns: flat head syndrome (positional plagiocephaly and brachycephaly) and craniosynostosis. Assessment, helmet therapy and, where surgery is needed, the craniofacial team at Aster Hospital, Whitefield.",
@@ -237,6 +244,9 @@ export const PRACTICES: Practice[] = [
     slug: "aesthetica-veda",
     name: "Aesthetica Veda",
     url: "https://aestheticaveda.com/",
+    logo: "/logos/aesthetica-veda.png",
+    logoWidth: 336,
+    logoHeight: 336,
     tagline: "Minimalistic & Natural",
     description:
       "Dr Vybhav's cosmetic clinics in Bangalore — plastic surgery, skin, hair and dental care under one roof. He consults at all three branches, and most consultations for the procedures on this site take place here.",

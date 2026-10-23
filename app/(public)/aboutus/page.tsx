@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { Image } from "@imagekit/next";
+import NextImage from "next/image";
 import type { Metadata } from "next";
-import { ArrowRight, ArrowUpRight, Award, Baby, BadgeCheck, BookOpen, Building2, GraduationCap, Mic, Plane, Sparkles, Stethoscope } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Award, BadgeCheck, BookOpen, Building2, GraduationCap, Mic, Plane, Stethoscope } from "lucide-react";
 import { VideoSection } from "@/components/site/video-section";
-import { AffiliationLogo, Byline, CtaBand, PhotoGallery, ServiceIndex } from "@/components/site/blocks";
+import { AffiliationLogo, Byline, HospitalPhoto, CtaBand, PhotoGallery, ServiceIndex } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { ABOUT_GALLERY, AFFILIATIONS, CREDENTIALS, DOCTOR, HOSPITALS, PRACTICES, PRESENTATIONS, PUBLICATIONS, PUBLICATIONS_OTHER, SITE } from "@/lib/content";
 import { getPublicClinics } from "@/lib/clinics";
@@ -196,7 +197,7 @@ export default async function AboutPage() {
           <ul className="practice-tiles">
             {PRACTICES.map((p) => (
               <li key={p.slug}>
-                {p.slug === "head-shape-clinic" ? <Baby size={22} aria-hidden="true" /> : <Sparkles size={22} aria-hidden="true" />}
+                <NextImage className="practice-logo" src={p.logo} alt={`${p.name} logo`} width={p.logoWidth} height={p.logoHeight} sizes="72px" />
                 <b>{p.name}</b>
                 <span>{p.description}</span>
                 <small>{p.where}</small>
@@ -215,7 +216,7 @@ export default async function AboutPage() {
               <li key={h.name}>
                 <Link href={ROUTES.locations}>
                   {h.image ? (
-                    <Image src={h.image} alt="" width={370} height={260} sizes="(max-width: 580px) 90vw, 240px" />
+                    <HospitalPhoto src={h.image} alt="" sizes="(max-width: 580px) 90vw, 240px" />
                   ) : (
                     <span className="hospital-noimg" aria-hidden="true">
                       <Building2 size={34} />

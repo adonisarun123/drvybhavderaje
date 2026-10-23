@@ -259,6 +259,15 @@ export function PhotoGallery({ photos, columns = 3 }: { photos: Photo[]; columns
   );
 }
 
+/** Hospital photo: local files under /hospitals/ go through next/image, older ones through ImageKit. */
+export function HospitalPhoto({ src, alt, sizes, className }: { src: string; alt: string; sizes: string; className?: string }) {
+  return src.startsWith("/hospitals/") ? (
+    <NextImage className={className} src={src} alt={alt} width={370} height={260} sizes={sizes} />
+  ) : (
+    <Image className={className} src={src} alt={alt} width={370} height={260} sizes={sizes} />
+  );
+}
+
 /** Membership logo: local files under /logos/ go through next/image, older ones through ImageKit. */
 export function AffiliationLogo({ a, alt, sizes }: { a: (typeof AFFILIATIONS)[number]; alt: string; sizes: string }) {
   return a.logo.startsWith("/logos/") ? (
@@ -297,7 +306,7 @@ export function PracticeCards({ heading = "Dr Vybhav's Practices", eyebrow = "Tw
       <div className="location-grid practice-grid">
         {PRACTICES.map((p) => (
           <article className="location-card" key={p.slug} id={p.slug} aria-labelledby={`practice-${p.slug}`}>
-            {p.slug === "head-shape-clinic" ? <Baby size={28} strokeWidth={1.5} aria-hidden="true" /> : <Sparkles size={28} strokeWidth={1.5} aria-hidden="true" />}
+            <NextImage className="practice-logo" src={p.logo} alt={`${p.name} logo`} width={p.logoWidth} height={p.logoHeight} sizes="88px" />
             <p className="eyebrow">{p.tagline}</p>
             <h3 id={`practice-${p.slug}`}>{p.name}</h3>
             <p>

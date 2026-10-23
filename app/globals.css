@@ -693,3 +693,7 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
   .wordmark strong { font-size: 17px; letter-spacing: -0.4px; }
   .wordmark small { font-size: 8.5px; letter-spacing: 0.9px; }
 }
+
+/* Practice logos (replace the earlier line icons, Oct 2026) */
+.location-card > .practice-logo { display: block; width: 88px; height: 88px; object-fit: contain; border-radius: 8px; margin-bottom: 20px; }
+.prose .practice-tiles .practice-logo { display: block; width: 72px; height: 72px; object-fit: contain; border-radius: 8px; margin: 0 0 4px; }
