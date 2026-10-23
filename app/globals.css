@@ -522,6 +522,72 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
 .fact-strip span { font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--navy); }
 .fact-strip small { display: block; color: var(--muted); font-size: 13px; font-weight: 400; }
 
+.about-side { position: sticky; top: 110px; align-self: start; display: grid; gap: 24px; }
+
+.timeline { list-style: none; padding: 0; margin: 0 0 48px; position: relative; }
+.timeline::before { content: ""; position: absolute; left: 7px; top: 10px; bottom: 10px; width: 2px; background: #d6e3f0; }
+.prose .timeline li { position: relative; margin: 0; padding: 0 0 32px 36px; }
+.prose .timeline li:last-child { padding-bottom: 0; }
+.timeline-marker { position: absolute; left: 0; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: #fff; border: 3px solid var(--blue); }
+.timeline-head { margin-bottom: 10px; }
+.timeline-when { display: inline-block; color: var(--blue); font-size: 13px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
+.timeline-where { color: var(--muted); font-size: 13px; }
+.timeline-where::before { content: "·"; margin: 0 8px; }
+.prose .timeline-head h3 { margin: 4px 0 0; font-size: 20px; letter-spacing: -0.4px; }
+.prose .timeline p { color: var(--muted); font-size: 16px; line-height: 1.75; margin: 0; }
+
+.qual-grid { list-style: none; padding: 0; margin: 24px 0 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.prose .qual-grid li { display: grid; grid-template-columns: 22px 1fr; grid-template-rows: auto auto; align-content: start; column-gap: 14px; margin: 0; padding: 20px 22px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+.qual-grid svg { color: var(--blue); grid-row: 1 / 3; margin-top: 2px; }
+.qual-grid b { font-size: 16px; font-weight: 600; color: var(--navy); line-height: 1.4; }
+.qual-grid span { color: var(--muted); font-size: 14px; line-height: 1.6; margin-top: 4px; }
+
+.affiliation-cards { list-style: none; padding: 0; margin: 24px 0 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.prose .affiliation-cards li { margin: 0; }
+.prose .affiliation-cards a { display: flex; align-items: center; gap: 16px; height: 100%; min-height: 44px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--navy); text-decoration: none; }
+.prose .affiliation-cards a:hover { border-color: var(--blue); }
+.affiliation-cards img { width: 60px; height: 60px; object-fit: contain; flex: none; }
+.affiliation-cards b { display: block; font-size: 15px; font-weight: 600; line-height: 1.35; }
+.affiliation-cards small { display: block; color: var(--muted); font-size: 13px; line-height: 1.5; margin-top: 4px; }
+
+.hospital-tiles { list-style: none; padding: 0; margin: 20px 0 8px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.prose .hospital-tiles li { margin: 0; }
+.prose .hospital-tiles a { display: block; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--navy); text-decoration: none; }
+.prose .hospital-tiles a:hover { border-color: var(--blue); color: var(--blue); }
+.practice-tiles { list-style: none; padding: 0; margin: 20px 0 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.prose .practice-tiles li { margin: 0; border: 1px solid var(--line); border-radius: 8px; background: #fff; padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+.prose .practice-tiles svg { color: var(--blue); }
+.prose .practice-tiles b { font-size: 18px; }
+.prose .practice-tiles span { font-size: 15px; line-height: 1.6; }
+.prose .practice-tiles small { color: var(--muted); font-size: 13px; }
+.prose .practice-tiles a { color: var(--blue); font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 6px; margin-top: auto; text-decoration: none; }
+@media (max-width: 760px) { .practice-tiles { grid-template-columns: 1fr; } }
+.hospital-tiles img { display: block; width: 100%; height: auto; aspect-ratio: 370 / 230; object-fit: cover; }
+.hospital-tiles span { display: block; padding: 12px 14px; font-size: 14px; font-weight: 600; line-height: 1.4; }
+
+.about-grid .pub-list { list-style: none; padding: 0; margin: 0 0 8px; counter-reset: pub; }
+.about-grid .pub-list li { counter-increment: pub; display: grid; grid-template-columns: 30px 1fr; column-gap: 10px; margin: 0; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.65; }
+.about-grid .pub-list li::before { content: counter(pub, decimal-leading-zero); color: var(--blue); font-size: 13px; font-weight: 700; padding-top: 3px; }
+
+.talk-list { list-style: none; padding: 0; margin: 0; }
+.prose .talk-list li { display: flex; align-items: flex-start; gap: 12px; margin: 0; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 15px; line-height: 1.65; }
+.talk-list svg { color: var(--blue); flex: none; margin-top: 3px; }
+
+/* About page: the shared ServiceIndex sits inside .prose — undo the prose link/list styling for it. */
+.prose .service-index { margin: 40px 0 56px; }
+.prose .service-index h2 { font-size: 26px; }
+.prose .service-index a { text-decoration: none; }
+.prose .service-index a:hover { text-decoration: underline; }
+.prose .service-index-grid h3 { margin: 0 0 10px; }
+.prose .service-index-grid ul { padding-left: 0; color: inherit; }
+.prose .service-index-grid li { margin: 0; }
+.prose .service-index > p { margin: 0 0 6px; }
+/* Consistent breathing room between the About page's card grids and the next heading. */
+.practice-tiles { margin-bottom: 48px; }
+.hospital-tiles { margin-bottom: 20px; }
+.prose .hospital-tiles + p { margin-bottom: 48px; }
+.prose .talk-list { margin-bottom: 48px; }
+
 .about-gallery { padding-top: 0; }
 
 @media (max-width: 1080px) {
@@ -550,3 +616,5 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
   .hospital-tiles span { padding: 10px 12px; font-size: 13px; }
   .about-side { position: static; }
 }
+/* The sidebar stacks under the article at phone width, so an 'On this page' list there would point backwards. */
+@media (max-width: 580px) { .about-side .toc { display: none; } }
