@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { Image } from "@imagekit/next";
 import type { Metadata } from "next";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { AffiliationLogos, Byline, CtaBand, PageHero, PhotoGallery, ServiceIndex } from "@/components/site/blocks";
+import { ArrowRight, ArrowUpRight, Award, BadgeCheck, BookOpen, Building2, GraduationCap, Mic, Plane, Stethoscope } from "lucide-react";
+import { Byline, CtaBand, PhotoGallery, ServiceIndex } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
-import { ABOUT_GALLERY, AFFILIATIONS, CREDENTIALS, DOCTOR, HOSPITALS, PRACTICES, PRESENTATIONS, PUBLICATIONS, PUBLICATIONS_OTHER, SITE } from "@/lib/content";
+import { ABOUT_GALLERY, AFFILIATIONS, CREDENTIALS, DOCTOR, HOSPITALS, PRESENTATIONS, PUBLICATIONS, PUBLICATIONS_OTHER, SITE } from "@/lib/content";
 import { getPublicClinics } from "@/lib/clinics";
 import { DOCTOR_PHOTO } from "@/lib/images";
 import { autolink, createLinkBudget } from "@/lib/links";
@@ -14,9 +14,22 @@ import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, PHYSICIAN_ID, phy
 export const revalidate = 3600;
 
 const TITLE = "About Dr Vybhav Deraje — Craniofacial & Plastic Surgeon, Bangalore";
-const DESCRIPTION = "Dr Vybhav Deraje: MBBS, MS, DNB (Plastic Surgery), craniofacial fellowship at the Australian Craniofacial Unit, Adelaide. Founder of The Head Shape Clinic and Aesthetica Veda, Bangalore.";
+const DESCRIPTION = "Dr Vybhav Deraje: MBBS, MS, DNB (Plastic Surgery), craniofacial fellowship at the Australian Craniofacial Unit, Adelaide. Founder of Aesthetica Veda, Bangalore.";
 
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: ROUTES.about, ogType: "profile" });
+
+/**
+ * Presentation-only labels for the career timeline. Each entry pairs with the same-index paragraph of
+ * DOCTOR.bio (lib/content.ts); the paragraphs themselves are the live-site copy and are not edited here.
+ * Years and places are the ones stated in those paragraphs — nothing is added.
+ */
+const CAREER: { when: string; where: string; title: string }[] = [
+  { when: "2008 – 2012", where: "Bangalore & Mysore", title: "Medical degree and general surgical residency" },
+  { when: "2015", where: "Delhi", title: "Plastic surgery training, Lok Nayak Hospital & MAMC" },
+  { when: "United Kingdom", where: "East Grinstead", title: "Advanced plastic surgery, Queen Victoria Hospital" },
+  { when: "Australia", where: "Adelaide", title: "Craniofacial Fellow, Australian Craniofacial Unit" },
+  { when: "2019 – present", where: "Bangalore", title: "Consultant Craniofacial & Plastic Surgeon" },
+];
 
 export default async function AboutPage() {
   const clinics = await getPublicClinics();
@@ -27,19 +40,117 @@ export default async function AboutPage() {
       <JsonLd
         data={[
           breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Dr Vybhav Deraje", path: ROUTES.about }]),
-          medicalWebPageJsonLd({ title: TITLE, description: DESCRIPTION, path: ROUTES.about, type: "AboutPage", speakable: [".page-hero .lead", ".prose > p:first-of-type"], mainEntityId: PHYSICIAN_ID() }),
+          medicalWebPageJsonLd({ title: TITLE, description: DESCRIPTION, path: ROUTES.about, type: "AboutPage", speakable: [".page-hero .lead", ".timeline li:first-child p"], mainEntityId: PHYSICIAN_ID() }),
           physicianJsonLd(clinics),
           ...scholarlyArticlesJsonLd(PUBLICATIONS),
         ]}
       />
-      <PageHero eyebrow={`${DOCTOR.honorificSuffix} · ${DOCTOR.fellowship}`} crumb="Dr Vybhav Deraje" title="Dr Vybhav Deraje" lead="Consultant Craniofacial & Plastic Surgeon, Bangalore. Founder of The Head Shape Clinic and Aesthetica Veda." />
-      <section className="section container content-grid">
+
+      {/* Hero: copy + portrait. Keeps the .page-hero class so the speakable selector and shared styles still apply. */}
+      <section className="page-hero about-hero">
+        <div className="container about-hero-grid">
+          <nav className="breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li>
+                <Link href="/">Home</Link>
+              </li>
+              <li aria-current="page">DR VYBHAV DERAJE</li>
+            </ol>
+          </nav>
+          <div className="about-hero-copy">
+            <p className="eyebrow">
+              {DOCTOR.honorificSuffix} · {DOCTOR.fellowship}
+            </p>
+            <h1>Dr Vybhav Deraje</h1>
+            <p className="lead">Consultant Craniofacial &amp; Plastic Surgeon, Bangalore. Founder &amp; Director, Aesthetica Veda.</p>
+            <ul className="fact-chips" aria-label="At a glance">
+              <li>
+                <BadgeCheck size={16} aria-hidden="true" /> KMC Reg. No. {DOCTOR.kmcRegistration} · registered since 2008
+              </li>
+              <li>
+                <Award size={16} aria-hidden="true" /> Craniofacial fellowship, ACFU Adelaide
+              </li>
+              <li>
+                <Stethoscope size={16} aria-hidden="true" /> Consultant in Bangalore since 2019
+              </li>
+            </ul>
+            <div className="actions">
+              <Link className="button" href={ROUTES.contact}>
+                Book an appointment <ArrowUpRight size={18} aria-hidden="true" />
+              </Link>
+              <Link className="text-link" href={ROUTES.locations}>
+                Where he consults <ArrowRight size={16} aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+          <div className="about-portrait">
+            <div className="image-frame">
+              <Image className="doctor-hero" src={DOCTOR_PHOTO} alt="Dr Vybhav Deraje, craniofacial and plastic surgeon, in blue surgical scrubs" width={466} height={588} priority sizes="(max-width: 580px) 90vw, (max-width: 1080px) 40vw, 420px" />
+            </div>
+            <div className="portrait-label">
+              <span className="label-line" aria-hidden="true" />
+              <div>
+                <strong>{SITE.name}</strong>
+                <span>Craniofacial &amp; Plastic Surgeon</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Four facts, all taken from the content on this page. */}
+      <section className="fact-strip" aria-label="Key facts">
+        <div className="container">
+          <div>
+            <GraduationCap aria-hidden="true" />
+            <span>
+              National Board certified<small>DNB — Plastic Surgery, 2015</small>
+            </span>
+          </div>
+          <div>
+            <Plane aria-hidden="true" />
+            <span>
+              Trained in the UK and Australia<small>East Grinstead · Australian Craniofacial Unit</small>
+            </span>
+          </div>
+          <div>
+            <Building2 aria-hidden="true" />
+            <span>
+              {HOSPITALS.length} Bangalore hospitals<small>Plus Aesthetica Veda clinics</small>
+            </span>
+          </div>
+          <div>
+            <BookOpen aria-hidden="true" />
+            <span>
+              {PUBLICATIONS.length} peer-reviewed papers<small>Craniofacial and plastic surgery</small>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <section className="section container content-grid about-grid">
         <article className="prose">
           <Byline />
-          <h2>Training and career</h2>
-          {bio.map((p, i) => (
-            <p key={i}>{p}</p>
-          ))}
+
+          <h2 id="training">Training and career</h2>
+          <ol className="timeline">
+            {bio.map((p, i) => {
+              const step = CAREER[i];
+              return (
+                <li key={i}>
+                  <div className="timeline-marker" aria-hidden="true" />
+                  {step && (
+                    <div className="timeline-head">
+                      <span className="timeline-when">{step.when}</span>
+                      <span className="timeline-where">{step.where}</span>
+                      <h3>{step.title}</h3>
+                    </div>
+                  )}
+                  <p>{p}</p>
+                </li>
+              );
+            })}
+          </ol>
 
           <h2 id="practice">Areas of practice</h2>
           <p>
@@ -48,46 +159,41 @@ export default async function AboutPage() {
           <ServiceIndex heading="Conditions and procedures treated" />
 
           <h2 id="qualifications">Qualifications</h2>
-          <div className="credential-list">
+          <ul className="qual-grid">
             {CREDENTIALS.map((c) => (
-              <div key={c.title}>
+              <li key={c.title}>
+                <GraduationCap size={22} aria-hidden="true" />
                 <b>{c.title}</b>
                 <span>{c.detail}</span>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
 
           <h2 id="affiliations">Affiliations and memberships</h2>
-          <AffiliationLogos />
-          <div className="credential-list">
+          <ul className="affiliation-cards" aria-label="Memberships and registrations">
             {AFFILIATIONS.map((a) => (
-              <div key={a.org}>
-                <b>{a.org}</b>
-                <span>{a.detail}</span>
-              </div>
-            ))}
-          </div>
-
-          <h2 id="practices">Practices</h2>
-          <p>Dr Vybhav founded and leads two practices in Bangalore:</p>
-          <ul>
-            {PRACTICES.map((p) => (
-              <li key={p.slug}>
-                <b>
-                  <a href={p.url} target="_blank" rel="noopener noreferrer">
-                    {p.name}
-                  </a>
-                </b>{" "}
-                — {p.description} <i>{p.where}.</i>
+              <li key={a.org}>
+                <a href={a.url} target="_blank" rel="noopener noreferrer">
+                  <Image src={a.logo} alt="" width={154} height={155} sizes="64px" />
+                  <span>
+                    <b>{a.org}</b>
+                    <small>{a.detail}</small>
+                  </span>
+                </a>
               </li>
             ))}
           </ul>
 
           <h2 id="hospitals">Hospital affiliations</h2>
-          <p>Dr Vybhav consults at Aesthetica Veda and The Head Shape Clinic, and operates at the following hospitals in Bangalore:</p>
-          <ul>
+          <p>Dr Vybhav consults at Aesthetica Veda clinics and operates at the following hospitals in Bangalore:</p>
+          <ul className="hospital-tiles">
             {HOSPITALS.map((h) => (
-              <li key={h.name}>{h.name}</li>
+              <li key={h.name}>
+                <Link href={ROUTES.locations}>
+                  <Image src={h.image} alt="" width={370} height={260} sizes="(max-width: 580px) 90vw, 240px" />
+                  <span>{h.name}</span>
+                </Link>
+              </li>
             ))}
           </ul>
           <p>
@@ -118,19 +224,20 @@ export default async function AboutPage() {
           </p>
 
           <h2 id="presentations">Presentations</h2>
-          <ul>
+          <ul className="talk-list">
             {PRESENTATIONS.map((p) => (
-              <li key={p.slice(0, 50)}>{p}</li>
+              <li key={p.slice(0, 50)}>
+                <Mic size={18} aria-hidden="true" />
+                <span>{p}</span>
+              </li>
             ))}
           </ul>
-
-          <h2 id="gallery">Gallery</h2>
-          <PhotoGallery photos={ABOUT_GALLERY} columns={2} />
         </article>
-        <div>
-          <Image className="about-image" src={DOCTOR_PHOTO} alt="Dr Vybhav Deraje" width={466} height={588} sizes="(max-width: 580px) 90vw, 400px" />
-          <nav className="side-card toc" aria-label="On this page" style={{ marginTop: 24 }}>
+
+        <aside className="about-side">
+          <nav className="side-card toc" aria-label="On this page">
             <p className="eyebrow">On this page</p>
+            <a href="#training">Training and career</a>
             <a href="#practice">Areas of practice</a>
             <a href="#qualifications">Qualifications</a>
             <a href="#affiliations">Affiliations</a>
@@ -139,15 +246,27 @@ export default async function AboutPage() {
             <a href="#presentations">Presentations</a>
             <a href="#gallery">Gallery</a>
           </nav>
-          <div className="side-card" style={{ marginTop: 24 }}>
+          <div className="side-card">
             <h3>Care begins with listening.</h3>
             <p>Bring your questions, your concerns and your expectations. The consultation is your space to understand your options.</p>
             <Link className="button" href={ROUTES.contact}>
               Book an appointment <ArrowUpRight size={18} aria-hidden="true" />
             </Link>
           </div>
-        </div>
+        </aside>
       </section>
+
+      {/* Gallery runs full width below the article so the photos get room. */}
+      <section className="section container about-gallery" id="gallery" aria-labelledby="gallery-heading">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">Teachers, colleagues and conferences</p>
+            <h2 id="gallery-heading">Gallery</h2>
+          </div>
+        </div>
+        <PhotoGallery photos={ABOUT_GALLERY} columns={4} />
+      </section>
+
       <CtaBand />
     </>
   );
