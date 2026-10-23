@@ -6,6 +6,7 @@ import { JsonLd } from "@/components/site/json-ld";
 import { COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, DOCTOR, GROUP_LABEL, HOME_FAQS, OTHER_SERVICES, SERVICE_PAGES, type ServicePage } from "@/lib/content";
 import { autolink, createLinkBudget } from "@/lib/links";
 import { ROUTES, SECTION } from "@/lib/routes";
+import { CRANIO_PARENT, CRANIO_TYPES, cranioTypePath } from "@/lib/cranio-types";
 import { SUB_PROCEDURES, subProcedurePath } from "@/lib/sub-procedures";
 import { absolute, breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, PHYSICIAN_ID } from "@/lib/seo";
 
@@ -48,10 +49,11 @@ function Group({ id, label, href, pages, intro }: { id: string; label: string; h
 
 export default function ProceduresIndexPage() {
   const az = [...SERVICE_PAGES].sort((a, b) => a.shortTitle.localeCompare(b.shortTitle));
-  // A–Z list also carries the procedure pages built from the patient-information sheets (nested under their parent).
+  // A–Z list also carries the nested pages: craniosynostosis types and the procedure pages built from the patient-information sheets.
   const azAll = [
     ...SERVICE_PAGES.map((p) => ({ key: p.slug, href: p.path, label: p.shortTitle, description: p.description })),
     ...SUB_PROCEDURES.map((p) => ({ key: `${p.parent}/${p.slug}`, href: subProcedurePath(p), label: p.shortTitle, description: p.description })),
+    ...CRANIO_TYPES.map((t) => ({ key: `${CRANIO_PARENT}/${t.slug}`, href: cranioTypePath(t.slug), label: t.shortTitle, description: t.description })),
   ].sort((a, b) => a.label.localeCompare(b.label));
   const faqs = HOME_FAQS.slice(0, 4).map((f) => ({ q: f.q, a: autolink(f.a, createLinkBudget(ROUTES.procedures)) }));
   return (

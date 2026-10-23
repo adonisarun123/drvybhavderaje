@@ -4,8 +4,9 @@
  * /<parent-slug>/<procedure-slug>, the same pattern as the craniosynostosis type pages (lib/cranio-types.ts).
  *
  * Source: Dr Vybhav Deraje's own sheets in public/images/pdf/, edited for plain language and consistency only.
- * Nothing clinical is added beyond the sheets. Correction flagged for the doctor: the cleft jaw-surgery sheet says
- * "discharged after 34 days" — written here as 3–4 days. NOT YET APPROVED by the doctor — see docs/CONTENT-APPROVAL.md.
+ * Nothing clinical is added beyond the sheets. The doctor approved (23 Oct 2026) the three flagged points: cleft jaw
+ * discharge 3–4 days (sheet typo "34"), phyllodes as a breast tumour not a cancer, and day-care for arm/thigh/breast lift.
+ * Full-page sign-off status: see docs/CONTENT-APPROVAL.md.
  */
 import { servicePath, type ServiceSlug } from "./routes";
 

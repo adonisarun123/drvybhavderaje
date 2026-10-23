@@ -65,8 +65,10 @@ One page per sheet that had no page of its own, nested under its parent (source:
 - Breast (`/breast-plastic-surgeon-bangalore/…`): breast-lift-mastopexy, breast-reconstruction-after-cancer
 - Body (`/body-plastic-surgeon-bangalore/…`): arm-lift-brachioplasty, thigh-lift-thighplasty
 
-Points for the doctor:
-- **Cleft jaw surgery sheet says "discharged after 34 days"** — the page says 3–4 days. Confirm.
-- Breast reconstruction sheet lists giant phyllodes tumour among "cancers"; the page says "other breast tumours include…". Confirm.
-- Arm lift, thigh lift and breast lift are described as day-care procedures, as in the sheets. Confirm.
+Points approved by the doctor (23 Oct 2026):
+- Cleft jaw surgery: discharge after 3–4 days (the sheet's "34 days" was a typo).
+- Breast reconstruction: phyllodes tumour listed under "other breast tumours", not cancers.
+- Arm lift, thigh lift and breast lift are day-care procedures.
+
+Still open:
 - Every page carries the "written and medically reviewed by Dr Vybhav Deraje" byline — it is untrue until he has read them.
