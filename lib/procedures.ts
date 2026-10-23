@@ -260,7 +260,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     ],
     conditions: ["Prominent ears", "Stahl ear", "Split ear lobe"],
     procedures: ["Otoplasty", "Ear lobe repair"],
-    related: ["ear-reconstruction-surgery-bangalore", "rhinoplasty-surgery-bangalore", "chin-augmentation-surgery-bangalore"],
+    related: ["earwell-infant-ear-correction-bangalore", "ear-reconstruction-surgery-bangalore", "rhinoplasty-surgery-bangalore"],
   }),
 
   page({
@@ -624,5 +624,131 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     conditions: ["Localised fat deposits", "Lipodystrophy", "Submental fullness (double chin)"],
     procedures: ["Power-assisted liposuction (PAL)", "Submental liposuction", "Fat harvest for grafting"],
     related: ["tummy-tuck-abdominoplasty-bangalore", "gynecomastia-surgery-bangalore", "facelift-surgery-bangalore"],
+  }),
+
+  /* ---------------------------------------------------------------------------------------------
+   * The Head Shape Clinic — non-surgical infant services (added 23 Oct 2026)
+   * Source: theheadshapeclinic.com/helmet-therapy and /ear-well-system (Dr Vybhav's own clinic
+   * site). Figures (wear time, durations, age windows, review intervals) are as published there;
+   * nothing was added. Doctor to confirm — see docs/CONTENT-APPROVAL.md.
+   * ------------------------------------------------------------------------------------------- */
+  page({
+    slug: "helmet-therapy-flat-head-bangalore",
+    group: "craniofacial",
+    shortTitle: "Helmet therapy",
+    title: "Helmet therapy for flat head syndrome in Bangalore",
+    metaTitle: "Helmet Therapy for Flat Head Syndrome in Bangalore | The Head Shape Clinic · Dr Vybhav Deraje",
+    description: "Cranial helmet therapy in Bangalore through The Head Shape Clinic (Dr Vybhav Deraje): for moderate-to-severe positional plagiocephaly and brachycephaly, and after endoscopic craniosynostosis surgery. 3D-scanned, custom-made helmets.",
+    eyebrow: "Craniofacial · The Head Shape Clinic",
+    lead: "Custom cranial helmets that guide a baby's skull growth — for moderate-to-severe flat head syndrome and after keyhole craniosynostosis surgery. Prescribed and reviewed by Dr Vybhav Deraje through The Head Shape Clinic.",
+    cardText: "Custom cranial helmets for flat head syndrome and after endoscopic craniosynostosis surgery, via The Head Shape Clinic.",
+    intro: [
+      "Helmet therapy is passive moulding of the skull. A custom-made helmet holds gently against the parts of the head that are already full and leaves room over the flat areas, so that as the brain grows it directs the skull outward where it is needed. Nothing pushes on the head; growth does the work.",
+      "Dr Vybhav Deraje assesses every baby first and advises helmet therapy only when it is the right treatment. Most babies with mild positional flattening improve with repositioning and tummy time alone. The helmet programme in Bangalore runs through The Head Shape Clinic, Dr Vybhav's dedicated clinic for infant head-shape problems.",
+    ],
+    sections: [
+      {
+        heading: "Who helmet therapy is for",
+        bullets: [
+          "Moderate to severe positional (deformational) plagiocephaly — flattening on one side of the back of the head, often with the ear and forehead pushed forward on that side",
+          "Moderate to severe positional brachycephaly — symmetrical flattening of the whole back of the head",
+          "Babies with single-suture craniosynostosis after endoscopic strip craniectomy, where the helmet completes the correction — usually starting about 10 days after surgery",
+        ],
+        note: "Positional flattening is a shape problem, not a brain or developmental problem, and it is not the same as craniosynostosis. Telling the two apart is the first job of the consultation.",
+      },
+      {
+        heading: "How the helmet is made and fitted",
+        body: [
+          "An orthotist assesses the baby and captures the head shape with a handheld 3D scanner — no plaster casting and nothing uncomfortable for the baby. The scan goes to the manufacturing partner, Orthomerica (USA), which fabricates the helmet to that scan, and American Board certified orthotists at KARE Orthotics & Prosthetics complete the fitting in Bangalore.",
+          "As the baby grows, the helmet is adjusted at each orthotist visit; most babies need two or three helmets over the course of treatment.",
+        ],
+      },
+      {
+        heading: "What treatment involves",
+        bullets: [
+          "The helmet is worn 23 hours a day; it comes off for bathing and cleaning",
+          "Positional plagiocephaly or brachycephaly: typically 3 to 4 months of wear",
+          "After endoscopic craniosynostosis surgery: longer — from about 6 months and in some cases up to 1–2 years, depending on severity and response",
+          "Orthotist review every 3 weeks for adjustments",
+          "Dr Vybhav reviews the baby and the scans every 3 months",
+        ],
+      },
+      {
+        heading: "Side effects",
+        body: ["Redness, rashes and, occasionally, pressure sores on the scalp are the common side effects; they are managed by adjusting the helmet and keeping it clean and dry. A temporary slowing of head-circumference growth and temporary thinning of hair under the helmet have been reported but are not proven effects."],
+      },
+      {
+        heading: "Timing matters",
+        body: ["Helmets work by directing growth, so they are most effective while the skull is growing fastest — in the first year of life. For craniosynostosis, the keyhole operation followed by a helmet is only possible in babies who present before about 6 months of age; after that, open cranial remodelling is the usual operation. If you are worried about your baby's head shape, an early assessment keeps every option open."],
+      },
+    ],
+    faqs: [
+      { q: "Does my baby need a helmet for a flat head?", a: "Usually not. Mild positional flattening improves with repositioning, supervised tummy time and time. Helmet therapy is advised for moderate to severe positional plagiocephaly or brachycephaly, and after endoscopic craniosynostosis surgery — always after assessment by a craniofacial surgeon." },
+      { q: "How many hours a day is the helmet worn?", a: "23 hours a day. It is removed for bathing and for cleaning the helmet." },
+      { q: "How long does helmet therapy take?", a: "About 3 to 4 months for positional plagiocephaly or brachycephaly. After endoscopic craniosynostosis surgery it is longer — from around 6 months and in some cases up to 1 to 2 years, depending on severity and how the skull responds. Most babies go through two or three helmets." },
+      { q: "How is the helmet made?", a: "From a handheld 3D scan of the baby's head, taken by an orthotist. The helmet is fabricated to that scan by Orthomerica (USA) and fitted by certified orthotists at KARE Orthotics & Prosthetics in Bangalore." },
+      { q: "Is helmet therapy painful?", a: "No. The helmet holds gently where the head is already full and leaves space over the flat areas; the baby's own growth does the correcting. Redness or a rash under the helmet is the common issue and is managed with adjustments." },
+      { q: "Where is helmet therapy available in Bangalore?", a: "Through The Head Shape Clinic, Dr Vybhav Deraje's clinic for infant head-shape problems at Docube Clinic, Koramangala, with orthotist fitting by KARE Orthotics & Prosthetics. KARE also fits in Delhi, Mumbai, Kochi, Chennai, Hyderabad and Kolkata." },
+      CONSULT_FAQ,
+    ],
+    conditions: ["Positional plagiocephaly", "Positional brachycephaly", "Flat head syndrome", "Craniosynostosis"],
+    procedures: ["Cranial helmet therapy", "Cranial remoulding orthosis"],
+    related: ["craniosynostosis-surgery-bangalore", "earwell-infant-ear-correction-bangalore", "other-craniofacial-conditions-treatments"],
+  }),
+
+  page({
+    slug: "earwell-infant-ear-correction-bangalore",
+    group: "craniofacial",
+    shortTitle: "EarWell infant ear moulding",
+    title: "EarWell infant ear correction in Bangalore",
+    metaTitle: "EarWell Infant Ear Moulding in Bangalore — Non-Surgical Ear Correction | Dr Vybhav Deraje",
+    description: "EarWell non-surgical ear moulding for newborns in Bangalore through The Head Shape Clinic (Dr Vybhav Deraje): corrects prominent, cup, Stahl and folded ears in 4–6 weeks when started within the first 14 days of life.",
+    eyebrow: "Craniofacial · The Head Shape Clinic",
+    lead: "A painless moulding device that reshapes a newborn's ear cartilage in 4 to 6 weeks — no surgery, no anaesthesia — when applied within the first two weeks of life. Offered in Bangalore through The Head Shape Clinic.",
+    cardText: "Non-surgical moulding for newborn ear deformities, started in the first 14 days of life. Via The Head Shape Clinic.",
+    intro: [
+      "In the first weeks after birth a baby's ear cartilage is still soft, under the influence of the mother's hormones, and can be reshaped without surgery. EarWell is a small moulding system that fits over the ear and holds it in the corrected position while the cartilage firms up — which is why it has to be started early, ideally within the first 14 days.",
+      "EarWell was developed in the USA in 2011 by craniofacial plastic surgeon Dr H. Steven Byrd with Becon Medical; the system used in India is manufactured by MediTEC Devices. Dr Vybhav Deraje offers it in Bangalore through The Head Shape Clinic. Started in time, it avoids a later operation for most babies; once the window has passed, the same deformities are corrected surgically by otoplasty from about 5–6 years of age.",
+    ],
+    sections: [
+      {
+        heading: "Ear deformities EarWell can correct",
+        bullets: ["Prominent or 'bat' ears", "Cup ear and cryptotia (an upper ear partly buried under the scalp skin)", "Stahl ear (an extra fold giving a pointed upper ear)", "Folded or lidded ears (the top of the ear folded over)"],
+        note: "Most ear deformities arise in the upper third of the ear during fetal development; some are due to position in the womb and others, such as prominent ears, run in families. Missing or very small ears (microtia) are a different problem — see ear reconstruction.",
+      },
+      {
+        heading: "Why the first 14 days matter",
+        body: ["Correction rates of 93–95% are reported when EarWell is started within the first 14 days of birth. After that the cartilage stiffens week by week and moulding becomes progressively less effective. If your newborn's ear looks folded, cupped or very prominent, ask for an assessment in the first week rather than waiting to see whether it settles."],
+      },
+      {
+        heading: "What treatment involves",
+        bullets: [
+          "The device is fitted at the clinic; no anaesthesia and no cuts — the baby may cry from the handling but the fitting is not painful",
+          "Worn continuously for 4 to 6 weeks; it does not interfere with sleep or feeding",
+          "2 to 3 short visits for cleaning and minor adjustments",
+          "The clinician cleans and replaces the device if it becomes wet or soggy",
+        ],
+      },
+      {
+        heading: "Side effects",
+        body: ["Mild skin irritation, sweat rash and redness under the device are the usual issues and settle with cleaning and adjustment. There is no scarring."],
+      },
+      {
+        heading: "If the window has passed",
+        body: ["Beyond the first few weeks, moulding no longer works and the ear shape is addressed surgically. Prominent ears, Stahl ear and similar shape deformities are corrected by otoplasty as a day-care procedure, usually from 5–6 years of age once the ear is close to adult size."],
+      },
+    ],
+    faqs: [
+      { q: "At what age should EarWell be applied?", a: "Within the first 14 days of birth — the earlier the better, while the ear cartilage is still soft enough to mould." },
+      { q: "How long does EarWell take to correct the ear?", a: "4 to 6 weeks of continuous wear, with 2 to 3 visits for cleaning or minor adjustments." },
+      { q: "Is EarWell painful for the baby?", a: "No. There are no cuts and no anaesthesia. The baby may cry during fitting from the handling, and the device does not interfere with sleep or feeding." },
+      { q: "Which ear deformities can EarWell treat?", a: "Prominent (bat) ears, cup ear and cryptotia, Stahl ear and folded ears. It does not treat microtia, where the ear is missing or very small — that needs ear reconstruction." },
+      { q: "What are the side effects of EarWell?", a: "Mild skin irritation, sweat rash and redness under the device, which settle with cleaning and adjustment. There is no scarring." },
+      { q: "My baby is older than two weeks — is it too late?", a: "Moulding becomes less effective week by week after birth; have the ear assessed promptly rather than waiting. If the window has passed, the deformity can be corrected later by otoplasty, usually from about 5–6 years." },
+      { q: "Where is EarWell available in Bangalore?", a: "Through The Head Shape Clinic, Dr Vybhav Deraje's clinic at Docube Clinic, Koramangala, Bangalore." },
+    ],
+    conditions: ["Prominent ears", "Cup ear", "Cryptotia", "Stahl ear", "Folded ear"],
+    procedures: ["EarWell infant ear moulding", "Non-surgical ear correction"],
+    related: ["otoplasty-ear-correction-bangalore", "ear-reconstruction-surgery-bangalore", "helmet-therapy-flat-head-bangalore"],
   }),
 ];

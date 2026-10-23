@@ -56,6 +56,9 @@ export const NEW_SERVICE_SLUGS = [
   "breast-reduction-surgery-bangalore",
   "gynecomastia-surgery-bangalore",
   "liposuction-surgery-bangalore",
+  // Added 23 Oct 2026 — The Head Shape Clinic's two non-surgical infant services.
+  "helmet-therapy-flat-head-bangalore",
+  "earwell-infant-ear-correction-bangalore",
 ] as const;
 
 export const SERVICE_SLUGS = [...LEGACY_SERVICE_SLUGS, ...NEW_SERVICE_SLUGS] as const;
@@ -94,6 +97,8 @@ export const FEATURED_COSMETIC: readonly ServiceSlug[] = [
 ];
 
 export const OTHER_SERVICES_ORDER: readonly ServiceSlug[] = [
+  "helmet-therapy-flat-head-bangalore",
+  "earwell-infant-ear-correction-bangalore",
   "facial-injuries-and-fracture-treatments",
   "head-and-neck-cancer-treatment",
   "other-craniofacial-conditions-treatments",

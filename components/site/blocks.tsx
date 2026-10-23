@@ -145,6 +145,8 @@ const SERVICE_ICONS: Record<string, typeof Baby> = {
   "rhinoplasty-surgery-bangalore": ScanFace,
   "blepharoplasty-eyelid-surgery-bangalore": Eye,
   "otoplasty-ear-correction-bangalore": Ear,
+  "helmet-therapy-flat-head-bangalore": Baby,
+  "earwell-infant-ear-correction-bangalore": Ear,
   "chin-augmentation-surgery-bangalore": Smile,
   "facelift-surgery-bangalore": Sparkles,
   "tummy-tuck-abdominoplasty-bangalore": PersonStanding,

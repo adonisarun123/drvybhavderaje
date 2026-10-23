@@ -43,6 +43,8 @@ export const TERM_LINKS: TermLink[] = [
   svc("breast-reduction-surgery-bangalore", "breast reduction", "reduction mammoplasty"),
   svc("gynecomastia-surgery-bangalore", "gynecomastia", "gynaecomastia", "male breast reduction"),
   svc("liposuction-surgery-bangalore", "liposuction"),
+  svc("helmet-therapy-flat-head-bangalore", "helmet therapy", "cranial helmet", "flat head syndrome", "positional plagiocephaly", "positional brachycephaly", "deformational plagiocephaly"),
+  svc("earwell-infant-ear-correction-bangalore", "EarWell", "Ear Well", "ear moulding", "infant ear moulding", "newborn ear moulding"),
   // Reconstructive and overview pages
   svc("facial-injuries-and-fracture-treatments", "facial fractures", "facial fracture", "facial injuries", "facial injury", "facial trauma", "craniofacial trauma", "maxillofacial trauma"),
   svc("head-and-neck-cancer-treatment", "head and neck cancer", "head and neck tumours", "head and neck tumour", "head and neck tumors", "oral cancer"),

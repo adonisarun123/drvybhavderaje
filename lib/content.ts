@@ -37,7 +37,7 @@ export const SITE = {
     youtube: "https://www.youtube.com/@drvybhavderaje",
   },
   /** ISO date the public copy was last reviewed; used for sitemap lastmod and schema dateModified. */
-  contentUpdated: "2026-10-22",
+  contentUpdated: "2026-10-23",
 };
 
 export interface NavItem {
@@ -386,7 +386,7 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
     ],
     conditions: ["Craniosynostosis", "Unicoronal synostosis", "Metopic synostosis", "Sagittal synostosis", "Lambdoid synostosis", "Bicoronal synostosis", "Multisuture synostosis", "Apert syndrome", "Crouzon syndrome", "Pfeiffer syndrome"],
     procedures: ["Endoscope-assisted strip craniectomy", "3D-printed helmet therapy", "Fronto-orbital remodelling", "Cranial vault remodelling", "Posterior vault expansion", "Le Fort III osteotomy"],
-    related: ["cleft-lip-and-palate-treatment-bangalore", "other-craniofacial-conditions-treatments", "corrective-jaw-surgery-bangalore"],
+    related: ["helmet-therapy-flat-head-bangalore", "cleft-lip-and-palate-treatment-bangalore", "other-craniofacial-conditions-treatments"],
     gallery: [
       { src: "/custom/cran_1.png", caption: "Sagittal craniosynostosis", width: 370, height: 260 },
       { src: "/custom/cran_2.png", caption: "Metopic craniosynostosis", width: 370, height: 260 },

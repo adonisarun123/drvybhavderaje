@@ -46,3 +46,11 @@ Source: `lib/procedures.ts`. The ten cosmetic pages expand the doctor's existing
 ## Practices (added 23 Oct 2026)
 
 The site now names and links both practices — **The Head Shape Clinic** (theheadshapeclinic.com) and **Aesthetica Veda** (aestheticaveda.com) — on the home page, About, Practice locations, every service page's "At a glance" box, the footer, structured data and llms.txt. The one-paragraph descriptions in `lib/content.ts` (`PRACTICES`) were drafted from the two public websites; please confirm the wording, the Head Shape Clinic's location (Docube Clinic, Koramangala) and the "outreach clinics in other Indian cities" line.
+
+## Helmet therapy and EarWell pages (added 23 Oct 2026)
+
+Two new pages under "Also treated" — `/helmet-therapy-flat-head-bangalore` and `/earwell-infant-ear-correction-bangalore` — written from theheadshapeclinic.com's own Helmet Therapy and Ear Well System pages, with no figures added. Points for the doctor:
+
+- **Helmet duration after endoscopic craniosynostosis surgery:** theheadshapeclinic.com says 6–15 months; drvybhavderaje.com's craniosynostosis page says 1–2 years. The new page says "from about 6 months and in some cases up to 1–2 years". Please confirm one figure and we will align both pages.
+- Partner names (Orthomerica, KARE Orthotics & Prosthetics, MediTEC Devices, Becon Medical / Dr H. Steven Byrd) and the EarWell 93–95% figure are quoted from theheadshapeclinic.com; confirm they may appear here.
+- Both pages route patients to The Head Shape Clinic; neither page is in the 14 featured procedures.
