@@ -1,10 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextResponse, after } from "next/server";
 import { createPublicEnquiry, publicEnquirySchema } from "@/lib/enquiries/service";
 import { enquiriesEnabled } from "@/lib/enquiries/public-config";
 import { allowRequest } from "@/lib/security/rate-limit";
 import { hashIp } from "@/lib/security/tokens";
 import { siteOrigin } from "@/lib/seo";
 import { isAppError, ValidationError } from "@/lib/errors";
+import { notifyNewEnquiry } from "@/lib/notifications/enquiry";
 
 export const dynamic = "force-dynamic";
 const MAX_BODY_BYTES = 8 * 1024;
@@ -86,6 +87,8 @@ export async function POST(req: Request) {
 
   try {
     const { enquiry, duplicate } = await createPublicEnquiry(input, { ipHash, userAgent: req.headers.get("user-agent") });
+    // Emails go out after the response; a mail failure can never turn a saved enquiry into an error for the visitor.
+    if (!duplicate) after(() => notifyNewEnquiry(enquiry));
     return NextResponse.json({ ok: true, data: { reference: enquiry.reference, duplicate } });
   } catch (e) {
     if (e instanceof ValidationError) return NextResponse.json({ ok: false, code: e.code, message: e.message, fieldErrors: e.fieldErrors }, { status: 422 });
