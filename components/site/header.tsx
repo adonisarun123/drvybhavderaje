@@ -65,7 +65,7 @@ export function SiteHeader() {
         <div className="container nav">
           <Link href="/" className="wordmark" aria-label="Dr Vybhav Deraje home">
             <span className="monogram" aria-hidden="true">
-              v<span>d</span>
+              V<span>D</span>
               <i />
             </span>
             <span>

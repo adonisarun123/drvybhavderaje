@@ -50,9 +50,10 @@ header.site-header { z-index: 30; background: #fff; border-bottom: 1px solid #e7
 .wordmark { align-items: center; gap: 12px; display: flex; }
 .wordmark strong { letter-spacing: -0.6px; font-size: 20px; font-weight: 600; display: block; white-space: nowrap; }
 .wordmark small { letter-spacing: 1.5px; font-size: 10px; display: block; white-space: nowrap; }
-.monogram { letter-spacing: -10px; color: var(--blue); padding-right: 12px; font-family: Georgia, serif; font-size: 47px; font-style: italic; font-weight: 400; line-height: 1; position: relative; }
+/* Upright capitals: the old italic lower-case "vd" with negative tracking read as "ud" (doctor, 23 Oct 2026). */
+.monogram { letter-spacing: -3px; color: var(--blue); padding-right: 10px; font-family: Georgia, "Times New Roman", serif; font-size: 40px; font-style: normal; font-weight: 400; line-height: 1; position: relative; }
 .monogram span { color: var(--navy); }
-.monogram i { background: var(--blue); width: 36px; height: 1px; position: absolute; bottom: 1px; left: 5px; }
+.monogram i { background: var(--blue); width: calc(100% - 10px); height: 2px; position: absolute; bottom: -4px; left: 0; }
 nav.site-nav { align-items: center; gap: 8px; font-size: 15px; font-weight: 500; display: flex; }
 nav.site-nav > a { padding: 10px 10px; min-height: 44px; display: inline-flex; align-items: center; border-radius: 4px; white-space: nowrap; }
 nav.site-nav > a[aria-current="page"]:not(.button) { color: var(--blue); box-shadow: inset 0 -2px 0 var(--blue); border-radius: 0; }
@@ -636,3 +637,63 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
 }
 /* The sidebar stacks under the article at phone width, so an 'On this page' list there would point backwards. */
 @media (max-width: 580px) { .about-side .toc { display: none; } }
+
+/* ------------------------------------------------------------------------------------------------
+ * Phone layout pass (doctor's review, 23 Oct 2026: "formatting on mobile looks all over the place").
+ * Kept last so it wins over the earlier breakpoints. One column for cards, icon beside the text,
+ * stacked fact rows, a two-column footer and consistent left edges inside articles.
+ * ---------------------------------------------------------------------------------------------- */
+@media (max-width: 580px) {
+  /* Service cards: one per row, icon on the left, no tall empty space. */
+  .care-grid, .care-grid.compact, .care-grid.cols-3 { grid-template-columns: 1fr; gap: 10px; }
+  .care-card { display: grid; grid-template-columns: 30px 1fr; column-gap: 14px; align-items: start; padding: 16px 16px 14px; }
+  .care-card .care-icon { grid-row: 1 / span 3; width: 28px; height: 28px; margin: 2px 0 0; }
+  .care-card h3, .care-grid.compact .care-card h3 { grid-column: 2; margin: 0 0 6px; font-size: 18px; }
+  .care-card p { grid-column: 2; margin: 0; font-size: 14px; line-height: 1.6; }
+  .care-card .card-link { grid-column: 2; margin-top: 10px; padding-top: 0; border-top: 0; justify-content: flex-start; gap: 6px; }
+  .care-card:hover { transform: none; }
+
+  /* Fact strips: label above its detail, both left-aligned. */
+  .trust-strip span, .fact-strip span { display: block; width: auto; }
+  .trust-strip small, .fact-strip small { display: block; margin-top: 2px; }
+  .trust-strip .container > div, .trust-strip .container > a { align-items: flex-start; }
+  .trust-strip svg, .fact-strip svg { flex: none; margin-top: 3px; }
+
+  /* Footer: brand block full width, link groups two-up and tighter. */
+  .footer-grid-4, .footer-grid-5 { grid-template-columns: 1fr 1fr; gap: 26px 18px; }
+  .footer-grid-4 > div:first-child, .footer-grid-5 > div:first-child { grid-column: 1 / -1; }
+  .footer-grid-5 > div:not(:first-child) > a { min-height: 0; padding: 6px 0; font-size: 14px; line-height: 1.35; margin-bottom: 2px; }
+  .footer-grid h3 { margin-bottom: 8px; }
+
+  .prose .affiliation-cards a { padding: 14px; gap: 12px; }
+  .photo-grid.cols-2, .photo-grid.cols-3, .photo-grid.cols-4 { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .photo-grid figcaption { font-size: 12px; line-height: 1.45; }
+
+  /* Headings: avoid one-word orphan lines and oversized type. */
+  h1, h2, h3 { text-wrap: balance; overflow-wrap: anywhere; hyphens: manual; }
+  .prose h3 { font-size: 20px; }
+  .section { padding-block: 44px; }
+  .logo-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .logo-row li a { padding: 12px 8px; }
+}
+@media (max-width: 580px) { .prose .timeline li { padding-left: 28px; } .prose .timeline-head h3 { font-size: 18px; } }
+/* Video cards with titles (Oct 2026) */
+.video-item { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.video-item figcaption { font-size: 15px; line-height: 1.45; color: var(--navy); font-weight: 500; }
+.video-section { margin-top: 42px; }
+.video-section .video-grid { grid-template-columns: repeat(2, 1fr); margin-top: 18px; }
+.video-section .channel-note { font-size: 14px; color: var(--muted); margin-top: 14px; }
+@media (max-width: 580px) { .video-section .video-grid { grid-template-columns: 1fr; } .video-item figcaption { font-size: 14px; } }
+
+/* Card lists inside articles sit on the same left edge as the text (all widths). */
+.prose ul.affiliation-cards, .prose ul.qual-grid, .prose ul.practice-tiles, .prose ul.hospital-tiles, .prose ul.logo-row, .prose ul.child-list.cards { padding-left: 0; margin-left: 0; }
+.procedure h3 a { color: inherit; text-decoration: none; }
+.procedure .text-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 15px; font-weight: 600; }
+.service-prose section > p + p { margin-top: 14px; }
+/* Small phones (≤400px): keep the wordmark and menu button inside the viewport. */
+@media (max-width: 400px) {
+  .wordmark { gap: 8px; }
+  .monogram { font-size: 32px; padding-right: 8px; letter-spacing: -2px; }
+  .wordmark strong { font-size: 17px; letter-spacing: -0.4px; }
+  .wordmark small { font-size: 8.5px; letter-spacing: 0.9px; }
+}

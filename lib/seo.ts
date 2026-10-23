@@ -217,11 +217,11 @@ export function scholarlyArticlesJsonLd(citations: string[]) {
   });
 }
 
-export function videoJsonLd(ids: string[]) {
+export function videoJsonLd(videos: { id: string; title?: string }[], name = "Dr Vybhav Deraje — video gallery") {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Dr Vybhav Deraje — video gallery",
-    itemListElement: ids.map((id, i) => ({ "@type": "ListItem", position: i + 1, url: `https://www.youtube.com/watch?v=${id}` })),
+    name,
+    itemListElement: videos.map((v, i) => ({ "@type": "ListItem", position: i + 1, url: `https://www.youtube.com/watch?v=${v.id}`, ...(v.title ? { name: v.title } : {}) })),
   };
 }

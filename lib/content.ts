@@ -249,6 +249,8 @@ export interface ServiceItem {
   text: string;
   /** Legacy patient-information PDF path under /public, e.g. "/images/pdf/cleft/Patient-information-sheet-Cleft-lip.pdf". */
   sheet?: string;
+  /** Dedicated sub-page for this item (craniosynostosis types). */
+  href?: string;
 }
 
 export interface ServiceSection {
@@ -342,31 +344,37 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
             title: "Unicoronal Synostosis",
             text: "One of the sutures running from the ear to the top of the head closes early. The forehead flattens on the affected side (anterior plagiocephaly), and the nose may deviate, the eye socket sit higher and the skull slant.",
             sheet: `${PDF}/Craniosynthosis/Patient-information-sheet-Unicoronal-craniosynostosis.pdf`,
+            href: "/craniosynostosis-surgery-bangalore/unicoronal-synostosis",
           },
           {
             title: "Metopic Synostosis",
             text: "The suture down the middle of the forehead closes early, giving a triangular or boat-shaped forehead (trigonocephaly) with hollowing at both temples. Some children also have speech and learning difficulties.",
             sheet: `${PDF}/Craniosynthosis/Patient-information-sheet-Metopic-craniosynostosis.pdf`,
+            href: "/craniosynostosis-surgery-bangalore/metopic-synostosis",
           },
           {
             title: "Sagittal Synostosis",
             text: "The suture running front to back along the top of the head closes early. The head becomes long and narrow (scaphocephaly).",
             sheet: `${PDF}/Craniosynthosis/Patient-information-sheet-Sagittal-craniosynostosis.pdf`,
+            href: "/craniosynostosis-surgery-bangalore/sagittal-synostosis",
           },
           {
             title: "Lambdoid Synostosis",
             text: "One or both sutures at the back of the head close early, flattening the back of the head (brachycephaly when both) or slanting it to one side (posterior plagiocephaly). The rarest form, sometimes confused with positional (deformational) plagiocephaly.",
             sheet: `${PDF}/Craniosynthosis/Patient-information-sheet-Lambdoid-craniosynostosis.pdf`,
+            href: "/craniosynostosis-surgery-bangalore/lambdoid-synostosis",
           },
           {
             title: "Bicoronal Synostosis",
             text: "Both ear-to-crown sutures close early. The head becomes wide and flattened from front to back (brachycephaly).",
             sheet: `${PDF}/Craniosynthosis/Patient-information-sheet-Bicoronal-craniosynostosis.pdf`,
+            href: "/craniosynostosis-surgery-bangalore/bicoronal-synostosis",
           },
           {
             title: "Multisuture Synostosis",
             text: "Many or all sutures close early, which can severely restrict brain growth through raised intracranial pressure; the head may be small (microcephaly). It may be non-syndromic or syndromic — syndromic cases are linked to gene changes (FGFR1, FGFR2, FGFR3, TWIST1, EFNB1 and others) and may involve hand or brain anomalies as well.",
             sheet: `${PDF}/Craniosynthosis/Patient-information-sheet-Multi-suture-craniosynostosis.pdf`,
+            href: "/craniosynostosis-surgery-bangalore/multisuture-syndromic-craniosynostosis",
           },
         ],
       },

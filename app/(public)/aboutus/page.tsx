@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Image } from "@imagekit/next";
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight, Award, Baby, BadgeCheck, BookOpen, Building2, GraduationCap, Mic, Plane, Sparkles, Stethoscope } from "lucide-react";
+import { VideoSection } from "@/components/site/video-section";
 import { AffiliationLogo, Byline, CtaBand, PhotoGallery, ServiceIndex } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { ABOUT_GALLERY, AFFILIATIONS, CREDENTIALS, DOCTOR, HOSPITALS, PRACTICES, PRESENTATIONS, PUBLICATIONS, PUBLICATIONS_OTHER, SITE } from "@/lib/content";
@@ -230,6 +231,8 @@ export default async function AboutPage() {
               Addresses and Phone Numbers <ArrowRight size={16} aria-hidden="true" />
             </Link>
           </p>
+
+          <VideoSection page="about" heading="Dr Vybhav on Plastic Surgery" />
 
           <h2 id="publications">Publications</h2>
           <h3>Scientific</h3>

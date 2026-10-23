@@ -1,3 +1,4 @@
+import { CRANIO_PARENT, CRANIO_TYPES, cranioTypePath } from "./cranio-types";
 import { AFFILIATIONS, CLINICS_SEED, COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, CREDENTIALS, DOCTOR, HOME_FAQS, HOSPITALS, OTHER_SERVICES, PRACTICES, PUBLICATIONS, SERVICE_PAGES, SITE } from "./content";
 import { ROUTES } from "./routes";
 import { absolute } from "./seo";
@@ -30,7 +31,10 @@ export function llmsTxt(): string {
   );
   lines.push(`- [A–Z index of all conditions and procedures](${absolute(ROUTES.procedures)})`, "");
   lines.push("## Craniofacial surgery", "");
-  for (const p of CRANIOFACIAL_SERVICES) lines.push(`- [${p.shortTitle}](${absolute(p.path)}): ${p.description}`);
+  for (const p of CRANIOFACIAL_SERVICES) {
+    lines.push(`- [${p.shortTitle}](${absolute(p.path)}): ${p.description}`);
+    if (p.slug === CRANIO_PARENT) for (const t of CRANIO_TYPES) lines.push(`  - [${t.shortTitle}](${absolute(cranioTypePath(t.slug))}): ${t.description}`);
+  }
   lines.push("", "## Cosmetic surgery", "");
   for (const p of COSMETIC_SERVICES) lines.push(`- [${p.shortTitle}](${absolute(p.path)}): ${p.description}`);
   lines.push("", "## Also treated (reconstructive surgery and overview pages)", "");
@@ -66,6 +70,15 @@ export function llmsFullTxt(): string {
       if (s.note) out.push(`Note: ${s.note}`, "");
     }
     out.push("## Frequently asked questions", "", ...p.faqs.flatMap((f) => [`**${f.q}**`, "", f.a, ""]));
+  }
+  for (const t of CRANIO_TYPES) {
+    out.push("---", "", `# ${t.title}`, "", `URL: ${absolute(cranioTypePath(t.slug))}`, "", t.lead, "", t.what, "", t.effects, "", t.diagnosis, "", ...t.treatment, "");
+    for (const s of t.sections) {
+      out.push(`## ${s.heading}`, "");
+      if (s.body?.length) out.push(...s.body, "");
+      if (s.bullets?.length) out.push(...s.bullets.map((b) => `- ${b}`), "");
+    }
+    out.push("## Frequently asked questions", "", ...t.faqs.flatMap((f) => [`**${f.q}**`, "", f.a, ""]));
   }
   out.push("---", "", "# General questions", "", ...HOME_FAQS.flatMap((f) => [`**${f.q}**`, "", f.a, ""]));
   return out.join("\n");

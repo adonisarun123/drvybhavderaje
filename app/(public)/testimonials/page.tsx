@@ -5,6 +5,7 @@ import { Byline, CtaBand, PageHero, TestimonialCard } from "@/components/site/bl
 import { JsonLd } from "@/components/site/json-ld";
 import { VideoGallery } from "@/components/site/video-gallery";
 import { SITE, TESTIMONIALS, VIDEOS } from "@/lib/content";
+import { withTitles } from "@/lib/videos";
 import { linkTargetFor } from "@/lib/links";
 import { ROUTES, servicePath } from "@/lib/routes";
 import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, videoJsonLd } from "@/lib/seo";
@@ -21,7 +22,7 @@ export default function TestimonialsPage() {
         data={[
           breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Patient Stories", path: ROUTES.testimonials }]),
           medicalWebPageJsonLd({ title: TITLE, description: DESCRIPTION, path: ROUTES.testimonials, type: "CollectionPage" }),
-          videoJsonLd(VIDEOS),
+          videoJsonLd(withTitles(VIDEOS)),
         ]}
       />
       <PageHero eyebrow="Our Stories" crumb="Patient Stories" title="Patients speak." lead="In their own words — experiences shared by patients and families, as published on the practice’s website." />
@@ -47,7 +48,7 @@ export default function TestimonialsPage() {
             YouTube Channel <ArrowUpRight size={18} aria-hidden="true" />
           </a>
         </div>
-        <VideoGallery ids={VIDEOS} />
+        <VideoGallery videos={withTitles(VIDEOS)} />
       </section>
       <CtaBand />
     </>

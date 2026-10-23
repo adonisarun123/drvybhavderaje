@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { VideoSection } from "@/components/site/video-section";
 import { Byline, CtaBand, Faq, HelpSideCard, PageHero, ServiceIndex } from "@/components/site/blocks";
 import { InfoSheet, sheetExists } from "@/components/site/info-sheet";
 import { JsonLd } from "@/components/site/json-ld";
@@ -50,6 +51,7 @@ export default function PatientResourcesPage() {
             </>
           )}
           <ServiceIndex heading="Procedure Guides" intro={<p>Every condition and procedure Dr Vybhav Deraje treats has its own page: who it suits, how it is done, recovery, limitations and the questions patients ask most.</p>} />
+          <VideoSection page="resources" heading="Before and After Surgery" />
           <h2 style={{ marginTop: 40 }}>Frequently Asked Questions</h2>
           <Faq items={faqs} />
         </article>

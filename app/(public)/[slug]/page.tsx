@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { Byline, CtaBand, Faq, HelpSideCard, KeyFacts, PageHero, PhotoGallery, RelatedServices } from "@/components/site/blocks";
 import { InfoSheet } from "@/components/site/info-sheet";
+import { VideoSection } from "@/components/site/video-section";
 import { JsonLd } from "@/components/site/json-ld";
 import { childServices, DOCTOR, getService, GROUP_HREF, GROUP_LABEL, HOSPITALS, isFeatured, PRACTICES, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
 import { autolink, createLinkBudget, relatedServices } from "@/lib/links";
@@ -30,7 +31,7 @@ interface LinkedSection {
   heading: string;
   body?: ReactNode[];
   bullets?: ReactNode[];
-  items?: { title: string; text: ReactNode; sheet?: string }[];
+  items?: { title: string; text: ReactNode; sheet?: string; href?: string }[];
   note?: ReactNode;
 }
 
@@ -50,8 +51,13 @@ function Section({ s }: { s: LinkedSection }) {
         <div className="procedure-list">
           {s.items.map((it) => (
             <article className="procedure" key={it.title}>
-              <h3>{it.title}</h3>
+              <h3>{it.href ? <Link href={it.href}>{it.title}</Link> : it.title}</h3>
               <p>{it.text}</p>
+              {it.href && (
+                <Link className="text-link" href={it.href}>
+                  Read more about {it.title.replace(/ Synostosis$/, " synostosis")} <ArrowRight size={14} aria-hidden="true" />
+                </Link>
+              )}
               {it.sheet && <InfoSheet href={it.sheet} />}
             </article>
           ))}
@@ -80,7 +86,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     heading: s.heading,
     body: s.body?.map((p) => autolink(p, budget)),
     bullets: s.bullets?.map((b) => autolink(b, budget)),
-    items: s.items?.map((it) => ({ title: it.title, text: autolink(it.text, budget), sheet: it.sheet })),
+    items: s.items?.map((it) => ({ title: it.title, text: autolink(it.text, budget), sheet: it.sheet, href: it.href })),
     note: s.note ? autolink(s.note, budget) : undefined,
   }));
   const faqs = page.faqs.map((f) => ({ q: f.q, a: autolink(f.a, budget) }));
@@ -127,7 +133,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 <b>Surgeon:</b> <Link href={ROUTES.about}>{DOCTOR.name}</Link>, {DOCTOR.honorificSuffix}; {DOCTOR.fellowship}.
               </li>
               <li>
-                <b>Where:</b> consultations at <Link href={ROUTES.locations}>Aesthetica Veda Clinics</Link> in Bangalore; surgery at {HOSPITALS.map((h) => h.name.replace(" Hospital", "")).slice(0, 3).join(", ")} and other partner hospitals.
+                <b>Where:</b> consultations at <Link href={ROUTES.locations}>Aesthetica Veda clinics</Link> in Bangalore; surgery at {HOSPITALS.map((h) => h.name.replace(" Hospital", "")).slice(0, 3).join(", ")} and other partner hospitals.
               </li>
               <li>
                 <b>Practice:</b>{" "}
@@ -177,6 +183,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           {sections.map((s) => (
             <Section key={s.heading} s={s} />
           ))}
+          <VideoSection page={page.slug} />
           {page.gallery && (
             <section>
               <h2>Gallery</h2>

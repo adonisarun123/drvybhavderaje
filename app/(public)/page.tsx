@@ -5,7 +5,8 @@ import { ArrowRight, ArrowUpRight, Baby, Building2, Check, GraduationCap, HeartH
 import { AffiliationLogos, Byline, CtaBand, Faq, PracticeCards, ServiceGrid, TestimonialCard } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { VideoGallery } from "@/components/site/video-gallery";
-import { COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, DOCTOR, HOME_FAQS, HOSPITALS, OTHER_SERVICES, SITE, TESTIMONIALS, VIDEOS } from "@/lib/content";
+import { COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, DOCTOR, HOME_FAQS, HOSPITALS, OTHER_SERVICES, SITE, TESTIMONIALS } from "@/lib/content";
+import { videosFor } from "@/lib/videos";
 import { getPublicClinics } from "@/lib/clinics";
 import { DOCTOR_PHOTO } from "@/lib/images";
 import { autolink, createLinkBudget, linkTargetFor } from "@/lib/links";
@@ -35,7 +36,7 @@ export default async function HomePage() {
           physicianJsonLd(clinics),
           practiceJsonLd(clinics),
           faqJsonLd(HOME_FAQS),
-          videoJsonLd(VIDEOS),
+          videoJsonLd(videosFor("home", 3)),
         ]}
       />
       <section className="hero">
@@ -285,7 +286,7 @@ export default async function HomePage() {
             YouTube Channel <ArrowUpRight size={18} aria-hidden="true" />
           </a>
         </div>
-        <VideoGallery ids={VIDEOS.slice(0, 3)} />
+        <VideoGallery videos={videosFor("home", 3)} />
       </section>
 
       <section className="section container faq-section" aria-labelledby="faq-heading">

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Image } from "@imagekit/next";
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight, Building2, MapPin, Phone } from "lucide-react";
+import { VideoSection } from "@/components/site/video-section";
 import { Byline, CtaBand, PageHero, PracticeCards, ServiceIndex } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { getPublicClinics } from "@/lib/clinics";
@@ -66,6 +67,7 @@ export default async function LocationsPage() {
             </article>
           ))}
         </div>
+        <VideoSection page="locations" heading="Walk Through the Clinics" />
       </section>
       <PracticeCards intro={<p>Babies and children with head-shape concerns are seen through The Head Shape Clinic (at Docube Clinic, Koramangala); all other consultations are at the Aesthetica Veda clinics above.</p>} />
       <section className="section container" aria-labelledby="surgery-heading" style={{ paddingTop: 0 }}>
