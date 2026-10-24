@@ -259,8 +259,8 @@ export default async function HomePage() {
         </div>
         <div className="doctor-media">
           <figure className="doctor-talk">
-            <NextImage src="/talks/indocleftcon-2026.jpg" alt="Dr Vybhav Deraje speaking as faculty at INDOCLEFTCON 2026, Mysore" width={740} height={520} sizes="(max-width: 760px) 92vw, 560px" />
-            <figcaption>Faculty, INDOCLEFTCON 2026 · Mysore</figcaption>
+            <NextImage src="/talks/star-summit-2025-portrait.jpg" alt="Dr Vybhav Deraje giving an invited talk at the STAR Summit 2025, Orlando" width={750} height={1000} sizes="(max-width: 900px) 92vw, 640px" />
+            <figcaption>Invited Talk, STAR Summit 2025 · Orlando, USA</figcaption>
           </figure>
           <ul className="doctor-stats" aria-label="At a glance">
             <li>

@@ -764,3 +764,13 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
   .doctor-path li { grid-template-columns: 1fr; gap: 2px; }
   .doctor-stats b { font-size: 22px; }
 }
+/* Meet the doctor: right column fills the full height of the text column (no empty space below). */
+@media (min-width: 901px) {
+  .doctor-section { align-items: stretch; }
+  .doctor-media { position: static; display: flex; flex-direction: column; }
+  .doctor-talk { flex: 1; min-height: 360px; }
+  .doctor-talk img { height: 100%; aspect-ratio: auto; position: absolute; inset: 0; }
+  .doctor-logos { align-self: start; }
+}
+.doctor-talk img { object-position: 50% 30%; }
+@media (max-width: 900px) { .doctor-talk img { aspect-ratio: 4 / 3; object-position: 50% 25%; } }
