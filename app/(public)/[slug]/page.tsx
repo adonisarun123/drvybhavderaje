@@ -28,6 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 /** A section with its copy already run through the autolinker (in document order, so the first mention on the page gets the link). */
 interface LinkedSection {
   heading: string;
+  id?: string;
   body?: ReactNode[];
   bullets?: ReactNode[];
   items?: { title: string; text: ReactNode; href?: string }[];
@@ -36,7 +37,7 @@ interface LinkedSection {
 
 function Section({ s }: { s: LinkedSection }) {
   return (
-    <section>
+    <section id={s.id}>
       <h2>{s.heading}</h2>
       {s.body?.map((p, i) => <p key={i}>{p}</p>)}
       {s.bullets && (
@@ -54,7 +55,7 @@ function Section({ s }: { s: LinkedSection }) {
               <p>{it.text}</p>
               {it.href && (
                 <Link className="text-link" href={it.href}>
-                  Read more about {it.title.replace(/ Synostosis$/, " synostosis")} <ArrowRight size={14} aria-hidden="true" />
+                  Read More About {it.title} <ArrowRight size={14} aria-hidden="true" />
                 </Link>
               )}
             </article>
@@ -83,6 +84,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const intro = page.intro.map((p) => autolink(p, budget));
   const sections: LinkedSection[] = page.sections.map((s: ServiceSection) => ({
     heading: s.heading,
+    id: s.id,
     body: s.body?.map((p) => autolink(p, budget)),
     bullets: s.bullets?.map((b) => autolink(b, budget)),
     items: s.items?.map((it) => ({ title: it.title, text: autolink(it.text, budget), href: it.href })),

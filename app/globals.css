@@ -774,3 +774,7 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
 }
 .doctor-talk img { object-position: 50% 30%; }
 @media (max-width: 900px) { .doctor-talk img { aspect-ratio: 4 / 3; object-position: 50% 25%; } }
+
+.travel-callout { margin: 32px 0; padding: 22px 24px; border: 1px solid var(--line); border-left: 4px solid var(--blue); border-radius: 8px; background: var(--soft, #eef3f8); }
+.travel-callout h2 { margin-top: 0; font-size: 22px; }
+.travel-callout p { margin-bottom: 12px; }

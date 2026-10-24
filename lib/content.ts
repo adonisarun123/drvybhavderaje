@@ -302,6 +302,8 @@ export interface ServiceItem {
 
 export interface ServiceSection {
   heading: string;
+  /** Optional anchor id, for links from other pages. */
+  id?: string;
   body?: string[];
   bullets?: string[];
   items?: ServiceItem[];
@@ -356,8 +358,8 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
     group: "craniofacial",
     shortTitle: "Craniosynostosis",
     title: "Craniosynostosis Surgery in Bangalore",
-    metaTitle: "Craniosynostosis Surgery in Bangalore — Endoscopic & Open | Dr Vybhav Deraje",
-    description: "Craniosynostosis surgery in Bangalore by Dr Vybhav Deraje: endoscopic keyhole surgery with Orthotic Helmet Therapy under 6 months, and open cranial remodelling.",
+    metaTitle: "Craniosynostosis Surgery in Bangalore, India — Endoscopic & Open | Dr Vybhav Deraje",
+    description: "Craniosynostosis surgery in Bangalore, India by Dr Vybhav Deraje: endoscopic keyhole surgery with Orthotic Helmet Therapy under 6 months, and open cranial remodelling. Families travel from across India and abroad.",
     eyebrow: "Craniofacial Surgery · For Children & Families",
     lead: "Specialist assessment and surgery for babies whose skull sutures have closed too early — including minimally invasive endoscopic surgery with Orthotic Helmet Therapy.",
     cardText: "Early-closing skull sutures in babies: endoscopic keyhole surgery, Orthotic Helmet Therapy and open remodelling.",
@@ -445,6 +447,32 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
           },
         ],
       },
+      {
+        heading: "Families from Other States and Abroad",
+        id: "travelling-for-treatment",
+        body: [
+          "Dr Vybhav Deraje treats children from across India and from other countries. Most of the planning can be done before you travel, so the time you spend in Bangalore is short and well organised.",
+        ],
+        items: [
+          {
+            title: "Before You Travel",
+            text: "Send your child’s photographs, CT scan images and reports to the clinic on WhatsApp or by email. Dr Vybhav reviews them and can speak with you on a video consultation to explain the diagnosis and the options. Contact the clinic early: keyhole (endoscopic) surgery is possible only before 6 months of age, so time matters.",
+          },
+          {
+            title: "How Long to Plan to Stay",
+            text: "For keyhole surgery, admission is on the day of the operation and most children go home on the third day; there is a check about one week after surgery, when Orthotic Helmet Therapy is started. For open surgery, the hospital stay is usually 6–7 days. The clinic confirms the dates for your child before you book travel.",
+          },
+          {
+            title: "Follow-Up After You Return Home",
+            text: "Orthotic Helmet Therapy and recovery need regular reviews. The clinic plans these with you, combining visits to Bangalore with video consultations where appropriate. The Head Shape Clinic also runs outreach clinics in other Indian cities — ask whether there is one near you.",
+          },
+          {
+            title: "Travelling from Outside India",
+            text: "Patients usually travel on India’s e-Medical Visa, with an e-Medical Attendant Visa for accompanying family; check the current rules on the official Indian visa website before applying. Surgery is at Aster Whitefield Hospital, whose international patient desk offers a visa assistance letter, airport pick-up and drop, interpreters, help with FRRO registration, and nearby accommodation options.",
+          },
+        ],
+        note: "Start with a call, WhatsApp message or email to the clinic — +91 95355 81616 · connect@drvybhavderaje.com — and send any scans you already have.",
+      },
     ],
     faqs: [
       { q: "What is Craniosynostosis?", a: "Craniosynostosis is a birth defect in which one or more of the soft joints (sutures) between the bones of a baby’s skull close too early. It changes the shape of the skull and in some children raises the pressure inside the skull." },
@@ -452,7 +480,8 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
       { q: "Is Craniosynostosis surgery done through a keyhole?", a: "For Non-Syndromic Single-Suture Craniosynostosis diagnosed before 6 months of age, Dr Vybhav Deraje performs minimally invasive Endoscope-Assisted Strip Craniectomy followed by Orthotic Helmet Therapy. Older children usually need open fronto-orbital or Cranial Vault Remodelling." },
       { q: "Is a helmet needed after endoscopic surgery?", a: "Yes. Orthotic Helmet Therapy starts about a week after Endoscope-Assisted Strip Craniectomy and moulds the skull shape as the brain grows. The craniofacial surgeon and the orthotic team review progress regularly and decide when it can stop." },
       { q: "Where is Craniosynostosis surgery performed in Bangalore?", a: "Dr Vybhav Deraje leads the Craniosynostosis multidisciplinary team at Aster Hospital, Whitefield, Bangalore. Consultations are through The Head Shape Clinic at Docube Clinic, Koramangala, which is dedicated to infant head-shape problems." },
-      { q: "We live outside Bangalore. How should we plan?", a: "Call or email the clinic first, send any existing scan reports ahead, and confirm the appointment and clinic location before arranging travel. Many families travel to Bangalore for this care." },
+      { q: "We live in another state. How should we plan?", a: "Send your child’s photographs, CT scan and reports to the clinic first; Dr Vybhav can review them and speak with you on a video consultation. The clinic then confirms the dates for surgery so you can book travel. For keyhole surgery most children go home on the third day, with a check about one week after the operation. The Head Shape Clinic also runs outreach clinics in other Indian cities." },
+      { q: "Can children from outside India be treated?", a: "Yes. Families travel to Bangalore from other countries for Craniosynostosis surgery. Most use India’s e-Medical Visa (with an e-Medical Attendant Visa for a parent), and the international patient desk at Aster Whitefield Hospital helps with the visa assistance letter, airport transfers, interpreters and accommodation. Start with a video consultation to plan the treatment and the length of your stay." },
     ],
     conditions: ["Craniosynostosis", "Unicoronal Synostosis", "Metopic Synostosis", "Sagittal Synostosis", "Lambdoid Synostosis", "Bicoronal Synostosis", "Multisuture Synostosis", "Apert syndrome", "Crouzon syndrome", "Pfeiffer syndrome"],
     procedures: ["Endoscope-assisted strip craniectomy", "Orthotic Helmet Therapy", "Fronto-orbital remodelling", "Cranial vault remodelling", "Posterior vault expansion", "Le Fort III osteotomy"],

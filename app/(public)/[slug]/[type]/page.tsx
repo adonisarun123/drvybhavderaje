@@ -151,6 +151,16 @@ export default async function CranioTypePage({ params }: { params: Params }) {
             </section>
           ))}
 
+          <section className="travel-callout" aria-labelledby="travel-heading">
+            <h2 id="travel-heading">Travelling from Another State or Country?</h2>
+            <p>
+              Families come to Dr Vybhav Deraje from across India and abroad. Send your child’s photographs and CT scan to the clinic first — Dr Vybhav can review them on a video consultation, and the clinic confirms the dates before you book travel. Keyhole surgery is possible only before 6 months of age, so contact the clinic early.
+            </p>
+            <Link className="text-link" href={`${parent.path}#travelling-for-treatment`}>
+              Planning Your Visit from Outside Bangalore <ArrowRight size={16} aria-hidden="true" />
+            </Link>
+          </section>
+
           <VideoSection page={cranioVideoKey(t)} heading={`Videos on ${t.shortTitle}`} />
 
           <section>
