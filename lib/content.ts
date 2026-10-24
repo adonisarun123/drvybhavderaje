@@ -99,6 +99,7 @@ export const CREDENTIALS = [
 export const AFFILIATIONS: { org: string; detail: string; url: string; logo: string; logoWidth: number; logoHeight: number }[] = [
   { org: "Association of Plastic Surgeons of India", detail: "Life member (APSI ID 1799, Membership No. D089FL2019)", url: "https://www.apsi.in/", logo: "/custom/membership_1.png", logoWidth: 154, logoHeight: 155 },
   { org: "National Academy of Burns India", detail: "Life member", url: "https://www.nabi.org.in/", logo: "/custom/membership_2.png", logoWidth: 154, logoHeight: 155 },
+  { org: "Indian Society of Cleft Lip, Palate & Craniofacial Anomalies (ISCLPCA)", detail: "Member", url: "https://www.isclpca.in/", logo: "/logos/isclpca.png", logoWidth: 150, logoHeight: 150 },
   { org: "Karnataka Medical Council", detail: "Registered since 2008 (Reg. No. 79493)", url: "https://www.karnatakamedicalcouncil.com/", logo: "/custom/membership_3.png", logoWidth: 154, logoHeight: 155 },
   { org: "Indian Association of Aesthetic Plastic Surgeons (IAAPS)", detail: "Life member", url: "https://iaaps.net/", logo: "/logos/iaaps.png", logoWidth: 186, logoHeight: 101 },
   { org: "International Society of Craniofacial Surgery (ISCFS)", detail: "Member", url: "https://www.iscfs.org/", logo: "/logos/iscfs.png", logoWidth: 650, logoHeight: 201 },
