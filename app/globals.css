@@ -697,3 +697,47 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
 /* Practice logos (replace the earlier line icons, Oct 2026) */
 .location-card > .practice-logo { display: block; width: 88px; height: 88px; object-fit: contain; border-radius: 8px; margin-bottom: 20px; }
 .prose .practice-tiles .practice-logo { display: block; width: 72px; height: 72px; object-fit: contain; border-radius: 8px; margin: 0 0 4px; }
+
+/* ---- Homepage polish (24 Oct 2026) ---------------------------------------------------------- */
+/* Section headings: never let the intro paragraph squeeze the heading column. */
+.section-heading > div { flex-shrink: 0; max-width: 60%; }
+.section-heading > p { max-width: 540px; }
+/* Ten cosmetic services: 5 x 2 on desktop, no orphan row. */
+.care-grid.cols-5 { grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.care-grid.cols-5 .care-card { padding: 24px 18px 20px; }
+.care-grid.cols-5 .care-card h3 { font-size: 19px; }
+@media (max-width: 1100px) { .care-grid.cols-5 { grid-template-columns: repeat(2, 1fr); } }
+/* Nine "also treated" links: 3 x 3. */
+.also-treated { grid-template-columns: repeat(3, 1fr); }
+/* Meet the doctor: photo + stats on the left, copy on the right, memberships full width below. */
+.doctor-section { align-items: start; row-gap: 48px; }
+.doctor-talk { margin: 28px 0 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: #fff; }
+.doctor-talk img { display: block; width: 100%; height: auto; aspect-ratio: 370 / 260; object-fit: cover; }
+.doctor-talk figcaption { padding: 10px 14px; font-size: 13px; color: var(--muted); }
+.doctor-stats { list-style: none; padding: 0; margin: 20px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.doctor-stats li { border: 1px solid var(--line); border-radius: 8px; padding: 14px; font-size: 13px; line-height: 1.4; color: var(--muted); background: #fff; }
+.doctor-stats b { display: block; font-size: 26px; font-weight: 500; color: var(--navy); letter-spacing: -0.5px; margin-bottom: 4px; }
+.doctor-copy { padding-top: 6px; }
+.doctor-logos { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 32px; }
+.doctor-logos .eyebrow { margin-bottom: 4px; }
+.logo-row { grid-template-columns: repeat(6, 1fr); }
+.logo-row li { display: flex; }
+.logo-row li a { flex: 1; justify-content: flex-start; }
+.logo-row img { height: 64px; }
+@media (max-width: 1100px) { .logo-row { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 760px) {
+  .section-heading > div { max-width: none; }
+  .doctor-section { row-gap: 28px; }
+  .doctor-logos { grid-column: auto; padding-top: 24px; }
+  .logo-row { grid-template-columns: 1fr 1fr; }
+  .also-treated { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) and (min-width: 761px) { .also-treated { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 580px) {
+  .care-grid.cols-5 { grid-template-columns: 1fr; gap: 10px; }
+  .care-grid.cols-5 .care-card { padding: 16px 16px 14px; }
+  .care-grid.cols-5 .care-card h3 { font-size: 18px; }
+  .doctor-stats { gap: 8px; }
+  .doctor-stats li { padding: 12px 10px; font-size: 12px; }
+  .doctor-stats b { font-size: 20px; }
+}

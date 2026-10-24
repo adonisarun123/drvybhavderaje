@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { Image } from "@imagekit/next";
+import NextImage from "next/image";
 import type { Metadata } from "next";
 import { ArrowRight, ArrowUpRight, Baby, Building2, Check, GraduationCap, HeartHandshake, MapPin, Phone, ShieldCheck } from "lucide-react";
 import { AffiliationLogos, Byline, CtaBand, Faq, PracticeCards, ServiceGrid, TestimonialCard } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { VideoGallery } from "@/components/site/video-gallery";
-import { COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, DOCTOR, HOME_FAQS, HOSPITALS, OTHER_SERVICES, SITE, TESTIMONIALS } from "@/lib/content";
+import { COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, DOCTOR, HOME_FAQS, HOSPITALS, OTHER_SERVICES, PRESENTATIONS, PUBLICATIONS, SITE, TESTIMONIALS } from "@/lib/content";
 import { videosFor } from "@/lib/videos";
 import { getPublicClinics } from "@/lib/clinics";
 import { DOCTOR_PHOTO } from "@/lib/images";
@@ -136,7 +137,7 @@ export default async function HomePage() {
             Honest conversations about options, limits and recovery.
           </p>
         </div>
-        <ServiceGrid services={COSMETIC_SERVICES} />
+        <ServiceGrid services={COSMETIC_SERVICES} columns={5} />
       </section>
 
       <section id="also-treated" className="section container" aria-labelledby="also-treated-heading" style={{ paddingTop: 0 }}>
@@ -209,22 +210,40 @@ export default async function HomePage() {
       </section>
 
       <section className="section container doctor-section" aria-labelledby="doctor-heading">
-        <div>
+        <div className="doctor-intro">
           <p className="eyebrow">Meet Dr Vybhav Deraje</p>
           <h2 id="doctor-heading">
-            Expertise you can understand.
+            Expertise You Can Understand.
             <br />
-            Care you can feel.
+            Care You Can Feel.
           </h2>
+          <figure className="doctor-talk">
+            <NextImage src="/talks/star-summit-2025.jpg" alt="Dr Vybhav Deraje giving an invited talk at the STAR Summit 2025, Orlando" width={740} height={520} sizes="(max-width: 760px) 92vw, 520px" />
+            <figcaption>Invited talk, STAR Summit 2025, Orlando, USA</figcaption>
+          </figure>
+          <ul className="doctor-stats" aria-label="Academic work">
+            <li>
+              <b>{PUBLICATIONS.length}</b> Peer-Reviewed Papers
+            </li>
+            <li>
+              <b>{PRESENTATIONS.length}</b> Conference Presentations
+            </li>
+            <li>
+              <b>Since 2019</b> Consultant Surgeon in Bangalore
+            </li>
+          </ul>
         </div>
-        <div>
+        <div className="doctor-copy">
           <p>{DOCTOR.summary}</p>
           <p>{DOCTOR.summary2}</p>
           <p>{DOCTOR.values}</p>
-          <AffiliationLogos />
           <Link href={ROUTES.about} className="text-link">
             Read the Full Profile, Publications and Training <ArrowRight size={18} aria-hidden="true" />
           </Link>
+        </div>
+        <div className="doctor-logos">
+          <p className="eyebrow">Memberships and Registrations</p>
+          <AffiliationLogos />
         </div>
       </section>
 
@@ -295,7 +314,7 @@ export default async function HomePage() {
           <h2 id="faq-heading">
             Questions?
             <br />{" "}
-            Start here.
+            Start Here.
           </h2>
           <p>
             For anything specific to your care,

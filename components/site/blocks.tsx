@@ -157,9 +157,9 @@ const SERVICE_ICONS: Record<string, typeof Baby> = {
   "liposuction-surgery-bangalore": Droplets,
 };
 
-export function ServiceGrid({ services, compact = false, columns }: { services: ServicePage[]; compact?: boolean; columns?: 3 | 4 }) {
+export function ServiceGrid({ services, compact = false, columns }: { services: ServicePage[]; compact?: boolean; columns?: 3 | 4 | 5 }) {
   return (
-    <div className={`care-grid${compact ? " compact" : ""}${columns === 3 ? " cols-3" : ""}`}>
+    <div className={`care-grid${compact ? " compact" : ""}${columns === 3 ? " cols-3" : columns === 5 ? " cols-5" : ""}`}>
       {services.map((s, i) => {
         const Icon = SERVICE_ICONS[s.slug] ?? Sparkles;
         return (
