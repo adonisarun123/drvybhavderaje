@@ -68,7 +68,7 @@ export default async function AboutPage() {
                 <Image className="portrait-img" src={DOCTOR_PHOTO} alt="Dr Vybhav Deraje, craniofacial and plastic surgeon, in blue surgical scrubs" width={466} height={588} priority sizes="(max-width: 580px) 90vw, (max-width: 1080px) 40vw, 420px" />
               </div>
               <figure className="portrait-candid">
-                <Image src={ABOUT_GALLERY[0]!.src} alt="" width={370} height={260} sizes="220px" />
+                <Image src={ABOUT_GALLERY.find((g) => g.src === "/custom/gallery_1.png")!.src} alt="" width={370} height={260} sizes="220px" />
                 <figcaption>Craniofacial Fellowship, Australian Craniofacial Unit, Adelaide</figcaption>
               </figure>
             </div>

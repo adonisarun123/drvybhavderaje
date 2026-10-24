@@ -251,7 +251,11 @@ export function PhotoGallery({ photos, columns = 3 }: { photos: Photo[]; columns
     <div className={`photo-grid cols-${columns}`}>
       {photos.map((p) => (
         <figure key={p.src} className="photo">
-          <Image src={p.src} alt={p.caption} width={p.width} height={p.height} sizes="(max-width: 580px) 90vw, (max-width: 900px) 45vw, 370px" />
+          {p.src.startsWith("/talks/") ? (
+            <NextImage src={p.src} alt={p.caption} width={p.width} height={p.height} sizes="(max-width: 580px) 90vw, (max-width: 900px) 45vw, 370px" />
+          ) : (
+            <Image src={p.src} alt={p.caption} width={p.width} height={p.height} sizes="(max-width: 580px) 90vw, (max-width: 900px) 45vw, 370px" />
+          )}
           <figcaption>{p.caption}</figcaption>
         </figure>
       ))}

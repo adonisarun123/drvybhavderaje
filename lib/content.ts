@@ -126,8 +126,18 @@ export const HOSPITALS: Hospital[] = [
   { name: "Apollo Spectra Hospital", image: "/custom/appolo1.webp", address: "143, 1st Cross, Near Nagarjuna Hotel, 5th Block, Koramangala, Bengaluru, Karnataka 560034" },
 ];
 
-/** Photographs from the practice's about page (ImageKit paths; legacy /images/… URLs redirect there). */
+/**
+ * Photographs from the practice's about page (ImageKit paths; legacy /images/… URLs redirect there).
+ * Talk photos under /talks/ (public folder) were picked from @drvybhavderaje on Instagram, 24 Oct 2026 — newest first.
+ */
 export const ABOUT_GALLERY: Photo[] = [
+  { src: "/talks/indocleftcon-2026.jpg", caption: "Faculty talk at INDOCLEFTCON 2026, Mysore", width: 740, height: 520 },
+  { src: "/talks/star-summit-2025.jpg", caption: "Invited talk at the STAR Summit 2025, Orlando, USA", width: 740, height: 520 },
+  { src: "/talks/nimhans-2025.jpg", caption: "Teaching at the NIMHANS CME & Workshop on Craniosynostosis, Bangalore, 2025", width: 740, height: 520 },
+  { src: "/talks/indocleftcon-2024.jpg", caption: "Presenting the craniosynostosis protocol at INDOCLEFTCON 2024, Mangalore", width: 740, height: 520 },
+  { src: "/talks/apsicon-2023.jpg", caption: "Faculty at the Residents’ Forum, APSICON 2023, Indore", width: 740, height: 520 },
+  { src: "/talks/pedplasty-2023.jpg", caption: "Invited talk on paediatric craniofacial trauma at PEDPLASTY 2023, Kochi", width: 740, height: 520 },
+  { src: "/talks/escfs-2022.jpg", caption: "Presenting eight years of craniosynostosis experience at ESCFS 2022, Oxford, UK", width: 740, height: 520 },
   { src: "/custom/gallery_1.png", caption: "Receiving the Craniofacial Fellowship certificate from Prof Peter Anderson, Australian Craniofacial Unit, Adelaide", width: 370, height: 260 },
   { src: "/custom/gallery_2.png", caption: "With Dr Derick Mendonca, former Head, Department of Plastic Surgery, Sakra World Hospital, Bangalore", width: 370, height: 260 },
   { src: "/custom/gallery_3.png", caption: "At the Australian Craniofacial Unit, Adelaide, Australia", width: 370, height: 260 },

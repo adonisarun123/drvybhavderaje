@@ -24,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   });
   return [
     entry("/", 1, "weekly", [doctorImage]),
-    entry(ROUTES.about, 0.9, "monthly", [doctorImage, ...ABOUT_GALLERY.map((g) => imageUrl(g.src))]),
+    entry(ROUTES.about, 0.9, "monthly", [doctorImage, ...ABOUT_GALLERY.map((g) => (g.src.startsWith("/talks/") ? `${base}${g.src}` : imageUrl(g.src)))]),
     ...SERVICE_PAGES.map((p) => entry(p.path, 0.8, "monthly", p.gallery?.map((g) => imageUrl(g.src)))),
     ...CRANIO_TYPES.map((t) => entry(cranioTypePath(t.slug), 0.7, "monthly")),
     ...SUB_PROCEDURES.map((p) => entry(subProcedurePath(p), 0.7, "monthly")),
