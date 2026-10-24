@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AFFILIATIONS, CREDENTIALS, DOCTOR, HOSPITALS, PRACTICES, SERVICE_PAGES, type ServicePage, SITE } from "./content";
+import { AFFILIATIONS, CREDENTIALS, DOCTOR, HOSPITALS, hospitalMapUrl, PRACTICES, SERVICE_PAGES, type ServicePage, SITE } from "./content";
 import { DOCTOR_PHOTO, imageUrl } from "./images";
 import { ROUTES } from "./routes";
 
@@ -88,7 +88,7 @@ export function physicianJsonLd(clinics: ClinicLike[]) {
     hasCredential: CREDENTIALS.map((c) => ({ "@type": "EducationalOccupationalCredential", name: c.title, recognizedBy: { "@type": "Organization", name: c.detail } })),
     memberOf: AFFILIATIONS.map((a) => ({ "@type": "Organization", name: a.org, url: a.url })),
     affiliation: PRACTICES.map((p) => ({ "@type": "MedicalBusiness", name: p.name, url: p.url, founder: { "@id": PHYSICIAN_ID() } })),
-    hospitalAffiliation: HOSPITALS.map((h) => ({ "@type": "Hospital", name: h.name, telephone: h.phone, address: { "@type": "PostalAddress", streetAddress: h.address, addressLocality: "Bengaluru", addressRegion: "Karnataka", addressCountry: "IN" } })),
+    hospitalAffiliation: HOSPITALS.map((h) => ({ "@type": "Hospital", name: h.name, hasMap: hospitalMapUrl(h), address: { "@type": "PostalAddress", streetAddress: h.address, addressLocality: "Bengaluru", addressRegion: "Karnataka", addressCountry: "IN" } })),
     worksFor: { "@id": ORG_ID() },
     availableService: SERVICE_PAGES.map((p) => ({ "@type": "MedicalTherapy", name: p.shortTitle, url: absolute(p.path) })),
     location: clinics.map(clinicNode),

@@ -16,3 +16,8 @@ export function titleCase(s: string): string {
       .join("-");
   });
 }
+
+/** Capital first letter for a value that follows a bold "Label:" (doctor's review, 24 Oct 2026). */
+export function capFirst(s: string): string {
+  return s ? s[0]!.toUpperCase() + s.slice(1) : s;
+}

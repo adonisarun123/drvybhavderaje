@@ -61,9 +61,9 @@ const KEYHOLE: CranioSection = {
 };
 
 const KEYHOLE_AFTER: CranioSection = {
-  heading: "After Keyhole Surgery: Helmet Therapy",
+  heading: "After Keyhole Surgery: Orthotic Helmet Therapy",
   body: [
-    "After a check one week after the operation, helmet therapy is started with the orthotic partner. It continues for 1–2 years, until a good head shape is achieved; the helmet may need to be changed once or twice depending on progress. You will see the craniofacial surgeon and neurosurgeon at regular intervals.",
+    "After a check one week after the operation, Orthotic Helmet Therapy is started with the orthotic partner and continues until a good head shape is achieved; the helmet may need to be changed once or twice depending on progress. You will see the craniofacial surgeon and neurosurgeon at regular intervals.",
   ],
 };
 
@@ -80,7 +80,7 @@ function openSurgery(name: string, what: string): CranioSection[] {
     {
       heading: "After Open Surgery",
       body: [
-        "You will have periodic follow-up with the craniofacial surgeon and neurosurgeon. This is usually a one-time operation: if there is no associated syndrome, it is all your child will need. Helmet therapy is not needed after open remodelling. Small gaps in the skull close over within 2–3 years, and the scar is usually well hidden in the hair.",
+        "You will have periodic follow-up with the craniofacial surgeon and neurosurgeon. This is usually a one-time operation: if there is no associated syndrome, it is all your child will need. Orthotic Helmet Therapy is not needed after open remodelling. Small gaps in the skull close over within 2–3 years, and the scar is usually well hidden in the hair.",
       ],
     },
   ];
@@ -100,9 +100,9 @@ function singleSuture(open: { name: string; what: string }): CranioSection[] {
 function commonFaqs(typeName: string, openName: string) {
   return [
     { q: `How is ${typeName} diagnosed?`, a: DIAGNOSIS_SINGLE },
-    { q: `What is the best age for ${typeName} surgery?`, a: `Under 6 months of age, minimally invasive endoscope-assisted keyhole surgery is possible, followed by helmet therapy for 1–2 years. Above 6 months, an open ${openName.toLowerCase()} is done.` },
+    { q: `What is the best age for ${typeName} surgery?`, a: `Under 6 months of age, minimally invasive endoscope-assisted keyhole surgery is possible, followed by Orthotic Helmet Therapy. Above 6 months, an open ${openName.toLowerCase()} is done.` },
     { q: "How long is the hospital stay?", a: "Usually about 3 days after keyhole surgery (one night in the ICU) and 6–7 days after open surgery." },
-    { q: "Is a helmet needed after surgery?", a: "Yes after keyhole surgery — helmet therapy continues for 1–2 years. No after open remodelling surgery." },
+    { q: "Is a helmet needed after surgery?", a: "Yes after keyhole surgery — Orthotic Helmet Therapy follows the operation. No after open remodelling surgery." },
   ];
 }
 
@@ -115,13 +115,13 @@ export const CRANIO_TYPES: CranioType[] = [
     shapeName: "Scaphocephaly",
     title: "Sagittal Craniosynostosis (Scaphocephaly) in Bangalore",
     metaTitle: "Sagittal Craniosynostosis Surgery in Bangalore | Dr Vybhav Deraje",
-    description: "Sagittal craniosynostosis (scaphocephaly) causes a long, narrow head. Keyhole surgery with helmet therapy or vault remodelling in Bangalore.",
+    description: "Sagittal craniosynostosis (scaphocephaly) causes a long, narrow head. Keyhole surgery with Orthotic Helmet Therapy or vault remodelling in Bangalore.",
     lead: "When the suture along the top of the head fuses early, the head grows long and narrow. Keyhole surgery before 6 months, or open remodelling later, restores a normal shape.",
     cardText: "Long, narrow head (scaphocephaly) — the most common single-suture type.",
     what: "Sagittal craniosynostosis is a condition in which the soft joint running along the top of the skull (the sagittal suture) fuses earlier than usual. The head becomes narrower and longer from front to back than usual — a shape called scaphocephaly.",
     effects: "Besides the long, narrow head, it causes bossing (bulging) of the forehead and a bullet-shaped back of the skull (occiput). In very rare circumstances it can compress the brain and raise the pressure inside the skull.",
     diagnosis: DIAGNOSIS_SINGLE,
-    treatment: [TEAM_SENTENCE, "Under 6 months of age: minimally invasive, endoscope-assisted keyhole surgery to remove the fused suture, followed by helmet therapy for 1–2 years. Above 6 months: an open operation called cranial vault remodelling to reshape the skull."],
+    treatment: [TEAM_SENTENCE, "Under 6 months of age: minimally invasive, endoscope-assisted keyhole surgery to remove the fused suture, followed by Orthotic Helmet Therapy. Above 6 months: an open operation called cranial vault remodelling to reshape the skull."],
     sections: singleSuture({ name: "Cranial Vault Remodelling", what: "reshapes the skull bones" }),
     faqs: [
       { q: "What does sagittal craniosynostosis look like?", a: "The head is long from front to back and narrow from side to side (scaphocephaly), often with a bulging forehead and a pointed, bullet-shaped back of the head." },
@@ -135,13 +135,13 @@ export const CRANIO_TYPES: CranioType[] = [
     shapeName: "Trigonocephaly",
     title: "Metopic Craniosynostosis (Trigonocephaly) in Bangalore",
     metaTitle: "Metopic Craniosynostosis Surgery in Bangalore | Dr Vybhav Deraje",
-    description: "Metopic craniosynostosis (trigonocephaly) gives a triangular forehead. Keyhole surgery with helmet therapy or fronto-orbital advancement in Bangalore.",
+    description: "Metopic craniosynostosis (trigonocephaly) gives a triangular forehead. Keyhole surgery with Orthotic Helmet Therapy or fronto-orbital advancement in Bangalore.",
     lead: "Early fusion of the suture down the middle of the forehead gives a triangular forehead. Keyhole surgery before 6 months, or fronto-orbital advancement later, corrects it.",
     cardText: "Triangular, keel-shaped forehead (trigonocephaly).",
     what: "Metopic craniosynostosis is a condition in which the soft joint running down the middle of the forehead (the metopic suture) fuses earlier than usual, giving a triangular-shaped head — trigonocephaly.",
     effects: "The forehead is triangular. Metopic craniosynostosis is also known to be associated with speech and language difficulties. In very rare circumstances it can compress the brain and raise the pressure inside the skull.",
     diagnosis: DIAGNOSIS_SINGLE,
-    treatment: [TEAM_SENTENCE, "Under 6 months of age: minimally invasive, endoscope-assisted keyhole surgery to remove the fused suture, followed by helmet therapy for 1–2 years. Above 6 months: an open operation called fronto-orbital advancement and remodelling to reshape the forehead."],
+    treatment: [TEAM_SENTENCE, "Under 6 months of age: minimally invasive, endoscope-assisted keyhole surgery to remove the fused suture, followed by Orthotic Helmet Therapy. Above 6 months: an open operation called fronto-orbital advancement and remodelling to reshape the forehead."],
     sections: singleSuture({ name: "Fronto-Orbital Advancement", what: "reshapes the forehead bones" }),
     faqs: [
       { q: "Is a metopic ridge the same as metopic craniosynostosis?", a: "Not necessarily. A ridge down the forehead can be a normal finding; metopic craniosynostosis produces a triangular forehead (trigonocephaly). A craniofacial surgeon's examination, with a skull X-ray and 3D CT scan where needed, tells them apart." },
@@ -161,7 +161,7 @@ export const CRANIO_TYPES: CranioType[] = [
     what: "Unicoronal craniosynostosis is a condition in which one of the soft joints on the side of the forehead (a coronal suture) fuses earlier than usual. The forehead flattens on the affected side — anterior plagiocephaly.",
     effects: "Along with the flattened forehead on the affected side, your child may have a deviated nose, a raised eye socket and a slanted skull. In very rare circumstances it can compress the brain and raise the pressure inside the skull.",
     diagnosis: DIAGNOSIS_SINGLE,
-    treatment: [TEAM_SENTENCE, "Under 6 months of age: minimally invasive, endoscope-assisted keyhole surgery to remove the fused suture, followed by helmet therapy for 1–2 years. Above 6 months: an open operation called fronto-orbital advancement and remodelling to reshape the forehead."],
+    treatment: [TEAM_SENTENCE, "Under 6 months of age: minimally invasive, endoscope-assisted keyhole surgery to remove the fused suture, followed by Orthotic Helmet Therapy. Above 6 months: an open operation called fronto-orbital advancement and remodelling to reshape the forehead."],
     sections: singleSuture({ name: "Fronto-Orbital Advancement", what: "reshapes the forehead bones" }),
     faqs: [
       { q: "What are the signs of unicoronal craniosynostosis?", a: "A forehead that is flattened on one side, a nose that deviates, an eye socket that sits higher on the affected side and a skull that looks slanted." },
@@ -175,13 +175,13 @@ export const CRANIO_TYPES: CranioType[] = [
     shapeName: "Brachycephaly",
     title: "Bicoronal Craniosynostosis (Brachycephaly) in Bangalore",
     metaTitle: "Bicoronal Craniosynostosis Surgery in Bangalore | Dr Vybhav Deraje",
-    description: "Bicoronal craniosynostosis (brachycephaly) gives a flat, wide head. Keyhole surgery with helmet therapy or fronto-orbital advancement in Bangalore.",
+    description: "Bicoronal craniosynostosis (brachycephaly) gives a flat, wide head. Keyhole surgery with Orthotic Helmet Therapy or fronto-orbital advancement in Bangalore.",
     lead: "When both coronal sutures fuse early, the head becomes flat and wide. Keyhole surgery before 6 months, or fronto-orbital advancement later, reshapes it.",
     cardText: "Both coronal sutures fused — a flat, wide head (brachycephaly).",
     what: "Bicoronal craniosynostosis is a condition in which both soft joints on the sides of the forehead (the right and left coronal sutures) fuse earlier than usual, resulting in a flat head — brachycephaly.",
     effects: "It produces an abnormally shaped, flat head. In very rare circumstances it can compress the brain and raise the pressure inside the skull.",
     diagnosis: DIAGNOSIS_SINGLE,
-    treatment: [TEAM_SENTENCE, "Under 6 months of age: minimally invasive, endoscope-assisted keyhole surgery to remove the fused sutures, followed by helmet therapy for 1–2 years. Above 6 months: an open operation called fronto-orbital advancement and remodelling to reshape the forehead."],
+    treatment: [TEAM_SENTENCE, "Under 6 months of age: minimally invasive, endoscope-assisted keyhole surgery to remove the fused sutures, followed by Orthotic Helmet Therapy. Above 6 months: an open operation called fronto-orbital advancement and remodelling to reshape the forehead."],
     sections: singleSuture({ name: "Fronto-Orbital Advancement", what: "reshapes the forehead bones" }),
     faqs: [
       { q: "Is bicoronal craniosynostosis the same as a flat head from sleeping position?", a: "No. Positional flat head comes from pressure on a soft skull and the sutures stay open; bicoronal craniosynostosis is early fusion of both coronal sutures and needs surgery. Examination and imaging tell them apart." },
@@ -195,13 +195,13 @@ export const CRANIO_TYPES: CranioType[] = [
     shapeName: "Posterior plagiocephaly",
     title: "Lambdoid Craniosynostosis (Posterior Plagiocephaly) in Bangalore",
     metaTitle: "Lambdoid Craniosynostosis Surgery in Bangalore | Dr Vybhav Deraje",
-    description: "Lambdoid craniosynostosis slants the back of the head to one side. Keyhole surgery with helmet therapy or vault remodelling in Bangalore.",
+    description: "Lambdoid craniosynostosis slants the back of the head to one side. Keyhole surgery with Orthotic Helmet Therapy or vault remodelling in Bangalore.",
     lead: "The rarest single-suture type: early fusion at the back of the head slants or twists the skull to one side. It is often mistaken for positional flat head.",
     cardText: "Back of the head slanted or twisted to one side — the rarest type.",
     what: "Lambdoid craniosynostosis is a condition in which one of the soft joints at the back of the head (a lambdoid suture) fuses earlier than usual, so the back of the skull becomes slanted or twisted to one side — posterior plagiocephaly.",
     effects: "It produces an abnormally shaped head, slanted or twisted at the back. In very rare circumstances it can compress the brain and raise the pressure inside the skull. Because it is rare, it is sometimes confused with positional (deformational) plagiocephaly.",
     diagnosis: DIAGNOSIS_SINGLE,
-    treatment: [TEAM_SENTENCE, "Under 6 months of age: minimally invasive, endoscope-assisted keyhole surgery to remove the fused suture, followed by helmet therapy for 1–2 years. Above 6 months: an open operation called cranial vault remodelling to reshape the skull."],
+    treatment: [TEAM_SENTENCE, "Under 6 months of age: minimally invasive, endoscope-assisted keyhole surgery to remove the fused suture, followed by Orthotic Helmet Therapy. Above 6 months: an open operation called cranial vault remodelling to reshape the skull."],
     sections: singleSuture({ name: "Cranial Vault Remodelling", what: "reshapes the skull bones" }),
     faqs: [
       { q: "How is lambdoid craniosynostosis different from positional plagiocephaly?", a: "Both flatten the back of the head, but in lambdoid craniosynostosis a suture has fused and the skull is slanted or twisted; in positional plagiocephaly the sutures are open. A craniofacial surgeon's examination with a skull X-ray and 3D CT scan confirms which it is." },

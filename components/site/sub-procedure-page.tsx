@@ -5,6 +5,7 @@ import { JsonLd } from "@/components/site/json-ld";
 import { DOCTOR, getService, GROUP_HREF, GROUP_LABEL, isFeatured, SITE } from "@/lib/content";
 import { autolink, createLinkBudget } from "@/lib/links";
 import { ROUTES, SECTION } from "@/lib/routes";
+import { capFirst } from "@/lib/title-case";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, PHYSICIAN_ID, siteOrigin } from "@/lib/seo";
 import { subProcedurePath, subProceduresOf, type SubProcedure } from "@/lib/sub-procedures";
 
@@ -69,7 +70,7 @@ export function SubProcedureView({ p }: { p: SubProcedure }) {
             <ul>
               {p.facts.map((f) => (
                 <li key={f.label}>
-                  <b>{f.label}:</b> {f.value}.
+                  <b>{f.label}:</b> {capFirst(f.value)}.
                 </li>
               ))}
               <li>

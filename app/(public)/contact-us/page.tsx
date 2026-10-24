@@ -40,7 +40,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
         <div>
           <aside className="side-card" aria-label="Phone and email">
             <p className="eyebrow">Prefer to speak with us?</p>
-            <h3>We’re here to help.</h3>
+            <h3>We’re Here to Help.</h3>
             <p>Call or message on WhatsApp to discuss appointment availability and the most convenient clinic for you.</p>
             <a className="text-link" href={`tel:${SITE.phoneTel}`}>
               <Phone size={16} aria-hidden="true" /> {SITE.phone}
@@ -56,7 +56,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
           </aside>
           <aside className="side-card" aria-label="Contacting us from outside India" style={{ marginTop: 24 }}>
             <p className="eyebrow">Outside India?</p>
-            <h3>Patients from abroad are welcome.</h3>
+            <h3>Patients from Abroad Are Welcome.</h3>
             <p>
               Dr Deraje sees patients travelling from outside India and offers video consultations for an initial opinion or follow-up. Choose <em>Video consultation</em> in the form above and select the country of your phone number, message the clinic on{" "}
               <a className="text-link" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
@@ -86,7 +86,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
           </aside>
           <aside className="side-card" aria-label="Not sure which procedure?" style={{ marginTop: 24 }}>
             <p className="eyebrow">Before You Write</p>
-            <h3>Read about the procedure first.</h3>
+            <h3>Read About the Procedure First.</h3>
             <p>Each page explains who it suits, what the surgery involves and what recovery looks like, so your enquiry can be specific.</p>
             <nav className="page-links" aria-label="Procedure Pages">
               {[...CRANIOFACIAL_SERVICES, ...COSMETIC_SERVICES].map((s) => (

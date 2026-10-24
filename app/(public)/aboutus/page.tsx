@@ -244,7 +244,7 @@ export default async function AboutPage() {
               </li>
             ))}
           </ol>
-          <h3>Non-scientific</h3>
+          <h3>Non-Scientific</h3>
           <ol className="pub-list">
             {PUBLICATIONS_OTHER.map((p) => (
               <li key={p.slice(0, 50)}>
@@ -281,7 +281,7 @@ export default async function AboutPage() {
             <a href="#gallery">Gallery</a>
           </nav>
           <div className="side-card">
-            <h3>Care begins with listening.</h3>
+            <h3>Care Begins with Listening.</h3>
             <p>Bring your questions, your concerns and your expectations. The consultation is your space to understand your options.</p>
             <Link className="button" href={ROUTES.contact}>
               Book an Appointment <ArrowUpRight size={18} aria-hidden="true" />

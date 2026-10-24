@@ -23,7 +23,7 @@ export default async function HomePage() {
   // Contextual links in the hero and the FAQ answers (first mention of each procedure links to its page).
   const budget = createLinkBudget("/", [ROUTES.about, ROUTES.locations, ROUTES.contact]);
   const heroCopy = autolink(
-    "Dr Vybhav Deraje is a National Board certified plastic surgeon with fellowship training in craniofacial surgery. From a baby’s first craniosynostosis consultation to rhinoplasty, facelift, breast and body surgery — specialist care, explained clearly.",
+    "Dr Vybhav Deraje is a National Board certified plastic surgeon with fellowship training in craniofacial surgery. For children, he leads the craniosynostosis team at Aster Whitefield Hospital; for adults, he offers cosmetic and reconstructive plastic surgery — specialist care, explained clearly.",
     budget,
   );
   const faqs = HOME_FAQS.map((f) => ({ q: f.q, a: autolink(f.a, createLinkBudget("/")) }));
@@ -46,9 +46,9 @@ export default async function HomePage() {
               <span className="blue-line" aria-hidden="true" /> Craniofacial &amp; Plastic Surgeon, Bangalore
             </p>
             <h1>
-              Reconstructing faces.
+              Reconstructing Faces.
               <br />
-              Rebuilding <em>lives</em>.
+              Rebuilding <em>Lives</em>.
             </h1>
             <p className="hero-description">{heroCopy}</p>
             <div className="actions">
@@ -178,14 +178,14 @@ export default async function HomePage() {
             <span className="art-bottom">Craniosynostosis care, centred on your child.</span>
           </div>
           <div className="feature-copy">
-            <p className="eyebrow">Craniosynostosis — Endoscopic Surgery and Helmet Therapy</p>
+            <p className="eyebrow">Craniosynostosis — Endoscopic Surgery and Orthotic Helmet Therapy</p>
             <h2 id="feature-heading">
-              When it’s your child,
+              When It’s Your Child,
               <br />
-              every question matters.
+              Every Question Matters.
             </h2>
             <p>
-              Dr Vybhav leads the craniosynostosis multidisciplinary team at Aster Hospital, Whitefield — the only hospital in India offering minimally invasive endoscope-assisted surgery with 3D-printed helmet therapy for babies under six months.
+              Dr Vybhav leads the craniosynostosis multidisciplinary team at Aster Hospital, Whitefield — the only hospital in India offering minimally invasive endoscope-assisted surgery with Orthotic Helmet Therapy for babies under six months.
             </p>
             <ul className="check-list">
               <li>
@@ -233,7 +233,7 @@ export default async function HomePage() {
           <div className="section-heading">
             <div>
               <p className="eyebrow">Your Visit, Made Simpler</p>
-              <h2 id="journey-heading">A clear next step. At every step.</h2>
+              <h2 id="journey-heading">A Clear Next Step. At Every Step.</h2>
             </div>
             <Link href={ROUTES.resources} className="text-link">
               Plan Your Visit <ArrowUpRight size={18} aria-hidden="true" />

@@ -346,7 +346,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
         body: ["A light dressing is worn for the first day or two. Bruising and swelling are at their peak at 2–3 days and largely settle by two weeks, when most people are comfortable returning to work and social life; strenuous exercise waits for about four weeks. Numbness around the ears is normal for a few weeks. Scars fade over 6–12 months and are hidden by hair and the natural creases."],
       },
       {
-        heading: "Facelift or non-surgical treatment?",
+        heading: "Facelift or Non-Surgical Treatment?",
         body: ["In the early stages of ageing, Botox, fillers, nanofat and skin treatments can be enough. Once tissue has descended, a facelift is the only treatment that lifts it. A mini-lift with shorter scars suits early jowling; a full face and neck lift suits more advanced change. The consultation is about matching the procedure to the degree of ageing and to the recovery time you can afford."],
       },
       {
@@ -438,7 +438,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
     ],
     sections: [
       {
-        heading: "Implant or fat transfer?",
+        heading: "Implant or Fat Transfer?",
         items: [
           { title: "Silicone Implants", text: "Give a predictable increase of one or more cup sizes in a single operation. Implant size and shape (round or anatomical), placement in front of or behind the chest muscle, and the incision — usually in the fold under the breast — are planned to your measurements. Modern cohesive-gel implants hold their shape and are expected to last many years, though they are not lifetime devices." },
           { title: "Fat Transfer (Autologous Fat Grafting)", text: "Fat is removed by liposuction from the tummy, flanks or thighs, prepared and injected into the breasts. It gives a modest, natural increase with no implant and slims the donor area, but needs enough spare fat, and a proportion of the graft is absorbed, so more than one session may be needed for a larger change." },
@@ -604,7 +604,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
         body: ["A compression garment is worn for about four to six weeks. Bruising and swelling peak in the first week and settle over three to four weeks; some fluid may leak from the small incisions for the first day or two. Most people return to desk work within a few days and to exercise at two to four weeks. The final contour shows at about three months as swelling resolves and the skin retracts."],
       },
       {
-        heading: "Liposuction or a lift?",
+        heading: "Liposuction or a Lift?",
         body: ["Liposuction removes fat but relies on the skin to shrink back. Where the skin is already loose — after pregnancy or major weight loss — removing fat alone can leave it looser still. In those cases a tummy tuck, arm lift or thigh lift, with or without liposuction, gives a better result; the consultation is where skin quality is assessed."],
       },
       {
@@ -668,7 +668,7 @@ export const PROCEDURE_PAGES: ServicePage[] = [
         bullets: [
           "The helmet is worn 23 hours a day; it comes off for bathing and cleaning",
           "Positional plagiocephaly or brachycephaly: typically 3 to 4 months of wear",
-          "After endoscopic craniosynostosis surgery: longer — from about 6 months and in some cases up to 1–2 years, depending on severity and response",
+          "After endoscopic craniosynostosis surgery: longer — continued until a good head shape is achieved, depending on severity and response",
           "Orthotist review every 3 weeks for adjustments",
           "Dr Vybhav reviews the baby and the scans every 3 months",
         ],

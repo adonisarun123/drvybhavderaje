@@ -60,26 +60,26 @@ export default async function ThankYouPage({ searchParams }: { searchParams: Pro
             </aside>
           )}
 
-          <h2>What happens next</h2>
+          <h2>What Happens Next</h2>
           <div className="steps" style={{ marginBottom: 40 }}>
             <div>
               <span className="step-number">01</span>
-              <h3>The clinic reviews your request</h3>
+              <h3>The Clinic Reviews Your Request</h3>
               <p>Your details go straight to the appointments team at Dr Vybhav Deraje&rsquo;s clinic. Requests are handled in clinic hours, Indian Standard Time (UTC+5:30).</p>
             </div>
             <div>
               <span className="step-number">02</span>
-              <h3>You receive a call or WhatsApp message</h3>
+              <h3>You Receive a Call or WhatsApp Message</h3>
               <p>The clinic will contact you on the number you gave to agree a date, time and location — or a video-consultation slot if you asked for one. Please keep your phone reachable.</p>
             </div>
             <div>
               <span className="step-number">03</span>
-              <h3>Your appointment is confirmed</h3>
+              <h3>Your Appointment Is Confirmed</h3>
               <p>Once a time is agreed, you&rsquo;ll receive confirmation with the clinic address and anything to bring. Earlier reports, scans and photographs are useful on the day.</p>
             </div>
           </div>
 
-          <h2>Before your consultation</h2>
+          <h2>Before Your Consultation</h2>
           <p>
             A little preparation makes the first visit more useful. The <Link href={ROUTES.resources}>patient resources</Link> page covers what to bring, questions worth asking and travelling to Bangalore from another city or country. Each procedure page explains who it suits, what the surgery involves and what recovery looks like:
           </p>
@@ -98,7 +98,7 @@ export default async function ThankYouPage({ searchParams }: { searchParams: Pro
         <div>
           <aside className="side-card" aria-label="Need to reach us sooner?">
             <p className="eyebrow">Need to speak with us sooner?</p>
-            <h3>Call or message the clinic.</h3>
+            <h3>Call or Message the Clinic.</h3>
             <p>If your concern is urgent, or you want to add something to your request, the quickest way is a call or a WhatsApp message.</p>
             <a className="text-link" href={`tel:${SITE.phoneTel}`}>
               <Phone size={16} aria-hidden="true" /> {SITE.phone}
@@ -115,7 +115,7 @@ export default async function ThankYouPage({ searchParams }: { searchParams: Pro
           </aside>
           <aside className="side-card" aria-label="Clinic locations" style={{ marginTop: 24 }}>
             <p className="eyebrow">Where you&rsquo;ll be seen</p>
-            <h3>Clinics across Bangalore.</h3>
+            <h3>Clinics Across Bangalore.</h3>
             <p>Dr Deraje consults at {clinics.map((c) => c.name).join(", ")}, and operates at partner hospitals.</p>
             <Link className="text-link" href={ROUTES.locations}>
               Locations and directions <ArrowRight size={16} aria-hidden="true" />

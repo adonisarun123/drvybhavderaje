@@ -90,7 +90,7 @@ export default function ProceduresIndexPage() {
             </ul>
           </section>
           <section>
-            <h2>Not sure which page applies to you?</h2>
+            <h2>Not Sure Which Page Applies to You?</h2>
             <p>
               Describe your concern in the <Link href={ROUTES.contact}>enquiry form</Link> or call the clinic; the team will suggest the right consultation. Read about <Link href={ROUTES.about}>Dr Vybhav Deraje’s training</Link>, see the <Link href={ROUTES.locations}>clinic and hospital locations</Link>, or <Link href={ROUTES.resources}>prepare for your first visit</Link>.
             </p>

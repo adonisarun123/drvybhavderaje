@@ -1,6 +1,6 @@
 import { CRANIO_PARENT, CRANIO_TYPES, cranioTypePath } from "./cranio-types";
 import { SUB_PROCEDURES, subProcedurePath, subProceduresOf } from "./sub-procedures";
-import { AFFILIATIONS, CLINICS_SEED, COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, CREDENTIALS, DOCTOR, HOME_FAQS, HOSPITALS, OTHER_SERVICES, PRACTICES, PUBLICATIONS, SERVICE_PAGES, SITE } from "./content";
+import { AFFILIATIONS, CLINICS_SEED, COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, CREDENTIALS, DOCTOR, HOME_FAQS, HOSPITALS, hospitalMapUrl, OTHER_SERVICES, PRACTICES, PUBLICATIONS, SERVICE_PAGES, SITE } from "./content";
 import { ROUTES } from "./routes";
 import { absolute } from "./seo";
 
@@ -62,7 +62,7 @@ export function llmsFullTxt(): string {
   out.push(`# About ${DOCTOR.name}`, "", `URL: ${absolute(ROUTES.about)}`, "", ...DOCTOR.bio, "");
   out.push("## Qualifications", "", ...CREDENTIALS.map((c) => `- ${c.title} — ${c.detail}`), "");
   out.push("## Memberships", "", ...AFFILIATIONS.map((a) => `- ${a.org}: ${a.detail}`), "");
-  out.push("## Hospital affiliations", "", ...HOSPITALS.map((h) => `- ${h.name}, ${h.address}. Tel ${h.phoneDisplay}`), "");
+  out.push("## Hospital affiliations", "", ...HOSPITALS.map((h) => `- ${h.name}, ${h.address}. Map: ${hospitalMapUrl(h)}`), "");
   out.push("## Consultation clinics", "", ...CLINICS_SEED.map((c) => `- ${c.brand} ${c.name}: ${c.addressLines}. Tel ${c.phone}`), "");
   out.push("## Selected publications", "", ...PUBLICATIONS.map((p) => `- ${p}`), "");
   for (const p of SERVICE_PAGES) {

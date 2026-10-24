@@ -7,7 +7,8 @@ import { JsonLd } from "@/components/site/json-ld";
 import { SubProcedureView } from "@/components/site/sub-procedure-page";
 import { VideoSection } from "@/components/site/video-section";
 import { CRANIO_PARENT, CRANIO_TYPES, cranioTypePath, cranioVideoKey, getCranioType } from "@/lib/cranio-types";
-import { DOCTOR, getService, SITE } from "@/lib/content";
+import { DOCTOR, getService, HEAD_SHAPE_CLINIC, SITE } from "@/lib/content";
+import { titleCase } from "@/lib/title-case";
 import { autolink, createLinkBudget } from "@/lib/links";
 import { ROUTES, SECTION } from "@/lib/routes";
 import { getSubProcedure, SUB_PROCEDURES, subProcedurePath } from "@/lib/sub-procedures";
@@ -94,16 +95,23 @@ export default async function CranioTypePage({ params }: { params: Params }) {
           <KeyFacts title={`${t.shortTitle} at a Glance`}>
             <ul>
               <li>
-                <b>Head Shape:</b> {t.shapeName}.
+                <b>Head Shape:</b> {titleCase(t.shapeName)}.
               </li>
               <li>
-                <b>Diagnosis:</b> clinical examination, skull X-ray and 3D CT scan{multi ? ", MRI and genetic testing" : "; MRI occasionally"}.
+                <b>Diagnosis:</b> Clinical examination, skull X-ray and 3D CT scan{multi ? ", MRI and genetic testing" : "; MRI occasionally"}.
               </li>
               <li>
-                <b>Treatment:</b> {multi ? "staged surgery through childhood with a multidisciplinary team." : `under 6 months, keyhole surgery and helmet therapy for 1–2 years; above 6 months, open ${(openName ?? "remodelling").toLowerCase()}.`}
+                <b>Treatment:</b> {multi ? "Staged surgery through childhood with a multidisciplinary team." : `Under 6 months, keyhole surgery and Orthotic Helmet Therapy; above 6 months, open ${(openName ?? "remodelling").toLowerCase()}.`}
               </li>
               <li>
                 <b>Surgeon:</b> <Link href={ROUTES.about}>{DOCTOR.name}</Link>, {DOCTOR.fellowship}.
+              </li>
+              <li>
+                <b>Where:</b> Consultations at{" "}
+                <a href={HEAD_SHAPE_CLINIC.url} target="_blank" rel="noopener noreferrer">
+                  The Head Shape Clinic
+                </a>{" "}
+                ({HEAD_SHAPE_CLINIC.where.split(" — ")[0]}); surgery at Aster Whitefield Hospital.
               </li>
               <li>
                 <b>Contact:</b> <a href={`tel:${SITE.phoneTel}`}>{SITE.phone}</a> · <a href={`mailto:${SITE.email}`}>{SITE.email}</a>

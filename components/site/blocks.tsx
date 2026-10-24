@@ -20,7 +20,7 @@ export function CtaBand() {
       </div>
       <div>
         <p className="eyebrow">Let’s Take the Next Step, Together</p>
-        <h2 id="cta-heading">Your questions are a good place to start.</h2>
+        <h2 id="cta-heading">Your Questions Are a Good Place to Start.</h2>
         <p>
           Call <a href={`tel:${SITE.phoneTel}`}>{SITE.phone}</a>, email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or send an enquiry.
         </p>
@@ -36,7 +36,7 @@ export function HelpSideCard() {
   return (
     <aside className="side-card" aria-label="Contact the clinic">
       <p className="eyebrow">Here to Help</p>
-      <h3>Let’s talk about your care.</h3>
+      <h3>Let’s Talk About Your Care.</h3>
       <p>The clinic can help you choose a location and arrange your consultation with Dr Vybhav Deraje.</p>
       <Link href={ROUTES.contact} className="button" data-analytics-cta="side_card_book">
         Book an Appointment <ArrowUpRight size={18} aria-hidden="true" />

@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { Byline, CtaBand, Faq, HelpSideCard, KeyFacts, PageHero, PhotoGallery, RelatedServices } from "@/components/site/blocks";
 import { VideoSection } from "@/components/site/video-section";
 import { JsonLd } from "@/components/site/json-ld";
-import { childServices, DOCTOR, getService, GROUP_HREF, GROUP_LABEL, HOSPITALS, isFeatured, PRACTICES, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
+import { childServices, DOCTOR, HEAD_SHAPE_CLINIC, HEAD_SHAPE_SLUGS, getService, GROUP_HREF, GROUP_LABEL, HOSPITALS, isFeatured, PRACTICES, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
 import { autolink, createLinkBudget, relatedServices } from "@/lib/links";
 import { ROUTES, SECTION } from "@/lib/routes";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, PROCEDURE_ID, CONDITION_ID, serviceEntitiesJsonLd } from "@/lib/seo";
@@ -76,6 +76,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const parent = page.parent ? getService(page.parent) : undefined;
   const children = childServices(page.slug);
   const related = relatedServices(page);
+  const headShape = HEAD_SHAPE_SLUGS.has(page.slug);
 
   // Contextual links, resolved in reading order: at-a-glance → intro → sections → FAQs.
   const budget = createLinkBudget(page.path, [ROUTES.about, ROUTES.locations, ROUTES.contact]);
@@ -130,29 +131,39 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               <li>
                 <b>Surgeon:</b> <Link href={ROUTES.about}>{DOCTOR.name}</Link>, {DOCTOR.honorificSuffix}; {DOCTOR.fellowship}.
               </li>
-              <li>
-                <b>Where:</b> consultations at <Link href={ROUTES.locations}>Aesthetica Veda clinics</Link> in Bangalore; surgery at {HOSPITALS.map((h) => h.name.replace(" Hospital", "")).slice(0, 3).join(", ")} and other partner hospitals.
-              </li>
+              {headShape ? (
+                <li>
+                  <b>Where:</b> Consultations at{" "}
+                  <a href={HEAD_SHAPE_CLINIC.url} target="_blank" rel="noopener noreferrer">
+                    The Head Shape Clinic
+                  </a>{" "}
+                  ({HEAD_SHAPE_CLINIC.where.split(" — ")[0]}); surgery, when needed, at Aster Whitefield Hospital.
+                </li>
+              ) : (
+                <li>
+                  <b>Where:</b> Consultations at <Link href={ROUTES.locations}>Aesthetica Veda Clinics</Link> in Bangalore; surgery at {HOSPITALS.map((h) => h.name.replace(" Hospital", "")).slice(0, 3).join(", ")} and other partner hospitals.
+                </li>
+              )}
               <li>
                 <b>Practice:</b>{" "}
-                {PRACTICES.filter((p) => p.groups.includes(page.group)).map((p, i) => (
+                {PRACTICES.filter((p) => (headShape ? p.slug === HEAD_SHAPE_CLINIC.slug : p.groups.includes(page.group))).map((p, i) => (
                   <span key={p.slug}>
                     {i > 0 && " · "}
                     <a href={p.url} target="_blank" rel="noopener noreferrer">
                       {p.name}
                     </a>{" "}
-                    ({p.tagline.toLowerCase()})
+                    ({p.tagline})
                   </span>
                 ))}
-                {page.group === "craniofacial" && (
+                {page.group === "craniofacial" && !headShape && (
                   <>
                     {" "}· <a href={PRACTICES[1]!.url} target="_blank" rel="noopener noreferrer">Aesthetica Veda</a> for all other consultations
                   </>
                 )}
-                {page.group === "craniofacial" ? " — both founded by Dr Vybhav Deraje." : " — Dr Vybhav Deraje's cosmetic clinics in Bangalore."}
+                {headShape ? " — founded by Dr Vybhav Deraje." : page.group === "craniofacial" ? " — both founded by Dr Vybhav Deraje." : " — Dr Vybhav Deraje's cosmetic clinics in Bangalore."}
               </li>
               <li>
-                <b>Patients from Outside Bangalore:</b> <Link href={ROUTES.contact}>video consultations</Link> for an initial opinion; surgery needs an in-person assessment.
+                <b>Patients from Outside Bangalore:</b> <Link href={ROUTES.contact}>Video consultations</Link> for an initial opinion; surgery needs an in-person assessment.
               </li>
               <li>
                 <b>Contact:</b> <a href={`tel:${SITE.phoneTel}`}>{SITE.phone}</a> · <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
@@ -197,7 +208,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </p>
           )}
           <section className="contact-inline">
-            <h2>Need more information?</h2>
+            <h2>Need More Information?</h2>
             <p>
               Call <a href={`tel:${SITE.phoneTel}`}>{SITE.phone}</a>, email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or{" "}
               <Link href={ROUTES.contact}>

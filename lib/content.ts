@@ -32,7 +32,7 @@ export const SITE = {
   whatsappNumber: "919535581616",
   whatsappUrl: "https://wa.me/919535581616?text=" + encodeURIComponent("Hello, I would like to enquire about a consultation with Dr Vybhav Deraje."),
   email: "connect@drvybhavderaje.com",
-  utilityLine: "Reconstructing faces. Rebuilding lives.",
+  utilityLine: "Reconstructing Faces. Rebuilding Lives.",
   /** <meta description> for the homepage (≤160 chars). */
   metaDescription: "Dr Vybhav Deraje, craniofacial & plastic surgeon in Bangalore: craniosynostosis, cleft, jaw and ear reconstruction; rhinoplasty, facelift, breast and body surgery.",
   /** Longer entity description used in structured data and llms.txt. */
@@ -109,17 +109,20 @@ export interface Hospital {
   /** ImageKit path, or a local /hospitals/… file in /public (served by next/image); omitted when there is no photograph (a neutral tile is shown instead). */
   image?: string;
   address: string;
-  phone: string;
-  phoneDisplay: string;
+}
+
+/** Google Maps link for a hospital (the doctor asked for map locations instead of hospital phone numbers, 24 Oct 2026). */
+export function hospitalMapUrl(h: Hospital): string {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${h.name}, ${h.address}`)}`;
 }
 
 /** Hospitals where Dr Deraje operates — list confirmed by the doctor, 23 Oct 2026. */
 export const HOSPITALS: Hospital[] = [
-  { name: "Aster Whitefield Hospital", image: "/custom/aster1.webp", address: "Plot No. 2, 3 & 4, Survey No. 76, Sadaramangala Industrial Area, Opp. ITPL Main Road, Kadugodi, Bengaluru, Karnataka 560066", phone: "+918045108888", phoneDisplay: "+91 80 4510 8888" },
-  { name: "Gifted Hands Hospital", image: "/hospitals/gifted-hands.jpg", address: "No. 5AC-908, Hennur Banasawadi Road Extension, HRBR Layout 1st Block, Bengaluru, Karnataka 560043", phone: "+919187207454", phoneDisplay: "+91 91872 07454" },
-  { name: "Aarogya Hastha Hospital", image: "/hospitals/aarogya-hastha.jpg", address: "No. 2816/2, Kasavanahalli Main Road, near 1st Cross Road, opp. HM Symphony, Off Sarjapur Road, Bengaluru, Karnataka 560035", phone: "+918066668800", phoneDisplay: "+91 80 6666 8800" },
-  { name: "Medicover Hospital", image: "/hospitals/medicover-whitefield.jpg", address: "351 ITPL Main Road, Hoodi Village, Whitefield, Bengaluru, Karnataka 560048", phone: "+914068334455", phoneDisplay: "+91 40 6833 4455" },
-  { name: "Apollo Spectra Hospital", image: "/custom/appolo1.webp", address: "143, 1st Cross, Near Nagarjuna Hotel, 5th Block, Koramangala, Bengaluru, Karnataka 560034", phone: "+918448440991", phoneDisplay: "+91 84484 40991" },
+  { name: "Aster Whitefield Hospital", image: "/custom/aster1.webp", address: "Plot No. 2, 3 & 4, Survey No. 76, Sadaramangala Industrial Area, Opp. ITPL Main Road, Kadugodi, Bengaluru, Karnataka 560066" },
+  { name: "Gifted Hands Hospital", image: "/hospitals/gifted-hands.jpg", address: "No. 5AC-908, Hennur Banasawadi Road Extension, HRBR Layout 1st Block, Bengaluru, Karnataka 560043" },
+  { name: "Aarogya Hastha Hospital", image: "/hospitals/aarogya-hastha.jpg", address: "No. 2816/2, Kasavanahalli Main Road, near 1st Cross Road, opp. HM Symphony, Off Sarjapur Road, Bengaluru, Karnataka 560035" },
+  { name: "Medicover Hospital", image: "/hospitals/medicover-whitefield.jpg", address: "351 ITPL Main Road, Hoodi Village, Whitefield, Bengaluru, Karnataka 560048" },
+  { name: "Apollo Spectra Hospital", image: "/custom/appolo1.webp", address: "143, 1st Cross, Near Nagarjuna Hotel, 5th Block, Koramangala, Bengaluru, Karnataka 560034" },
 ];
 
 /** Photographs from the practice's about page (ImageKit paths; legacy /images/… URLs redirect there). */
@@ -138,8 +141,11 @@ export const ABOUT_GALLERY: Photo[] = [
   { src: "/custom/18.png", caption: "Presenting at APSICON 2018, Lucknow", width: 370, height: 260 },
 ];
 
+/** Publications and presentations: synced with Dr Deraje's CV dated 15 May 2026 (doctor's review, 24 Oct 2026). Newest first. */
 export const PUBLICATIONS = [
-  "Deraje V, Tandon AS. The significance or insignificance of prematurely fused bilateral squamous sutures. 2022;9(1):82-4.",
+  "Atluri SJ, Deraje V, Sakhrani V. Interfrontal bone: a rare phenomenon and diagnostic challenge. J Cleft Lip Palate Craniofac Anomal. 2026 Jan-Jun;13(1):115-7.",
+  "Gujjalanavar RS, Doddamani R, Deraje V, Gopal S. Spring-assisted cranial expansion for multisuture craniosynostosis: first case report from the Indian subcontinent. Indian J Plast Surg. 2023 Oct 6;56(5):461-5.",
+  "Deraje V, Tandon AS. The significance or insignificance of prematurely fused bilateral squamous sutures. J Cleft Lip Palate Craniofac Anomal. 2022;9(1):82-4.",
   "Deraje V, Gopal S, Mendonca DA, Gujjalanavar RS. Endoscope-assisted “extended” suturectomy for unicoronal craniosynostosis: a technical note. Plast Reconstr Surg. 2021 Dec 1;148(6):1079e-80e.",
   "Deraje V, Gujjalanavar RS, Das S, Janardhan R, Rao P. Acute extremity gangrene in COVID-19 patients. Indian J Plast Surg. 2021;54(2):237-9.",
   "Mbaidjol Z, Shaharan S, Christopoulos G, Deraje V, Kannan RY. Fibonacci sequence ‘snail’ flap versus skin grafts in scalp reconstruction: a comparative study. Eur J Plast Surg. 2021;44:587–92.",
@@ -157,7 +163,17 @@ export const PUBLICATIONS = [
 export const PUBLICATIONS_OTHER = ["Life is tougher for women after plastic surgery residency: myth or reality? PLASTICOS 2020;5:25-8."];
 
 export const PRESENTATIONS = [
-  "Faculty talk, ‘Craniofacial procedures for sleep apnoea’ — 3rd Annual Workshop on Sleep & OSA, Bangalore, 9 Feb 2020.",
+  "Faculty, invited talk, ‘Role of Orthotic Helmet Therapy in craniofacial practice’ — INDOCLEFTCON 2026, Mysore, May 2026.",
+  "Faculty and CME convener, ‘History and evolution of craniofacial surgery’ — APSI-accredited CME on Craniofacial Surgery (online), Feb 2026.",
+  "Faculty, invited talk, ‘Endoscopic strip craniectomy and helmet therapy — 10-year experience from India’ — STAR Summit, Orlando, Florida, USA, Oct 2025.",
+  "Faculty, talk on endoscopic strip craniectomy and helmet therapy — NIMHANS CME & Workshop on Craniosynostosis, Bangalore, Oct 2025.",
+  "Faculty, invited talk, ‘Minimally invasive methods of craniosynostosis treatment’ — INDOCLEFTCON 2024, Mangalore, Apr 2024.",
+  "Faculty — Residents’ Forum, APSICON 2023, Indore, Dec 2023.",
+  "Faculty, invited talk, ‘Special considerations in paediatric craniofacial trauma’ — PEDPLASTY, Kochi, Nov 2023.",
+  "Faculty, invited talk, ‘Minimally invasive methods for craniosynostosis treatment’ — BJPSA Hybrid Academic Meet on Craniofacial Surgery (online), Jul 2023.",
+  "Podium presentation, ‘8-year experience of treating craniosynostosis in a tertiary care centre in India’ — ESCFS 2022, Oxford, UK, Sep 2022.",
+  "Faculty, invited talk, ‘The surgical anatomy and classification of lip defects’ — APSI-accredited CME on Lip, Ear & Nose Reconstruction (online), Mar 2022.",
+  "Faculty talk, ‘Craniofacial procedures for sleep apnoea’ — 3rd Annual Workshop on Snoring & OSA, Bangalore, 9 Feb 2020.",
   "Faculty debate, ‘Gender issues in plastic surgery training and practice’ — APSICON 2019, Bhubaneswar, 11–15 Dec 2019.",
   "Poster, ‘Effect of fronto-orbital advancement on frontal sinus development and function in non-syndromic and syndromic craniosynostosis’ — ISCFS 2019, Paris, 16–19 Sep 2019.",
   "Instructor — SET 2-5 Registrars’ Conference (ASPS-RACS), Adelaide, 23–27 Mar 2019.",
@@ -236,7 +252,7 @@ export const PRACTICES: Practice[] = [
     logoHeight: 392,
     tagline: "Caring for Little Heads",
     description:
-      "Dr Vybhav's dedicated clinic for infant head-shape concerns: flat head syndrome (positional plagiocephaly and brachycephaly) and craniosynostosis. Assessment, helmet therapy and, where surgery is needed, the craniofacial team at Aster Hospital, Whitefield.",
+      "Dr Vybhav's dedicated clinic for infant head-shape concerns: flat head syndrome (positional plagiocephaly and brachycephaly) and craniosynostosis. Assessment, Orthotic Helmet Therapy and, where surgery is needed, the craniofacial team at Aster Hospital, Whitefield.",
     where: "Docube Clinic, Koramangala, Bengaluru — with outreach clinics in other Indian cities",
     groups: ["craniofacial"],
   },
@@ -256,6 +272,8 @@ export const PRACTICES: Practice[] = [
 ];
 
 export const HEAD_SHAPE_CLINIC = PRACTICES[0]!;
+/** Craniosynostosis and infant head-shape pages: these name The Head Shape Clinic only, never Aesthetica Veda (doctor's review, 24 Oct 2026). */
+export const HEAD_SHAPE_SLUGS: ReadonlySet<string> = new Set(["craniosynostosis-surgery-bangalore", "helmet-therapy-flat-head-bangalore"]);
 export const AESTHETICA_VEDA = PRACTICES[1]!;
 
 /* ------------------------------------------------------------------------------------------------
@@ -328,13 +346,13 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
     shortTitle: "Craniosynostosis",
     title: "Craniosynostosis Surgery in Bangalore",
     metaTitle: "Craniosynostosis Surgery in Bangalore — Endoscopic & Open | Dr Vybhav Deraje",
-    description: "Craniosynostosis surgery in Bangalore by Dr Vybhav Deraje: endoscopic keyhole surgery with 3D-printed helmet therapy under 6 months, and open cranial remodelling.",
+    description: "Craniosynostosis surgery in Bangalore by Dr Vybhav Deraje: endoscopic keyhole surgery with Orthotic Helmet Therapy under 6 months, and open cranial remodelling.",
     eyebrow: "Craniofacial Surgery · For Children & Families",
-    lead: "Specialist assessment and surgery for babies whose skull sutures have closed too early — including minimally invasive endoscopic surgery with 3D-printed helmet therapy.",
-    cardText: "Early-closing skull sutures in babies: endoscopic keyhole surgery, helmet therapy and open remodelling.",
+    lead: "Specialist assessment and surgery for babies whose skull sutures have closed too early — including minimally invasive endoscopic surgery with Orthotic Helmet Therapy.",
+    cardText: "Early-closing skull sutures in babies: endoscopic keyhole surgery, Orthotic Helmet Therapy and open remodelling.",
     intro: [
       "Craniosynostosis is a birth defect in which one or more of the soft joints between the bones of a baby’s skull (the cranial sutures) close too early. Depending on the suture involved it changes the shape of the skull and, in some children, raises the pressure inside the skull and compresses the growing brain.",
-      "Dr Vybhav Deraje has a special interest and expertise in managing craniosynostosis. He leads the craniosynostosis multidisciplinary team at Aster Hospital, Whitefield — the only hospital in India offering minimally invasive endoscope-assisted surgery together with 3D-printed helmet therapy for these children.",
+      "Dr Vybhav Deraje has a special interest and expertise in managing craniosynostosis. He leads the craniosynostosis multidisciplinary team at Aster Hospital, Whitefield — the only hospital in India offering minimally invasive endoscope-assisted surgery together with Orthotic Helmet Therapy for these children.",
     ],
     sections: [
       {
@@ -404,7 +422,7 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
         items: [
           {
             title: "Non-Syndromic Single-Suture Craniosynostosis — Under 6 Months",
-            text: "Minimally invasive (keyhole) endoscope-assisted strip craniectomy followed by 3D-printed helmet therapy for 1–2 years. The fused suture is removed through a small incision using minimally invasive techniques: shorter hospital stay, minimal blood loss, usually no blood transfusion and a quick recovery. The helmet then moulds the skull and allows the brain to grow normally.",
+            text: "Minimally invasive (keyhole) endoscope-assisted strip craniectomy followed by Orthotic Helmet Therapy. The fused suture is removed through a small incision using minimally invasive techniques: shorter hospital stay, minimal blood loss, usually no blood transfusion and a quick recovery. The helmet then moulds the skull and allows the brain to grow normally.",
           },
           {
             title: "Non-Syndromic Single-Suture Craniosynostosis — Over 6 Months",
@@ -420,20 +438,20 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
     faqs: [
       { q: "What is craniosynostosis?", a: "Craniosynostosis is a birth defect in which one or more of the soft joints (sutures) between the bones of a baby’s skull close too early. It changes the shape of the skull and in some children raises the pressure inside the skull." },
       { q: "What are the signs of craniosynostosis in a baby?", a: "An unusual head shape, a hard ridge along a suture, a soft spot that disappears early, slow head growth or a flat face. Raised pressure can cause developmental delay, vision changes, seizures or sleep apnoea. A craniofacial specialist assessment, usually with imaging, confirms the diagnosis." },
-      { q: "Is craniosynostosis surgery done through a keyhole?", a: "For non-syndromic single-suture craniosynostosis diagnosed before 6 months of age, Dr Vybhav Deraje performs minimally invasive endoscope-assisted strip craniectomy followed by 3D-printed helmet therapy. Older children usually need open fronto-orbital or cranial vault remodelling." },
-      { q: "How long does the helmet have to be worn after endoscopic surgery?", a: "Helmet therapy after endoscope-assisted strip craniectomy usually continues for 1 to 2 years to mould the skull shape as the brain grows." },
-      { q: "Where is craniosynostosis surgery performed in Bangalore?", a: "Dr Vybhav Deraje leads the craniosynostosis multidisciplinary team at Aster Hospital, Whitefield, Bangalore. Consultations are at Aesthetica Veda clinics in Whitefield, HRBR Layout and Koramangala, and through The Head Shape Clinic at Docube Clinic, Koramangala, which is dedicated to infant head-shape problems." },
+      { q: "Is craniosynostosis surgery done through a keyhole?", a: "For non-syndromic single-suture craniosynostosis diagnosed before 6 months of age, Dr Vybhav Deraje performs minimally invasive endoscope-assisted strip craniectomy followed by Orthotic Helmet Therapy. Older children usually need open fronto-orbital or cranial vault remodelling." },
+      { q: "Is a helmet needed after endoscopic surgery?", a: "Yes. Orthotic Helmet Therapy starts about a week after endoscope-assisted strip craniectomy and moulds the skull shape as the brain grows. The craniofacial surgeon and the orthotic team review progress regularly and decide when it can stop." },
+      { q: "Where is craniosynostosis surgery performed in Bangalore?", a: "Dr Vybhav Deraje leads the craniosynostosis multidisciplinary team at Aster Hospital, Whitefield, Bangalore. Consultations are through The Head Shape Clinic at Docube Clinic, Koramangala, which is dedicated to infant head-shape problems." },
       { q: "We live outside Bangalore. How should we plan?", a: "Call or email the clinic first, send any existing scan reports ahead, and confirm the appointment and clinic location before arranging travel. Many families travel to Bangalore for this care." },
     ],
     conditions: ["Craniosynostosis", "Unicoronal Synostosis", "Metopic Synostosis", "Sagittal Synostosis", "Lambdoid Synostosis", "Bicoronal Synostosis", "Multisuture Synostosis", "Apert syndrome", "Crouzon syndrome", "Pfeiffer syndrome"],
-    procedures: ["Endoscope-assisted strip craniectomy", "3D-printed helmet therapy", "Fronto-orbital remodelling", "Cranial vault remodelling", "Posterior vault expansion", "Le Fort III osteotomy"],
+    procedures: ["Endoscope-assisted strip craniectomy", "Orthotic Helmet Therapy", "Fronto-orbital remodelling", "Cranial vault remodelling", "Posterior vault expansion", "Le Fort III osteotomy"],
     related: ["helmet-therapy-flat-head-bangalore", "cleft-lip-and-palate-treatment-bangalore", "other-craniofacial-conditions-treatments"],
     gallery: [
       { src: "/custom/cran_1.png", caption: "Sagittal craniosynostosis", width: 370, height: 260 },
       { src: "/custom/cran_2.png", caption: "Metopic craniosynostosis", width: 370, height: 260 },
       { src: "/custom/cran_3.png", caption: "Unicoronal craniosynostosis", width: 370, height: 260 },
       { src: "/custom/cran_4.png", caption: "Bicoronal craniosynostosis", width: 370, height: 260 },
-      { src: "/custom/cran_5.png", caption: "3D-printed helmet", width: 370, height: 260 },
+      { src: "/custom/cran_5.png", caption: "Orthotic helmet", width: 370, height: 260 },
     ],
   },
   {
@@ -525,8 +543,8 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
       {
         heading: "Two Approaches",
         items: [
-          { title: "Orthodontics-first", text: "Braces and orthodontic treatment for 6 months to a year, followed by surgery. Some orthodontic treatment is sometimes needed after surgery as well." },
-          { title: "Surgery-first", text: "The jaw surgery is done first and followed by 6 months to a year of orthodontic treatment." },
+          { title: "Orthodontics-First", text: "Braces and orthodontic treatment for 6 months to a year, followed by surgery. Some orthodontic treatment is sometimes needed after surgery as well." },
+          { title: "Surgery-First", text: "The jaw surgery is done first and followed by 6 months to a year of orthodontic treatment." },
         ],
       },
       {
@@ -859,17 +877,19 @@ export const NAV: NavItem[] = [
 
 export const TESTIMONIALS = [
   {
-    name: "Praveen and Tarlika",
+    name: "A. J.",
     topic: "Craniosynostosis",
-    text: "Our first child was born on 8 July 2019 with a flat forehead on one side. After a CT scan he was diagnosed with craniosynostosis. Many doctors did not know the proper diagnosis and some suggested open skull surgery at 5 months. We found that Sakra World Hospital in Bengaluru had performed India’s first keyhole surgery on a 5-month-old baby, and the team’s confidence gave us the assurance to go ahead. After a successful surgery our son wore a 3D-printed helmet for 18 months. Today, at one year old, his forehead looks completely symmetrical. Special thanks to Dr Swaroop Gopal, Dr Rajendra S Gujjalanavar and Dr Vybhav Deraje for their moral support throughout the treatment.",
+    text: "We have had a fabulous experience with Dr Vybhav as our son’s primary surgeon for craniosynostosis. Dr Deraje is the true embodiment of the ‘patient first’ philosophy. He is not only excellent at his job but a kind and thoughtful human being as well. He is also one of the few surgeons who is constantly evolving and learning, travelling all around the world to both learn and teach, and that gives any patient much more confidence in having him as their doctor.",
   },
+
   { name: "Venkatesh", topic: "Hand Surgery", text: "I met with an accident and had surgery on my fingertip. Dr Vybhav did very well — I didn’t expect my fingertip to survive. He is a very helpful person as well." },
   { name: "Anindya", topic: "Wound management", text: "I was exceedingly comfortable during the surgery and Dr Deraje is a wonderful surgeon. He also assisted me in getting a certificate promptly for my injury. My scars have healed perfectly too." },
   { name: "Anand", topic: "Facial injury", text: "Amazing doctor. Explained things thoroughly during treatment. Made the deep cut mark on my cheek fully disappear, which I never thought would happen." },
   { name: "Rainy", topic: "Family of a patient", text: "I highly recommend Dr Vybhav based on my experience as the patient’s immediate family and primary caretaker. He strikes a good balance between excellent professional skill and his approach to the patient and family. He was thoroughly patient with my queries and gave sound advice." },
   { name: "Manoj", topic: "Paediatric plastic surgery", text: "A mind-blowing plastic surgeon — very friendly and very caring. My six-year-old daughter had four stitches on her chin a month back; it was done so neatly that the mark has almost vanished in less than a month." },
   { name: "Amit", topic: "Flap surgery for diabetic foot ulcer", text: "Dr Vybhav is a competent professional and a gentleman. My experience with him handling a flap and skin graft for my foot was reassuring. He is also a great counsellor who puts one’s mind at ease. No hesitation in recommending him to anyone needing reconstructive or plastic surgery." },
-  { name: "Debasish", topic: "Craniofacial trauma", text: "My daughter was seriously injured in a road accident and admitted to Sakra World Hospital under Dr Deraje, where she underwent surgery and recovered quickly. During the fifteen days I stayed there I received regular help, medical guidance and assistance from Dr Deraje whenever I needed it. I had never experienced this kind of care in the treatment of a patient." },
+  { name: "Deepa", topic: "Facial fractures", text: "We were completely devastated by my mother’s accident, which left her with multiple facial fractures. Dr Vybhav Deraje is a godsend: he treated my mom with utmost care and explained things clearly at every follow-up after the surgery. He was very diligent in making sure my mother got the best care, even when we had to consult other specialists. He answered all our queries with immense patience and guided us through the process — an amazing combination of high professionalism and empathy towards his patients." },
+  { name: "Kishore", topic: "Endoscopic forehead surgery", text: "I underwent forehead osteoma and lipoma removal with Dr Vybhav Deraje. The surgery was done through an endoscopic approach with a small incision on the scalp beyond the hairline, which healed well with no visible scar. He explained the procedure in detail, which really helped ease my anxiety, and was attentive to every concern before and after the procedure. Very satisfied with the treatment and the outcome." },
   { name: "Sandeep", topic: "Craniosynostosis", text: "Very comfortable to deal with. He clearly explains the condition and builds confidence, and clarifies all your questions with patience. Highly recommended." },
   { name: "Abhishek", topic: "Corrective jaw surgery", text: "Dr Deraje is very approachable, understanding and knowledgeable. He has a keen eye for aesthetics and his treatment plan has proven transformative and positive. Precise, patient and polite — well recommended." },
 ];

@@ -6,7 +6,7 @@ import { VideoSection } from "@/components/site/video-section";
 import { Byline, CtaBand, HospitalPhoto, PageHero, PracticeCards, ServiceIndex } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { getPublicClinics } from "@/lib/clinics";
-import { CLINICS_SEED, HOSPITALS } from "@/lib/content";
+import { CLINICS_SEED, HOSPITALS, hospitalMapUrl } from "@/lib/content";
 import { formatPhone } from "@/lib/phone";
 import { ROUTES } from "@/lib/routes";
 import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, physicianJsonLd, practiceJsonLd } from "@/lib/seo";
@@ -90,14 +90,15 @@ export default async function LocationsPage() {
               )}
               <h3>{h.name}</h3>
               <p>{h.address}</p>
-              <a href={`tel:${h.phone}`}>
-                <Phone size={16} aria-hidden="true" />
-                {h.phoneDisplay}
+              <a href={hospitalMapUrl(h)} target="_blank" rel="noopener noreferrer">
+                <MapPin size={16} aria-hidden="true" />
+                View on Google Maps
+                <span className="visually-hidden">(opens in a new tab)</span>
               </a>
             </article>
           ))}
         </div>
-        <p className="note">Appointment timings must be confirmed with the clinic. Hospital phone numbers connect to the hospital’s own front desk.</p>
+        <p className="note">Appointment timings must be confirmed with the clinic. For appointments, contact Dr Vybhav’s clinic rather than the hospital.</p>
         <ServiceIndex heading="What Is Treated at These Locations" intro={<p>Consultations for every condition and procedure take place at the Aesthetica Veda clinics; surgery is scheduled at the partner hospital best suited to it.</p>} />
       </section>
       <CtaBand />
