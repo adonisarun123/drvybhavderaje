@@ -724,7 +724,7 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
 .doctor-values svg { flex: 0 0 auto; color: var(--blue); margin-top: 2px; }
 .doctor-values p { margin: 0 !important; font-size: 14px !important; line-height: 1.6; }
 .doctor-actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-.doctor-media { position: sticky; top: 110px; }
+.doctor-media { position: relative; }
 .doctor-talk { margin: 0; border-radius: 10px; overflow: hidden; position: relative; box-shadow: 0 18px 40px #0c39691f; }
 .doctor-talk img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 40%; }
 .doctor-talk figcaption { position: absolute; left: 14px; bottom: 14px; padding: 6px 12px; border-radius: 999px; background: #ffffffeb; font-size: 12px; font-weight: 500; color: var(--navy); }
