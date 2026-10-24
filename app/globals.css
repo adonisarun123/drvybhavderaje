@@ -709,15 +709,28 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
 @media (max-width: 1100px) { .care-grid.cols-5 { grid-template-columns: repeat(2, 1fr); } }
 /* Nine "also treated" links: 3 x 3. */
 .also-treated { grid-template-columns: repeat(3, 1fr); }
-/* Meet the doctor: photo + stats on the left, copy on the right, memberships full width below. */
-.doctor-section { align-items: start; row-gap: 48px; }
-.doctor-talk { margin: 28px 0 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: #fff; }
-.doctor-talk img { display: block; width: 100%; height: auto; aspect-ratio: 370 / 260; object-fit: cover; }
-.doctor-talk figcaption { padding: 10px 14px; font-size: 13px; color: var(--muted); }
-.doctor-stats { list-style: none; padding: 0; margin: 20px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.doctor-stats li { border: 1px solid var(--line); border-radius: 8px; padding: 14px; font-size: 13px; line-height: 1.4; color: var(--muted); background: #fff; }
-.doctor-stats b { display: block; font-size: 26px; font-weight: 500; color: var(--navy); letter-spacing: -0.5px; margin-bottom: 4px; }
-.doctor-copy { padding-top: 6px; }
+/* Meet the doctor (v2): copy + training path left, photo + stats right, memberships full width below. */
+.doctor-section { grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; row-gap: 56px; }
+.doctor-lead { font-size: 16px; line-height: 1.8; margin: 18px 0 26px; }
+.doctor-path { list-style: none; padding: 0; margin: 0 0 26px; border-left: 2px solid #dbe6f3; }
+.doctor-path li { display: grid; grid-template-columns: 92px 1fr; gap: 14px; padding: 0 0 16px 18px; position: relative; }
+.doctor-path li::before { content: ""; position: absolute; left: -6px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: #fff; border: 2px solid var(--blue); }
+.doctor-path li:last-child { padding-bottom: 0; }
+.doctor-path li:last-child::before { background: var(--blue); }
+.doctor-path span { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); padding-top: 3px; }
+.doctor-path div { font-size: 14px; line-height: 1.55; color: var(--muted); }
+.doctor-path b { display: block; font-size: 15px; font-weight: 600; color: var(--navy); }
+.doctor-values { display: flex; gap: 12px; align-items: flex-start; margin: 0 0 28px; padding: 14px 16px; background: var(--soft, #eef3f8); border-radius: 8px; color: var(--navy); }
+.doctor-values svg { flex: 0 0 auto; color: var(--blue); margin-top: 2px; }
+.doctor-values p { margin: 0 !important; font-size: 14px !important; line-height: 1.6; }
+.doctor-actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.doctor-media { position: sticky; top: 110px; }
+.doctor-talk { margin: 0; border-radius: 10px; overflow: hidden; position: relative; box-shadow: 0 18px 40px #0c39691f; }
+.doctor-talk img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 40%; }
+.doctor-talk figcaption { position: absolute; left: 14px; bottom: 14px; padding: 6px 12px; border-radius: 999px; background: #ffffffeb; font-size: 12px; font-weight: 500; color: var(--navy); }
+.doctor-stats { list-style: none; padding: 0; margin: 16px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.doctor-stats li { border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; font-size: 13px; line-height: 1.4; color: var(--muted); background: #fff; }
+.doctor-stats b { display: block; font-size: 28px; font-weight: 500; color: var(--navy); letter-spacing: -0.5px; margin-bottom: 2px; }
 .doctor-logos { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 32px; }
 .doctor-logos .eyebrow { margin-bottom: 4px; }
 .logo-row { grid-template-columns: repeat(6, 1fr); }
@@ -740,4 +753,14 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
   .doctor-stats { gap: 8px; }
   .doctor-stats li { padding: 12px 10px; font-size: 12px; }
   .doctor-stats b { font-size: 20px; }
+}
+
+@media (max-width: 900px) {
+  .doctor-section { grid-template-columns: 1fr; gap: 32px; }
+  .doctor-media { position: static; }
+  .doctor-copy { order: 0; }
+}
+@media (max-width: 580px) {
+  .doctor-path li { grid-template-columns: 1fr; gap: 2px; }
+  .doctor-stats b { font-size: 22px; }
 }

@@ -210,36 +210,69 @@ export default async function HomePage() {
       </section>
 
       <section className="section container doctor-section" aria-labelledby="doctor-heading">
-        <div className="doctor-intro">
+        <div className="doctor-copy">
           <p className="eyebrow">Meet Dr Vybhav Deraje</p>
           <h2 id="doctor-heading">
             Expertise You Can Understand.
             <br />
             Care You Can Feel.
           </h2>
+          <p className="doctor-lead">{DOCTOR.summary}</p>
+          <ol className="doctor-path" aria-label="Training and career">
+            <li>
+              <span>India</span>
+              <div>
+                <b>DNB Plastic Surgery</b> Lok Nayak Hospital &amp; MAMC, Delhi
+              </div>
+            </li>
+            <li>
+              <span>UK</span>
+              <div>
+                <b>Fellowship in Plastic Surgery</b> Queen Victoria Hospital, East Grinstead
+              </div>
+            </li>
+            <li>
+              <span>Australia</span>
+              <div>
+                <b>Fellowship in Craniofacial Surgery</b> Australian Craniofacial Unit, Adelaide
+              </div>
+            </li>
+            <li>
+              <span>Since 2019</span>
+              <div>
+                <b>Consultant Surgeon, Bangalore</b> Leads the Craniosynostosis team at Aster Whitefield Hospital
+              </div>
+            </li>
+          </ol>
+          <blockquote className="doctor-values">
+            <HeartHandshake size={20} aria-hidden="true" />
+            <p>Privacy, safety and close coordination with other specialists — so every patient gets complete, joined-up care.</p>
+          </blockquote>
+          <div className="doctor-actions">
+            <Link href={ROUTES.about} className="button">
+              Read Full Profile <ArrowRight size={18} aria-hidden="true" />
+            </Link>
+            <Link href={ROUTES.contact} className="text-link">
+              Book an Appointment <ArrowUpRight size={18} aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+        <div className="doctor-media">
           <figure className="doctor-talk">
-            <NextImage src="/talks/star-summit-2025.jpg" alt="Dr Vybhav Deraje giving an invited talk at the STAR Summit 2025, Orlando" width={740} height={520} sizes="(max-width: 760px) 92vw, 520px" />
-            <figcaption>Invited talk, STAR Summit 2025, Orlando, USA</figcaption>
+            <NextImage src="/talks/indocleftcon-2026.jpg" alt="Dr Vybhav Deraje speaking as faculty at INDOCLEFTCON 2026, Mysore" width={740} height={520} sizes="(max-width: 760px) 92vw, 560px" />
+            <figcaption>Faculty, INDOCLEFTCON 2026 · Mysore</figcaption>
           </figure>
-          <ul className="doctor-stats" aria-label="Academic work">
+          <ul className="doctor-stats" aria-label="At a glance">
             <li>
               <b>{PUBLICATIONS.length}</b> Peer-Reviewed Papers
             </li>
             <li>
-              <b>{PRESENTATIONS.length}</b> Conference Presentations
+              <b>{PRESENTATIONS.length}</b> Conference Talks
             </li>
             <li>
-              <b>Since 2019</b> Consultant Surgeon in Bangalore
+              <b>2</b> Practices Founded
             </li>
           </ul>
-        </div>
-        <div className="doctor-copy">
-          <p>{DOCTOR.summary}</p>
-          <p>{DOCTOR.summary2}</p>
-          <p>{DOCTOR.values}</p>
-          <Link href={ROUTES.about} className="text-link">
-            Read the Full Profile, Publications and Training <ArrowRight size={18} aria-hidden="true" />
-          </Link>
         </div>
         <div className="doctor-logos">
           <p className="eyebrow">Memberships and Registrations</p>
