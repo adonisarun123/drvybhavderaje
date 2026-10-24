@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (sub) return pageMetadata({ title: sub.metaTitle, description: sub.description, path: subProcedurePath(sub), ogType: "article" });
   const t = slug === CRANIO_PARENT ? getCranioType(type) : undefined;
   if (!t) return {};
-  return pageMetadata({ title: t.metaTitle, description: t.description, path: cranioTypePath(t.slug), ogType: "article" });
+  return pageMetadata({ title: t.metaTitle, description: t.description, path: cranioTypePath(t.slug), ogType: "article", bare: true });
 }
 
 export default async function CranioTypePage({ params }: { params: Params }) {
