@@ -76,7 +76,7 @@ export default async function CranioTypePage({ params }: { params: Params }) {
             possibleTreatment: multi
               ? ["Posterior cranial vault expansion", "Fronto-orbital advancement", "Cranial vault remodelling", "Le Fort III advancement"].map((name) => ({ "@type": "MedicalProcedure", name }))
               : [
-                  { "@type": "MedicalProcedure", name: "Endoscope-assisted strip craniectomy with helmet therapy" },
+                  { "@type": "MedicalProcedure", name: "Endoscope-Assisted Strip Craniectomy with Helmet Therapy" },
                   { "@type": "MedicalProcedure", name: openName ?? "Cranial vault remodelling" },
                 ],
           },
@@ -101,7 +101,7 @@ export default async function CranioTypePage({ params }: { params: Params }) {
                 <b>Diagnosis:</b> Clinical examination, skull X-ray and 3D CT scan{multi ? ", MRI and genetic testing" : "; MRI occasionally"}.
               </li>
               <li>
-                <b>Treatment:</b> {multi ? "Staged surgery through childhood with a multidisciplinary team." : `Under 6 months, keyhole surgery and Orthotic Helmet Therapy; above 6 months, open ${(openName ?? "remodelling").toLowerCase()}.`}
+                <b>Treatment:</b> {multi ? "Staged surgery through childhood with a multidisciplinary team." : `Under 6 months, keyhole surgery and Orthotic Helmet Therapy; above 6 months, open ${openName ?? "Remodelling"}.`}
               </li>
               <li>
                 <b>Surgeon:</b> <Link href={ROUTES.about}>{DOCTOR.name}</Link>, {DOCTOR.fellowship}.

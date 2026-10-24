@@ -39,7 +39,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
         </div>
         <div>
           <aside className="side-card" aria-label="Phone and email">
-            <p className="eyebrow">Prefer to speak with us?</p>
+            <p className="eyebrow">Prefer to Speak with Us?</p>
             <h3>We’re Here to Help.</h3>
             <p>Call or message on WhatsApp to discuss appointment availability and the most convenient clinic for you.</p>
             <a className="text-link" href={`tel:${SITE.phoneTel}`}>

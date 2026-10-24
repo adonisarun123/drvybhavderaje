@@ -44,7 +44,7 @@ export default async function ThankYouPage({ searchParams }: { searchParams: Pro
 
           {reference && (
             <aside className="key-facts" aria-label="Your enquiry">
-              <p className="eyebrow">Your enquiry</p>
+              <p className="eyebrow">Your Enquiry</p>
               <h2>
                 <CheckCircle2 size={22} aria-hidden="true" style={{ verticalAlign: "-4px", marginRight: 8, color: "var(--ok-border)" }} />
                 Reference <span data-enquiry-reference>{reference}</span>
@@ -97,7 +97,7 @@ export default async function ThankYouPage({ searchParams }: { searchParams: Pro
 
         <div>
           <aside className="side-card" aria-label="Need to reach us sooner?">
-            <p className="eyebrow">Need to speak with us sooner?</p>
+            <p className="eyebrow">Need to Speak with Us Sooner?</p>
             <h3>Call or Message the Clinic.</h3>
             <p>If your concern is urgent, or you want to add something to your request, the quickest way is a call or a WhatsApp message.</p>
             <a className="text-link" href={`tel:${SITE.phoneTel}`}>
@@ -114,15 +114,15 @@ export default async function ThankYouPage({ searchParams }: { searchParams: Pro
             <p className="note">For a medical emergency, seek urgent care at the nearest hospital.</p>
           </aside>
           <aside className="side-card" aria-label="Clinic locations" style={{ marginTop: 24 }}>
-            <p className="eyebrow">Where you&rsquo;ll be seen</p>
+            <p className="eyebrow">Where You&rsquo;ll Be Seen</p>
             <h3>Clinics Across Bangalore.</h3>
             <p>Dr Deraje consults at {clinics.map((c) => c.name).join(", ")}, and operates at partner hospitals.</p>
             <Link className="text-link" href={ROUTES.locations}>
-              Locations and directions <ArrowRight size={16} aria-hidden="true" />
+              Locations and Directions <ArrowRight size={16} aria-hidden="true" />
             </Link>
           </aside>
           <aside className="side-card" aria-label="About the surgeon" style={{ marginTop: 24 }}>
-            <p className="eyebrow">Meet your surgeon</p>
+            <p className="eyebrow">Meet Your Surgeon</p>
             <h3>Dr Vybhav Deraje</h3>
             <p>Consultant craniofacial and plastic surgeon with fellowship training in Adelaide, Australia, practising in Bangalore since 2019.</p>
             <Link className="text-link" href={ROUTES.about}>

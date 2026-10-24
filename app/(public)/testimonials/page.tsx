@@ -11,7 +11,7 @@ import { ROUTES, servicePath } from "@/lib/routes";
 import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, videoJsonLd } from "@/lib/seo";
 
 const TITLE = "Patient Stories & Testimonials — Dr Vybhav Deraje, Bangalore";
-const DESCRIPTION = "Patients and families on their experience with Dr Vybhav Deraje, Bangalore: craniosynostosis, hand surgery, facial injury, jaw surgery and more. Plus videos.";
+const DESCRIPTION = "Patients and families on their experience with Dr Vybhav Deraje, Bangalore: Craniosynostosis, hand surgery, facial injury, jaw surgery and more. Plus videos.";
 
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: ROUTES.testimonials });
 

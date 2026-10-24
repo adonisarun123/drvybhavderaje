@@ -31,7 +31,7 @@ export function CookieBanner() {
       </p>
       <div className="cookie-actions">
         <button type="button" className="button" onClick={() => writeConsent("granted")}>
-          Accept analytics
+          Accept Analytics
         </button>
         <button type="button" className="button outline" onClick={() => writeConsent("denied")}>
           Decline

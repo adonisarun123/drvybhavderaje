@@ -24,7 +24,7 @@ export default async function HomePage() {
   // Contextual links in the hero and the FAQ answers (first mention of each procedure links to its page).
   const budget = createLinkBudget("/", [ROUTES.about, ROUTES.locations, ROUTES.contact]);
   const heroCopy = autolink(
-    "Dr Vybhav Deraje is a National Board certified plastic surgeon with fellowship training in craniofacial surgery. For children, he leads the craniosynostosis team at Aster Whitefield Hospital; for adults, he offers cosmetic and reconstructive plastic surgery — specialist care, explained clearly.",
+    "Dr Vybhav Deraje is a National Board certified plastic surgeon with fellowship training in craniofacial surgery. For children, he leads the Craniosynostosis team at Aster Whitefield Hospital; for adults, he offers cosmetic and reconstructive plastic surgery — specialist care, explained clearly.",
     budget,
   );
   const faqs = HOME_FAQS.map((f) => ({ q: f.q, a: autolink(f.a, createLinkBudget("/")) }));
@@ -147,7 +147,7 @@ export default async function HomePage() {
             <h2 id="also-treated-heading">Reconstructive and Other Conditions</h2>
           </div>
           <p>
-            Facial injuries, head and neck cancer, facial palsy, vascular anomalies and hand surgery.
+            Facial Injuries, head and neck cancer, Facial Palsy, Vascular Anomalies and hand surgery.
             <br />
             Plus overview pages for the full range of face, breast and body procedures.
           </p>
@@ -186,16 +186,16 @@ export default async function HomePage() {
               Every Question Matters.
             </h2>
             <p>
-              Dr Vybhav leads the craniosynostosis multidisciplinary team at Aster Hospital, Whitefield — the only hospital in India offering minimally invasive endoscope-assisted surgery with Orthotic Helmet Therapy for babies under six months.
+              Dr Vybhav leads the Craniosynostosis multidisciplinary team at Aster Hospital, Whitefield — the only hospital in India offering minimally invasive endoscope-assisted surgery with Orthotic Helmet Therapy for babies under six months.
             </p>
             <ul className="check-list">
               <li>
                 <Check aria-hidden="true" />
-                Keyhole strip craniectomy: less blood loss, shorter stay, faster recovery
+                Keyhole Strip Craniectomy: less blood loss, shorter stay, faster recovery
               </li>
               <li>
                 <Check aria-hidden="true" />
-                Open fronto-orbital and cranial vault remodelling for older children
+                Open fronto-orbital and Cranial Vault Remodelling for older children
               </li>
               <li>
                 <Check aria-hidden="true" />

@@ -202,7 +202,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <p className="note">
               Part of{" "}
               <Link href={parent.path}>
-                {parent.title.toLowerCase()} <ArrowRight size={14} aria-hidden="true" />
+                {parent.title} <ArrowRight size={14} aria-hidden="true" />
               </Link>{" "}
               — see the overview for the full range of procedures, including those without a dedicated page.
             </p>

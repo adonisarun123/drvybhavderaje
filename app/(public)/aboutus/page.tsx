@@ -130,7 +130,7 @@ export default async function AboutPage() {
           <div>
             <BookOpen aria-hidden="true" />
             <span>
-              {PUBLICATIONS.length} Peer-Reviewed Papers<small>Craniofacial and plastic surgery</small>
+              {PUBLICATIONS.length} Peer-Reviewed Papers<small>Craniofacial and Plastic Surgery</small>
             </span>
           </div>
         </div>

@@ -34,10 +34,10 @@ export const SITE = {
   email: "connect@drvybhavderaje.com",
   utilityLine: "Reconstructing Faces. Rebuilding Lives.",
   /** <meta description> for the homepage (≤160 chars). */
-  metaDescription: "Dr Vybhav Deraje, craniofacial & plastic surgeon in Bangalore: craniosynostosis, cleft, jaw and ear reconstruction; rhinoplasty, facelift, breast and body surgery.",
+  metaDescription: "Dr Vybhav Deraje, craniofacial & plastic surgeon in Bangalore: Craniosynostosis, cleft, jaw and Ear Reconstruction; Rhinoplasty, Facelift, breast and body surgery.",
   /** Longer entity description used in structured data and llms.txt. */
   defaultDescription:
-    "Dr Vybhav Deraje is a National Board certified plastic surgeon in Bangalore with fellowship training in craniofacial surgery (Australian Craniofacial Unit, Adelaide). Craniofacial surgery — craniosynostosis, cleft lip and palate, orthognathic (jaw) surgery and ear reconstruction — and cosmetic surgery: rhinoplasty, blepharoplasty, otoplasty, chin augmentation, facelift, tummy tuck, breast augmentation, breast reduction, gynaecomastia surgery and liposuction. He also treats facial injuries, head and neck cancer, facial palsy and hand conditions.",
+    "Dr Vybhav Deraje is a National Board certified plastic surgeon in Bangalore with fellowship training in craniofacial surgery (Australian Craniofacial Unit, Adelaide). Craniofacial surgery — Craniosynostosis, Cleft Lip and Palate, orthognathic (jaw) surgery and Ear Reconstruction — and cosmetic surgery: Rhinoplasty, Blepharoplasty, Otoplasty, Chin Augmentation, Facelift, Tummy Tuck, Breast Augmentation, Breast Reduction, Gynaecomastia Surgery and Liposuction. He also treats Facial Injuries, head and neck cancer, Facial Palsy and hand conditions.",
   social: {
     facebook: "https://www.facebook.com/drvybhavderaje/",
     instagram: "https://www.instagram.com/drvybhavderaje/",
@@ -70,17 +70,17 @@ export const DOCTOR = {
   /** Karnataka Medical Council registration — shown in every byline and in the Physician schema. */
   kmcRegistration: "79493",
   summary:
-    "Dr Vybhav Deraje is a National Board certified plastic surgeon with a special interest in craniofacial surgery. He has practised as a Consultant Craniofacial & Plastic Surgeon in Bangalore since returning from Adelaide, Australia in 2019. He is the founder of two practices in Bangalore: The Head Shape Clinic, for infant head-shape concerns and craniosynostosis, and Aesthetica Veda, a chain of cosmetic clinics where he consults at all three branches.",
-  summary2: "Dr Vybhav is also the driving force behind the craniosynostosis multidisciplinary team at Aster Hospital, Whitefield, Bangalore.",
+    "Dr Vybhav Deraje is a National Board certified plastic surgeon with a special interest in craniofacial surgery. He has practised as a Consultant Craniofacial & Plastic Surgeon in Bangalore since returning from Adelaide, Australia in 2019. He is the founder of two practices in Bangalore: The Head Shape Clinic, for infant head-shape concerns and Craniosynostosis, and Aesthetica Veda, a chain of cosmetic clinics where he consults at all three branches.",
+  summary2: "Dr Vybhav is also the driving force behind the Craniosynostosis multidisciplinary team at Aster Hospital, Whitefield, Bangalore.",
   values:
     "Dr Vybhav Deraje firmly believes in upholding the privacy, confidentiality and safety of all his patients. He also believes in collaboration and close coordination with other specialists and professionals in order to provide comprehensive, holistic healthcare.",
   bio: [
     "Born in Mangalore, a coastal town on the west coast of southern India, Dr Vybhav Deraje grew up and completed his schooling in Bangalore. He completed his medical degree at Kempegowda Institute of Medical Sciences, Bangalore (Rajiv Gandhi University of Health Sciences), training there from 2002 to 2008.",
     "His keen interest in surgery led him to complete his Master of Surgery degree and general surgical residency at Mysore Medical College and Research Institute, Mysore, from 2009 to 2012.",
-    "During his surgical residency he was drawn to the art and craft of plastic surgery. He worked as a Registrar in Plastic Surgery at hospitals in Bangalore before entering formal training, and completed his plastic surgery training at Lok Nayak Hospital and the associated Maulana Azad Medical College, Delhi, from 2013 to 2015. While working in Delhi, treating many children with cleft lip and palate and other craniofacial anomalies, he developed his passion for craniofacial surgery.",
+    "During his surgical residency he was drawn to the art and craft of plastic surgery. He worked as a Registrar in Plastic Surgery at hospitals in Bangalore before entering formal training, and completed his plastic surgery training at Lok Nayak Hospital and the associated Maulana Azad Medical College, Delhi, from 2013 to 2015. While working in Delhi, treating many children with Cleft Lip and Palate and other craniofacial anomalies, he developed his passion for craniofacial surgery.",
     "He then travelled to the United Kingdom for further training in plastic surgery at Queen Victoria Hospital, East Grinstead, sponsored by the Royal College of Surgeons of Edinburgh under the International Medical Graduate Sponsorship Scheme. Queen Victoria Hospital and the ‘Guinea Pig Club’ are well known in the plastic surgery community for the treatment and rehabilitation of airmen injured in World War II under Sir Archibald McIndoe. Here Dr Deraje trained extensively in breast cancer reconstruction and hand surgery, and also operated on many patients with skin cancer and burns.",
-    "After a year in the UK he focused on his area of special interest, craniofacial surgery, completing the Fellowship in Craniomaxillofacial Surgery after a year and a half as Craniofacial Fellow at the world-renowned Australian Craniofacial Unit, Adelaide — one of only two stand-alone craniofacial units in the world. There he trained extensively in the management of craniosynostosis, cleft lip and palate, vascular anomalies, head and neck tumours, facial fractures and orthognathic surgery.",
-    "Since returning from Adelaide in 2019 he has practised as a Consultant Craniofacial & Plastic Surgeon in Bangalore. He is the Founder & Director of Aesthetica Veda, a chain of cosmetic clinics in Bangalore where he primarily consults, and the founder of The Head Shape Clinic, Koramangala, which focuses on infant head-shape problems and craniosynostosis. He operates at Aster Whitefield Hospital, Gifted Hands Hospital, Aarogya Hastha Hospital, Medicover Hospital and Apollo Spectra Hospital.",
+    "After a year in the UK he focused on his area of special interest, craniofacial surgery, completing the Fellowship in Craniomaxillofacial Surgery after a year and a half as Craniofacial Fellow at the world-renowned Australian Craniofacial Unit, Adelaide — one of only two stand-alone craniofacial units in the world. There he trained extensively in the management of Craniosynostosis, Cleft Lip and Palate, Vascular Anomalies, head and neck tumours, Facial Fractures and Orthognathic Surgery.",
+    "Since returning from Adelaide in 2019 he has practised as a Consultant Craniofacial & Plastic Surgeon in Bangalore. He is the Founder & Director of Aesthetica Veda, a chain of cosmetic clinics in Bangalore where he primarily consults, and the founder of The Head Shape Clinic, Koramangala, which focuses on infant head-shape problems and Craniosynostosis. He operates at Aster Whitefield Hospital, Gifted Hands Hospital, Aarogya Hastha Hospital, Medicover Hospital and Apollo Spectra Hospital.",
   ],
 };
 
@@ -134,10 +134,10 @@ export const ABOUT_GALLERY: Photo[] = [
   { src: "/talks/indocleftcon-2026.jpg", caption: "Faculty talk at INDOCLEFTCON 2026, Mysore", width: 740, height: 520 },
   { src: "/talks/star-summit-2025.jpg", caption: "Invited talk at the STAR Summit 2025, Orlando, USA", width: 740, height: 520 },
   { src: "/talks/nimhans-2025.jpg", caption: "Teaching at the NIMHANS CME & Workshop on Craniosynostosis, Bangalore, 2025", width: 740, height: 520 },
-  { src: "/talks/indocleftcon-2024.jpg", caption: "Presenting the craniosynostosis protocol at INDOCLEFTCON 2024, Mangalore", width: 740, height: 520 },
+  { src: "/talks/indocleftcon-2024.jpg", caption: "Presenting the Craniosynostosis protocol at INDOCLEFTCON 2024, Mangalore", width: 740, height: 520 },
   { src: "/talks/apsicon-2023.jpg", caption: "Faculty at the Residents’ Forum, APSICON 2023, Indore", width: 740, height: 520 },
   { src: "/talks/pedplasty-2023.jpg", caption: "Invited talk on paediatric craniofacial trauma at PEDPLASTY 2023, Kochi", width: 740, height: 520 },
-  { src: "/talks/escfs-2022.jpg", caption: "Presenting eight years of craniosynostosis experience at ESCFS 2022, Oxford, UK", width: 740, height: 520 },
+  { src: "/talks/escfs-2022.jpg", caption: "Presenting eight years of Craniosynostosis experience at ESCFS 2022, Oxford, UK", width: 740, height: 520 },
   { src: "/custom/gallery_1.png", caption: "Receiving the Craniofacial Fellowship certificate from Prof Peter Anderson, Australian Craniofacial Unit, Adelaide", width: 370, height: 260 },
   { src: "/custom/gallery_2.png", caption: "With Dr Derick Mendonca, former Head, Department of Plastic Surgery, Sakra World Hospital, Bangalore", width: 370, height: 260 },
   { src: "/custom/gallery_3.png", caption: "At the Australian Craniofacial Unit, Adelaide, Australia", width: 370, height: 260 },
@@ -146,7 +146,7 @@ export const ABOUT_GALLERY: Photo[] = [
   { src: "/custom/12.png", caption: "With Dr Mark Moore, Head, Australian Craniofacial Unit, Adelaide", width: 370, height: 260 },
   { src: "/custom/13.png", caption: "With Dr Chutima Jirapinyo, Consultant Craniofacial Surgeon, Bangkok", width: 370, height: 260 },
   { src: "/custom/14.png", caption: "With Dr Adam Blackburn, Consultant Plastic Surgeon, East Grinstead, UK", width: 370, height: 260 },
-  { src: "/custom/15.png", caption: "At a fat grafting demonstration course, Bangalore", width: 370, height: 260 },
+  { src: "/custom/15.png", caption: "At a Fat Grafting demonstration course, Bangalore", width: 370, height: 260 },
   { src: "/custom/16.png", caption: "Debating at APSICON 2019, Bhubaneswar", width: 370, height: 260 },
   { src: "/custom/17.png", caption: "Presenting at ISCFS 2019, Paris", width: 370, height: 260 },
   { src: "/custom/18.png", caption: "Presenting at APSICON 2018, Lucknow", width: 370, height: 260 },
@@ -263,7 +263,7 @@ export const PRACTICES: Practice[] = [
     logoHeight: 392,
     tagline: "Caring for Little Heads",
     description:
-      "Dr Vybhav's dedicated clinic for infant head-shape concerns: flat head syndrome (positional plagiocephaly and brachycephaly) and craniosynostosis. Assessment, Orthotic Helmet Therapy and, where surgery is needed, the craniofacial team at Aster Hospital, Whitefield.",
+      "Dr Vybhav's dedicated clinic for infant head-shape concerns: Flat Head Syndrome (Positional Plagiocephaly and Brachycephaly) and Craniosynostosis. Assessment, Orthotic Helmet Therapy and, where surgery is needed, the craniofacial team at Aster Hospital, Whitefield.",
     where: "Docube Clinic, Koramangala, Bengaluru — with outreach clinics in other Indian cities",
     groups: ["craniofacial"],
   },
@@ -296,7 +296,7 @@ export interface ServiceItem {
   text: string;
   /** Source patient-information sheet (legacy PDF URL). The PDFs were removed 23 Oct 2026; the URL redirects to the page (lib/pdf-redirects.ts). Not rendered. */
   sheet?: string;
-  /** Dedicated sub-page for this item (craniosynostosis types). */
+  /** Dedicated sub-page for this item (Craniosynostosis types). */
   href?: string;
 }
 
@@ -315,7 +315,7 @@ export interface ServicePage {
   path: string;
   /** Which of the two headline groups the page belongs to (hub pages for reconstructive work still sit under "cosmetic" for navigation). */
   group: ServiceGroup;
-  /** Hub page this procedure page belongs to (e.g. rhinoplasty → facial plastic surgery). */
+  /** Hub page this procedure page belongs to (e.g. Rhinoplasty → facial plastic surgery). */
   parent?: ServiceSlug;
   /** Card / nav label. */
   shortTitle: string;
@@ -363,14 +363,14 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
     cardText: "Early-closing skull sutures in babies: endoscopic keyhole surgery, Orthotic Helmet Therapy and open remodelling.",
     intro: [
       "Craniosynostosis is a birth defect in which one or more of the soft joints between the bones of a baby’s skull (the cranial sutures) close too early. Depending on the suture involved it changes the shape of the skull and, in some children, raises the pressure inside the skull and compresses the growing brain.",
-      "Dr Vybhav Deraje has a special interest and expertise in managing craniosynostosis. He leads the craniosynostosis multidisciplinary team at Aster Hospital, Whitefield — the only hospital in India offering minimally invasive endoscope-assisted surgery together with Orthotic Helmet Therapy for these children.",
+      "Dr Vybhav Deraje has a special interest and expertise in managing Craniosynostosis. He leads the Craniosynostosis multidisciplinary team at Aster Hospital, Whitefield — the only hospital in India offering minimally invasive endoscope-assisted surgery together with Orthotic Helmet Therapy for these children.",
     ],
     sections: [
       {
         heading: "Types of Craniosynostosis",
         bullets: [
-          "Non-syndromic craniosynostosis — coronal, metopic, sagittal, lambdoid or multisuture.",
-          "Syndromic craniosynostosis — Apert, Crouzon, Pfeiffer, Muenke and Saethre-Chotzen syndromes.",
+          "Non-Syndromic Craniosynostosis — coronal, metopic, sagittal, lambdoid or multisuture.",
+          "Syndromic Craniosynostosis — Apert, Crouzon, Pfeiffer, Muenke and Saethre-Chotzen syndromes.",
         ],
       },
       {
@@ -389,37 +389,37 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
         items: [
           {
             title: "Unicoronal Synostosis",
-            text: "One of the sutures running from the ear to the top of the head closes early. The forehead flattens on the affected side (anterior plagiocephaly), and the nose may deviate, the eye socket sit higher and the skull slant.",
+            text: "One of the sutures running from the ear to the top of the head closes early. The forehead flattens on the affected side (Anterior Plagiocephaly), and the nose may deviate, the eye socket sit higher and the skull slant.",
             sheet: `${PDF}/Craniosynthosis/Patient-information-sheet-Unicoronal-craniosynostosis.pdf`,
             href: "/craniosynostosis-surgery-bangalore/unicoronal-synostosis",
           },
           {
             title: "Metopic Synostosis",
-            text: "The suture down the middle of the forehead closes early, giving a triangular or boat-shaped forehead (trigonocephaly) with hollowing at both temples. Some children also have speech and learning difficulties.",
+            text: "The suture down the middle of the forehead closes early, giving a triangular or boat-shaped forehead (Trigonocephaly) with hollowing at both temples. Some children also have speech and learning difficulties.",
             sheet: `${PDF}/Craniosynthosis/Patient-information-sheet-Metopic-craniosynostosis.pdf`,
             href: "/craniosynostosis-surgery-bangalore/metopic-synostosis",
           },
           {
             title: "Sagittal Synostosis",
-            text: "The suture running front to back along the top of the head closes early. The head becomes long and narrow (scaphocephaly).",
+            text: "The suture running front to back along the top of the head closes early. The head becomes long and narrow (Scaphocephaly).",
             sheet: `${PDF}/Craniosynthosis/Patient-information-sheet-Sagittal-craniosynostosis.pdf`,
             href: "/craniosynostosis-surgery-bangalore/sagittal-synostosis",
           },
           {
             title: "Lambdoid Synostosis",
-            text: "One or both sutures at the back of the head close early, flattening the back of the head (brachycephaly when both) or slanting it to one side (posterior plagiocephaly). The rarest form, sometimes confused with positional (deformational) plagiocephaly.",
+            text: "One or both sutures at the back of the head close early, flattening the back of the head (Brachycephaly when both) or slanting it to one side (Posterior Plagiocephaly). The rarest form, sometimes confused with positional (deformational) Plagiocephaly.",
             sheet: `${PDF}/Craniosynthosis/Patient-information-sheet-Lambdoid-craniosynostosis.pdf`,
             href: "/craniosynostosis-surgery-bangalore/lambdoid-synostosis",
           },
           {
             title: "Bicoronal Synostosis",
-            text: "Both ear-to-crown sutures close early. The head becomes wide and flattened from front to back (brachycephaly).",
+            text: "Both ear-to-crown sutures close early. The head becomes wide and flattened from front to back (Brachycephaly).",
             sheet: `${PDF}/Craniosynthosis/Patient-information-sheet-Bicoronal-craniosynostosis.pdf`,
             href: "/craniosynostosis-surgery-bangalore/bicoronal-synostosis",
           },
           {
             title: "Multisuture Synostosis",
-            text: "Many or all sutures close early, which can severely restrict brain growth through raised intracranial pressure; the head may be small (microcephaly). It may be non-syndromic or syndromic — syndromic cases are linked to gene changes (FGFR1, FGFR2, FGFR3, TWIST1, EFNB1 and others) and may involve hand or brain anomalies as well.",
+            text: "Many or all sutures close early, which can severely restrict brain growth through raised intracranial pressure; the head may be small (Microcephaly). It may be non-syndromic or syndromic — syndromic cases are linked to gene changes (FGFR1, FGFR2, FGFR3, TWIST1, EFNB1 and others) and may involve hand or brain anomalies as well.",
             sheet: `${PDF}/Craniosynthosis/Patient-information-sheet-Multi-suture-craniosynostosis.pdf`,
             href: "/craniosynostosis-surgery-bangalore/multisuture-syndromic-craniosynostosis",
           },
@@ -428,40 +428,40 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
       {
         heading: "How Craniosynostosis Is Treated",
         body: [
-          "Treatment is surgical and needs a multidisciplinary team: craniofacial surgeon, neurosurgeon, paediatric anaesthetist and intensivist, ophthalmologist, ENT surgeon, speech therapist and orthodontist. The type of operation depends on the type of craniosynostosis and the age of the child. Dr Vybhav Deraje’s treatment protocol is based on strong scientific evidence and experience.",
+          "Treatment is surgical and needs a multidisciplinary team: craniofacial surgeon, neurosurgeon, paediatric anaesthetist and intensivist, ophthalmologist, ENT surgeon, speech therapist and orthodontist. The type of operation depends on the type of Craniosynostosis and the age of the child. Dr Vybhav Deraje’s treatment protocol is based on strong scientific evidence and experience.",
         ],
         items: [
           {
             title: "Non-Syndromic Single-Suture Craniosynostosis — Under 6 Months",
-            text: "Minimally invasive (keyhole) endoscope-assisted strip craniectomy followed by Orthotic Helmet Therapy. The fused suture is removed through a small incision using minimally invasive techniques: shorter hospital stay, minimal blood loss, usually no blood transfusion and a quick recovery. The helmet then moulds the skull and allows the brain to grow normally.",
+            text: "Minimally invasive (keyhole) Endoscope-Assisted Strip Craniectomy followed by Orthotic Helmet Therapy. The fused suture is removed through a small incision using minimally invasive techniques: shorter hospital stay, minimal blood loss, usually no blood transfusion and a quick recovery. The helmet then moulds the skull and allows the brain to grow normally.",
           },
           {
             title: "Non-Syndromic Single-Suture Craniosynostosis — Over 6 Months",
-            text: "Open surgery (fronto-orbital remodelling or cranial vault remodelling) to reshape the skull. The incision runs across the top of the head from ear to ear; the neurosurgeon removes the affected suture and the craniofacial plastic surgeon remoulds the skull bones into a normal shape.",
+            text: "Open surgery (Fronto-Orbital Remodelling or Cranial Vault Remodelling) to reshape the skull. The incision runs across the top of the head from ear to ear; the neurosurgeon removes the affected suture and the craniofacial plastic surgeon remoulds the skull bones into a normal shape.",
           },
           {
             title: "Syndromic Craniosynostosis",
-            text: "Posterior vault expansion or fronto-orbital advancement — open procedures that enlarge the skull to give the brain room to grow, usually in the first year of life. Multiple operations are often needed and their timing depends on the child’s condition. A Le Fort III osteotomy and advancement after the age of 4 is sometimes required to improve obstructive sleep apnoea and airway problems. Some children also need physical therapy, occupational therapy, speech-language therapy or special education.",
+            text: "Posterior Vault Expansion or Fronto-Orbital Advancement — open procedures that enlarge the skull to give the brain room to grow, usually in the first year of life. Multiple operations are often needed and their timing depends on the child’s condition. A Le Fort III osteotomy and advancement after the age of 4 is sometimes required to improve Obstructive Sleep Apnoea and airway problems. Some children also need physical therapy, occupational therapy, speech-language therapy or special education.",
           },
         ],
       },
     ],
     faqs: [
-      { q: "What is craniosynostosis?", a: "Craniosynostosis is a birth defect in which one or more of the soft joints (sutures) between the bones of a baby’s skull close too early. It changes the shape of the skull and in some children raises the pressure inside the skull." },
-      { q: "What are the signs of craniosynostosis in a baby?", a: "An unusual head shape, a hard ridge along a suture, a soft spot that disappears early, slow head growth or a flat face. Raised pressure can cause developmental delay, vision changes, seizures or sleep apnoea. A craniofacial specialist assessment, usually with imaging, confirms the diagnosis." },
-      { q: "Is craniosynostosis surgery done through a keyhole?", a: "For non-syndromic single-suture craniosynostosis diagnosed before 6 months of age, Dr Vybhav Deraje performs minimally invasive endoscope-assisted strip craniectomy followed by Orthotic Helmet Therapy. Older children usually need open fronto-orbital or cranial vault remodelling." },
-      { q: "Is a helmet needed after endoscopic surgery?", a: "Yes. Orthotic Helmet Therapy starts about a week after endoscope-assisted strip craniectomy and moulds the skull shape as the brain grows. The craniofacial surgeon and the orthotic team review progress regularly and decide when it can stop." },
-      { q: "Where is craniosynostosis surgery performed in Bangalore?", a: "Dr Vybhav Deraje leads the craniosynostosis multidisciplinary team at Aster Hospital, Whitefield, Bangalore. Consultations are through The Head Shape Clinic at Docube Clinic, Koramangala, which is dedicated to infant head-shape problems." },
+      { q: "What is Craniosynostosis?", a: "Craniosynostosis is a birth defect in which one or more of the soft joints (sutures) between the bones of a baby’s skull close too early. It changes the shape of the skull and in some children raises the pressure inside the skull." },
+      { q: "What are the signs of Craniosynostosis in a baby?", a: "An unusual head shape, a hard ridge along a suture, a soft spot that disappears early, slow head growth or a flat face. Raised pressure can cause developmental delay, vision changes, seizures or sleep apnoea. A craniofacial specialist assessment, usually with imaging, confirms the diagnosis." },
+      { q: "Is Craniosynostosis surgery done through a keyhole?", a: "For Non-Syndromic Single-Suture Craniosynostosis diagnosed before 6 months of age, Dr Vybhav Deraje performs minimally invasive Endoscope-Assisted Strip Craniectomy followed by Orthotic Helmet Therapy. Older children usually need open fronto-orbital or Cranial Vault Remodelling." },
+      { q: "Is a helmet needed after endoscopic surgery?", a: "Yes. Orthotic Helmet Therapy starts about a week after Endoscope-Assisted Strip Craniectomy and moulds the skull shape as the brain grows. The craniofacial surgeon and the orthotic team review progress regularly and decide when it can stop." },
+      { q: "Where is Craniosynostosis surgery performed in Bangalore?", a: "Dr Vybhav Deraje leads the Craniosynostosis multidisciplinary team at Aster Hospital, Whitefield, Bangalore. Consultations are through The Head Shape Clinic at Docube Clinic, Koramangala, which is dedicated to infant head-shape problems." },
       { q: "We live outside Bangalore. How should we plan?", a: "Call or email the clinic first, send any existing scan reports ahead, and confirm the appointment and clinic location before arranging travel. Many families travel to Bangalore for this care." },
     ],
     conditions: ["Craniosynostosis", "Unicoronal Synostosis", "Metopic Synostosis", "Sagittal Synostosis", "Lambdoid Synostosis", "Bicoronal Synostosis", "Multisuture Synostosis", "Apert syndrome", "Crouzon syndrome", "Pfeiffer syndrome"],
     procedures: ["Endoscope-assisted strip craniectomy", "Orthotic Helmet Therapy", "Fronto-orbital remodelling", "Cranial vault remodelling", "Posterior vault expansion", "Le Fort III osteotomy"],
     related: ["helmet-therapy-flat-head-bangalore", "cleft-lip-and-palate-treatment-bangalore", "other-craniofacial-conditions-treatments"],
     gallery: [
-      { src: "/custom/cran_1.png", caption: "Sagittal craniosynostosis", width: 370, height: 260 },
-      { src: "/custom/cran_2.png", caption: "Metopic craniosynostosis", width: 370, height: 260 },
-      { src: "/custom/cran_3.png", caption: "Unicoronal craniosynostosis", width: 370, height: 260 },
-      { src: "/custom/cran_4.png", caption: "Bicoronal craniosynostosis", width: 370, height: 260 },
+      { src: "/custom/cran_1.png", caption: "Sagittal Craniosynostosis", width: 370, height: 260 },
+      { src: "/custom/cran_2.png", caption: "Metopic Craniosynostosis", width: 370, height: 260 },
+      { src: "/custom/cran_3.png", caption: "Unicoronal Craniosynostosis", width: 370, height: 260 },
+      { src: "/custom/cran_4.png", caption: "Bicoronal Craniosynostosis", width: 370, height: 260 },
       { src: "/custom/cran_5.png", caption: "Orthotic helmet", width: 370, height: 260 },
     ],
   },
@@ -472,13 +472,13 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
     shortTitle: "Cleft Lip and Palate",
     title: "Cleft Lip and Palate Treatment in Bangalore",
     metaTitle: "Cleft Lip & Palate Treatment in Bangalore — Protocol-Based Care | Dr Vybhav Deraje",
-    description: "Protocol-based cleft lip and palate treatment in Bangalore: lip repair at 3–6 months, palate repair at 9–12 months, speech surgery, bone grafting and jaw surgery.",
+    description: "Protocol-based Cleft Lip and Palate treatment in Bangalore: lip repair at 3–6 months, palate repair at 9–12 months, Speech Surgery, bone grafting and jaw surgery.",
     eyebrow: "Craniofacial Surgery · Care Through Every Stage",
-    lead: "Standardised, protocol-based care from the first lip repair in infancy to jaw surgery and rhinoplasty in adulthood — with ENT surgeons, dentists, orthodontists and speech therapists.",
-    cardText: "Lip and palate repair in infancy through speech surgery, bone grafting, jaw surgery and rhinoplasty.",
+    lead: "Standardised, protocol-based care from the first lip repair in infancy to jaw surgery and Rhinoplasty in adulthood — with ENT surgeons, dentists, orthodontists and speech therapists.",
+    cardText: "Lip and palate repair in infancy through Speech Surgery, bone grafting, jaw surgery and Rhinoplasty.",
     intro: [
-      "Cleft lip and palate is one of the most common congenital facial anomalies. Left untreated it can affect a child’s self-esteem and has a significant effect on speech, swallowing and other oral and nasal functions.",
-      "Dr Vybhav Deraje, together with a multidisciplinary team of ENT surgeons, dentists, orthodontists and speech therapists, provides protocol-based, standardised treatment. Common types include cleft lip only, cleft lip and alveolus, cleft palate only, cleft lip and palate, and submucous cleft palate.",
+      "Cleft Lip and Palate is one of the most common congenital facial anomalies. Left untreated it can affect a child’s self-esteem and has a significant effect on speech, swallowing and other oral and nasal functions.",
+      "Dr Vybhav Deraje, together with a multidisciplinary team of ENT surgeons, dentists, orthodontists and speech therapists, provides protocol-based, standardised treatment. Common types include Cleft Lip only, Cleft Lip and alveolus, Cleft Palate only, Cleft Lip and Palate, and submucous Cleft Palate.",
     ],
     sections: [
       {
@@ -487,12 +487,12 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
           { title: "3–6 Months — Lip Repair", text: "Needs only a one-day hospital stay. Babies can breastfeed immediately after surgery if there is no palatal problem.", sheet: `${PDF}/cleft/Patient-information-sheet-Cleft-lip.pdf`, href: sheetPage(`${PDF}/cleft/Patient-information-sheet-Cleft-lip.pdf`) },
           {
             title: "9–12 Months — Palate Repair",
-            text: "Needs 1–2 days in hospital. This operation is critical for the development of normal speech. Most babies also need ventilation tubes inserted in the ears by an ENT surgeon at the same time, because a cleft palate usually comes with a dysfunctional Eustachian tube and fluid in the ears.",
+            text: "Needs 1–2 days in hospital. This operation is critical for the development of normal speech. Most babies also need ventilation tubes inserted in the ears by an ENT surgeon at the same time, because a Cleft Palate usually comes with a dysfunctional Eustachian tube and fluid in the ears.",
             sheet: `${PDF}/cleft/Patient-information-sheet-Cleft-palate.pdf`, href: sheetPage(`${PDF}/cleft/Patient-information-sheet-Cleft-palate.pdf`),
           },
           {
             title: "1–12 Years — Speech Therapy and Speech Surgery",
-            text: "All children have speech therapy after the palate operation, with periodic speech assessment and nasendoscopy. Where needed, secondary speech surgery such as pharyngoplasty or Furlow’s Z-plasty improves speech.",
+            text: "All children have speech therapy after the palate operation, with periodic speech assessment and nasendoscopy. Where needed, secondary Speech Surgery such as pharyngoplasty or Furlow’s Z-plasty improves speech.",
             sheet: `${PDF}/cleft/Patient-information-sheet-Speech-surgery.pdf`, href: sheetPage(`${PDF}/cleft/Patient-information-sheet-Speech-surgery.pdf`),
           },
           {
@@ -502,26 +502,26 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
           },
           {
             title: "16–18 Years — Jaw Surgery with Orthodontics",
-            text: "Orthognathic surgery corrects the ‘flat face’ (midface hypoplasia) with a Le Fort I maxillary advancement or sometimes double-jaw surgery. The upper jaw is brought forward for a proper bite and better facial balance; the lower jaw is moved when required. This is major surgery with a 3–4 day hospital stay including one day in ICU.",
+            text: "Orthognathic Surgery corrects the ‘flat face’ (midface hypoplasia) with a Le Fort I maxillary advancement or sometimes Double-Jaw Surgery. The upper jaw is brought forward for a proper bite and better facial balance; the lower jaw is moved when required. This is major surgery with a 3–4 day hospital stay including one day in ICU.",
             sheet: `${PDF}/cleft/Patient-information-sheet-Corrective-Jaw-surgery.pdf`, href: sheetPage(`${PDF}/cleft/Patient-information-sheet-Corrective-Jaw-surgery.pdf`),
           },
           {
             title: "Above 18 Years — Rhinoplasty, with Lip Revision If Needed",
-            text: "Rhinoplasty corrects the nasal deformity associated with cleft lip and palate; any adjustments to the lip can be made at the same time.",
+            text: "Rhinoplasty corrects the nasal deformity associated with Cleft Lip and Palate; any adjustments to the lip can be made at the same time.",
             sheet: `${PDF}/cleft/Patient-information-sheet-Cleft-Rhinoplasty.pdf`, href: sheetPage(`${PDF}/cleft/Patient-information-sheet-Cleft-Rhinoplasty.pdf`),
           },
         ],
-        note: "Subsidised treatment is available for children with cleft lip and palate from economically disadvantaged families. Please ask the clinic.",
+        note: "Subsidised treatment is available for children with Cleft Lip and Palate from economically disadvantaged families. Please ask the clinic.",
       },
     ],
     faqs: [
-      { q: "At what age is cleft lip repaired?", a: "Lip repair is done at 3–6 months of age and needs only a one-day hospital stay. Babies can breastfeed immediately afterwards if there is no palatal problem." },
-      { q: "When is a cleft palate repaired?", a: "Palate repair is done at 9–12 months of age with a 1–2 day hospital stay. It is critical for normal speech development, and ear ventilation tubes are usually inserted at the same time." },
-      { q: "Will my child need speech therapy after cleft palate surgery?", a: "Yes. All children have speech therapy after palate repair, with periodic speech assessment and nasendoscopy. Some need secondary speech surgery (pharyngoplasty or Furlow’s Z-plasty) between 1 and 12 years." },
-      { q: "What is alveolar bone grafting and when is it done?", a: "Between 7 and 11 years, bone from the hip is grafted into the gap in the upper jaw, timed to the eruption of the canine tooth, with orthodontic treatment before and after." },
-      { q: "Is subsidised cleft treatment available in Bangalore?", a: "Yes. Subsidised treatment is available for children with cleft lip and palate from economically disadvantaged families. Contact the clinic for details." },
+      { q: "At what age is Cleft Lip repaired?", a: "Lip repair is done at 3–6 months of age and needs only a one-day hospital stay. Babies can breastfeed immediately afterwards if there is no palatal problem." },
+      { q: "When is a Cleft Palate repaired?", a: "Palate repair is done at 9–12 months of age with a 1–2 day hospital stay. It is critical for normal speech development, and ear ventilation tubes are usually inserted at the same time." },
+      { q: "Will my child need speech therapy after Cleft Palate surgery?", a: "Yes. All children have speech therapy after palate repair, with periodic speech assessment and nasendoscopy. Some need secondary Speech Surgery (pharyngoplasty or Furlow’s Z-plasty) between 1 and 12 years." },
+      { q: "What is Alveolar Bone Grafting and when is it done?", a: "Between 7 and 11 years, bone from the hip is grafted into the gap in the upper jaw, timed to the eruption of the canine tooth, with orthodontic treatment before and after." },
+      { q: "Is subsidised cleft treatment available in Bangalore?", a: "Yes. Subsidised treatment is available for children with Cleft Lip and Palate from economically disadvantaged families. Contact the clinic for details." },
     ],
-    conditions: ["Cleft lip", "Cleft palate", "Cleft Lip and Palate", "Submucous cleft palate", "Midface hypoplasia"],
+    conditions: ["Cleft lip", "Cleft palate", "Cleft Lip and Palate", "Submucous Cleft Palate", "Midface hypoplasia"],
     procedures: ["Cleft lip repair", "Cleft palate repair", "Pharyngoplasty", "Furlow Z-plasty", "Alveolar bone grafting", "Le Fort I maxillary advancement", "Cleft rhinoplasty"],
     related: ["corrective-jaw-surgery-bangalore", "craniosynostosis-surgery-bangalore", "face-plastic-surgery-bangalore"],
   },
@@ -532,12 +532,12 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
     shortTitle: "Orthognathic (Jaw Correction) Surgery",
     title: "Orthognathic Surgery (Corrective Jaw Surgery) in Bangalore",
     metaTitle: "Orthognathic Surgery in Bangalore — Jaw Correction Surgery | Dr Vybhav Deraje",
-    description: "Orthognathic (jaw correction) surgery in Bangalore by Dr Vybhav Deraje: Le Fort I, BSSO, double-jaw surgery and genioplasty for bite, face and sleep apnoea.",
+    description: "Orthognathic (jaw correction) surgery in Bangalore by Dr Vybhav Deraje: Le Fort I, BSSO, Double-Jaw Surgery and Genioplasty for bite, face and sleep apnoea.",
     eyebrow: "Craniofacial Surgery · Function and Facial Balance",
     lead: "Repositioning the upper jaw, lower jaw or both to realign the teeth, balance the face and, in selected patients, relieve snoring and sleep apnoea.",
-    cardText: "Le Fort I, BSSO, double-jaw surgery and genioplasty for bite problems and facial balance.",
+    cardText: "Le Fort I, BSSO, Double-Jaw Surgery and Genioplasty for bite problems and facial balance.",
     intro: [
-      "Corrective jaw surgery, or orthognathic surgery, is the part of plastic and maxillofacial surgery in which the bones of the upper jaw, lower jaw or both are moved to realign the teeth or improve the appearance of the face.",
+      "Corrective Jaw Surgery, or Orthognathic Surgery, is the part of plastic and maxillofacial surgery in which the bones of the upper jaw, lower jaw or both are moved to realign the teeth or improve the appearance of the face.",
       "Dr Vybhav Deraje works with orthodontists, speech therapists and virtual surgical planning specialists to deliver this care.",
     ],
     sections: [
@@ -547,8 +547,8 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
           "To correct malocclusion of the teeth — an ‘overbite’ (upper teeth far ahead of the lower), an ‘underbite’ (lower teeth ahead of the upper) or an ‘open bite’ (a gap between upper and lower teeth).",
           "To improve facial appearance — a ‘flat face’ where the upper jaw sits behind the lower, a ‘weak chin’ where the lower jaw is set back, or a ‘strong chin’ where the lower jaw is too far forward.",
           "To improve the smile — a ‘gummy smile’ or excessive tooth show.",
-          "Cleft lip and palate — people with a cleft often have a ‘dish face’ deformity and benefit greatly from jaw surgery.",
-          "Snoring and sleep apnoea — patients who have failed all other medical and surgical treatment can benefit from orthognathic surgery.",
+          "Cleft Lip and Palate — people with a cleft often have a ‘dish face’ deformity and benefit greatly from jaw surgery.",
+          "Snoring and sleep apnoea — patients who have failed all other medical and surgical treatment can benefit from Orthognathic Surgery.",
         ],
       },
       {
@@ -570,11 +570,11 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
       },
     ],
     faqs: [
-      { q: "What is orthognathic surgery?", a: "Orthognathic (corrective jaw) surgery moves the bones of the upper jaw, lower jaw or both to realign the teeth and improve the balance of the face. The main operations are Le Fort I osteotomy, bilateral sagittal split osteotomy (BSSO), double-jaw surgery and genioplasty." },
+      { q: "What is Orthognathic Surgery?", a: "Orthognathic (corrective jaw) surgery moves the bones of the upper jaw, lower jaw or both to realign the teeth and improve the balance of the face. The main operations are Le Fort I osteotomy, bilateral sagittal split osteotomy (BSSO), Double-Jaw Surgery and Genioplasty." },
       { q: "Does jaw surgery leave visible scars?", a: "No. All incisions are made inside the mouth, so there are no external skin scars." },
-      { q: "How long is the hospital stay after corrective jaw surgery?", a: "Usually 3–4 days, including one day in the intensive care unit. A blood transfusion is occasionally needed." },
+      { q: "How long is the hospital stay after Corrective Jaw Surgery?", a: "Usually 3–4 days, including one day in the intensive care unit. A blood transfusion is occasionally needed." },
       { q: "Do I need braces before jaw surgery?", a: "In the orthodontics-first approach, braces are worn for 6 months to a year before surgery. In the surgery-first approach the jaw is operated on first and orthodontic treatment follows for 6 months to a year. Your orthodontist and surgeon decide together which suits you." },
-      { q: "Can jaw surgery help snoring and sleep apnoea?", a: "People with snoring and sleep apnoea who have not improved with other medical and surgical treatment can potentially benefit from orthognathic surgery." },
+      { q: "Can jaw surgery help snoring and sleep apnoea?", a: "People with snoring and sleep apnoea who have not improved with other medical and surgical treatment can potentially benefit from Orthognathic Surgery." },
     ],
     conditions: ["Malocclusion", "Overbite", "Underbite", "Open bite", "Midface hypoplasia", "Retrogenia", "Gummy smile", "Obstructive sleep apnoea"],
     procedures: ["Orthognathic surgery", "Le Fort I osteotomy", "Bilateral sagittal split osteotomy", "Double jaw surgery", "Genioplasty"],
@@ -589,9 +589,9 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
     metaTitle: "Facial Injury & Fracture Treatment in Bangalore | Dr Vybhav Deraje",
     description: "Facial injury and fracture treatment in Bangalore: plastic surgical wound repair and titanium-plate fixation of forehead, orbital, nasal, cheek and jaw fractures.",
     eyebrow: "Craniofacial Surgery · Trauma",
-    lead: "Meticulous repair of facial wounds and fixation of facial fractures after road accidents, falls, assaults and sporting injuries.",
+    lead: "Meticulous repair of facial wounds and fixation of Facial Fractures after road accidents, falls, assaults and sporting injuries.",
     cardText: "Repair of facial wounds and plate fixation of forehead, orbital, nasal, cheek and jaw fractures.",
-    intro: ["Facial injuries and fractures are among the most common injuries after road traffic accidents, falls, assaults and sporting mishaps."],
+    intro: ["Facial Injuries and fractures are among the most common injuries after road traffic accidents, falls, assaults and sporting mishaps."],
     sections: [
       {
         heading: "Facial Abrasions and Lacerations",
@@ -603,19 +603,19 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
       {
         heading: "Facial Fractures",
         body: [
-          "Displaced facial fractures that cause a functional or aesthetic problem usually need reduction and fixation. The common fractures are of the frontal bone (forehead), orbit (eye socket), nose, maxilla (upper jaw), zygoma (cheek) and mandible (lower jaw).",
+          "Displaced Facial Fractures that cause a functional or aesthetic problem usually need reduction and fixation. The common fractures are of the frontal bone (forehead), orbit (eye socket), nose, maxilla (upper jaw), zygoma (cheek) and mandible (lower jaw).",
           "A CT scan and X-rays may be needed for assessment. The bones are brought back into position and stabilised with titanium plates and screws. Dr Vybhav Deraje uses the Synthes plating system. Surgery usually needs a one-day admission and most patients are back to normal within about a week.",
         ],
       },
     ],
     faqs: [
       { q: "Should a facial cut be stitched by a plastic surgeon?", a: "Facial lacerations benefit from a plastic surgeon’s meticulous tissue handling, magnification, fine sutures and long-term scar management, which give the best chance of an inconspicuous scar." },
-      { q: "How are facial fractures fixed?", a: "Displaced fractures of the forehead, eye socket, nose, upper jaw, cheek or lower jaw are brought back into position and stabilised with titanium plates and screws, after assessment with a CT scan and X-rays." },
+      { q: "How are Facial Fractures fixed?", a: "Displaced fractures of the forehead, eye socket, nose, upper jaw, cheek or lower jaw are brought back into position and stabilised with titanium plates and screws, after assessment with a CT scan and X-rays." },
       { q: "How long is the recovery after facial fracture surgery?", a: "Surgery usually needs a one-day hospital admission and most patients return to normal activities within about a week." },
       { q: "Is this an emergency service?", a: "No. This website and its enquiry form are not an emergency service. For an acute injury go to the nearest emergency department; the hospital team can involve Dr Vybhav Deraje where appropriate." },
     ],
     conditions: ["Facial laceration", "Facial abrasion", "Frontal bone fracture", "Orbital fracture", "Nasal fracture", "Maxillary fracture", "Zygomatic fracture", "Mandibular fracture"],
-    procedures: ["Laceration repair", "Open reduction and internal fixation of facial fractures"],
+    procedures: ["Laceration repair", "Open reduction and internal fixation of Facial Fractures"],
     related: ["corrective-jaw-surgery-bangalore", "hand-plastic-surgeon-bangalore", "face-plastic-surgery-bangalore"],
   },
   {
@@ -660,16 +660,16 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
     shortTitle: "Other Craniofacial Conditions",
     title: "Facial Palsy, Parry-Romberg Disease and Vascular Anomalies",
     metaTitle: "Facial Palsy, Parry-Romberg & Vascular Anomaly Treatment in Bangalore | Dr Vybhav Deraje",
-    description: "Treatment in Bangalore for facial palsy (nerve transfer, gracilis smile surgery), Parry-Romberg disease (fat grafting) and vascular tumours in children.",
+    description: "Treatment in Bangalore for Facial Palsy (nerve transfer, gracilis smile surgery), Parry-Romberg disease (Fat Grafting) and vascular tumours in children.",
     eyebrow: "Craniofacial Surgery · Other Conditions",
     lead: "Specialist care for facial nerve palsy, facial volume loss and vascular tumours and malformations.",
-    cardText: "Facial palsy reconstruction, fat grafting for Parry-Romberg disease, vascular tumours and malformations.",
-    intro: ["Beyond craniosynostosis, clefts and trauma, craniofacial surgery covers a range of conditions that affect the function and appearance of the face."],
+    cardText: "Facial Palsy reconstruction, Fat Grafting for Parry-Romberg disease, vascular tumours and malformations.",
+    intro: ["Beyond Craniosynostosis, clefts and trauma, craniofacial surgery covers a range of conditions that affect the function and appearance of the face."],
     sections: [
       {
         heading: "Facial Palsy",
         body: [
-          "Facial palsy is loss of function of the muscles of facial expression due to injury to or compression of the facial nerve.",
+          "Facial Palsy is loss of function of the muscles of facial expression due to injury to or compression of the facial nerve.",
           "It is best treated early — within one year — when nerve transfer procedures can be carried out using nerve grafts from the leg (sural nerve). If treatment is delayed by more than 1–2 years, a major procedure such as free functioning muscle transfer using thigh muscle (gracilis) is needed to reconstruct the smile, and gold weights are placed in the eyelid to help it close properly. Physiotherapy and Botox injections may be needed as supplementary treatment.",
         ],
       },
@@ -677,7 +677,7 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
         heading: "Parry-Romberg Disease",
         body: [
           "This condition causes contour deformities of the face: loss of volume under the skin produces depressions, and the skin itself may thin.",
-          "Fat grafting is an excellent option. Fat is taken from the tummy or thighs and injected into the affected areas to restore a smooth surface — usually a day procedure.",
+          "Fat Grafting is an excellent option. Fat is taken from the tummy or thighs and injected into the affected areas to restore a smooth surface — usually a day procedure.",
         ],
       },
       {
@@ -689,8 +689,8 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
       },
     ],
     faqs: [
-      { q: "How soon should facial palsy be treated?", a: "Ideally within the first year, when nerve transfer using a sural nerve graft from the leg is possible. After 1–2 years, smile reconstruction needs free functioning gracilis muscle transfer, with eyelid gold weights to help eye closure." },
-      { q: "What is the treatment for Parry-Romberg disease?", a: "Fat grafting — fat from the tummy or thighs is injected into the depressed areas of the face to restore a smooth contour. It is usually a day procedure." },
+      { q: "How soon should Facial Palsy be treated?", a: "Ideally within the first year, when nerve transfer using a sural nerve graft from the leg is possible. After 1–2 years, Smile Reconstruction needs free functioning gracilis muscle transfer, with eyelid gold weights to help eye closure." },
+      { q: "What is the treatment for Parry-Romberg disease?", a: "Fat Grafting — fat from the tummy or thighs is injected into the depressed areas of the face to restore a smooth contour. It is usually a day procedure." },
       { q: "Do haemangiomas in babies need surgery?", a: "Not always. Some vascular tumours resolve on their own. Others are treated with medication (propranolol), sclerosant injections (bleomycin), interventional radiology or surgery, depending on the exact diagnosis." },
     ],
     conditions: ["Facial Palsy", "Parry-Romberg syndrome", "Haemangioma", "Lymphangioma", "Arteriovenous malformation", "Venous malformation", "Capillary malformation"],
@@ -704,18 +704,18 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
     shortTitle: "Facial Plastic Surgery — All Procedures",
     title: "Facial Plastic Surgery in Bangalore",
     metaTitle: "Facial Plastic Surgery in Bangalore — Rhinoplasty, Blepharoplasty, Facelift | Dr Vybhav Deraje",
-    description: "Facial plastic surgery in Bangalore by Dr Vybhav Deraje: rhinoplasty, blepharoplasty, chin and ear correction, facelift, fat grafting, Botox and fillers.",
+    description: "Facial plastic surgery in Bangalore by Dr Vybhav Deraje: Rhinoplasty, Blepharoplasty, chin and ear correction, Facelift, Fat Grafting, Botox and fillers.",
     eyebrow: "Cosmetic Surgery · Face · Overview",
     lead: "Surgical and non-surgical options for the nose, eyes, chin, ears, forehead and ageing face — explained plainly, with realistic recovery times.",
-    cardText: "Rhinoplasty, eyelid surgery, chin and ear correction, facelift, fat grafting, Botox and fillers.",
+    cardText: "Rhinoplasty, eyelid surgery, chin and ear correction, Facelift, Fat Grafting, Botox and fillers.",
     intro: ["An informed decision begins with an honest conversation about what you would like to change, what is achievable and what recovery involves. These are the facial procedures Dr Vybhav Deraje offers."],
     sections: [
       {
         heading: "Procedures",
         items: [
-          { title: "Rhinoplasty (Nose Job)", text: "Surgery to correct the shape of the nose or enhance its appearance, sometimes combined with septoplasty for a deviated septum. Done under general anaesthesia with a one-day admission; back to normal activities in 2–3 days. You may have a nasal pack for one day and a nasal splint for a week.", sheet: `${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Rhinoplasty.pdf` },
+          { title: "Rhinoplasty (Nose Job)", text: "Surgery to correct the shape of the nose or enhance its appearance, sometimes combined with Septoplasty for a deviated septum. Done under general anaesthesia with a one-day admission; back to normal activities in 2–3 days. You may have a nasal pack for one day and a nasal splint for a week.", sheet: `${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Rhinoplasty.pdf` },
           { title: "Blepharoplasty (Eyelid Surgery)", text: "A day-care procedure under local anaesthesia that removes excess fat and skin from the upper and/or lower eyelids to correct puffy eye bags and a tired look.", sheet: `${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Blepharoplasty.pdf` },
-          { title: "Chin Augmentation", text: "Corrects a weak, strong or deviated chin. A day-care procedure under general anaesthesia using an implant (silicone or Medpor) or by repositioning your own bone (genioplasty).", sheet: `${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Chin-Augmentation.pdf` },
+          { title: "Chin Augmentation", text: "Corrects a weak, strong or deviated chin. A day-care procedure under general anaesthesia using an implant (silicone or Medpor) or by repositioning your own bone (Genioplasty).", sheet: `${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Chin-Augmentation.pdf` },
           { title: "Otoplasty (Prominent Ear Correction)", text: "Corrects the shape of the external ear in bat ear, prominent ear and Stahl ear deformities. Split ear-lobe repair is also offered. All are day-care procedures.", sheet: `${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Otoplasty.pdf` },
           { title: "Facelift and Necklift", text: "Reverses the skin signs of ageing on the face and neck — jowls, wrinkles, crow’s feet and loose skin. Incisions are placed at strategic points to hide the eventual scars. A day-care procedure under general anaesthesia.", sheet: `${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Facelift-and-Necklift.pdf` },
           { title: "Fat Grafting", text: "Your own fat, as microfat or nanofat, is used to correct contour deformities and rejuvenate the skin. A day-care procedure that can be done under local anaesthesia. Nanofat and microfat are good alternatives to PRP and fillers for rejuvenation and volume restoration.", sheet: `${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Fat-grafting.pdf`, href: sheetPage(`${PDF}/Plastic-Surgery-of-Face/Patient-information-sheet-Fat-grafting.pdf`) },
@@ -725,8 +725,8 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
       },
     ],
     faqs: [
-      { q: "How long is recovery after rhinoplasty?", a: "Rhinoplasty is done under general anaesthesia with a one-day admission. Most people return to normal activities in 2–3 days, with a nasal pack for one day and a splint for about a week." },
-      { q: "Is blepharoplasty done under general anaesthesia?", a: "No. Eyelid surgery is a day-care procedure under local anaesthesia, on the upper eyelid, lower eyelid or both." },
+      { q: "How long is recovery after Rhinoplasty?", a: "Rhinoplasty is done under general anaesthesia with a one-day admission. Most people return to normal activities in 2–3 days, with a nasal pack for one day and a splint for about a week." },
+      { q: "Is Blepharoplasty done under general anaesthesia?", a: "No. Eyelid surgery is a day-care procedure under local anaesthesia, on the upper eyelid, lower eyelid or both." },
       { q: "Can a forehead lipoma be removed without a scar on the forehead?", a: "Yes. Endoscopic scarless forehead surgery removes lipomas, osteomas and dermoid cysts through an incision hidden beyond the hairline." },
       { q: "Is a consultation a commitment to surgery?", a: "No. Use the consultation to understand your options, alternatives, limitations and recovery, then take the time you need to decide." },
       { q: "Can I get a cost estimate?", a: "Yes — after assessment the clinic gives an individual estimate. Ask what it includes: hospital charges, anaesthesia, implants and follow-up." },
@@ -742,10 +742,10 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
     shortTitle: "Breast Surgery — All Procedures",
     title: "Breast Plastic Surgery in Bangalore",
     metaTitle: "Breast Surgery in Bangalore — Augmentation, Lift, Reduction, Reconstruction | Dr Vybhav Deraje",
-    description: "Breast surgery in Bangalore by Dr Vybhav Deraje: augmentation with implants or fat, lift, reduction, DIEP flap reconstruction after cancer and gynaecomastia surgery.",
+    description: "Breast surgery in Bangalore by Dr Vybhav Deraje: augmentation with implants or fat, lift, reduction, DIEP flap reconstruction after cancer and Gynaecomastia Surgery.",
     eyebrow: "Cosmetic & Reconstructive Surgery · Breast · Overview",
-    lead: "Augmentation, lift, reduction and reconstruction after breast cancer — plus male breast reduction — with a clear explanation of what each involves.",
-    cardText: "Augmentation, lift, reduction, reconstruction after cancer and gynaecomastia surgery.",
+    lead: "Augmentation, lift, reduction and reconstruction after breast cancer — plus male Breast Reduction — with a clear explanation of what each involves.",
+    cardText: "Augmentation, lift, reduction, reconstruction after cancer and Gynaecomastia Surgery.",
     intro: ["Each of these procedures is discussed individually at consultation, including the options, scars, recovery and realistic outcomes."],
     sections: [
       {
@@ -756,21 +756,21 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
           { title: "Breast Reduction", text: "Reduces the size and volume of very large breasts (gigantomastia), relieving back pain, rashes and dermatitis. A day-care procedure under general anaesthesia with strategically placed scars that fade over time.", sheet: `${PDF}/Plastic-surgery-of-Breast/Patient-information-sheet-Breast-reduction.pdf` },
           {
             title: "Breast Reconstruction after Cancer",
-            text: "Women who need a mastectomy need not be left without a breast. Dr Vybhav Deraje works with the breast surgeon to reconstruct the breast either during the cancer operation (immediate) or later (delayed). The most common operation uses abdominal tissue (DIEP / MS-TRAM flap), which also gives a tummy tuck; if the abdomen is unsuitable, thigh tissue (TUG flap) or back tissue with an implant (LD flap) can be used. These operations involve 4–5 days in hospital under general anaesthesia. The nipple and areola can later be reconstructed under local anaesthesia, and women having a lumpectomy or partial resection can benefit from oncoplastic techniques to keep the breasts harmonious.",
+            text: "Women who need a mastectomy need not be left without a breast. Dr Vybhav Deraje works with the breast surgeon to reconstruct the breast either during the cancer operation (immediate) or later (delayed). The most common operation uses abdominal tissue (DIEP / MS-TRAM flap), which also gives a Tummy Tuck; if the abdomen is unsuitable, thigh tissue (TUG flap) or back tissue with an implant (LD flap) can be used. These operations involve 4–5 days in hospital under general anaesthesia. The nipple and areola can later be reconstructed under local anaesthesia, and women having a lumpectomy or partial resection can benefit from oncoplastic techniques to keep the breasts harmonious.",
             sheet: `${PDF}/Plastic-surgery-of-Breast/Patient-information-sheet-Breast-cancer-reconstruction.pdf`, href: sheetPage(`${PDF}/Plastic-surgery-of-Breast/Patient-information-sheet-Breast-cancer-reconstruction.pdf`),
           },
-          { title: "Gynaecomastia Surgery (Male Breast Reduction)", text: "A day-care procedure for enlarged breasts in men, common in adolescence; a hormonal work-up is sometimes needed first. Treatment is liposuction, surgical excision or both, aiming for a natural masculine chest, usually with no visible scar.", sheet: `${PDF}/Plastic-surgery-of-Breast/Patient-information-sheet-Gynaecomastia-correction.pdf` },
+          { title: "Gynaecomastia Surgery (Male Breast Reduction)", text: "A day-care procedure for enlarged breasts in men, common in adolescence; a hormonal work-up is sometimes needed first. Treatment is Liposuction, surgical excision or both, aiming for a natural masculine chest, usually with no visible scar.", sheet: `${PDF}/Plastic-surgery-of-Breast/Patient-information-sheet-Gynaecomastia-correction.pdf` },
         ],
       },
     ],
     faqs: [
-      { q: "Can breast augmentation be done without implants?", a: "Yes. Augmentation can use a silicone implant or fat transferred from your own body. Both are day-care procedures under general anaesthesia; your surgeon helps you choose." },
+      { q: "Can Breast Augmentation be done without implants?", a: "Yes. Augmentation can use a silicone implant or fat transferred from your own body. Both are day-care procedures under general anaesthesia; your surgeon helps you choose." },
       { q: "Can the breast be reconstructed at the same time as a mastectomy?", a: "Yes. Reconstruction can be immediate (during the cancer surgery) or delayed, using abdominal tissue (DIEP / MS-TRAM), thigh tissue (TUG) or back tissue with an implant (LD flap). Hospital stay is 4–5 days." },
-      { q: "Does gynaecomastia surgery leave scars?", a: "Usually there is no visible scar on the chest. Treatment is liposuction, excision or both, done as a day-care procedure." },
-      { q: "Does breast reduction help back pain?", a: "Breast reduction treats very large breasts (gigantomastia) and relieves symptoms such as back pain, rashes and dermatitis caused by their weight." },
+      { q: "Does Gynaecomastia Surgery leave scars?", a: "Usually there is no visible scar on the chest. Treatment is Liposuction, excision or both, done as a day-care procedure." },
+      { q: "Does Breast Reduction help back pain?", a: "Breast Reduction treats very large breasts (gigantomastia) and relieves symptoms such as back pain, rashes and dermatitis caused by their weight." },
     ],
     conditions: ["Breast hypoplasia", "Breast ptosis", "Gigantomastia", "Breast cancer", "Gynaecomastia"],
-    procedures: ["Breast Augmentation", "Mastopexy", "Breast Reduction", "DIEP flap breast reconstruction", "TUG flap", "Latissimus dorsi flap", "Nipple reconstruction", "Oncoplastic breast surgery", "Gynaecomastia Surgery"],
+    procedures: ["Breast Augmentation", "Mastopexy", "Breast Reduction", "DIEP flap Breast Reconstruction", "TUG flap", "Latissimus dorsi flap", "Nipple reconstruction", "Oncoplastic breast surgery", "Gynaecomastia Surgery"],
     related: ["body-plastic-surgeon-bangalore", "face-plastic-surgery-bangalore", "head-and-neck-cancer-treatment"],
   },
   {
@@ -780,27 +780,27 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
     shortTitle: "Body Contouring — All Procedures",
     title: "Body Contouring Surgery in Bangalore",
     metaTitle: "Body Contouring in Bangalore — Tummy Tuck, Liposuction, Arm & Thigh Lift | Dr Vybhav Deraje",
-    description: "Body contouring in Bangalore by Dr Vybhav Deraje: abdominoplasty (tummy tuck), power-assisted liposuction, arm lift and thigh lift, with recovery explained.",
+    description: "Body Contouring in Bangalore by Dr Vybhav Deraje: Abdominoplasty (Tummy Tuck), power-assisted Liposuction, Arm Lift and Thigh Lift, with recovery explained.",
     eyebrow: "Cosmetic Surgery · Body · Overview",
-    lead: "Abdominoplasty, liposuction, arm lift and thigh lift — with honest guidance on scars, hospital stay and recovery.",
-    cardText: "Tummy tuck, power-assisted liposuction, arm lift and thigh lift.",
-    intro: ["Body contouring removes excess skin and fat and tightens tissue to restore a firmer shape. The right procedure depends on your anatomy and goals, which is what the consultation is for."],
+    lead: "Abdominoplasty, Liposuction, Arm Lift and Thigh Lift — with honest guidance on scars, hospital stay and recovery.",
+    cardText: "Tummy Tuck, power-assisted Liposuction, Arm Lift and Thigh Lift.",
+    intro: ["Body Contouring removes excess skin and fat and tightens tissue to restore a firmer shape. The right procedure depends on your anatomy and goals, which is what the consultation is for."],
     sections: [
       {
         heading: "Procedures",
         items: [
-          { title: "Abdominoplasty (Tummy Tuck)", text: "Removes excess, sagging tissue from the abdomen for a flat, fit appearance. The abdominal muscles are tightened and any hernia repaired at the same time; the scar sits below the line of underwear. Often combined with liposuction or a breast lift as a ‘mummy makeover’ after a woman has completed her family. General anaesthesia with a 3–4 day hospital stay; normal activities in about a week and strenuous exercise after 6 weeks.", sheet: `${PDF}/Plastic-Surgery-of-Body/Patient-information-sheet-Abdominoplasty.pdf` },
-          { title: "Liposuction", text: "A day-care procedure under general anaesthesia in which excess fat is removed from specific areas for a smoother contour. Dr Vybhav Deraje uses the MicroAire power-assisted liposuction system.", sheet: `${PDF}/Plastic-Surgery-of-Body/Patient-information-sheet-Liposuction.pdf` },
+          { title: "Abdominoplasty (Tummy Tuck)", text: "Removes excess, sagging tissue from the abdomen for a flat, fit appearance. The abdominal muscles are tightened and any hernia repaired at the same time; the scar sits below the line of underwear. Often combined with Liposuction or a Breast Lift as a ‘mummy makeover’ after a woman has completed her family. General anaesthesia with a 3–4 day hospital stay; normal activities in about a week and strenuous exercise after 6 weeks.", sheet: `${PDF}/Plastic-Surgery-of-Body/Patient-information-sheet-Abdominoplasty.pdf` },
+          { title: "Liposuction", text: "A day-care procedure under general anaesthesia in which excess fat is removed from specific areas for a smoother contour. Dr Vybhav Deraje uses the MicroAire power-assisted Liposuction system.", sheet: `${PDF}/Plastic-Surgery-of-Body/Patient-information-sheet-Liposuction.pdf` },
           { title: "Brachioplasty (Arm Lift)", text: "A day-care procedure under general anaesthesia removing excess skin and tissue from the arms for a slimmer look.", sheet: `${PDF}/Plastic-Surgery-of-Body/Patient-information-sheet-Brachiaplasty.pdf`, href: sheetPage(`${PDF}/Plastic-Surgery-of-Body/Patient-information-sheet-Brachiaplasty.pdf`) },
           { title: "Thighplasty (Thigh Lift)", text: "A day-care procedure under general anaesthesia removing excess skin and tissue from the thighs for a slimmer look and to recreate the gap between the thighs.", sheet: `${PDF}/Plastic-Surgery-of-Body/Patient-information-sheet-Thighplasty.pdf`, href: sheetPage(`${PDF}/Plastic-Surgery-of-Body/Patient-information-sheet-Thighplasty.pdf`) },
         ],
       },
     ],
     faqs: [
-      { q: "How long is the hospital stay after a tummy tuck?", a: "Abdominoplasty is done under general anaesthesia with a 3–4 day hospital stay. Most people return to normal activities in about a week and strenuous exercise after 6 weeks." },
-      { q: "Is liposuction a day-care procedure?", a: "Yes. Liposuction is done as a day-care procedure under general anaesthesia using the MicroAire power-assisted system." },
-      { q: "Where is the scar after abdominoplasty?", a: "The scar is placed low on the abdomen so that it is hidden under the line of underwear." },
-      { q: "Can a tummy tuck be combined with other procedures?", a: "Yes. It is often combined with liposuction, a breast lift or other procedures as a ‘mummy makeover’ once a woman has completed her family." },
+      { q: "How long is the hospital stay after a Tummy Tuck?", a: "Abdominoplasty is done under general anaesthesia with a 3–4 day hospital stay. Most people return to normal activities in about a week and strenuous exercise after 6 weeks." },
+      { q: "Is Liposuction a day-care procedure?", a: "Yes. Liposuction is done as a day-care procedure under general anaesthesia using the MicroAire power-assisted system." },
+      { q: "Where is the scar after Abdominoplasty?", a: "The scar is placed low on the abdomen so that it is hidden under the line of underwear." },
+      { q: "Can a Tummy Tuck be combined with other procedures?", a: "Yes. It is often combined with Liposuction, a Breast Lift or other procedures as a ‘mummy makeover’ once a woman has completed her family." },
     ],
     conditions: ["Abdominal skin laxity", "Diastasis recti", "Localised fat deposits", "Arm skin laxity", "Thigh skin laxity"],
     procedures: ["Abdominoplasty", "Liposuction", "Brachioplasty", "Thighplasty"],
@@ -813,16 +813,16 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
     shortTitle: "Hand Surgery",
     title: "Hand Surgery in Bangalore",
     metaTitle: "Hand Surgery in Bangalore — Carpal Tunnel, Trigger Finger, Syndactyly, Hand Trauma | Dr Vybhav Deraje",
-    description: "Hand surgery in Bangalore by Dr Vybhav Deraje: wide-awake (WALANT) carpal tunnel and trigger finger release, syndactyly, burn contractures and hand trauma.",
+    description: "Hand surgery in Bangalore by Dr Vybhav Deraje: wide-awake (WALANT) carpal tunnel and Trigger Finger Release, Syndactyly, burn contractures and hand trauma.",
     eyebrow: "Reconstructive Surgery · Hand",
-    lead: "Wide-awake day-care surgery for carpal tunnel and trigger finger, congenital hand surgery for children, burn deformity release and emergency hand trauma care.",
-    cardText: "WALANT carpal tunnel and trigger finger release, syndactyly, burn contractures and hand trauma.",
+    lead: "Wide-awake day-care surgery for carpal tunnel and Trigger Finger, congenital hand surgery for children, burn deformity release and emergency hand trauma care.",
+    cardText: "WALANT carpal tunnel and Trigger Finger Release, Syndactyly, burn contractures and hand trauma.",
     intro: ["Hand surgery sits at the heart of plastic surgery. Dr Vybhav Deraje trained in hand surgery at Queen Victoria Hospital, East Grinstead, and offers the following procedures."],
     sections: [
       {
         heading: "Procedures",
         items: [
-          { title: "Carpal Tunnel Release", text: "For carpal tunnel syndrome, where the median nerve is compressed in a canal at the wrist. Releasing the tunnel relieves numbness, tingling and weakness. Offered as a day-care WALANT procedure — Wide Awake, Local Anaesthesia, No Tourniquet — the most contemporary approach to elective hand surgery worldwide.", sheet: `${PDF}/Plastic-Surgery-of-Hand/Patient-information-sheet-Carpal-tunnel-release.pdf`, href: sheetPage(`${PDF}/Plastic-Surgery-of-Hand/Patient-information-sheet-Carpal-tunnel-release.pdf`) },
+          { title: "Carpal Tunnel Release", text: "For Carpal Tunnel Syndrome, where the median nerve is compressed in a canal at the wrist. Releasing the tunnel relieves numbness, tingling and weakness. Offered as a day-care WALANT procedure — Wide Awake, Local Anaesthesia, No Tourniquet — the most contemporary approach to elective hand surgery worldwide.", sheet: `${PDF}/Plastic-Surgery-of-Hand/Patient-information-sheet-Carpal-tunnel-release.pdf`, href: sheetPage(`${PDF}/Plastic-Surgery-of-Hand/Patient-information-sheet-Carpal-tunnel-release.pdf`) },
           { title: "Trigger Finger Release", text: "Also a day-care WALANT procedure: the pulley that causes the finger to catch and lock is released, with immediate relief of symptoms.", sheet: `${PDF}/Plastic-Surgery-of-Hand/Patient-information-sheet-Trigger-finger-release.pdf`, href: sheetPage(`${PDF}/Plastic-Surgery-of-Hand/Patient-information-sheet-Trigger-finger-release.pdf`) },
           { title: "Syndactyly Release", text: "Syndactyly is a common congenital deformity in which two or more adjacent fingers have not separated. The fingers are released and the wounds covered with skin grafts, usually before the age of one, as a day-care procedure under general anaesthesia.", sheet: `${PDF}/Plastic-Surgery-of-Hand/Patient-information-sheet-Syndactyly-release.pdf`, href: sheetPage(`${PDF}/Plastic-Surgery-of-Hand/Patient-information-sheet-Syndactyly-release.pdf`) },
           { title: "Burnt Hand Deformity Release", text: "Contractures caused by burns are released and the wounds covered with skin grafts or flaps from elsewhere on the body. Rigorous physiotherapy is needed before and after." },
@@ -831,8 +831,8 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
       },
     ],
     faqs: [
-      { q: "What is WALANT hand surgery?", a: "WALANT stands for Wide Awake, Local Anaesthesia, No Tourniquet. You stay awake, only local anaesthetic is used and no tourniquet is applied — the most contemporary method for elective hand surgery. Dr Vybhav Deraje uses it for carpal tunnel and trigger finger release as day-care procedures." },
-      { q: "At what age is syndactyly surgery done?", a: "Usually before the age of one year, as a day-care procedure under general anaesthesia. The joined fingers are separated and the wounds covered with skin grafts." },
+      { q: "What is WALANT hand surgery?", a: "WALANT stands for Wide Awake, Local Anaesthesia, No Tourniquet. You stay awake, only local anaesthetic is used and no tourniquet is applied — the most contemporary method for elective hand surgery. Dr Vybhav Deraje uses it for carpal tunnel and Trigger Finger Release as day-care procedures." },
+      { q: "At what age is Syndactyly surgery done?", a: "Usually before the age of one year, as a day-care procedure under general anaesthesia. The joined fingers are separated and the wounds covered with skin grafts." },
       { q: "Does Dr Vybhav Deraje treat hand injuries?", a: "Yes. The hand trauma service covers nail-bed, tendon, nerve and vascular injuries, amputations, mangled hand and brachial plexus injuries, with hand therapy support at the hospital." },
     ],
     conditions: ["Carpal tunnel syndrome", "Trigger finger", "Syndactyly", "Post-burn hand contracture", "Hand injury", "Brachial plexus injury"],

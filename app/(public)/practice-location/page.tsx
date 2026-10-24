@@ -58,7 +58,7 @@ export default async function LocationsPage() {
                 </a>
               )}
               <a href={c.mapsUrl} target="_blank" rel="noopener noreferrer">
-                Get directions <ArrowUpRight size={16} aria-hidden="true" />
+                Get Directions <ArrowUpRight size={16} aria-hidden="true" />
                 <span className="visually-hidden">(opens Google Maps in a new tab)</span>
               </a>
               <Link href={`${ROUTES.contact}?clinic=${c.slug}`}>

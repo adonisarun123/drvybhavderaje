@@ -168,7 +168,7 @@ export function ServiceGrid({ services, compact = false, columns }: { services: 
             <h3>{s.shortTitle}</h3>
             <p>{s.cardText}</p>
             <span className="card-link">
-              Read more <ArrowUpRight size={19} aria-hidden="true" />
+              Read More <ArrowUpRight size={19} aria-hidden="true" />
             </span>
           </Link>
         );
