@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, ArrowUpRight, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Mail, MapPin, MessageCircle, Phone, Video } from "lucide-react";
 import { PageHero } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { AppointmentForm } from "@/components/site/appointment-form";
@@ -26,16 +26,16 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
   const enabled = enquiriesEnabled();
   const slotsEnabled = enabled ? await publicSlotsEnabled() : false;
   const bounds = publicDateBounds(60, PRACTICE_TZ);
-  const initialClinic = clinics.some((c) => c.slug === clinic) ? clinic : undefined;
+  const initialClinic = clinics.some((c) => c.slug === clinic) || clinic === "video_consultation" ? clinic : undefined;
   return (
     <>
       <JsonLd data={[breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Contact Us", path: ROUTES.contact }]), medicalWebPageJsonLd({ title: TITLE, description: DESCRIPTION, path: ROUTES.contact, type: "ContactPage" })]} />
       <PageHero eyebrow="Contact Us" crumb="Contact Us" title="Book an appointment." lead="Use the enquiry form, or call or email the clinic, to arrange a consultation with Dr Vybhav Deraje." />
       <section className="section container content-grid">
-        <div className="form-card">
+        <div className="form-card" id="enquiry">
           <h2>Online Enquiry</h2>
           <p>Share your contact details, the reason for your enquiry and your preferred clinic. Please do not include medical reports or detailed health information — bring those to your appointment.</p>
-          <AppointmentForm clinics={clinics} enabled={enabled} slotsEnabled={slotsEnabled} dateMin={bounds.min} dateMax={bounds.max} initialClinic={initialClinic} />
+          <AppointmentForm key={initialClinic ?? "none"} clinics={clinics} enabled={enabled} slotsEnabled={slotsEnabled} dateMin={bounds.min} dateMax={bounds.max} initialClinic={initialClinic} />
         </div>
         <div>
           <aside className="side-card" aria-label="Phone and email">
@@ -54,20 +54,47 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
               {SITE.email} <ArrowUpRight size={16} aria-hidden="true" />
             </a>
           </aside>
-          <aside className="side-card" aria-label="Contacting us from outside India" style={{ marginTop: 24 }}>
+          <aside className="side-card abroad-card" aria-label="Contacting us from outside India" style={{ marginTop: 24 }}>
             <p className="eyebrow">Outside India?</p>
             <h3>Patients from Abroad Are Welcome.</h3>
-            <p>
-              Dr Deraje sees patients travelling from outside India and offers video consultations for an initial opinion or follow-up. Choose <em>Video consultation</em> in the form above and select the country of your phone number, message the clinic on{" "}
-              <a className="text-link" href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
-                WhatsApp
-              </a>
-              , or email{" "}
-              <a className="text-link" href={`mailto:${SITE.email}`}>
-                {SITE.email}
-              </a>
-              . The clinic replies in Indian Standard Time (UTC+5:30); preferred times are shown in IST and in your local time. Please wait for the clinic to ask before sending medical reports or photographs.
-            </p>
+            <p>Dr Deraje sees patients travelling from outside India and offers video consultations for an initial opinion or follow-up.</p>
+            <ul className="contact-actions">
+              <li>
+                <Link href={`${ROUTES.contact}?clinic=video_consultation#enquiry`}>
+                  <Video size={18} aria-hidden="true" />
+                  <span>
+                    <b>Book a video consultation</b>
+                    <small>Via the enquiry form</small>
+                  </span>
+                  <ArrowRight size={16} aria-hidden="true" />
+                </Link>
+              </li>
+              <li>
+                <a href={SITE.whatsappUrl} target="_blank" rel="noopener noreferrer">
+                  <MessageCircle size={18} aria-hidden="true" />
+                  <span>
+                    <b>WhatsApp the clinic</b>
+                    <small>{SITE.phone}</small>
+                  </span>
+                  <ArrowUpRight size={16} aria-hidden="true" />
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${SITE.email}`}>
+                  <Mail size={18} aria-hidden="true" />
+                  <span>
+                    <b>Email</b>
+                    <small>{SITE.email}</small>
+                  </span>
+                  <ArrowUpRight size={16} aria-hidden="true" />
+                </a>
+              </li>
+            </ul>
+            <ul className="abroad-notes">
+              <li>In the form, select the country of your phone number.</li>
+              <li>The clinic replies in Indian Standard Time (UTC+5:30). Preferred times are shown in IST and in your local time.</li>
+              <li>Please wait for the clinic to ask before sending medical reports or photographs.</li>
+            </ul>
           </aside>
           <aside className="side-card" aria-label="Clinic addresses" style={{ marginTop: 24 }}>
             <p className="eyebrow">Consultation Clinics</p>

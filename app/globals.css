@@ -382,6 +382,16 @@ main:focus { outline: none; }
 .mini-address b { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: var(--navy); }
 .mini-address span { color: var(--muted); }
 .mini-address a { color: var(--blue); margin: 0 !important; }
+#enquiry { scroll-margin-top: 96px; }
+.contact-actions { list-style: none; margin: 0 0 20px; padding: 0; display: grid; gap: 10px; }
+.contact-actions a { margin: 0; display: grid; grid-template-columns: 20px 1fr 16px; align-items: center; gap: 12px; min-height: 56px; padding: 10px 14px; background: #fff; border: 1px solid var(--line); border-radius: 6px; color: var(--navy); transition: border-color 0.2s, background 0.2s; }
+.contact-actions a:hover { border-color: var(--blue); background: var(--pale); }
+.contact-actions a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.contact-actions svg { color: var(--blue); }
+.contact-actions span { display: grid; gap: 2px; min-width: 0; line-height: 1.35; }
+.contact-actions b { font-size: 15px; font-weight: 600; }
+.contact-actions small { color: var(--muted); font-size: 13px; overflow-wrap: anywhere; }
+.abroad-notes { margin: 0; padding: 16px 0 0 18px; border-top: 1px solid var(--line); display: grid; gap: 8px; color: var(--muted); font-size: 14px; line-height: 1.6; }
 
 .testimonial-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; display: grid; }
 .testimonial-card { border: 1px solid var(--line); border-radius: 6px; background: #fff; padding: 26px 24px 22px; margin: 0; display: flex; flex-direction: column; gap: 14px; }
