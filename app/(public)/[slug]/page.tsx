@@ -143,7 +143,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 </li>
               ) : (
                 <li>
-                  <b>Where:</b> Consultations at <Link href={ROUTES.locations}>Aesthetica Veda Clinics</Link> in Bangalore; surgery at {HOSPITALS.map((h) => h.name.replace(" Hospital", "")).slice(0, 3).join(", ")} and other partner hospitals.
+                  <b>Where:</b> Consultations at <Link href={ROUTES.locations}>Aesthetica Veda Clinics</Link> in Bangalore; surgery at {HOSPITALS.filter((h) => page.group !== "cosmetic" || !h.name.startsWith("Aster")).map((h) => h.name.replace(" Hospital", "")).slice(0, 3).join(", ")} and other partner hospitals.
                 </li>
               )}
               <li>
