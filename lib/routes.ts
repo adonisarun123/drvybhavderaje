@@ -134,4 +134,8 @@ export const RETIRED_PATHS: Record<string, string> = {
   "/index.html": ROUTES.home,
   "/index": ROUTES.home,
   "/home": ROUTES.home,
+  // Still receiving Google impressions in Oct 2026 (GSC) but 404ing: Aesthetica Veda brand searches land here.
+  "/aesthetica-veda.html": ROUTES.locations,
+  "/aesthetica-veda": ROUTES.locations,
+  "/book-now": ROUTES.contact,
 };
