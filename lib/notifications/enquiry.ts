@@ -36,6 +36,7 @@ export async function notifyNewEnquiry(enquiry: Enquiry): Promise<void> {
       clinicName: clinic ? [clinic.brand, clinic.name].filter(Boolean).join(" ") : null,
       clinicPreference: enquiry.clinicPreference,
       preferredStartAt: enquiry.preferredStartAt,
+      remarks: enquiry.remarks,
       createdAt: enquiry.createdAt,
       adminUrl: `${siteOrigin()}/admin/enquiries/${enquiry.id}`,
       siteName: SITE.name,

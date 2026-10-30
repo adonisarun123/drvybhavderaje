@@ -307,6 +307,8 @@ export const enquiries = pgTable(
     clinicPreference: text("clinic_preference"), // e.g. "help_me_choose"
     preferredStartAt: timestamp("preferred_start_at", { withTimezone: true }),
     preferredNote: text("preferred_note"),
+    /** Optional free-text reason the patient gives on the website form. */
+    remarks: text("remarks"),
     source: text("source").notNull().default("website"),
     status: text("status").notNull().default("new"),
     assignedTo: uuid("assigned_to").references(() => user.id, { onDelete: "set null" }),

@@ -123,6 +123,7 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
       email: String(fd.get("email") ?? ""),
       clinic: String(fd.get("clinic") ?? ""),
       preferredStart: selectedSlot,
+      remarks: String(fd.get("remarks") ?? ""),
       consent: fd.get("consent") === "on",
       submissionId: submissionId.current,
       website: String(fd.get("website") ?? ""),
@@ -130,7 +131,7 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
     };
     setStatus({ kind: "sending" });
     const clinicKind = isClinicPreference(payload.clinic) ? payload.clinic : "clinic";
-    const common = { form_id: ENQUIRY_FORM_ID, clinic: payload.clinic, clinic_kind: clinicKind, phone_country: phoneCountry, has_slot: !!selectedSlot, has_email: !!payload.email, page_path: window.location.pathname };
+    const common = { form_id: ENQUIRY_FORM_ID, clinic: payload.clinic, clinic_kind: clinicKind, phone_country: phoneCountry, has_slot: !!selectedSlot, has_email: !!payload.email, has_remarks: !!payload.remarks.trim(), page_path: window.location.pathname };
     track("form_submit", common);
     try {
       const res = await fetch("/api/enquiries", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
@@ -302,6 +303,19 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
             )}
           </div>
         )}
+        <label className="field full" htmlFor={`${id}-remarks`}>
+          Reason for Your Visit / Remarks (Optional)
+          <textarea id={`${id}-remarks`} name="remarks" rows={4} maxLength={1000} placeholder="e.g. Rhinoplasty consultation, my baby's head shape, a second opinion" aria-invalid={!!err("remarks")} aria-describedby={err("remarks") ? `${id}-remarks-err` : `${id}-remarks-help`} disabled={!enabled} />
+          {err("remarks") ? (
+            <span className="field-error" id={`${id}-remarks-err`}>
+              {err("remarks")}
+            </span>
+          ) : (
+            <span className="note" id={`${id}-remarks-help`}>
+              A short note helps the clinic prepare. Please don’t include medical reports or detailed health information — bring those to your appointment.
+            </span>
+          )}
+        </label>
       </div>
       <div className="hp" aria-hidden="true">
         <label>

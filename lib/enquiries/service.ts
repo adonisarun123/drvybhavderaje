@@ -21,6 +21,7 @@ export const publicEnquirySchema = z.object({
   email: z.union([z.literal(""), z.string().trim().email("Please enter a valid email address").max(254)]).optional(),
   clinic: z.string().trim().min(1, "Please choose a clinic").max(64),
   preferredStart: z.string().trim().max(40).optional().or(z.literal("")),
+  remarks: z.string().trim().max(1000, "Please keep this under 1,000 characters").optional().or(z.literal("")),
   consent: z.literal(true, { error: "Please confirm you agree to be contacted" }),
   submissionId: z.string().uuid(),
   website: z.string().max(0).optional(), // honeypot
@@ -67,6 +68,7 @@ export async function createPublicEnquiry(
         clinicId,
         clinicPreference,
         preferredStartAt,
+        remarks: input.remarks || null,
         source: "website",
         status: "new",
         consentAt: new Date(),

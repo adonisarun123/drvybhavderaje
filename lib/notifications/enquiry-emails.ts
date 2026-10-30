@@ -13,6 +13,7 @@ export interface EnquiryEmailInput {
   clinicName: string | null;
   clinicPreference: string | null;
   preferredStartAt: Date | null;
+  remarks?: string | null;
   createdAt: Date;
   adminUrl: string;
   siteName: string;
@@ -43,6 +44,7 @@ export function buildClinicAlert(i: EnquiryEmailInput): { subject: string; text:
     ["Email", i.email ?? "—"],
     ["Clinic", clinicLabel(i)],
     ["Preferred time", i.preferredStartAt ? fmtIst(i.preferredStartAt) : "No preference given"],
+    ["Remarks", i.remarks?.trim() || "—"],
     ["Received", fmtIst(i.createdAt)],
   ];
   const subject = `New consultation request ${i.reference} — ${i.name} (${clinicLabel(i)})`;

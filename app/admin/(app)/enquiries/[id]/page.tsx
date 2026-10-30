@@ -63,6 +63,8 @@ export default async function EnquiryDetailPage({ params }: { params: Promise<{ 
               <dd>{clinicName ?? clinicPreferenceLabel(e.clinicPreference, "Not specified")}</dd>
               <dt>Preferred time</dt>
               <dd>{e.preferredStartAt ? fmtDateTime(e.preferredStartAt) : e.preferredNote ?? "—"}</dd>
+              <dt>Remarks</dt>
+              <dd style={{ whiteSpace: "pre-wrap" }}>{e.remarks ?? "—"}</dd>
               <dt>Consent</dt>
               <dd>{e.consentAt ? `Contact consent given ${fmtDateTime(e.consentAt)} (${e.consentVersion})` : "Logged by staff"}</dd>
               <dt>Assigned</dt>
