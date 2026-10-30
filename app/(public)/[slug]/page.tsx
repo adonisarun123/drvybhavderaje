@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { Byline, CtaBand, Faq, HelpSideCard, KeyFacts, PageHero, PhotoGallery, RelatedServices } from "@/components/site/blocks";
 import { VideoSection } from "@/components/site/video-section";
 import { JsonLd } from "@/components/site/json-ld";
-import { childServices, DOCTOR, HEAD_SHAPE_CLINIC, HEAD_SHAPE_SLUGS, getService, GROUP_HREF, GROUP_LABEL, HOSPITALS, isFeatured, PRACTICES, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
+import { childServices, CLINICS_SEED, DOCTOR, HEAD_SHAPE_CLINIC, HEAD_SHAPE_SLUGS, getService, GROUP_HREF, GROUP_LABEL, HOSPITALS, isFeatured, PRACTICES, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
 import { autolink, createLinkBudget, relatedServices } from "@/lib/links";
 import { ROUTES, SECTION } from "@/lib/routes";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, PROCEDURE_ID, CONDITION_ID, serviceEntitiesJsonLd } from "@/lib/seo";
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const page = getService(slug);
   if (!page) return {};
-  return pageMetadata({ title: page.metaTitle, description: page.description, path: page.path, ogType: "article" });
+  return pageMetadata({ title: page.metaTitle, description: page.description, path: page.path, ogType: "article", bare: !page.metaTitle.includes(SITE.name) });
 }
 
 /** A section with its copy already run through the autolinker (in document order, so the first mention on the page gets the link). */
@@ -127,7 +127,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <section className="section container content-grid">
         <article className="prose service-prose">
           <Byline />
-          <KeyFacts title={titleCase(`${page.shortTitle} in Bangalore`)}>
+          <KeyFacts title={titleCase(`${page.shortTitle} in Bangalore${page.slug === "craniosynostosis-surgery-bangalore" ? ", India" : ""}`)}>
             <p>{page.description}</p>
             <ul>
               <li>
@@ -143,7 +143,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 </li>
               ) : (
                 <li>
-                  <b>Where:</b> Consultations at <Link href={ROUTES.locations}>Aesthetica Veda Clinics</Link> in Bangalore; surgery at {HOSPITALS.filter((h) => page.group !== "cosmetic" || !h.name.startsWith("Aster")).map((h) => h.name.replace(" Hospital", "")).slice(0, 3).join(", ")} and other partner hospitals.
+                  <b>Where:</b> Consultations at <Link href={ROUTES.locations}>Aesthetica Veda Clinics</Link> in {CLINICS_SEED.map((c) => c.name).join(", ").replace(/, ([^,]*)$/, " and $1")}, Bangalore (Bengaluru); surgery at {HOSPITALS.filter((h) => page.group !== "cosmetic" || !h.name.startsWith("Aster")).map((h) => h.name.replace(" Hospital", "")).slice(0, 3).join(", ")} and other partner hospitals.
                 </li>
               )}
               <li>

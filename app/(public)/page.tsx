@@ -114,7 +114,7 @@ export default async function HomePage() {
         <div className="section-heading">
           <div>
             <p className="eyebrow">Our Services</p>
-            <h2 id="craniofacial-heading">Craniofacial Surgery</h2>
+            <h2 id="craniofacial-heading">Craniofacial Surgery in Bangalore</h2>
           </div>
           <p>
             Conditions of the skull, face, jaws and ears — in children and adults.
@@ -129,7 +129,7 @@ export default async function HomePage() {
         <div className="section-heading">
           <div>
             <p className="eyebrow">Our Services</p>
-            <h2 id="cosmetic-heading">Cosmetic Surgery</h2>
+            <h2 id="cosmetic-heading">Cosmetic Surgery in Bangalore</h2>
           </div>
           <p>
             Face, breast and body procedures by a board-certified plastic surgeon.
@@ -203,7 +203,7 @@ export default async function HomePage() {
               </li>
             </ul>
             <Link href={servicePath("craniosynostosis-surgery-bangalore")} className="text-link">
-              Read About Craniosynostosis Care <ArrowRight size={18} aria-hidden="true" />
+              Craniosynostosis Surgery for Families Across India <ArrowRight size={18} aria-hidden="true" />
             </Link>
           </div>
         </div>
