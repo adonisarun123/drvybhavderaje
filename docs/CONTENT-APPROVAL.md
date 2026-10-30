@@ -5,7 +5,7 @@ It still needs the doctor's sign-off.
 
 ## Clinical copy — 11 new procedure pages (22 Oct 2026) — REVIEW BEFORE LAUNCH
 Source: `lib/procedures.ts`. The ten cosmetic pages expand the doctor's existing one-paragraph descriptions (anaesthesia, admission, recovery, technique) with general patient-education sections written in non-promissory language. Points for the doctor to confirm or strike:
-- **Ear reconstruction** had no content on the live site. The page is a draft from standard craniofacial practice: rib-cartilage two-stage reconstruction from ~8–10 years, porous polyethylene as an alternative, hearing pathway with ENT/audiology. Confirm the techniques and ages he actually offers. **Status 30 Oct 2026: not yet confirmed — page is live but noindexed and out of the sitemap/llms.txt (`PENDING_REVIEW_SLUGS` in `lib/content.ts`). Confirmation questions emailed to the doctor; remove the slug from that set once he signs off.**
+- **Ear reconstruction** had no content on the live site. The page is a draft from standard craniofacial practice: rib-cartilage two-stage reconstruction from ~8–10 years, porous polyethylene as an alternative, hearing pathway with ENT/audiology. Confirm the techniques and ages he actually offers. **Confirmed by the doctor 30 Oct 2026 (via Arun); page indexable again.**
 - Rhinoplasty: open vs closed approach, septal cartilage grafts, revision rhinoplasty, 6-week contact-sport advice.
 - Blepharoplasty: transconjunctival lower-lid option, 5–7 day sutures, contraindications listed.
 - Otoplasty: age 5–6 timing, adults under local + sedation, headband for several weeks, lobe repair under local.

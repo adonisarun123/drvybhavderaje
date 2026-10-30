@@ -877,7 +877,7 @@ export const SERVICE_PAGES: ServicePage[] = [...LEGACY_SERVICE_PAGES, ...PROCEDU
  * the navigation, but are noindexed and left out of the sitemap and llms.txt / llms-full.txt until
  * he signs them off (see docs/CONTENT-APPROVAL.md). Remove a slug here once it is confirmed.
  */
-export const PENDING_REVIEW_SLUGS: ReadonlySet<string> = new Set(["ear-reconstruction-surgery-bangalore"]);
+export const PENDING_REVIEW_SLUGS: ReadonlySet<string> = new Set<string>([]);
 export const isPendingReview = (slug: string): boolean => PENDING_REVIEW_SLUGS.has(slug);
 
 export function getService(slug: string): ServicePage | undefined {
