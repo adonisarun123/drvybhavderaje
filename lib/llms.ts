@@ -1,6 +1,6 @@
 import { CRANIO_PARENT, CRANIO_TYPES, cranioTypePath } from "./cranio-types";
 import { SUB_PROCEDURES, subProcedurePath, subProceduresOf } from "./sub-procedures";
-import { AFFILIATIONS, CLINICS_SEED, COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, CREDENTIALS, DOCTOR, HOME_FAQS, HOSPITALS, hospitalMapUrl, OTHER_SERVICES, PRACTICES, PUBLICATIONS, SERVICE_PAGES, SITE } from "./content";
+import { isPendingReview, AFFILIATIONS, CLINICS_SEED, COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, CREDENTIALS, DOCTOR, HOME_FAQS, HOSPITALS, hospitalMapUrl, OTHER_SERVICES, PRACTICES, PUBLICATIONS, SERVICE_PAGES, SITE } from "./content";
 import { ROUTES } from "./routes";
 import { absolute } from "./seo";
 
@@ -33,6 +33,7 @@ export function llmsTxt(): string {
   lines.push(`- [A–Z index of all conditions and procedures](${absolute(ROUTES.procedures)})`, "");
   lines.push("## Craniofacial surgery", "");
   for (const p of CRANIOFACIAL_SERVICES) {
+    if (isPendingReview(p.slug)) continue;
     lines.push(`- [${p.shortTitle}](${absolute(p.path)}): ${p.description}`);
     if (p.slug === CRANIO_PARENT) for (const t of CRANIO_TYPES) lines.push(`  - [${t.shortTitle}](${absolute(cranioTypePath(t.slug))}): ${t.description}`);
     for (const c of subProceduresOf(p.slug)) lines.push(`  - [${c.shortTitle}](${absolute(subProcedurePath(c))}): ${c.description}`);
@@ -66,6 +67,7 @@ export function llmsFullTxt(): string {
   out.push("## Consultation clinics", "", ...CLINICS_SEED.map((c) => `- ${c.brand} ${c.name}: ${c.addressLines}. Tel ${c.phone}`), "");
   out.push("## Selected publications", "", ...PUBLICATIONS.map((p) => `- ${p}`), "");
   for (const p of SERVICE_PAGES) {
+    if (isPendingReview(p.slug)) continue;
     out.push("---", "", `# ${p.title}`, "", `URL: ${absolute(p.path)}`, "", p.lead, "", ...p.intro, "");
     for (const s of p.sections) {
       out.push(`## ${s.heading}`, "");

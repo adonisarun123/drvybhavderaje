@@ -872,6 +872,14 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
 
 export const SERVICE_PAGES: ServicePage[] = [...LEGACY_SERVICE_PAGES, ...PROCEDURE_PAGES];
 
+/**
+ * Pages whose clinical copy the doctor has not yet confirmed. They stay visible on the site and in
+ * the navigation, but are noindexed and left out of the sitemap and llms.txt / llms-full.txt until
+ * he signs them off (see docs/CONTENT-APPROVAL.md). Remove a slug here once it is confirmed.
+ */
+export const PENDING_REVIEW_SLUGS: ReadonlySet<string> = new Set(["ear-reconstruction-surgery-bangalore"]);
+export const isPendingReview = (slug: string): boolean => PENDING_REVIEW_SLUGS.has(slug);
+
 export function getService(slug: string): ServicePage | undefined {
   return SERVICE_PAGES.find((p) => p.slug === slug);
 }

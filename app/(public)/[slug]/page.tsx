@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { Byline, CtaBand, Faq, HelpSideCard, KeyFacts, PageHero, PhotoGallery, RelatedServices } from "@/components/site/blocks";
 import { VideoSection } from "@/components/site/video-section";
 import { JsonLd } from "@/components/site/json-ld";
-import { childServices, CLINICS_SEED, DOCTOR, HEAD_SHAPE_CLINIC, HEAD_SHAPE_SLUGS, getService, GROUP_HREF, GROUP_LABEL, HOSPITALS, isFeatured, PRACTICES, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
+import { childServices, CLINICS_SEED, DOCTOR, isPendingReview, HEAD_SHAPE_CLINIC, HEAD_SHAPE_SLUGS, getService, GROUP_HREF, GROUP_LABEL, HOSPITALS, isFeatured, PRACTICES, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
 import { autolink, createLinkBudget, relatedServices } from "@/lib/links";
 import { ROUTES, SECTION } from "@/lib/routes";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, PROCEDURE_ID, CONDITION_ID, serviceEntitiesJsonLd } from "@/lib/seo";
@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const page = getService(slug);
   if (!page) return {};
-  return pageMetadata({ title: page.metaTitle, description: page.description, path: page.path, ogType: "article", bare: !page.metaTitle.includes(SITE.name) });
+  return pageMetadata({ title: page.metaTitle, description: page.description, path: page.path, ogType: "article", bare: !page.metaTitle.includes(SITE.name), noindex: isPendingReview(page.slug) });
 }
 
 /** A section with its copy already run through the autolinker (in document order, so the first mention on the page gets the link). */
