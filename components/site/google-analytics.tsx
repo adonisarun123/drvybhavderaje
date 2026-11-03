@@ -2,12 +2,13 @@
 
 import Script from "next/script";
 import { useEffect, useState } from "react";
-import { CONSENT_EVENT, readConsent, type ConsentChoice } from "@/lib/consent";
+import { CONSENT_BANNER_ENABLED, CONSENT_EVENT, readConsent, type ConsentChoice } from "@/lib/consent";
 
 export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID ?? "G-5GZJ539E0C";
 
 /**
- * Google Analytics 4 (gtag.js), loaded ONLY after the visitor accepts analytics in the cookie banner.
+ * Google Analytics 4 (gtag.js). While CONSENT_BANNER_ENABLED is false (lib/consent.ts) it loads for
+ * every visitor; otherwise ONLY after the visitor accepts analytics in the cookie banner.
  *
  * Google Consent Mode v2 defaults are set to "denied" before gtag runs, and no Google script is
  * fetched at all until consent is "granted" — the strict ("basic") pattern EU/UK regulators accept,
@@ -25,12 +26,13 @@ export function GoogleAnalytics() {
   }, []);
 
   useEffect(() => {
-    if (consent === "denied" && typeof window.gtag === "function") {
+    if (CONSENT_BANNER_ENABLED && consent === "denied" && typeof window.gtag === "function") {
       window.gtag("consent", "update", { analytics_storage: "denied", ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied" });
     }
   }, [consent]);
 
-  if (process.env.NODE_ENV !== "production" || !GA_MEASUREMENT_ID || consent !== "granted") return null;
+  const allowed = CONSENT_BANNER_ENABLED ? consent === "granted" : true;
+  if (process.env.NODE_ENV !== "production" || !GA_MEASUREMENT_ID || !allowed) return null;
 
   return (
     <>

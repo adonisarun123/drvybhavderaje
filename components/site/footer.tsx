@@ -1,4 +1,5 @@
 import { CookieSettingsLink } from "@/components/site/cookie-banner";
+import { CONSENT_BANNER_ENABLED } from "@/lib/consent";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { FacebookIcon, InstagramIcon, LinkedinIcon, YoutubeIcon } from "./social-icons";
@@ -81,7 +82,8 @@ export function SiteFooter() {
         <span>© {new Date().getFullYear()} {SITE.name}</span>
         <span>Information on this site supports, and does not replace, a medical consultation.</span>
         <span>
-          <Link href={ROUTES.privacy}>Privacy Policy</Link> · <Link href={ROUTES.terms}>Terms of Use</Link> · <CookieSettingsLink />
+          <Link href={ROUTES.privacy}>Privacy Policy</Link> · <Link href={ROUTES.terms}>Terms of Use</Link>
+          {CONSENT_BANNER_ENABLED && <> · <CookieSettingsLink /></>}
         </span>
         <span className="footer-credit">
           Website by <a href="https://www.monkmantra.com" target="_blank" rel="noopener noreferrer" title="Monk Mantra — healthcare digital marketing, Bangalore">Monk Mantra</a>

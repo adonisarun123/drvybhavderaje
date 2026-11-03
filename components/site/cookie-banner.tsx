@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { CONSENT_EVENT, readConsent, resetConsent, writeConsent } from "@/lib/consent";
+import { CONSENT_BANNER_ENABLED, CONSENT_EVENT, readConsent, resetConsent, writeConsent } from "@/lib/consent";
 import { ROUTES } from "@/lib/routes";
 import { track } from "@/lib/analytics";
 
@@ -21,7 +21,7 @@ export function CookieBanner() {
     return () => window.removeEventListener(CONSENT_EVENT, sync);
   }, []);
 
-  if (!open) return null;
+  if (!CONSENT_BANNER_ENABLED || !open) return null;
 
   return (
     <aside className="cookie-banner" role="region" aria-label="Cookie choices">
@@ -43,6 +43,7 @@ export function CookieBanner() {
 
 /** Footer link that re-opens the banner so a visitor can change their mind. */
 export function CookieSettingsLink() {
+  if (!CONSENT_BANNER_ENABLED) return null;
   return (
     <button
       type="button"

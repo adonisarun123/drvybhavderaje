@@ -29,7 +29,7 @@ export default function PrivacyPage() {
           <h3>Usage Data</h3>
           <p>We may collect information about how the Service is accessed and used, such as your device’s Internet Protocol (IP) address, browser type and version, the pages you visit, the date, time and duration of your visit, and other diagnostic data.</p>
           <h3>Cookies</h3>
-          <p>This public website sets no advertising cookies. Until you accept analytics in the cookie banner, the only cookie set is <code>dvd_consent</code>, which remembers your choice for six months. If you accept, Google Analytics sets its own cookies (described below). Staff sign-in to the private administration area uses a secure session cookie that is set only there. You can change your choice at any time with the “Cookie settings” link in the footer, or instruct your browser to refuse cookies.</p>
+          <p>This public website sets no advertising cookies. It uses Google Analytics, which sets its own cookies (described below). Staff sign-in to the private administration area uses a secure session cookie that is set only there. You can instruct your browser to refuse or delete cookies at any time; the site, including the enquiry form, works without them.</p>
 
           <h2>How We Use Your Data</h2>
           <ul>
@@ -41,7 +41,7 @@ export default function PrivacyPage() {
           <p>Enquiries are stored securely and are visible only to authorised clinic staff, who may record operational notes (for example, that they called you). Submitting an enquiry does not create or confirm an appointment. To protect the form from abuse, a one-way hash of your network address and your browser type are stored with the request.</p>
 
           <h2>Analytics</h2>
-          <p>We use Google Analytics 4 (Google LLC, United States) to understand how the Service is used — pages visited, approximate location, device and browser type, and how visitors arrive. <strong>It runs only after you choose “Accept analytics” in the cookie banner</strong>; nothing is loaded from Google and no analytics cookies are set before that, and IP addresses are anonymised. Declining, or later choosing “Decline” under “Cookie settings”, stops analytics for the next six months. Google may share this data with other Google services; see Google’s privacy policy, or use the Google Analytics opt-out browser add-on.</p>
+          <p>We use Google Analytics 4 (Google LLC, United States) to understand how the Service is used — pages visited, approximate location, device and browser type, and how visitors arrive. IP addresses are anonymised and no advertising features are enabled. To opt out, block cookies for this site in your browser or install the Google Analytics opt-out browser add-on. Google may share this data with other Google services; see Google’s privacy policy.</p>
 
           <h2>Where Your Data Is Stored and International Transfers</h2>
           <p>The practice is located in Bengaluru, India, and clinic staff access your enquiry from India. The website and its database are hosted by service providers outside India:</p>

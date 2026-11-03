@@ -5,6 +5,14 @@
  * JavaScript frameworks) and mirrored in localStorage as a fallback. Nothing from Google is loaded
  * until the value is "granted". Six-month expiry, after which the banner asks again.
  */
+/**
+ * Master switch for the analytics consent banner. While false (decided 3 Nov 2026, temporary):
+ * no banner, no footer "Cookie Settings" link, and Google Analytics loads for every visitor in
+ * production regardless of any choice stored earlier. Set back to true to restore the
+ * consent-gated behaviour — and restore the privacy-policy wording to match.
+ */
+export const CONSENT_BANNER_ENABLED = false;
+
 export const CONSENT_COOKIE = "dvd_consent";
 export const CONSENT_MAX_AGE_DAYS = 180;
 export const CONSENT_EVENT = "dvd-consent-change";
