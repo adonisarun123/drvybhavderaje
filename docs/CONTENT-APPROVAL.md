@@ -93,3 +93,12 @@ Points for the doctor:
 ## Cost FAQ reworded per procedure (11 Nov 2026) — LIVE once pushed
 
 Search Console shows people searching "<procedure> cost in bangalore" (gynecomastia, rhinoplasty, tummy tuck) with the site ranking 28–72. The standing FAQ "Can I get a cost estimate?" is now asked per procedure — "How much does Rhinoplasty cost in Bangalore?" — on all 11 procedure pages (it was on 5). The answer is the same approved statement, minus the leading "Yes": an individual estimate after assessment, and what to ask it includes. No prices. If the practice is willing to publish a price range or the factors that change the price, that is what would actually rank for these searches.
+
+## Doctor's corrections of 11 Nov 2026 (relayed by Arun) — LIVE once pushed
+
+- **Palate repair hospital stay is 1–2 days.** The Cleft Palate Repair page (facts, After Surgery, FAQ) said 2–3 days and now says 1–2, matching the main Cleft page. Inconsistency closed.
+- **Jaw-surgery risks are the same for cleft and non-cleft patients.** The Orthognathic risks section stands as published.
+- **Death sentence removed** from the Craniosynostosis complications paragraph (main page and all six type pages). The doctor: it is not usually part of their consenting process.
+- **Exclusivity claim replaced, on the doctor's wording:** the home page and the Craniosynostosis page now call the Aster Whitefield team "the pioneering team in Endoscopic Craniosynostosis Surgery in India". His basis: it was the only team in India doing this until about two years ago, and the newer teams started with its support. "The only hospital in India" stays retired.
+- **Costs:** the doctor is open to publishing costs; a cost sheet has gone to him to fill in. No prices on the site until it comes back.
+- **Public slots:** stay off. The doctor will consider publishing slots if he or his staff can block time; that control already exists at /admin/availability.

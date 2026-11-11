@@ -89,7 +89,7 @@ export function openSurgery(name: string, what: string): CranioSection[] {
 export const COMPLICATIONS: CranioSection = {
   heading: "Possible Complications",
   body: [
-    "This is major surgery and families should be fully informed. Infection, bleeding, scarring, swelling and pain are the common complications, and the team manages them routinely. A small tear in the covering of the brain is sometimes seen and is usually repaired during the operation. Injury to the eye or brain is very rare. Death is a remote theoretical possibility; Dr Deraje's team has not seen it in their practice.",
+    "This is major surgery and families should be fully informed. Infection, bleeding, scarring, swelling and pain are the common complications, and the team manages them routinely. A small tear in the covering of the brain is sometimes seen and is usually repaired during the operation. Injury to the eye or brain is very rare.",
   ],
 };
 

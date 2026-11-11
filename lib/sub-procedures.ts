@@ -109,7 +109,7 @@ export const SUB_PROCEDURES: SubProcedure[] = [
     facts: [
       { label: "Usual Age", value: "9–12 months, just before speech develops" },
       { label: "Anaesthesia", value: "general, about 60–90 minutes" },
-      { label: "Hospital Stay", value: "2–3 days, until feeding is normal" },
+      { label: "Hospital Stay", value: "1–2 days, until feeding is normal" },
       { label: "Often Combined With", value: "ear ventilation tubes, placed by the ENT surgeons in the same sitting" },
     ],
     sections: [
@@ -135,7 +135,7 @@ export const SUB_PROCEDURES: SubProcedure[] = [
           "Absorbable packs may be placed in the mouth, and a little oozing of blood from the mouth is normal.",
           "Splints on both arms stop your baby from touching the repair.",
           "Clear liquids from 2 hours after surgery and soft food from the next day; the speech pathologist advises on feeding technique.",
-          "Home after 2–3 days once feeding is normal, with a wound check after 1 week. The stitches are absorbable and dissolve or fall out over the following weeks.",
+          "Home after 1–2 days once feeding is normal, with a wound check after 1 week. The stitches are absorbable and dissolve or fall out over the following weeks.",
         ],
       },
       { heading: "Speech After the Repair", body: ["Speech problems can persist despite surgery. Your child may need speech therapy through the growing years and, very rarely, Speech Surgery."] },
@@ -145,7 +145,7 @@ export const SUB_PROCEDURES: SubProcedure[] = [
       { q: "When is Cleft Palate surgery done?", a: "Usually at 9–12 months of age, just before speech develops." },
       { q: "Why are ear tubes put in at the same time?", a: "A Cleft Palate can stop the Eustachian tube working properly, so fluid collects in the middle ear and affects hearing. The ENT surgeons usually insert ventilation tubes during the palate repair to drain it." },
       { q: "Will my child need speech therapy?", a: "Possibly. Speech problems can persist after the repair, so speech is followed through childhood; speech therapy is common and Speech Surgery is very rarely needed." },
-      { q: "How long is the hospital stay?", a: "Usually 2–3 days, until feeding is back to normal." },
+      { q: "How long is the hospital stay?", a: "Usually 1–2 days, until feeding is back to normal." },
     ],
     sheet: `${PDF}/cleft/Patient-information-sheet-Cleft-palate.pdf`,
   },

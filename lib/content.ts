@@ -67,6 +67,13 @@ const CONTENT_MODIFIED = {
     "/privacy-policy": "2026-11-03",
     "/aboutus": "2026-11-11",
     "/practice-location": "2026-11-11",
+    "/cleft-lip-and-palate-treatment-bangalore/cleft-palate-repair": "2026-11-11",
+    "/craniosynostosis-surgery-bangalore/sagittal-synostosis": "2026-11-11",
+    "/craniosynostosis-surgery-bangalore/metopic-synostosis": "2026-11-11",
+    "/craniosynostosis-surgery-bangalore/unicoronal-synostosis": "2026-11-11",
+    "/craniosynostosis-surgery-bangalore/bicoronal-synostosis": "2026-11-11",
+    "/craniosynostosis-surgery-bangalore/lambdoid-synostosis": "2026-11-11",
+    "/craniosynostosis-surgery-bangalore/multisuture-syndromic-craniosynostosis": "2026-11-11",
   } as Record<string, string>,
 };
 
@@ -472,7 +479,7 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
     cardText: "Early-closing skull sutures in babies: endoscopic keyhole surgery, Orthotic Helmet Therapy and open remodelling.",
     intro: [
       "Craniosynostosis is a birth defect in which one or more of the soft joints between the bones of a baby’s skull (the cranial sutures) close too early. Depending on the suture involved it changes the shape of the skull and, in some children, raises the pressure inside the skull and compresses the growing brain.",
-      "Dr Vybhav Deraje has a special interest and expertise in managing Craniosynostosis. He leads the Craniosynostosis multidisciplinary team at Aster Hospital, Whitefield, which offers minimally invasive endoscope-assisted surgery together with Orthotic Helmet Therapy for these children.",
+      "Dr Vybhav Deraje has a special interest and expertise in managing Craniosynostosis. He leads the Craniosynostosis multidisciplinary team at Aster Hospital, Whitefield, the pioneering team in Endoscopic Craniosynostosis Surgery in India. The team offers minimally invasive endoscope-assisted surgery together with Orthotic Helmet Therapy for these children.",
     ],
     sections: [
       {
