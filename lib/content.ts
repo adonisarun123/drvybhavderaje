@@ -13,6 +13,7 @@
 import { FEATURED_COSMETIC, FEATURED_CRANIOFACIAL, OTHER_SERVICES_ORDER, ROUTES, SECTION, servicePath, type ServiceSlug } from "./routes";
 import { PROCEDURE_PAGES } from "./procedures";
 import { subProcedureForSheet, subProcedurePath } from "./sub-procedures";
+import { COMPLICATIONS as CRANIO_COMPLICATIONS, DIAGNOSIS_SINGLE, KEYHOLE, KEYHOLE_AFTER, openSurgery } from "./cranio-types";
 
 /** URL of the procedure page built from a patient-information sheet (lib/sub-procedures.ts). */
 function sheetPage(sheet: string): string {
@@ -308,6 +309,8 @@ export interface ServiceSection {
   bullets?: string[];
   items?: ServiceItem[];
   note?: string;
+  /** Drafted section awaiting the doctor's sign-off: hidden on the site, in schema and in llms.txt until this flag is removed (docs/CONTENT-APPROVAL.md). */
+  pendingReview?: boolean;
 }
 
 export type ServiceGroup = "craniofacial" | "cosmetic" | "reconstructive";
@@ -351,6 +354,79 @@ export interface Photo {
 
 const PDF = "/images/pdf";
 
+/* ---- Draft sections awaiting the doctor's sign-off (11 Nov 2026) ------------------------------------
+ * Added to bring the three priority craniofacial pages up to the service-page specification
+ * (assessment, recovery and follow-up, risks, cost process). Every clinical statement is taken from
+ * Dr Deraje's own patient-information sheets as already published on the type / procedure pages
+ * (lib/cranio-types.ts, lib/sub-procedures.ts). Hidden everywhere until `pendingReview` is removed;
+ * preview locally with NEXT_PUBLIC_SHOW_DRAFT_SECTIONS=true. Review list: docs/CONTENT-APPROVAL.md.
+ */
+export const SHOW_DRAFT_SECTIONS = process.env.NEXT_PUBLIC_SHOW_DRAFT_SECTIONS === "true";
+const draft = (s: ServiceSection): ServiceSection => ({ ...s, pendingReview: true });
+const COST_SECTION = (extra?: string): ServiceSection =>
+  draft({
+    heading: "Costs and Estimates",
+    body: ["The cost depends on the operation, the hospital and the length of stay, so the clinic gives an individual estimate after assessment rather than a fixed price. Ask what it includes: hospital charges, anaesthesia, implants and follow-up.", ...(extra ? [extra] : [])],
+  });
+
+const CRANIO_DRAFT_DIAGNOSIS: ServiceSection[] = [draft({ heading: "How Craniosynostosis Is Diagnosed", body: [DIAGNOSIS_SINGLE] })];
+const CRANIO_DRAFT_RECOVERY: ServiceSection[] = [
+  draft(KEYHOLE),
+  draft(KEYHOLE_AFTER),
+  ...openSurgery("Remodelling Surgery", "reshapes the skull bones").map(draft),
+  draft(CRANIO_COMPLICATIONS),
+  COST_SECTION(),
+];
+
+const CLEFT_DRAFT: ServiceSection[] = [
+  draft({
+    heading: "How a Cleft Is Diagnosed",
+    body: ["A Cleft Lip or Cleft Palate can often be seen on a high-quality 3D or 4D ultrasound during pregnancy, and the anomaly scan in early pregnancy usually detects it. It is sometimes missed and found only after the baby is born."],
+  }),
+  draft({
+    heading: "After Lip and Palate Repair",
+    bullets: [
+      "Splints on both arms stop your baby from touching the repair.",
+      "After lip repair, feeding can start 2 hours after surgery. After palate repair, clear liquids start 2 hours after surgery and soft food the next day. The speech pathologist advises on feeding technique.",
+      "Your baby goes home once feeding is back to normal.",
+      "Lip stitches are removed after about a week, and you will be shown how to massage the scar for 3–6 months. Palate stitches are absorbable, with a wound check after 1 week.",
+    ],
+  }),
+  draft({
+    heading: "Speech and Hearing Follow-Up",
+    body: [
+      "Because the muscles of the palate are abnormal, a Cleft Palate can affect swallowing and speech. In some children it also affects the Eustachian tube, letting fluid collect in the middle ear and causing hearing problems.",
+      "Speech problems can persist despite surgery. Your child may need speech therapy through the growing years and, very rarely, Speech Surgery.",
+    ],
+  }),
+  draft({
+    heading: "Possible Complications",
+    body: ["Infection, bleeding, scarring, swelling and pain are the common complications. Pain in hospital is managed by the acute pain service team, and usually only a simple painkiller is needed at home. Very rarely the wound can come apart (wound dehiscence) and the repair may have to be repeated later."],
+  }),
+  COST_SECTION("Subsidised treatment is available for children with Cleft Lip and Palate from economically disadvantaged families."),
+];
+
+const JAW_DRAFT: ServiceSection[] = [
+  draft({
+    heading: "Assessment and Planning",
+    body: ["An OPG (a specialised X-ray of the jaws), a lateral cephalogram and a CT scan are taken. The operation is planned on specialised software using virtual surgical planning, which is also used to prepare the models and splints needed in theatre. Most patients need all wisdom teeth removed beforehand."],
+  }),
+  draft({
+    heading: "Recovery After Jaw Surgery",
+    bullets: [
+      "One night in the ICU, then the ward.",
+      "Mild oozing of blood from the mouth is normal; soft diet for 3 weeks, with regular mouthwashes.",
+      "Home after 3–4 days, with rubber bands fitted to the braces.",
+      "Wound check after 1 week; the stitches are absorbable. Orthodontic treatment continues for 3–6 months once healed.",
+    ],
+  }),
+  draft({
+    heading: "Risks and Possible Complications",
+    body: ["Infection, bleeding, swelling and pain are the common complications; pain in hospital is managed by the acute pain service team. Numbness of the upper and lower lip from stretching of the nerves is common and temporary, though full recovery can take 6 months to 1 year. In patients born with a cleft, speech can worsen after surgery and speech therapy may be needed. Loss of teeth is a rare complication that may need dental rehabilitation."],
+  }),
+  COST_SECTION(),
+];
+
 const LEGACY_SERVICE_PAGES: ServicePage[] = [
   {
     slug: "craniosynostosis-surgery-bangalore",
@@ -365,7 +441,7 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
     cardText: "Early-closing skull sutures in babies: endoscopic keyhole surgery, Orthotic Helmet Therapy and open remodelling.",
     intro: [
       "Craniosynostosis is a birth defect in which one or more of the soft joints between the bones of a baby’s skull (the cranial sutures) close too early. Depending on the suture involved it changes the shape of the skull and, in some children, raises the pressure inside the skull and compresses the growing brain.",
-      "Dr Vybhav Deraje has a special interest and expertise in managing Craniosynostosis. He leads the Craniosynostosis multidisciplinary team at Aster Hospital, Whitefield — the only hospital in India offering minimally invasive endoscope-assisted surgery together with Orthotic Helmet Therapy for these children.",
+      "Dr Vybhav Deraje has a special interest and expertise in managing Craniosynostosis. He leads the Craniosynostosis multidisciplinary team at Aster Hospital, Whitefield, which offers minimally invasive endoscope-assisted surgery together with Orthotic Helmet Therapy for these children.",
     ],
     sections: [
       {
@@ -427,6 +503,7 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
           },
         ],
       },
+      ...CRANIO_DRAFT_DIAGNOSIS,
       {
         heading: "How Craniosynostosis Is Treated",
         body: [
@@ -447,6 +524,7 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
           },
         ],
       },
+      ...CRANIO_DRAFT_RECOVERY,
       {
         heading: "Families from Other States and Abroad",
         id: "travelling-for-treatment",
@@ -542,6 +620,7 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
         ],
         note: "Subsidised treatment is available for children with Cleft Lip and Palate from economically disadvantaged families. Please ask the clinic.",
       },
+      ...CLEFT_DRAFT,
     ],
     faqs: [
       { q: "At what age is Cleft Lip repaired?", a: "Lip repair is done at 3–6 months of age and needs only a one-day hospital stay. Babies can breastfeed immediately afterwards if there is no palatal problem." },
@@ -597,6 +676,7 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
         ],
         note: "All incisions are inside the mouth, so there are no external skin scars. These operations involve 3–4 days in hospital including one day in ICU; a blood transfusion is occasionally needed.",
       },
+      ...JAW_DRAFT,
     ],
     faqs: [
       { q: "What is Orthognathic Surgery?", a: "Orthognathic (corrective jaw) surgery moves the bones of the upper jaw, lower jaw or both to realign the teeth and improve the balance of the face. The main operations are Le Fort I osteotomy, bilateral sagittal split osteotomy (BSSO), Double-Jaw Surgery and Genioplasty." },
@@ -870,7 +950,8 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
   },
 ];
 
-export const SERVICE_PAGES: ServicePage[] = [...LEGACY_SERVICE_PAGES, ...PROCEDURE_PAGES];
+/** Sections still awaiting the doctor's sign-off are dropped here, so no page, schema, sitemap or llms.txt consumer can render them. */
+export const SERVICE_PAGES: ServicePage[] = [...LEGACY_SERVICE_PAGES, ...PROCEDURE_PAGES].map((p) => (SHOW_DRAFT_SECTIONS ? p : { ...p, sections: p.sections.filter((s) => !s.pendingReview) }));
 
 /**
  * Pages whose clinical copy the doctor has not yet confirmed. They stay visible on the site and in

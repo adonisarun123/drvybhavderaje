@@ -46,13 +46,13 @@ export function cranioTypePath(slug: string): string {
 
 /* ---- Shared passages (identical across the doctor's single-suture sheets) ---------------------------- */
 
-const DIAGNOSIS_SINGLE =
+export const DIAGNOSIS_SINGLE =
   "Your craniofacial surgeon will first examine your child thoroughly. A skull X-ray and a 3D CT scan of the head are usually needed; occasionally an MRI is also done to assess the brain.";
 
 const TEAM_SENTENCE =
   "Treatment is surgical and is carried out by a multidisciplinary team led by the craniofacial surgeon and neurosurgeon. Dr Vybhav Deraje leads the Craniosynostosis team at Aster Whitefield Hospital, Bangalore. The type of operation depends on your child's age.";
 
-const KEYHOLE: CranioSection = {
+export const KEYHOLE: CranioSection = {
   heading: "Keyhole (Endoscopic) Surgery — What to Expect",
   body: [
     "Before surgery your child is assessed by a paediatric neuro-anaesthetist and has an eye check. Admission is on the day of surgery. The operation takes 1–2 hours under general anaesthesia. Because it needs only a small cut in the scalp, there are no major scars and no major blood loss, although a blood transfusion is occasionally needed.",
@@ -60,14 +60,14 @@ const KEYHOLE: CranioSection = {
   ],
 };
 
-const KEYHOLE_AFTER: CranioSection = {
+export const KEYHOLE_AFTER: CranioSection = {
   heading: "After Keyhole Surgery: Orthotic Helmet Therapy",
   body: [
     "After a check one week after the operation, Orthotic Helmet Therapy is started with the orthotic partner and continues until a good head shape is achieved; the helmet may need to be changed once or twice depending on progress. You will see the craniofacial surgeon and neurosurgeon at regular intervals.",
   ],
 };
 
-function openSurgery(name: string, what: string): CranioSection[] {
+export function openSurgery(name: string, what: string): CranioSection[] {
   return [
     {
       heading: `Open ${name} — What to Expect`,
@@ -86,7 +86,7 @@ function openSurgery(name: string, what: string): CranioSection[] {
   ];
 }
 
-const COMPLICATIONS: CranioSection = {
+export const COMPLICATIONS: CranioSection = {
   heading: "Possible Complications",
   body: [
     "This is major surgery and families should be fully informed. Infection, bleeding, scarring, swelling and pain are the common complications, and the team manages them routinely. A small tear in the covering of the brain is sometimes seen and is usually repaired during the operation. Injury to the eye or brain is very rare. Death is a remote theoretical possibility; Dr Deraje's team has not seen it in their practice.",

@@ -71,3 +71,17 @@ Points approved by the doctor (23 Oct 2026):
 - Arm lift, thigh lift and breast lift are day-care procedures.
 
 Full sign-off: the doctor has read all 15 pages (confirmed by Arun, 23 Oct 2026). Cleared for launch.
+
+## Priority craniofacial pages — draft sections awaiting sign-off (added 11 Nov 2026) — NOT LIVE
+
+Sixteen sections drafted for the Craniosynostosis, Cleft Lip and Palate and Orthognathic pages so they cover assessment, recovery and follow-up, risks and the cost process. Source: `lib/content.ts` (`CRANIO_DRAFT_*`, `CLEFT_DRAFT`, `JAW_DRAFT`). Every clinical statement is copied from the doctor's own patient-information sheets as already approved on the type and procedure pages. The sections are flagged `pendingReview` and are stripped from pages, structured data and llms.txt. Preview: run the site with `NEXT_PUBLIC_SHOW_DRAFT_SECTIONS=true`. To publish a section, delete its `draft(...)` wrapper.
+
+Points for the doctor:
+- **Craniosynostosis (7 sections):** diagnosis, keyhole surgery, helmet therapy after keyhole surgery, open surgery, after open surgery, complications, costs. The open-surgery passage uses the generic wording "Open Remodelling Surgery" and "reshapes the skull bones". The complications paragraph includes the sheet's sentence on death being a remote theoretical possibility; confirm it should appear on the main page.
+- **Cleft (5 sections):** diagnosis, after lip and palate repair, speech and hearing follow-up, complications, costs. The complications paragraph merges the lip and palate sheets. **Existing inconsistency to resolve:** the main page says palate repair needs 1–2 days in hospital; the palate sheet page says 2–3 days. The draft avoids stating a figure.
+- **Orthognathic (4 sections):** assessment and planning, recovery, risks, costs. Source is the cleft jaw-surgery sheet. The speech sentence was narrowed to "in patients born with a cleft" and the Speech Surgery clause dropped; confirm the rest applies to non-cleft patients.
+- **Costs and Estimates (all three):** restates the standing cost FAQ; no prices. Confirm "implants" is the right word for these pages.
+
+## Exclusivity claim softened (11 Nov 2026)
+
+"The only hospital in India offering…" on the home page and the Craniosynostosis page now reads "which offers…". Restore the claim only with a dated, verifiable source that can be shown on the page.

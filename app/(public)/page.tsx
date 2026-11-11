@@ -186,7 +186,7 @@ export default async function HomePage() {
               Every Question Matters.
             </h2>
             <p>
-              Dr Vybhav leads the Craniosynostosis multidisciplinary team at Aster Hospital, Whitefield — the only hospital in India offering minimally invasive endoscope-assisted surgery with Orthotic Helmet Therapy for babies under six months.
+              Dr Vybhav leads the Craniosynostosis multidisciplinary team at Aster Hospital, Whitefield, which offers minimally invasive endoscope-assisted surgery with Orthotic Helmet Therapy for babies under six months.
             </p>
             <ul className="check-list">
               <li>
