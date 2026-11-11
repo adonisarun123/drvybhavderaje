@@ -379,15 +379,21 @@ export interface Photo {
 
 const PDF = "/images/pdf";
 
-/* ---- Draft sections awaiting the doctor's sign-off (11 Nov 2026) ------------------------------------
- * Added to bring the three priority craniofacial pages up to the service-page specification
- * (assessment, recovery and follow-up, risks, cost process). Every clinical statement is taken from
- * Dr Deraje's own patient-information sheets as already published on the type / procedure pages
- * (lib/cranio-types.ts, lib/sub-procedures.ts). Hidden everywhere until `pendingReview` is removed;
- * preview locally with NEXT_PUBLIC_SHOW_DRAFT_SECTIONS=true. Review list: docs/CONTENT-APPROVAL.md.
+/* ---- Priority craniofacial pages: assessment, recovery, risks and cost sections (11 Nov 2026) -------
+ * Added to bring the three priority craniofacial pages up to the service-page specification. Every
+ * clinical statement is taken from Dr Deraje's own patient-information sheets as already published on
+ * the type / procedure pages (lib/cranio-types.ts, lib/sub-procedures.ts).
+ * APPROVED by Dr Deraje on 11 Nov 2026 (via Arun), including the three flagged points — see
+ * docs/CONTENT-APPROVAL.md. They are live.
+ *
+ * Review gate for future drafts: wrap a new section in `pending(...)`. It is then hidden from pages,
+ * schema and llms.txt until the wrapper is removed; preview with NEXT_PUBLIC_SHOW_DRAFT_SECTIONS=true.
  */
 export const SHOW_DRAFT_SECTIONS = process.env.NEXT_PUBLIC_SHOW_DRAFT_SECTIONS === "true";
-const draft = (s: ServiceSection): ServiceSection => ({ ...s, pendingReview: true });
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const pending = (s: ServiceSection): ServiceSection => ({ ...s, pendingReview: true });
+/** Marks a section that went through the review gate and was approved. */
+const draft = (s: ServiceSection): ServiceSection => s;
 const COST_SECTION = (extra?: string): ServiceSection =>
   draft({
     heading: "Costs and Estimates",

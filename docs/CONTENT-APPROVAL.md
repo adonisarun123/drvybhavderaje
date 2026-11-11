@@ -72,7 +72,11 @@ Points approved by the doctor (23 Oct 2026):
 
 Full sign-off: the doctor has read all 15 pages (confirmed by Arun, 23 Oct 2026). Cleared for launch.
 
-## Priority craniofacial pages — draft sections awaiting sign-off (added 11 Nov 2026) — NOT LIVE
+## Priority craniofacial pages — 16 sections (added 11 Nov 2026) — APPROVED 11 Nov 2026, LIVE once pushed
+
+**Signed off by Dr Deraje on 11 Nov 2026 (confirmed to Claude by Arun), including the three flagged points:** the complications paragraph stays on the main Craniosynostosis page as written; the jaw-surgery risks apply as written; the cleft sections are approved as drafted. **Still open:** which palate-repair hospital stay is correct — the main Cleft page says 1–2 days, the palate sheet page says 2–3. The approved sections state no figure, so the two existing pages still disagree.
+
+Original note follows.
 
 Sixteen sections drafted for the Craniosynostosis, Cleft Lip and Palate and Orthognathic pages so they cover assessment, recovery and follow-up, risks and the cost process. Source: `lib/content.ts` (`CRANIO_DRAFT_*`, `CLEFT_DRAFT`, `JAW_DRAFT`). Every clinical statement is copied from the doctor's own patient-information sheets as already approved on the type and procedure pages. The sections are flagged `pendingReview` and are stripped from pages, structured data and llms.txt. Preview: run the site with `NEXT_PUBLIC_SHOW_DRAFT_SECTIONS=true`. To publish a section, delete its `draft(...)` wrapper.
 
