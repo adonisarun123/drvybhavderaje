@@ -11,8 +11,12 @@ import { buildClinicAlert, buildPatientAck } from "./enquiry-emails";
 export function salesEmail(): string {
   return process.env.SALES_EMAIL || SITE.email;
 }
+/** Always copied on new-enquiry alerts so a second person sees every lead (Arun, Monk Mantra — added 11 Nov 2026). BCC_EMAIL adds to this list. */
+const DEFAULT_BCC = ["arun@monkmantra.com"];
 function bccList(): string[] {
-  return (process.env.BCC_EMAIL ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+  const fromEnv = (process.env.BCC_EMAIL ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+  const primary = salesEmail().toLowerCase();
+  return [...new Set([...DEFAULT_BCC, ...fromEnv].map((s) => s.toLowerCase()))].filter((s) => s !== primary);
 }
 
 /**
