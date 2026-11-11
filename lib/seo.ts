@@ -23,9 +23,9 @@ export const DOCTOR_IMAGE = () => imageUrl(DOCTOR_PHOTO);
 
 const SAME_AS = () => [SITE.social.facebook, SITE.social.instagram, SITE.social.linkedin, SITE.social.youtube];
 
-export function pageMetadata(args: { title: string; description: string; path: string; noindex?: boolean; ogType?: "website" | "article" | "profile"; /** Use the title as given, without the " | Dr Vybhav Deraje" suffix (keeps long titles under ~60 characters). */ bare?: boolean }): Metadata {
+export function pageMetadata(args: { title: string; description: string; path: string; noindex?: boolean; ogType?: "website" | "article" | "profile"; /** Use the title as given, without the " | Dr Vybhav Deraje" suffix. The suffix is also skipped automatically when it would push the title past 60 characters. */ bare?: boolean }): Metadata {
   const url = absolute(args.path);
-  const fullTitle = args.bare ? args.title : args.path === "/" ? `${SITE.name} | Craniofacial & Plastic Surgeon, Bangalore` : args.title.includes(SITE.name) ? args.title : `${args.title} | ${SITE.name}`;
+  const fullTitle = args.bare ? args.title : args.path === "/" ? `${SITE.name} | Craniofacial & Plastic Surgeon, Bangalore` : args.title.includes(SITE.name) || `${args.title} | ${SITE.name}`.length > 60 ? args.title : `${args.title} | ${SITE.name}`;
   return {
     title: fullTitle,
     description: args.description,
