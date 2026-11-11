@@ -65,6 +65,8 @@ const CONTENT_MODIFIED = {
     "/cleft-lip-and-palate-treatment-bangalore": "2026-11-11",
     "/corrective-jaw-surgery-bangalore": "2026-11-11",
     "/privacy-policy": "2026-11-03",
+    "/aboutus": "2026-11-11",
+    "/practice-location": "2026-11-11",
   } as Record<string, string>,
 };
 

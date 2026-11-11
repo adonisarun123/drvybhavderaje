@@ -85,3 +85,7 @@ Points for the doctor:
 ## Exclusivity claim softened (11 Nov 2026)
 
 "The only hospital in India offering…" on the home page and the Craniosynostosis page now reads "which offers…". Restore the claim only with a dated, verifiable source that can be shown on the page.
+
+## Cost FAQ reworded per procedure (11 Nov 2026) — LIVE once pushed
+
+Search Console shows people searching "<procedure> cost in bangalore" (gynecomastia, rhinoplasty, tummy tuck) with the site ranking 28–72. The standing FAQ "Can I get a cost estimate?" is now asked per procedure — "How much does Rhinoplasty cost in Bangalore?" — on all 11 procedure pages (it was on 5). The answer is the same approved statement, minus the leading "Yes": an individual estimate after assessment, and what to ask it includes. No prices. If the practice is willing to publish a price range or the factors that change the price, that is what would actually rank for these searches.
