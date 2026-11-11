@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AFFILIATIONS, CREDENTIALS, DOCTOR, HOSPITALS, hospitalMapUrl, PRACTICES, SERVICE_PAGES, type ServicePage, SITE } from "./content";
+import { AFFILIATIONS, contentModified, CREDENTIALS, DOCTOR, HOSPITALS, hospitalMapUrl, PRACTICES, SERVICE_PAGES, type ServicePage, SITE } from "./content";
 import { DOCTOR_PHOTO, imageUrl } from "./images";
 import { ROUTES } from "./routes";
 
@@ -175,7 +175,7 @@ export function medicalWebPageJsonLd(args: {
     publisher: { "@id": ORG_ID() },
     reviewedBy: { "@id": PHYSICIAN_ID() },
     lastReviewed: SITE.contentUpdated,
-    dateModified: SITE.contentUpdated,
+    dateModified: contentModified(args.path, SERVICE_PAGES.some((p) => p.path === args.path)),
     inLanguage: "en-IN",
     audience: { "@type": "MedicalAudience", audienceType: "Patient" },
     speakable: args.speakable?.length ? { "@type": "SpeakableSpecification", cssSelector: args.speakable } : undefined,

@@ -45,9 +45,32 @@ export const SITE = {
     linkedin: "https://www.linkedin.com/in/dr-vybhav-deraje-480729a1",
     youtube: "https://www.youtube.com/@drvybhavderaje",
   },
-  /** ISO date the public copy was last reviewed; used for sitemap lastmod and schema dateModified. */
+  /** ISO date the doctor last reviewed the public copy; shown in the byline and used for schema lastReviewed. Change only on a real review. */
   contentUpdated: "2026-10-23",
 };
+
+/**
+ * When each page's published content last changed — sitemap <lastmod> and schema dateModified.
+ * Separate from SITE.contentUpdated (the medical review date) so an edit never claims a fresh review.
+ * Add the page's path here whenever its visible copy, title or description changes.
+ */
+const CONTENT_MODIFIED = {
+  /** Last change that touched every public page (site-wide capitals, 24 Oct 2026). */
+  siteWide: "2026-10-24",
+  /** Last change to the shared service-page template and titles (30 Oct 2026). */
+  servicePages: "2026-10-30",
+  paths: {
+    "/": "2026-11-11",
+    "/craniosynostosis-surgery-bangalore": "2026-11-11",
+    "/cleft-lip-and-palate-treatment-bangalore": "2026-11-11",
+    "/corrective-jaw-surgery-bangalore": "2026-11-11",
+    "/privacy-policy": "2026-11-03",
+  } as Record<string, string>,
+};
+
+export function contentModified(path: string, isServicePage = false): string {
+  return CONTENT_MODIFIED.paths[path] ?? (isServicePage ? CONTENT_MODIFIED.servicePages : CONTENT_MODIFIED.siteWide);
+}
 
 export interface NavItem {
   href: string;
@@ -578,7 +601,7 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
     group: "craniofacial",
     shortTitle: "Cleft Lip and Palate",
     title: "Cleft Lip and Palate Treatment in Bangalore",
-    metaTitle: "Cleft Lip & Palate Treatment in Bangalore — Protocol-Based Care | Dr Vybhav Deraje",
+    metaTitle: "Cleft Lip & Palate Treatment in Bangalore — Protocol-Based Care",
     description: "Protocol-based Cleft Lip and Palate treatment in Bangalore: lip repair at 3–6 months, palate repair at 9–12 months, Speech Surgery, bone grafting and jaw surgery.",
     eyebrow: "Craniofacial Surgery · Care Through Every Stage",
     lead: "Standardised, protocol-based care from the first lip repair in infancy to jaw surgery and Rhinoplasty in adulthood — with ENT surgeons, dentists, orthodontists and speech therapists.",
@@ -639,7 +662,7 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
     group: "craniofacial",
     shortTitle: "Orthognathic (Jaw Correction) Surgery",
     title: "Orthognathic Surgery (Corrective Jaw Surgery) in Bangalore",
-    metaTitle: "Orthognathic Surgery in Bangalore — Jaw Correction Surgery | Dr Vybhav Deraje",
+    metaTitle: "Orthognathic Surgery in Bangalore — Jaw Correction Surgery",
     description: "Orthognathic (jaw correction) surgery in Bangalore by Dr Vybhav Deraje: Le Fort I, BSSO, Double-Jaw Surgery and Genioplasty for bite, face and sleep apnoea.",
     eyebrow: "Craniofacial Surgery · Function and Facial Balance",
     lead: "Repositioning the upper jaw, lower jaw or both to realign the teeth, balance the face and, in selected patients, relieve snoring and sleep apnoea.",
