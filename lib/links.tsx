@@ -94,7 +94,9 @@ export function autolink(text: string, budget: LinkBudget): ReactNode {
     count += 1;
     out.push(text.slice(last, m.index));
     out.push(
-      <Link key={`${href}-${m.index}`} href={href}>
+      // The key must not look like a URL path: keys are serialised into the page payload, and Google crawled
+      // "/<path>-<n>" strings from it as real URLs (44 phantom 404s in Search Console, 11 Nov 2026).
+      <Link key={`autolink-${m.index}`} href={href}>
         {m[0]}
       </Link>,
     );
