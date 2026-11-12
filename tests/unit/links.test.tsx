@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { isValidElement, type ReactElement } from "react";
-import { autolink, createLinkBudget, linkTargetFor, relatedServices } from "@/lib/links";
+import { autolink, createLinkBudget, linkTargetFor, relatedServices, relatedServicesWithReason, serviceRelatedPaths } from "@/lib/links";
+import { medicalWebPageJsonLd } from "@/lib/seo";
 import { getService, SERVICE_PAGES } from "@/lib/content";
 import { ROUTES, servicePath } from "@/lib/routes";
 
@@ -57,3 +58,51 @@ describe("relatedServices", () => {
     expect(relatedServices(face).map((x) => x.slug)).toContain("rhinoplasty-surgery-bangalore");
   });
 });
+
+describe("related links are relevant, not category padding", () => {
+  it("only relates a page to its editor's picks, parent hub, siblings and children", () => {
+    for (const p of SERVICE_PAGES) {
+      for (const { page: r, reason } of relatedServicesWithReason(p)) {
+        const ok = p.related.includes(r.slug) || r.slug === p.parent || (p.parent !== undefined && r.parent === p.parent) || r.parent === p.slug;
+        expect(ok, `${p.slug} → ${r.slug} (${reason})`).toBe(true);
+      }
+    }
+    const reduction = getService("breast-reduction-surgery-bangalore")!;
+    expect(relatedServices(reduction).map((x) => x.slug)).not.toContain("rhinoplasty-surgery-bangalore");
+  });
+
+  it("declares as relatedLink exactly the pages the service template renders, each a real page, never itself", () => {
+    const known = new Set(SERVICE_PAGES.map((x) => x.path));
+    for (const p of SERVICE_PAGES) {
+      const paths = serviceRelatedPaths(p);
+      expect(new Set(paths).size).toBe(paths.length);
+      expect(paths).not.toContain(p.path);
+      for (const path of paths) expect(known.has(path), `${p.slug} → ${path}`).toBe(true);
+      for (const r of relatedServices(p)) expect(paths).toContain(r.path);
+    }
+  });
+});
+
+describe("relationship structured data", () => {
+  const args = { title: "T", description: "D", path: "/rhinoplasty-surgery-bangalore" };
+
+  it("drops the page itself and duplicates from relatedLink, and never assumes a significantLink", () => {
+    const node = medicalWebPageJsonLd({ ...args, relatedPaths: ["/facelift-surgery-bangalore", "/rhinoplasty-surgery-bangalore", "/facelift-surgery-bangalore"] });
+    expect(node.relatedLink).toHaveLength(1);
+    expect(node.relatedLink?.[0]).toMatch(/\/facelift-surgery-bangalore$/);
+    expect(node.significantLink).toBeUndefined();
+    expect(medicalWebPageJsonLd(args).relatedLink).toBeUndefined();
+  });
+
+  it("is switched off by RELATIONSHIP_SCHEMA=false", () => {
+    process.env.RELATIONSHIP_SCHEMA = "false";
+    try {
+      const node = medicalWebPageJsonLd({ ...args, relatedPaths: ["/facelift-surgery-bangalore"], significantPaths: ["/contact-us"] });
+      expect(node.relatedLink).toBeUndefined();
+      expect(node.significantLink).toBeUndefined();
+    } finally {
+      delete process.env.RELATIONSHIP_SCHEMA;
+    }
+  });
+});
+

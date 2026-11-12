@@ -19,6 +19,8 @@
  *   pdf_download       any .pdf link (patient information sheets)
  *   outbound_click     any link leaving the site (practice sites, hospitals, social, Monk Mantra)
  *   cta_click          links marked data-analytics-cta="…" (Book an appointment buttons)
+ *   internal_link_click  a related-page or in-copy link to another page of the site — link_type: related
+ *                      (Related Care grid, child / sibling lists) | contextual (links inside body copy)
  *   video_play         a YouTube embed was started — video_id, video_index
  *   consent_update     visitor used "Cookie Settings" (only reaches GA while consent is granted)
  *   thank_you_view     the /thank-you page rendered for a fresh enquiry (deduplicated per reference)
@@ -36,6 +38,7 @@ export type AnalyticsEventName =
   | "pdf_download"
   | "outbound_click"
   | "cta_click"
+  | "internal_link_click"
   | "video_play"
   | "consent_update"
   | "thank_you_view";
@@ -68,7 +71,7 @@ export function linkLocation(el: Element): "header" | "footer" | "whatsapp_fab" 
   return "main";
 }
 
-/** Classifies an anchor for the global click tracker. Returns null for ordinary internal navigation. */
+/** Classifies an anchor for the global click tracker. Returns null for ordinary internal navigation (menus, breadcrumbs, footer). */
 export function classifyLink(a: HTMLAnchorElement, currentHost: string): { name: AnalyticsEventName; params: AnalyticsParams } | null {
   const href = a.getAttribute("href") ?? "";
   if (!href || href.startsWith("#")) return null;
@@ -92,5 +95,8 @@ export function classifyLink(a: HTMLAnchorElement, currentHost: string): { name:
   if (/\.pdf$/i.test(url.pathname)) return { name: "pdf_download", params: { file_name: file, link_url: url.pathname, link_text: text, link_location: location } };
   if (host && host !== currentHost.replace(/^www\./, "")) return { name: "outbound_click", params: { link_url: url.href, link_domain: host, link_text: text, link_location: location } };
   if (cta) return { name: "cta_click", params: { cta_name: cta, link_url: url.pathname, link_text: text, link_location: location } };
+  // Internal links that the link map tracks: related-page blocks and links inside body copy. Navigation, breadcrumbs and cards elsewhere are not counted.
+  const linkType = a.closest<HTMLElement>("[data-link-group]")?.dataset.linkGroup ?? (a.closest(".service-prose") ? "contextual" : undefined);
+  if (linkType) return { name: "internal_link_click", params: { link_type: linkType, link_url: url.pathname, link_text: text, link_location: location } };
   return null;
 }

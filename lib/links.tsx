@@ -7,9 +7,11 @@
  *    entity signal for answer engines. Rules keep it from looking spammy: one link per target per
  *    page, at most MAX_PER_BLOCK links in any one paragraph, never the page you are on, never
  *    inside headings.
- * 2. relatedServices() — the "Related Care" grid: the editor's picks plus parent, siblings and the
- *    rest of the group, so every service page reaches every other page of its group within one
- *    click and every hub page reaches its children.
+ * 2. relatedServices() — the "Related Care" grid: the editor's picks plus the parent hub, sibling
+ *    procedures of the same hub and a hub's own children. Pages that merely share a group
+ *    (craniofacial / cosmetic) are NOT added as padding: a related link must be a meaningful next
+ *    step, and the same list is declared as `relatedLink` in the page's structured data
+ *    (docs/INTERNAL-LINKING.md).
  *
  * All targets are ROUTES / servicePath() constants — never hard-coded paths.
  */
@@ -114,24 +116,40 @@ export function linkTargetFor(label: string): string | undefined {
   return m ? PHRASE_TO_HREF.get((m[1] ?? "").toLowerCase()) : undefined;
 }
 
+/** Why a page appears in another page's Related Care grid — recorded in the link map (docs/internal-link-map.csv). */
+export type RelationReason = "editor-pick" | "parent-hub" | "sibling" | "child";
+
 /**
- * Related pages for the "Related Care" grid: editor's picks → parent hub → sibling procedures of the
- * same hub → other pages of the same group → the rest. Never the page itself; capped at `max`.
+ * Related pages for the "Related Care" grid, each with the reason it is there: editor's picks →
+ * parent hub → sibling procedures of the same hub → a hub's children. Never the page itself, never
+ * a page that only shares the group; capped at `max`.
  */
-export function relatedServices(page: ServicePage, max = 6): ServicePage[] {
+export function relatedServicesWithReason(page: ServicePage, max = 6): { page: ServicePage; reason: RelationReason }[] {
   const seen = new Set<string>([page.slug]);
-  const out: ServicePage[] = [];
-  const add = (p: ServicePage | undefined) => {
+  const out: { page: ServicePage; reason: RelationReason }[] = [];
+  const add = (p: ServicePage | undefined, reason: RelationReason) => {
     if (p && !seen.has(p.slug) && out.length < max) {
       seen.add(p.slug);
-      out.push(p);
+      out.push({ page: p, reason });
     }
   };
-  for (const slug of page.related) add(getService(slug));
-  if (page.parent) add(getService(page.parent));
-  for (const p of FEATURED_SERVICES) if (page.parent && p.parent === page.parent) add(p);
-  for (const p of SERVICE_PAGES) if (p.parent === page.slug) add(p);
-  for (const p of FEATURED_SERVICES) if (p.group === page.group) add(p);
-  for (const p of SERVICE_PAGES) if (p.group === page.group) add(p);
+  for (const slug of page.related) add(getService(slug), "editor-pick");
+  if (page.parent) add(getService(page.parent), "parent-hub");
+  for (const p of FEATURED_SERVICES) if (page.parent && p.parent === page.parent) add(p, "sibling");
+  for (const p of SERVICE_PAGES) if (p.parent === page.slug) add(p, "child");
   return out;
+}
+
+export function relatedServices(page: ServicePage, max = 6): ServicePage[] {
+  return relatedServicesWithReason(page, max).map((r) => r.page);
+}
+
+/**
+ * Paths a service page declares as `relatedLink`: exactly the pages its template renders as visible
+ * links — the parent hub (breadcrumb and "part of" link), the hub's child list and the Related Care grid.
+ */
+export function serviceRelatedPaths(page: ServicePage): string[] {
+  const parent = page.parent ? getService(page.parent) : undefined;
+  const children = SERVICE_PAGES.filter((p) => p.parent === page.slug);
+  return [...new Set([...(parent ? [parent.path] : []), ...children.map((c) => c.path), ...relatedServices(page).map((r) => r.path)])];
 }

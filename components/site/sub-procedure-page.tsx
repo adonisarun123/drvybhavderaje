@@ -111,7 +111,7 @@ export function SubProcedureView({ p }: { p: SubProcedure }) {
             <Faq items={faqs} />
           </section>
 
-          <section>
+          <section data-link-group="related">
             <h2>{siblings.length > 0 ? `Related ${parent.shortTitle} Procedures` : "Related"}</h2>
             {siblings.length > 0 && (
               <ul className="child-list">

@@ -12,6 +12,7 @@ Copy `.env.example` to `.env.local` (development) or set them in your host (Verc
 | `ADMIN_SETUP_TOKEN` | first run only | Enables `/admin/setup` while **no** staff accounts exist. Delete it once the first administrator exists. |
 | `ENQUIRIES_ENABLED` | yes | `"true"` to accept public consultation requests. Keep `"false"` until the database connection is verified and the privacy notice is approved. |
 | `PUBLIC_INDEXING` | yes | `"true"` only on the approved production domain. Previews are always `noindex`. |
+| `RELATIONSHIP_SCHEMA` | optional | `"false"` removes `relatedLink` / `significantLink` from the page structured data (rollback or holdout test). Visible links stay. Default on. See `docs/INTERNAL-LINKING.md`. |
 | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `FROM_EMAIL` | optional | Enables email via SMTP (preferred; the same variables as the other Monk Mantra sites). `SMTP_PORT` 465 is implicit TLS, anything else STARTTLS; `SMTP_SECURE` overrides. |
 | `SALES_EMAIL`, `BCC_EMAIL` | optional | Inbox that receives every new website enquiry (default `connect@drvybhavderaje.com`) and optional comma-separated BCC. |
 | `RESEND_API_KEY`, `NOTIFY_FROM_EMAIL` | optional | Fallback email provider when SMTP is not set. Without any provider the dashboard never claims a message was sent. |

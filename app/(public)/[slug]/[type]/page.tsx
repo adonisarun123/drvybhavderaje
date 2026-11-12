@@ -168,7 +168,7 @@ export default async function CranioTypePage({ params }: { params: Params }) {
             <Faq items={faqs} />
           </section>
 
-          <section>
+          <section data-link-group="related">
             <h2>Other Types of Craniosynostosis</h2>
             <ul className="child-list">
               {siblings.map((s) => (

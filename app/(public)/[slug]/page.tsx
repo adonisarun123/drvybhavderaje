@@ -8,7 +8,7 @@ import { Byline, CtaBand, Faq, HelpSideCard, KeyFacts, PageHero, PhotoGallery, R
 import { VideoSection } from "@/components/site/video-section";
 import { JsonLd } from "@/components/site/json-ld";
 import { childServices, CLINICS_SEED, DOCTOR, isPendingReview, HEAD_SHAPE_CLINIC, HEAD_SHAPE_SLUGS, getService, GROUP_HREF, GROUP_LABEL, HOSPITALS, isFeatured, PRACTICES, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
-import { autolink, createLinkBudget, relatedServices } from "@/lib/links";
+import { autolink, createLinkBudget, relatedServices, serviceRelatedPaths } from "@/lib/links";
 import { ROUTES, SECTION } from "@/lib/routes";
 import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, PROCEDURE_ID, CONDITION_ID, serviceEntitiesJsonLd } from "@/lib/seo";
 
@@ -108,7 +108,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             speakable: ["#summary", ".service-prose .intro", ".faq"],
             mainEntityId: page.procedures.length ? PROCEDURE_ID(page, 0) : page.conditions.length ? CONDITION_ID(page, 0) : undefined,
             aboutIds: [...page.conditions.map((_, i) => CONDITION_ID(page, i)), ...page.procedures.map((_, i) => PROCEDURE_ID(page, i))],
-            relatedPaths: [...(parent ? [parent.path] : []), ...children.map((c) => c.path), ...related.map((r) => r.path)],
+            relatedPaths: serviceRelatedPaths(page),
           }),
           faqJsonLd(page.faqs),
           ...serviceEntitiesJsonLd(page),
@@ -178,7 +178,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </p>
           ))}
           {children.length > 0 && (
-            <section>
+            <section data-link-group="related">
               <h2>Procedure Pages</h2>
               <p>Each of these procedures has its own page with candidacy, technique, recovery and limitations explained in full.</p>
               <ul className="child-list">

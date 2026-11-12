@@ -16,6 +16,14 @@ export function indexingEnabled(): boolean {
   return process.env.PUBLIC_INDEXING === "true" && process.env.VERCEL_ENV !== "preview";
 }
 
+/**
+ * Relationship structured data (`relatedLink`, `significantLink`) is on unless RELATIONSHIP_SCHEMA="false".
+ * The switch exists for staged rollout, rollback and holdout tests; it never removes the visible links.
+ */
+export function relationshipSchemaEnabled(): boolean {
+  return process.env.RELATIONSHIP_SCHEMA !== "false";
+}
+
 export const PHYSICIAN_ID = () => `${siteOrigin()}/#physician`;
 export const WEBSITE_ID = () => `${siteOrigin()}/#website`;
 export const ORG_ID = () => `${siteOrigin()}/#practice`;
@@ -154,12 +162,19 @@ export function medicalWebPageJsonLd(args: {
   speakable?: string[];
   /** `@id` of the page's primary entity (the procedure or the physician). */
   mainEntityId?: string;
-  /** Canonical paths of the pages this one links to as related reading (becomes `relatedLink`). */
+  /** Canonical paths of pages this one visibly links to as related reading (becomes `relatedLink`). Only pass paths the template renders as links. */
   relatedPaths?: string[];
+  /** Paths with evidence of significance (page-level click data). Omit when there is none; nothing is assumed. */
+  significantPaths?: string[];
   /** Additional `@id`s the page is about (conditions, procedures). */
   aboutIds?: string[];
 }) {
   const url = absolute(args.path);
+  const links = (paths?: string[]) => {
+    if (!relationshipSchemaEnabled()) return undefined;
+    const unique = [...new Set(paths ?? [])].filter((p) => p !== args.path);
+    return unique.length ? unique.map(absolute) : undefined;
+  };
   return {
     "@context": "https://schema.org",
     "@type": args.type ?? "MedicalWebPage",
@@ -179,8 +194,8 @@ export function medicalWebPageJsonLd(args: {
     inLanguage: "en-IN",
     audience: { "@type": "MedicalAudience", audienceType: "Patient" },
     speakable: args.speakable?.length ? { "@type": "SpeakableSpecification", cssSelector: args.speakable } : undefined,
-    relatedLink: args.relatedPaths?.length ? args.relatedPaths.map(absolute) : undefined,
-    significantLink: [absolute(ROUTES.about), absolute(ROUTES.contact)],
+    relatedLink: links(args.relatedPaths),
+    significantLink: links(args.significantPaths),
   };
 }
 

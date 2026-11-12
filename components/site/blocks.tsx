@@ -180,7 +180,7 @@ export function ServiceGrid({ services, compact = false, columns }: { services: 
 export function RelatedServices({ services }: { services: ServicePage[] }) {
   if (!services.length) return null;
   return (
-    <section className="section container" aria-labelledby="related-heading">
+    <section className="section container" aria-labelledby="related-heading" data-link-group="related">
       <div className="section-heading">
         <div>
           <p className="eyebrow">You May Also Be Looking For</p>
