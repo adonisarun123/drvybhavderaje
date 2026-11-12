@@ -11,6 +11,7 @@
  * Image paths are relative to the ImageKit folder (see lib/images.ts), e.g. "/custom/gallery_1.png".
  */
 import { FEATURED_COSMETIC, FEATURED_CRANIOFACIAL, OTHER_SERVICES_ORDER, ROUTES, SECTION, servicePath, type ServiceSlug } from "./routes";
+import { formatHours } from "./hours";
 import { PROCEDURE_PAGES } from "./procedures";
 import { subProcedureForSheet, subProcedurePath } from "./sub-procedures";
 import { COMPLICATIONS as CRANIO_COMPLICATIONS, DIAGNOSIS_SINGLE, KEYHOLE, KEYHOLE_AFTER, openSurgery } from "./cranio-types";
@@ -1085,6 +1086,13 @@ export const HOME_FAQS = [
   { q: "Who is Dr Vybhav Deraje?", a: "Dr Vybhav Deraje is a National Board certified plastic surgeon in Bangalore with a special interest in craniofacial surgery. He trained in India, at Queen Victoria Hospital in the UK and at the Australian Craniofacial Unit in Adelaide, and has practised in Bangalore since 2019. He is the founder of Aesthetica Veda and The Head Shape Clinic." },
   { q: "What does a craniofacial surgeon treat?", a: "Conditions of the skull and face: craniosynostosis, cleft lip and palate, jaw deformities (orthognathic surgery), facial fractures, head and neck tumour reconstruction, facial palsy and vascular anomalies." },
   { q: "Where does Dr Vybhav Deraje consult in Bangalore?", a: "At Aesthetica Veda clinics in Whitefield, HRBR Layout and Koramangala. Babies with head-shape concerns or craniosynostosis can also be seen through The Head Shape Clinic at Docube Clinic, Koramangala. Surgeries are performed at Aster Whitefield Hospital, Gifted Hands Hospital, Aarogya Hastha Hospital, Medicover Hospital and Apollo Spectra Hospital." },
+  {
+    q: "What are Dr Vybhav Deraje's consultation timings?",
+    // Built from CLINIC_HOURS_SEED so this answer cannot drift from the hours shown on the clinic cards.
+    a: `${CLINICS_SEED.filter((c) => CLINIC_HOURS_SEED[c.slug]?.length)
+      .map((c) => `${c.name}: ${CLINIC_HOURS_SEED[c.slug]!.map(formatHours).join("; ")}`)
+      .join(". ")}. Timings are in Indian Standard Time and can change around surgery and travel, so please book or call the clinic before you visit.`,
+  },
   { q: "Do you see patients from outside India, and are video consultations available?", a: "Yes. Dr Deraje treats patients who travel to Bangalore from abroad and offers video consultations for an initial opinion or for follow-up after surgery. Use the enquiry form, choose “Video consultation”, and select the country of your phone number; the clinic will reply by email or phone to arrange a time. Surgery itself always requires an in-person assessment in Bangalore." },
   { q: "How do I book an appointment with Dr Vybhav Deraje?", a: "Call +91 95355 81616, email connect@drvybhavderaje.com or use the enquiry form on this website. The clinic confirms the location, date and time." },
   { q: "I’m travelling from another city. Where should I start?", a: "Contact the clinic before making travel arrangements, send relevant reports ahead and confirm your appointment and clinic location." },
