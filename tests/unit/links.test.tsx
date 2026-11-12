@@ -1,9 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { isValidElement, type ReactElement } from "react";
 import { autolink, createLinkBudget, linkTargetFor, relatedServices, relatedServicesWithReason, serviceRelatedPaths } from "@/lib/links";
+import { SCHEMA_HOLDOUT_PATHS, SCHEMA_TEST_PATHS, schemaTestGroup } from "@/lib/link-experiment";
 import { medicalWebPageJsonLd } from "@/lib/seo";
 import { getService, SERVICE_PAGES } from "@/lib/content";
 import { ROUTES, servicePath } from "@/lib/routes";
+import { SUB_PROCEDURES, subProcedurePath } from "@/lib/sub-procedures";
+import { CRANIO_TYPES, cranioTypePath } from "@/lib/cranio-types";
 
 const hrefs = (node: unknown): string[] => (Array.isArray(node) ? node.filter((n) => isValidElement(n)).map((n) => (n as ReactElement<{ href: string }>).props.href) : []);
 
@@ -102,6 +105,30 @@ describe("relationship structured data", () => {
       expect(node.significantLink).toBeUndefined();
     } finally {
       delete process.env.RELATIONSHIP_SCHEMA;
+    }
+  });
+});
+
+describe("schema holdout test", () => {
+  it("has two disjoint, near-equal groups of real pages and leaves the home page out", () => {
+    const known = new Set([...SERVICE_PAGES.map((p) => p.path), ...SUB_PROCEDURES.map((p) => subProcedurePath(p)), ...CRANIO_TYPES.map((t) => cranioTypePath(t.slug))]);
+    for (const p of [...SCHEMA_TEST_PATHS, ...SCHEMA_HOLDOUT_PATHS]) expect(known.has(p), p).toBe(true);
+    for (const p of SCHEMA_HOLDOUT_PATHS) expect(SCHEMA_TEST_PATHS.has(p)).toBe(false);
+    expect(Math.abs(SCHEMA_TEST_PATHS.size - SCHEMA_HOLDOUT_PATHS.size)).toBeLessThanOrEqual(5);
+    expect(schemaTestGroup("/")).toBe("not in test");
+  });
+
+  it("withholds relatedLink on holdout pages only, until RELATIONSHIP_SCHEMA_HOLDOUT=false", () => {
+    const holdout = [...SCHEMA_HOLDOUT_PATHS][0]!;
+    const test = [...SCHEMA_TEST_PATHS][0]!;
+    const node = (path: string) => medicalWebPageJsonLd({ title: "T", description: "D", path, relatedPaths: ["/contact-us"] });
+    expect(node(holdout).relatedLink).toBeUndefined();
+    expect(node(test).relatedLink).toHaveLength(1);
+    process.env.RELATIONSHIP_SCHEMA_HOLDOUT = "false";
+    try {
+      expect(node(holdout).relatedLink).toHaveLength(1);
+    } finally {
+      delete process.env.RELATIONSHIP_SCHEMA_HOLDOUT;
     }
   });
 });

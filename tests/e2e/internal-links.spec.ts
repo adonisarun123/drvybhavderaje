@@ -6,6 +6,7 @@
  *   E2E_BASE_URL=https://drvybhavderaje.com npx playwright test internal-links
  */
 import { test, expect } from "@playwright/test";
+import { inSchemaHoldout } from "../../lib/link-experiment";
 
 const BASE = process.env.E2E_BASE_URL ?? "http://localhost:3000";
 
@@ -29,7 +30,9 @@ for (const path of SAMPLE) {
       return Array.isArray(parsed) ? parsed : [parsed];
     }) as { relatedLink?: string[]; significantLink?: string[] }[];
     const declared = nodes.flatMap((n) => [...(n.relatedLink ?? []), ...(n.significantLink ?? [])]);
-    expect(declared.length, "page declares related links").toBeGreaterThan(0);
+    // Pages in the holdout group of the schema test declare nothing by design (lib/link-experiment.ts).
+    if (inSchemaHoldout(path)) expect(declared, "holdout page declares no relationship links").toHaveLength(0);
+    else expect(declared.length, "page declares related links").toBeGreaterThan(0);
     const hrefs = new Set(await page.locator("main a[href]").evaluateAll((as) => as.map((a) => new URL((a as HTMLAnchorElement).href).pathname)));
     for (const url of declared) {
       const target = new URL(url).pathname;

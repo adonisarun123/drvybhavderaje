@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AFFILIATIONS, contentModified, CREDENTIALS, DOCTOR, HOSPITALS, hospitalMapUrl, PRACTICES, SERVICE_PAGES, type ServicePage, SITE } from "./content";
 import { DOCTOR_PHOTO, imageUrl } from "./images";
+import { inSchemaHoldout } from "./link-experiment";
 import { ROUTES } from "./routes";
 
 export function siteOrigin(): string {
@@ -18,7 +19,8 @@ export function indexingEnabled(): boolean {
 
 /**
  * Relationship structured data (`relatedLink`, `significantLink`) is on unless RELATIONSHIP_SCHEMA="false".
- * The switch exists for staged rollout, rollback and holdout tests; it never removes the visible links.
+ * The switch exists for staged rollout and rollback; it never removes the visible links. Pages in the
+ * holdout group of the running schema test (lib/link-experiment.ts) omit it as well.
  */
 export function relationshipSchemaEnabled(): boolean {
   return process.env.RELATIONSHIP_SCHEMA !== "false";
@@ -171,7 +173,7 @@ export function medicalWebPageJsonLd(args: {
 }) {
   const url = absolute(args.path);
   const links = (paths?: string[]) => {
-    if (!relationshipSchemaEnabled()) return undefined;
+    if (!relationshipSchemaEnabled() || inSchemaHoldout(args.path)) return undefined;
     const unique = [...new Set(paths ?? [])].filter((p) => p !== args.path);
     return unique.length ? unique.map(absolute) : undefined;
   };

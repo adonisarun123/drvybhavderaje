@@ -1,98 +1,217 @@
 /**
- * Writes docs/internal-link-map.csv — the editorial record of the site's internal links, generated
- * from the same data the pages render from (lib/links.tsx), so the record cannot drift from the site.
+ * Writes docs/internal-link-map.csv — the record of every internal link on the public site.
  *
- *   npx tsx scripts/link-map.ts
+ * It reads the pages as rendered, so the map is what a visitor and a crawler actually get: every
+ * <a href> to another page of the site, where it sits on the page, whether the page also declares it
+ * as `relatedLink` in its structured data, and whether the destination answers 200.
  *
- * Covers: Related Care grids, parent / child / sibling / see-also links, and the in-copy links the
- * autolinker adds on service pages. Not covered: header, footer, breadcrumbs, key-facts links, and
- * in-copy links on sub-procedure and Craniosynostosis type pages.
+ *   npm run build && npm run start          # or point at any deployment
+ *   npx tsx scripts/link-map.ts [base-url]  # default http://localhost:3000
+ *
+ * Header and footer links are identical on every page and are listed once, as "Every page".
+ * Links to other sites, phone, email and WhatsApp links are not internal links and are left out.
  */
 import { writeFileSync } from "node:fs";
-import { isValidElement, type ReactElement, type ReactNode } from "react";
-import { childServices, getService, SERVICE_PAGES, type ServicePage } from "../lib/content";
-import { CRANIO_PARENT, CRANIO_TYPES, cranioTypePath } from "../lib/cranio-types";
-import { autolink, createLinkBudget, relatedServicesWithReason, TERM_LINKS } from "../lib/links";
+import { childServices, getService, SERVICE_PAGES } from "../lib/content";
+import { CRANIO_TYPES, cranioTypePath } from "../lib/cranio-types";
+import { schemaTestGroup } from "../lib/link-experiment";
+import { relatedServicesWithReason, TERM_LINKS } from "../lib/links";
 import { ROUTES } from "../lib/routes";
-import { SUB_PROCEDURES, subProcedurePath, subProceduresOf } from "../lib/sub-procedures";
+import { SUB_PROCEDURES, subProcedurePath } from "../lib/sub-procedures";
 
-const ORIGIN = "https://drvybhavderaje.com";
+const BASE = (process.argv[2] ?? "http://localhost:3000").replace(/\/$/, "");
+const SITE = "https://drvybhavderaje.com";
 
-/** Editor's picks queried at the 12 Nov 2026 audit — the relationship needs the doctor's confirmation. */
-const TO_CONFIRM = new Set([
-  "ear-reconstruction-surgery-bangalore>craniosynostosis-surgery-bangalore",
-  "chin-augmentation-surgery-bangalore>liposuction-surgery-bangalore",
-  "liposuction-surgery-bangalore>facelift-surgery-bangalore",
-  "head-and-neck-cancer-treatment>breast-plastic-surgeon-bangalore",
-  "facial-injuries-and-fracture-treatments>hand-plastic-surgeon-bangalore",
-  "face-plastic-surgery-bangalore>corrective-jaw-surgery-bangalore",
-]);
+type Zone = "header" | "footer" | "main";
+interface Found {
+  href: string;
+  anchor: string;
+  zone: Zone;
+  placement: string;
+  kind: "breadcrumb" | "glance" | "related" | "practice" | "contact" | "cta" | "faq" | "copy" | "other";
+}
 
-type Row = { source: string; sourceType: string; dest: string; anchor: string; why: string; placement: string; schema: string; status: string };
-const rows: Row[] = [];
-const push = (r: Row) => rows.push(r);
+const VOID = new Set(["area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"]);
+const text = (html: string) =>
+  html
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&#x27;|&#39;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&nbsp;/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+const attr = (attrs: string, name: string) => new RegExp(`\\b${name}="([^"]*)"`).exec(attrs)?.[1];
 
-const sourceType = (p: ServicePage) => (childServices(p.slug).length ? "Service hub" : "Service page");
-const titleFor = (path: string) => SERVICE_PAGES.find((p) => p.path === path)?.shortTitle ?? path;
-
-function contextual(text: string | undefined, budget: ReturnType<typeof createLinkBudget>, source: string, type: string, placement: string) {
-  if (!text) return;
-  const out: ReactNode = autolink(text, budget);
-  if (!Array.isArray(out)) return;
-  for (const n of out) {
-    if (!isValidElement(n)) continue;
-    const el = n as ReactElement<{ href: string; children: string }>;
-    push({ source, sourceType: type, dest: el.props.href, anchor: el.props.children, why: "First mention of the topic in the copy", placement, schema: "—", status: "Live" });
+/** Walks the page's tags in order, keeping the stack of open elements, and returns every link with its placement. */
+function linksIn(html: string): Found[] {
+  const body = html.slice(html.indexOf("<body")).replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<!--[\s\S]*?-->|<svg[\s\S]*?<\/svg>/g, "");
+  const stack: { tag: string; cls: string; attrs: string }[] = [];
+  const out: Found[] = [];
+  let heading = "";
+  const tagRe = /<(\/?)([a-zA-Z][a-zA-Z0-9]*)\b([^>]*)>/g;
+  for (let m = tagRe.exec(body); m; m = tagRe.exec(body)) {
+    const tag = m[2]!.toLowerCase();
+    const attrs = m[3] ?? "";
+    if (m[1]) {
+      const i = stack.map((s) => s.tag).lastIndexOf(tag);
+      if (i >= 0) stack.length = i;
+      continue;
+    }
+    if (tag === "h2" || tag === "h1") {
+      const end = body.indexOf(`</${tag}>`, tagRe.lastIndex);
+      if (end > 0 && tag === "h2") heading = text(body.slice(tagRe.lastIndex, end));
+    }
+    if (tag === "main") heading = "";
+    if (tag === "a") {
+      const href = attr(attrs, "href");
+      const end = body.indexOf("</a>", tagRe.lastIndex);
+      if (href && end > 0) {
+        const has = (pred: (s: { tag: string; cls: string; attrs: string }) => boolean) => stack.some(pred);
+        const cls = (c: string) => has((s) => s.cls.split(/\s+/).includes(c));
+        const zone: Zone = has((s) => s.tag === "footer") ? "footer" : has((s) => s.tag === "main") ? "main" : "header";
+        let kind: Found["kind"] = "other";
+        let placement = heading ? `Section: ${heading}` : "Page introduction";
+        if (cls("breadcrumb")) [kind, placement] = ["breadcrumb", "Breadcrumb"];
+        else if (cls("key-facts")) [kind, placement] = ["glance", "At a Glance panel"];
+        else if (has((s) => /data-link-group="related"/.test(s.attrs))) [kind, placement] = ["related", `Related links: ${heading}`];
+        else if (cls("page-links")) [kind, placement] = ["practice", "More About the Practice links"];
+        else if (cls("side-card")) [kind, placement] = ["contact", "Contact side card"];
+        else if (cls("cta")) [kind, placement] = ["cta", "Call-to-action band"];
+        else if (cls("faq")) [kind, placement] = ["faq", "FAQ answer"];
+        else if (cls("service-prose")) kind = "copy";
+        out.push({ href, anchor: text(body.slice(tagRe.lastIndex, end)), zone, placement, kind });
+      }
+    }
+    if (!VOID.has(tag) && !attrs.trim().endsWith("/")) stack.push({ tag, cls: attr(attrs, "class") ?? "", attrs });
   }
+  return out;
 }
 
-for (const page of SERVICE_PAGES) {
-  const type = sourceType(page);
-  const parent = page.parent ? getService(page.parent) : undefined;
-  if (parent) push({ source: page.path, sourceType: type, dest: parent.path, anchor: parent.title, why: "Parent hub", placement: "Breadcrumb and 'part of' link", schema: "relatedLink", status: "Live" });
-  for (const c of childServices(page.slug)) push({ source: page.path, sourceType: type, dest: c.path, anchor: c.shortTitle, why: "Procedure page of this hub", placement: "Procedure Pages list", schema: "relatedLink", status: "Live" });
-  for (const r of relatedServicesWithReason(page)) {
-    const why = { "editor-pick": "Editor's pick", "parent-hub": "Parent hub", sibling: "Procedure of the same hub", child: "Procedure page of this hub" }[r.reason];
-    const confirm = r.reason === "editor-pick" && TO_CONFIRM.has(`${page.slug}>${r.page.slug}`);
-    push({ source: page.path, sourceType: type, dest: r.page.path, anchor: r.page.shortTitle, why, placement: "Related Care grid", schema: "relatedLink", status: confirm ? "Live — doctor to confirm relationship" : "Live" });
+/** Path of an internal link without its fragment, or null for external / phone / email / same-page links. */
+function internalPath(href: string, from: string): string | null {
+  if (/^(tel:|mailto:|#|javascript:)/i.test(href)) return null;
+  let url: URL;
+  try {
+    url = new URL(href, BASE + from);
+  } catch {
+    return null;
   }
-  // Cards inside sections that carry their own link (sub-procedure and condition-type pages).
-  for (const s of page.sections) for (const it of s.items ?? []) if (it.href) push({ source: page.path, sourceType: type, dest: it.href.split("#")[0]!, anchor: it.title, why: "Detail page of this service", placement: `Section: ${s.heading}`, schema: "—", status: "Live" });
-  // In-copy links, resolved in the template's reading order (app/(public)/[slug]/page.tsx).
-  const budget = createLinkBudget(page.path, [ROUTES.about, ROUTES.locations, ROUTES.contact]);
-  for (const p of page.intro) contextual(p, budget, page.path, type, "Introduction");
-  for (const s of page.sections) {
-    const where = `Section: ${s.heading}`;
-    for (const p of s.body ?? []) contextual(p, budget, page.path, type, where);
-    for (const b of s.bullets ?? []) contextual(b, budget, page.path, type, where);
-    for (const it of s.items ?? []) contextual(it.text, budget, page.path, type, where);
-    contextual(s.note, budget, page.path, type, where);
+  if (url.origin !== new URL(BASE).origin && url.origin !== SITE) return null;
+  if (url.pathname.startsWith("/_next") || /\.(pdf|png|jpe?g|webp|svg|ico|xml|txt)$/i.test(url.pathname)) return null;
+  return url.pathname === from ? null : url.pathname;
+}
+
+async function get(path: string) {
+  const res = await fetch(BASE + path, { redirect: "manual" });
+  return { status: res.status, html: res.status === 200 ? await res.text() : "" };
+}
+
+const subPaths = new Map(SUB_PROCEDURES.map((s) => [subProcedurePath(s), s]));
+const typePaths = new Map(CRANIO_TYPES.map((t) => [cranioTypePath(t.slug), t]));
+const servicePaths = new Map(SERVICE_PAGES.map((p) => [p.path, p]));
+const termTargets = new Set(TERM_LINKS.map((t) => t.href));
+
+function sourceType(path: string): string {
+  const s = servicePaths.get(path);
+  if (s) return childServices(s.slug).length ? "Service hub" : "Service page";
+  if (subPaths.has(path)) return "Sub-procedure page";
+  if (typePaths.has(path)) return "Condition type page";
+  return path === "/" ? "Home page" : "Practice page";
+}
+
+function pageName(path: string): string {
+  return servicePaths.get(path)?.shortTitle ?? subPaths.get(path)?.shortTitle ?? typePaths.get(path)?.shortTitle ?? (path === "/" ? "Home" : path.slice(1));
+}
+
+function why(source: string, dest: string, f: Found): string {
+  if (f.kind === "breadcrumb") return "Navigation path back to the parent page";
+  if (f.kind === "glance") return "Surgeon, clinic and consultation reference";
+  if (f.kind === "practice") return "Practice information";
+  if (f.kind === "contact" || f.kind === "cta") return "Next step: enquiry or contact";
+  if (f.kind === "related") {
+    if (dest === ROUTES.procedures) return "Full index of conditions and procedures";
+    const s = servicePaths.get(source);
+    const reason = s ? relatedServicesWithReason(s).find((r) => r.page.path === dest)?.reason : undefined;
+    if (reason) return { "editor-pick": "Editor's pick", "parent-hub": "Parent hub", sibling: "Procedure of the same hub", child: "Procedure page of this hub" }[reason];
+    if (s && getService(servicePaths.get(dest)?.slug ?? "")?.parent === s.slug) return "Procedure page of this hub";
+    if (subPaths.has(source) || typePaths.has(source)) return dest.startsWith(source.slice(0, source.lastIndexOf("/")) + "/") ? "Sibling page of the same service" : "Parent or see-also service";
+    return "Related page";
   }
-  for (const f of page.faqs) contextual(f.a, budget, page.path, type, "FAQ answer");
+  if ((f.kind === "copy" || f.kind === "faq") && termTargets.has(dest)) return "First mention of the topic in the copy";
+  if (dest.startsWith(source + "/")) return "Detail page of this service";
+  return "Reference within the section";
 }
 
-for (const sp of SUB_PROCEDURES) {
-  const source = subProcedurePath(sp);
-  const parent = getService(sp.parent);
-  if (parent) push({ source, sourceType: "Sub-procedure page", dest: parent.path, anchor: parent.shortTitle, why: "Parent service", placement: "Breadcrumb and Related section", schema: "relatedLink", status: "Live" });
-  for (const s of subProceduresOf(sp.parent).filter((x) => x.slug !== sp.slug)) push({ source, sourceType: "Sub-procedure page", dest: subProcedurePath(s), anchor: s.shortTitle, why: "Procedure of the same service", placement: "Related section", schema: "relatedLink", status: "Live" });
-  const seeAlso = sp.seeAlso ? getService(sp.seeAlso) : undefined;
-  if (seeAlso) push({ source, sourceType: "Sub-procedure page", dest: seeAlso.path, anchor: seeAlso.shortTitle, why: "Editor's see-also", placement: "See also line", schema: "relatedLink", status: "Live" });
+async function main() {
+  const sitemap = await get("/sitemap.xml");
+  if (sitemap.status !== 200) throw new Error(`No sitemap at ${BASE}/sitemap.xml (${sitemap.status}). Start the site first: npm run build && npm run start`);
+  const pages = [...sitemap.html.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]!).pathname);
+
+  const rows: string[][] = [];
+  const dests = new Set<string>();
+  const seen = new Set<string>();
+  let declaredTotal = 0;
+  const notRendered: string[] = [];
+
+  for (const page of pages) {
+    const { status, html } = await get(page);
+    if (status !== 200) throw new Error(`${page} answered ${status}`);
+    const declared = new Set(
+      [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+        .flatMap((m) => {
+          const j: unknown = JSON.parse(m[1]!);
+          return (Array.isArray(j) ? j : [j]) as { relatedLink?: string[] }[];
+        })
+        .flatMap((n) => n.relatedLink ?? [])
+        .map((u) => new URL(u).pathname),
+    );
+    declaredTotal += declared.size;
+    const found = linksIn(html);
+    const mainTargets = new Set(found.filter((f) => f.zone === "main").map((f) => internalPath(f.href, page)));
+    for (const d of declared) if (!mainTargets.has(d)) notRendered.push(`${page} → ${d}`);
+
+    for (const f of found) {
+      const dest = internalPath(f.href, page);
+      if (!dest) continue;
+      const siteWide = f.zone !== "main";
+      const source = siteWide ? "Every page" : SITE + page;
+      const placement = siteWide ? (f.zone === "header" ? "Header menu" : "Footer") : f.placement;
+      const key = `${source}|${dest}|${placement}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      dests.add(dest);
+      rows.push([
+        source,
+        siteWide ? "Site-wide" : sourceType(page),
+        SITE + dest,
+        pageName(dest),
+        f.anchor,
+        siteWide ? "Site navigation" : why(page, dest, f),
+        placement,
+        !siteWide && declared.has(dest) ? "relatedLink" : "—",
+        siteWide ? "—" : schemaTestGroup(page),
+        dest,
+      ]);
+    }
+  }
+
+  // Destination health: every internal link should land on a 200 page, not a redirect or an error.
+  const health = new Map<string, number>();
+  for (const d of dests) health.set(d, (await get(d)).status);
+  const unhealthy = [...health].filter(([, s]) => s !== 200);
+
+  const cell = (v: string) => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v);
+  const header = ["Source URL", "Source type", "Destination URL", "Destination", "Anchor text", "Why useful", "Visible placement", "Schema", "Schema test group", "Destination status"];
+  const lines = rows.map((r) => [...r.slice(0, 9), health.get(r[9]!) === 200 ? "200 OK" : `${health.get(r[9]!)} — fix`].map(cell).join(","));
+  writeFileSync(new URL("../docs/internal-link-map.csv", import.meta.url), [header.join(","), ...lines].join("\n") + "\n");
+
+  console.log(`${pages.length} pages read from ${BASE}`);
+  console.log(`${rows.length} internal links written to docs/internal-link-map.csv (${rows.filter((r) => r[0] === "Every page").length} site-wide, ${rows.filter((r) => r[7] === "relatedLink").length} declared as relatedLink)`);
+  console.log(`${declaredTotal} relatedLink URLs declared; ${notRendered.length} not rendered as a visible link`);
+  console.log(`${dests.size} distinct destinations; ${unhealthy.length} not answering 200${unhealthy.length ? ": " + unhealthy.map(([d, s]) => `${d} (${s})`).join(", ") : ""}`);
+  if (notRendered.length) console.log(notRendered.join("\n"));
+  if (notRendered.length || unhealthy.length) process.exitCode = 1;
 }
 
-const cranioParent = getService(CRANIO_PARENT)!;
-for (const t of CRANIO_TYPES) {
-  const source = cranioTypePath(t.slug);
-  push({ source, sourceType: "Condition type page", dest: cranioParent.path, anchor: "Craniosynostosis Surgery in Bangalore — Full Overview", why: "Parent service", placement: "Breadcrumb and Other Types section", schema: "relatedLink", status: "Live" });
-  for (const s of CRANIO_TYPES.filter((x) => x.slug !== t.slug)) push({ source, sourceType: "Condition type page", dest: cranioTypePath(s.slug), anchor: s.shortTitle, why: "Other type of the same condition", placement: "Other Types section", schema: "relatedLink", status: "Live" });
-}
-
-const known = new Set<string>([...SERVICE_PAGES.map((p) => p.path), ...SUB_PROCEDURES.map((s) => subProcedurePath(s)), ...CRANIO_TYPES.map((t) => cranioTypePath(t.slug)), ...Object.values(ROUTES), ...TERM_LINKS.map((t) => t.href)]);
-const unknown = rows.filter((r) => !known.has(r.dest));
-if (unknown.length) throw new Error(`Link map has destinations that are not site routes: ${[...new Set(unknown.map((r) => r.dest))].join(", ")}`);
-
-const cell = (v: string) => (/[",\n]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v);
-const header = ["Source URL", "Source type", "Destination URL", "Destination", "Anchor text", "Why useful", "Visible placement", "Schema", "Status"];
-const lines = rows.map((r) => [ORIGIN + r.source, r.sourceType, ORIGIN + r.dest, titleFor(r.dest), r.anchor, r.why, r.placement, r.schema, r.status].map(cell).join(","));
-writeFileSync(new URL("../docs/internal-link-map.csv", import.meta.url), [header.join(","), ...lines].join("\n") + "\n");
-console.log(`${rows.length} links written to docs/internal-link-map.csv (${rows.filter((r) => r.schema === "relatedLink").length} declared as relatedLink, ${rows.filter((r) => r.status !== "Live").length} to confirm)`);
+void main();
