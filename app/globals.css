@@ -788,3 +788,13 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
 .travel-callout { margin: 32px 0; padding: 22px 24px; border: 1px solid var(--line); border-left: 4px solid var(--blue); border-radius: 8px; background: var(--soft, #eef3f8); }
 .travel-callout h2 { margin-top: 0; font-size: 22px; }
 .travel-callout p { margin-bottom: 12px; }
+
+/* Clinic consultation hours (practice locations cards, contact page side card) */
+.location-card > p.clinic-hours { min-height: auto; margin: 0 0 14px; display: flex; gap: 10px; align-items: flex-start; font-size: 15px; }
+.clinic-hours > svg { color: var(--blue); margin-top: 4px; flex: none; }
+.clinic-hours > span { display: grid; gap: 2px; }
+.clinic-hours b { font-weight: 600; color: var(--navy); }
+.hours-list { margin: 0 0 16px; display: grid; gap: 12px; }
+.hours-list dt { font-weight: 600; color: var(--navy); font-size: 16px; }
+.hours-list dd { margin: 2px 0 0; font-size: 15px; }
+.side-card p.hours-note { margin-bottom: 0; font-size: 14px; color: var(--muted); }

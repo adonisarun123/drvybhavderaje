@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { AFFILIATIONS, contentModified, CREDENTIALS, DOCTOR, HOSPITALS, hospitalMapUrl, PRACTICES, SERVICE_PAGES, type ServicePage, SITE } from "./content";
 import { DOCTOR_PHOTO, imageUrl } from "./images";
 import { inSchemaHoldout } from "./link-experiment";
+import { openingHoursSpecification, type ClinicHours } from "./hours";
 import { ROUTES } from "./routes";
 
 export function siteOrigin(): string {
@@ -57,7 +58,7 @@ export function pageMetadata(args: { title: string; description: string; path: s
   };
 }
 
-type ClinicLike = { name: string; brand: string; addressLines: string; phone: string | null; postcode: string | null; city: string; slug?: string };
+type ClinicLike = { name: string; brand: string; addressLines: string; phone: string | null; postcode: string | null; city: string; slug?: string; hours?: ClinicHours[] };
 
 function clinicNode(c: ClinicLike) {
   return {
@@ -66,6 +67,7 @@ function clinicNode(c: ClinicLike) {
     name: `${c.brand} ${c.name}`.trim(),
     telephone: c.phone ?? undefined,
     address: { "@type": "PostalAddress", streetAddress: c.addressLines, addressLocality: c.city, addressRegion: "Karnataka", postalCode: c.postcode ?? undefined, addressCountry: "IN" },
+    openingHoursSpecification: c.hours?.length ? openingHoursSpecification(c.hours) : undefined,
   };
 }
 

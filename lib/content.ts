@@ -262,6 +262,19 @@ export const CLINICS_SEED = [
   },
 ];
 
+/**
+ * Dr Vybhav's consultation hours at each clinic (supplied 12 Nov 2026), keyed by clinic slug.
+ * The live source is the `weekly_sessions` table (Admin → Availability), which also drives the booking
+ * calendar; this list is the fallback when the database is unreachable and the source for llms.txt.
+ * Keep the two in step. Weekdays: 0 = Sunday … 6 = Saturday.
+ */
+export const CLINIC_HOURS_SEED: Record<string, { days: number[]; start: string; end: string }[]> = {
+  whitefield: [{ days: [1, 2, 3, 4, 5, 6], start: "11:00", end: "13:00" }],
+  "hrbr-layout": [{ days: [1, 5], start: "15:00", end: "17:00" }],
+  koramangala: [{ days: [2, 3, 4, 6], start: "14:00", end: "17:00" }],
+};
+
+
 export function mapsUrl(brand: string, address: string): string {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${brand} ${address}`)}`;
 }

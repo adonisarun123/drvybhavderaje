@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { Image } from "@imagekit/next";
 import type { Metadata } from "next";
-import { ArrowRight, ArrowUpRight, Building2, MapPin, Phone } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Building2, Clock, MapPin, Phone } from "lucide-react";
 import { VideoSection } from "@/components/site/video-section";
 import { Byline, CtaBand, HospitalPhoto, PageHero, PracticeCards, ServiceIndex } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { getPublicClinics } from "@/lib/clinics";
 import { CLINICS_SEED, HOSPITALS, hospitalMapUrl } from "@/lib/content";
+import { formatHours } from "@/lib/hours";
 import { formatPhone } from "@/lib/phone";
 import { ROUTES } from "@/lib/routes";
 import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, physicianJsonLd, practiceJsonLd } from "@/lib/seo";
@@ -51,6 +52,17 @@ export default async function LocationsPage() {
               <p className="eyebrow">{c.brand}</p>
               <h3 id={`clinic-${c.slug}`}>{c.name}</h3>
               <p>{c.addressLines}</p>
+              {c.hours.length > 0 && (
+                <p className="clinic-hours">
+                  <Clock size={16} aria-hidden="true" />
+                  <span>
+                    <b>Consultation Hours</b>
+                    {c.hours.map((h) => (
+                      <span key={formatHours(h)}>{formatHours(h)}</span>
+                    ))}
+                  </span>
+                </p>
+              )}
               {c.phone && (
                 <a href={`tel:${c.phone}`}>
                   <Phone size={16} aria-hidden="true" />
@@ -98,7 +110,7 @@ export default async function LocationsPage() {
             </article>
           ))}
         </div>
-        <p className="note">Appointment timings must be confirmed with the clinic. For appointments, contact Dr Vybhav’s clinic rather than the hospital.</p>
+        <p className="note">Consultation hours are in Indian Standard Time and can change around surgery and travel, so appointment timings must be confirmed with the clinic. For appointments, contact Dr Vybhav’s clinic rather than the hospital.</p>
         <ServiceIndex heading="What Is Treated at These Locations" intro={<p>Consultations for every condition and procedure take place at the Aesthetica Veda clinics; surgery is scheduled at the partner hospital best suited to it.</p>} />
       </section>
       <CtaBand />

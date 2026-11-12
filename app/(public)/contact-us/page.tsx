@@ -5,6 +5,7 @@ import { PageHero } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { AppointmentForm } from "@/components/site/appointment-form";
 import { getPublicClinics } from "@/lib/clinics";
+import { formatHours } from "@/lib/hours";
 import { COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, SITE } from "@/lib/content";
 import { enquiriesEnabled } from "@/lib/enquiries/public-config";
 import { formatPhone } from "@/lib/phone";
@@ -54,6 +55,25 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
               {SITE.email} <ArrowUpRight size={16} aria-hidden="true" />
             </a>
           </aside>
+          {clinics.some((c) => c.hours.length > 0) && (
+            <aside className="side-card hours-card" aria-label="Consultation hours" style={{ marginTop: 24 }}>
+              <p className="eyebrow">Consultation Hours</p>
+              <h3>When Dr Vybhav Consults.</h3>
+              <dl className="hours-list">
+                {clinics
+                  .filter((c) => c.hours.length > 0)
+                  .map((c) => (
+                    <div key={c.slug}>
+                      <dt>{c.name}</dt>
+                      {c.hours.map((h) => (
+                        <dd key={formatHours(h)}>{formatHours(h)}</dd>
+                      ))}
+                    </div>
+                  ))}
+              </dl>
+              <p className="hours-note">Indian Standard Time. Hours can change around surgery and travel, so please book or call before you visit.</p>
+            </aside>
+          )}
           <aside className="side-card abroad-card" aria-label="Contacting us from outside India" style={{ marginTop: 24 }}>
             <p className="eyebrow">Outside India?</p>
             <h3>Patients from Abroad Are Welcome.</h3>

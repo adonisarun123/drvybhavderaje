@@ -1,6 +1,7 @@
 import { CRANIO_PARENT, CRANIO_TYPES, cranioTypePath } from "./cranio-types";
 import { SUB_PROCEDURES, subProcedurePath, subProceduresOf } from "./sub-procedures";
-import { isPendingReview, AFFILIATIONS, CLINICS_SEED, COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, CREDENTIALS, DOCTOR, HOME_FAQS, HOSPITALS, hospitalMapUrl, OTHER_SERVICES, PRACTICES, PUBLICATIONS, SERVICE_PAGES, SITE } from "./content";
+import { isPendingReview, AFFILIATIONS, CLINIC_HOURS_SEED, CLINICS_SEED, COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, CREDENTIALS, DOCTOR, HOME_FAQS, HOSPITALS, hospitalMapUrl, OTHER_SERVICES, PRACTICES, PUBLICATIONS, SERVICE_PAGES, SITE } from "./content";
+import { formatHours } from "./hours";
 import { ROUTES } from "./routes";
 import { absolute } from "./seo";
 
@@ -58,13 +59,18 @@ export function llmsTxt(): string {
   return lines.join("\n");
 }
 
+function clinicHoursLine(slug: string): string {
+  const hours = CLINIC_HOURS_SEED[slug] ?? [];
+  return hours.length ? ` Consultation hours: ${hours.map(formatHours).join("; ")}.` : "";
+}
+
 export function llmsFullTxt(): string {
   const out: string[] = [llmsTxt(), "---", ""];
   out.push(`# About ${DOCTOR.name}`, "", `URL: ${absolute(ROUTES.about)}`, "", ...DOCTOR.bio, "");
   out.push("## Qualifications", "", ...CREDENTIALS.map((c) => `- ${c.title} — ${c.detail}`), "");
   out.push("## Memberships", "", ...AFFILIATIONS.map((a) => `- ${a.org}: ${a.detail}`), "");
   out.push("## Hospital affiliations", "", ...HOSPITALS.map((h) => `- ${h.name}, ${h.address}. Map: ${hospitalMapUrl(h)}`), "");
-  out.push("## Consultation clinics", "", ...CLINICS_SEED.map((c) => `- ${c.brand} ${c.name}: ${c.addressLines}. Tel ${c.phone}`), "");
+  out.push("## Consultation clinics", "", ...CLINICS_SEED.map((c) => `- ${c.brand} ${c.name}: ${c.addressLines}. Tel ${c.phone}.${clinicHoursLine(c.slug)}`), "", "Consultation hours are in Indian Standard Time and can change around surgery and travel; confirm with the clinic before visiting.", "");
   out.push("## Selected publications", "", ...PUBLICATIONS.map((p) => `- ${p}`), "");
   for (const p of SERVICE_PAGES) {
     if (isPendingReview(p.slug)) continue;
