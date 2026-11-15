@@ -105,6 +105,8 @@ Search Console shows people searching "<procedure> cost in bangalore" (gynecomas
 
 ## Service-page visuals — Craniosynostosis page (added 15 Nov 2026) — DIAGRAMS AWAIT THE DOCTOR'S SIGN-OFF
 
+**Condensed wording APPROVED by Dr Deraje on 15 Nov 2026 (via Arun):** hero chips, comparison table, timelines, route labels and step strips, on all 23 service pages. The head-shape diagrams were not part of that sign-off and remain hidden.
+
 The Craniosynostosis page now presents its approved copy visually (source: `lib/page-visuals.ts`, `components/site/page-visuals.tsx`): hero fact chips and overview video, an "On This Page" side menu, the six types as a card grid, treatment as an age path, a keyhole-vs-open comparison table, day-by-day lines for both operations, a four-step strip for travelling families, and one video beside each section it explains. No clinical statement was added: every chip, table cell, timeline entry and step restates a sentence already on the page.
 
 For the doctor to confirm:
