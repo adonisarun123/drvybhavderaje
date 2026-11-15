@@ -75,6 +75,7 @@ function clinicNode(c: ClinicLike) {
     openingHoursSpecification: c.hours?.length ? openingHoursSpecification(c.hours) : undefined,
     priceRange: priceRangeLabel(),
     currenciesAccepted: "INR",
+    paymentAccepted: "Online payment, Credit card",
   };
 }
 
@@ -137,6 +138,7 @@ export function practiceJsonLd(clinics: ClinicLike[]) {
     areaServed: AREA_SERVED,
     priceRange: priceRangeLabel(),
     currenciesAccepted: "INR",
+    paymentAccepted: "Online payment, Credit card",
     hasOfferCatalog: { "@id": COST_CATALOG_ID() },
   };
 }
@@ -272,6 +274,7 @@ function costOffer(c: CostItem) {
       priceCurrency: currency,
       ...(c.inrTo ? { minPrice: v(c.inrFrom), maxPrice: v(c.inrTo) } : c.fixed || c.per ? { price: v(c.inrFrom) } : { minPrice: v(c.inrFrom) }),
       ...(c.per ? { unitText: c.per } : {}),
+      ...(c.gst ? { valueAddedTaxIncluded: false } : {}),
       description: currency === "USD" ? `Approximate conversion at ₹${USD_INR} = US$1 (${FX_DATE}); billed in INR.` : undefined,
     };
   };

@@ -8,6 +8,9 @@
  *   (enquiry replies only).
  * - "Not included" is the doctor's own column, copied as given. The sheet's "Included" and "What makes it
  *   cost more" columns were left blank, so the site does not list inclusions — the written estimate does.
+ * - Doctor's answers (15 Nov 2026, via Arun): the figures are the charges for the procedures; GST is not
+ *   included (applied here to the cosmetic categories — GST_CATEGORIES); payment can be made online, including
+ *   by credit card.
  * - USD figures are an approximate conversion for overseas patients, not a USD price. Bills are in INR.
  *   Update USD_INR (and FX_DATE) when the rate moves materially; every USD figure on the site follows.
  */
@@ -32,6 +35,8 @@ export interface CostItem {
   /** Per-unit pricing (e.g. "unit", "ml"). */
   per?: string;
   notIncluded?: string[];
+  /** GST is charged on top of this figure. */
+  gst?: boolean;
   /** Extra billing note shown with the figure. */
   note?: string;
   /** Pages that show this figure. The first is the procedure's own page (linked from the cost page). */
@@ -54,7 +59,11 @@ const STD = ["pre-operative tests", "medicines after discharge"];
 const PLANNING = [...STD, "virtual surgical planning", "3D models", "orthodontic braces"];
 const GARMENTS = [...STD, "compression garments"];
 
-export const COST_ITEMS: CostItem[] = [
+/** Cosmetic work attracts GST, which the doctor's figures exclude; reconstructive and infant care is shown as quoted. */
+export const GST_CATEGORIES: ReadonlySet<CostCategory> = new Set<CostCategory>(["Face — Cosmetic", "Non-Surgical Treatments", "Breast and Body — Cosmetic"]);
+export const GST_LABEL = "GST";
+
+const SHEET_ROWS: CostItem[] = [
   // Consultations
   { name: "In-Clinic Consultation", category: "Consultations", inrFrom: 1200, fixed: true, paths: [] },
   { name: "Video Consultation — Patients in India", category: "Consultations", inrFrom: 1200, fixed: true, paths: [] },
@@ -123,6 +132,9 @@ export const COST_ITEMS: CostItem[] = [
   { name: "Thigh Lift (Thighplasty)", category: "Breast and Body — Cosmetic", inrFrom: 150000, inrTo: 200000, notIncluded: GARMENTS, paths: [sub("body-plastic-surgeon-bangalore", "thigh-lift-thighplasty"), BODY] },
 ];
 
+/** Cosmetic rows get "GST" added to their not-included list and a "+ GST" marker on the figure. */
+export const COST_ITEMS: CostItem[] = SHEET_ROWS.map((c) => (GST_CATEGORIES.has(c.category) ? { ...c, gst: true, notIncluded: [...(c.notIncluded ?? []), GST_LABEL] } : c));
+
 export const COST_CATEGORIES: CostCategory[] = [...new Set(COST_ITEMS.map((c) => c.category))];
 
 /* ---- Formatting ---------------------------------------------------------------------------------- */
@@ -148,13 +160,17 @@ function range(from: string, to: string | undefined, per?: string, fixed = false
   return per ? `${base} per ${per}` : base;
 }
 
-export const inrRange = (c: CostItem) => range(formatInr(c.inrFrom), c.inrTo ? formatInr(c.inrTo) : undefined, c.per, c.fixed);
-export const usdRange = (c: CostItem) => range(formatUsd(toUsd(c.inrFrom)), c.inrTo ? formatUsd(toUsd(c.inrTo)) : undefined, c.per, c.fixed);
+const plusGst = (c: CostItem, text: string) => (c.gst ? `${text} + GST` : text);
+export const inrRange = (c: CostItem) => plusGst(c, range(formatInr(c.inrFrom), c.inrTo ? formatInr(c.inrTo) : undefined, c.per, c.fixed));
+export const usdRange = (c: CostItem) => plusGst(c, range(formatUsd(toUsd(c.inrFrom)), c.inrTo ? formatUsd(toUsd(c.inrTo)) : undefined, c.per, c.fixed));
 /** "₹1,50,000 – ₹2,00,000 (about US$1,600 – US$2,150)" */
+/** "₹1,50,000 – ₹2,00,000 (about US$1,600 – US$2,150)", with " + GST" once at the end for cosmetic rows. */
 export const bothRanges = (c: CostItem) => {
-  const inr = inrRange(c);
-  const usd = usdRange(c);
-  return inr.startsWith("from ") ? `${inr} (about ${usd.replace(/^from /, "")})` : `${inr} (about ${usd})`;
+  const base = { ...c, gst: false };
+  const inr = inrRange(base);
+  const usd = usdRange(base);
+  const text = inr.startsWith("from ") ? `${inr} (about ${usd.replace(/^from /, "")})` : `${inr} (about ${usd})`;
+  return c.gst ? `${text} + GST` : text;
 };
 
 /** "pre-operative tests, medicines after discharge and compression garments" */
@@ -162,8 +178,10 @@ export function joinList(items: string[]): string {
   return items.length < 2 ? (items[0] ?? "") : `${items.slice(0, -1).join(", ")} and ${items.at(-1)}`;
 }
 
-export const FX_NOTE = `US dollar figures are approximate, converted at ₹${USD_INR} to US$1 (${FX_DATE}). Bills are raised in Indian rupees, so the amount in your own currency depends on the exchange rate on the day you pay.`;
-export const TYPICAL_NOTE = "Typical costs for an uncomplicated case, as set by Dr Vybhav Deraje. Your individual estimate is confirmed after assessment and depends on the hospital, the length of stay and the complexity of the case.";
+export const PAYMENT_NOTE = "Payment can be made online, including by credit card.";
+export const FX_NOTE = `US dollar figures are approximate, converted at ₹${USD_INR} to US$1 (${FX_DATE}). Bills are raised in Indian rupees, so the amount in your own currency depends on the exchange rate on the day you pay. ${PAYMENT_NOTE}`;
+export const TYPICAL_NOTE = "These are Dr Vybhav Deraje's charges for the procedure, for a typical uncomplicated case. Your individual estimate is confirmed after assessment and depends on the hospital, the length of stay and the complexity of the case.";
+export const GST_NOTE = "GST is not included in the figures for cosmetic procedures and is added to the bill.";
 
 /* ---- Lookup -------------------------------------------------------------------------------------- */
 
@@ -175,7 +193,8 @@ export const COST_PATHS: ReadonlySet<string> = new Set(COST_ITEMS.flatMap((c) =>
 
 /** The "Not included" items shared by every figure in the list (deduplicated, in first-seen order). */
 export function notIncludedFor(items: CostItem[]): string[] {
-  return [...new Set(items.flatMap((c) => c.notIncluded ?? []))];
+  const all = [...new Set(items.flatMap((c) => c.notIncluded ?? []))];
+  return [...all.filter((x) => x !== GST_LABEL), ...all.filter((x) => x === GST_LABEL)];
 }
 
 /** Plain-text cost section body — used for the page copy, the FAQ answer and llms-full.txt. */
@@ -190,7 +209,7 @@ export function costFaqAnswer(items: CostItem[]): string {
   const list = items.map((c) => `${c.name} ${bothRanges(c)}`).join("; ");
   const excluded = notIncludedFor(items);
   const varies = items.some((c) => (c.notIncluded ?? []).join() !== (items[0]?.notIncluded ?? []).join());
-  return `Typical cost for an uncomplicated case: ${list}.${excluded.length ? ` Not included${varies ? ", depending on the procedure" : ""}: ${joinList(excluded)}.` : ""} The clinic confirms an individual estimate after assessment; overseas patients can start with a video consultation (${formatInr(1200)}, about ${formatUsd(toUsd(1200))}). Bills are in Indian rupees.`;
+  return `Typical cost for an uncomplicated case: ${list}.${excluded.length ? ` Not included${varies ? ", depending on the procedure" : ""}: ${joinList(excluded)}.` : ""} The clinic confirms an individual estimate after assessment; overseas patients can start with a video consultation (${formatInr(1200)}, about ${formatUsd(toUsd(1200))}). Bills are in Indian rupees, and payment can be made online, including by credit card.`;
 }
 
 /** Lowest and highest published figure, for `priceRange` on the practice and clinics. */

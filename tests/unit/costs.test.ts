@@ -25,7 +25,12 @@ describe("published costs", () => {
 
   it("formats INR with Indian grouping and an approximate USD range", () => {
     const rhino = COST_ITEMS.find((c) => c.name === "Rhinoplasty")!;
-    expect(bothRanges(rhino)).toBe("₹1,50,000 – ₹2,00,000 (about US$1,600 – US$2,150)");
+    expect(bothRanges(rhino)).toBe("₹1,50,000 – ₹2,00,000 (about US$1,600 – US$2,150) + GST");
+  });
+
+  it("marks cosmetic figures as excluding GST and leaves reconstructive figures alone", () => {
+    expect(bothRanges(COST_ITEMS.find((c) => c.name === "Tummy Tuck (Abdominoplasty)")!)).toContain("+ GST");
+    expect(bothRanges(COST_ITEMS.find((c) => c.name === "Cleft Lip Repair")!)).not.toContain("GST");
   });
 
   it("puts a cost section and a cost FAQ with figures on every service page that has costs", () => {

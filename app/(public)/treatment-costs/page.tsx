@@ -5,7 +5,7 @@ import { Byline, CtaBand, Faq, HelpSideCard, KeyFacts, PageHero } from "@/compon
 import { CostTable } from "@/components/site/cost-table";
 import { JsonLd } from "@/components/site/json-ld";
 import { DOCTOR, SITE } from "@/lib/content";
-import { COST_CATEGORIES, COST_ITEMS, formatInr, formatUsd, FX_NOTE, joinList, notIncludedFor, toUsd, TYPICAL_NOTE, USD_INR } from "@/lib/costs";
+import { COST_CATEGORIES, COST_ITEMS, formatInr, formatUsd, FX_NOTE, GST_NOTE, joinList, PAYMENT_NOTE, notIncludedFor, toUsd, TYPICAL_NOTE, USD_INR } from "@/lib/costs";
 import { ROUTES } from "@/lib/routes";
 import { breadcrumbJsonLd, costCatalogJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata } from "@/lib/seo";
 
@@ -26,6 +26,8 @@ const FAQS = [
   { q: "What is not included in the figures?", a: `Depending on the procedure: ${joinList(notIncludedFor(COST_ITEMS))}. Travel, accommodation and visa costs are not included. Each procedure page lists what applies to that operation.` },
   { q: "How much is a consultation, and can I consult from abroad?", a: `An in-clinic consultation, a video consultation from within India and a video consultation from overseas each cost ${CONSULT} (about ${CONSULT_USD}). Overseas patients usually start with a video consultation, sending their reports and photographs ahead.` },
   { q: "Why are prices shown in US dollars?", a: `Many patients travel to Bangalore from other countries. The US dollar figures are a guide converted at ₹${USD_INR} to US$1; costs are billed in Indian rupees, so the amount in your currency depends on the exchange rate when you pay.` },
+  { q: "Is GST included?", a: `${GST_NOTE} The figures for craniosynostosis, cleft, jaw and ear reconstruction, helmet therapy and EarWell are shown as quoted by the doctor.` },
+  { q: "How can I pay from outside India?", a: `${PAYMENT_NOTE} Bills are raised in Indian rupees; your card provider converts the amount to your currency.` },
   { q: "Is the cost of syndromic craniosynostosis surgery for the whole treatment?", a: "No. Syndromic and multisuture craniosynostosis is usually treated in stages through childhood, and the figure shown is per stage." },
   { q: "Is help available with the cost of cleft treatment?", a: "Yes. Subsidised treatment is available for children with Cleft Lip and Palate from economically disadvantaged families; ask the clinic when you enquire." },
 ];
@@ -59,6 +61,12 @@ export default function TreatmentCostsPage() {
                 <b>Currency:</b> Billed in Indian rupees (INR). US dollar figures are approximate, at ₹{USD_INR} to US$1.
               </li>
               <li>
+                <b>GST:</b> Not included for cosmetic procedures; added to the bill.
+              </li>
+              <li>
+                <b>Payment:</b> Online, including by credit card; billed in Indian rupees.
+              </li>
+              <li>
                 <b>Usually Not Included:</b> {joinList(notIncludedFor(COST_ITEMS))}, depending on the procedure.
               </li>
               <li>
@@ -87,6 +95,7 @@ export default function TreatmentCostsPage() {
           <section>
             <h2>What the Figures Cover</h2>
             <p>{TYPICAL_NOTE}</p>
+            <p>{GST_NOTE}</p>
             <p>Depending on the procedure, these are billed separately: {joinList(notIncludedFor(COST_ITEMS))}. The procedure pages list what applies to each operation, and your written estimate sets out exactly what is included.</p>
           </section>
 
