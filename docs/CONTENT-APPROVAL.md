@@ -111,3 +111,11 @@ For the doctor to confirm:
 - **Head-shape diagrams (hidden until approved).** Six simplified top-down skull diagrams drawn for this site, one per type, with the closed suture in solid blue. They are schematic, not anatomical drawings. Preview with `NEXT_PUBLIC_SHOW_DRAFT_SECTIONS=true npm run dev`; publish by setting `DIAGRAMS_APPROVED = true` in `lib/page-visuals.ts`. Points to check: the shape shown for each type; unilateral types are drawn with the right side affected; Multisuture shows the coronal, sagittal and lambdoid sutures closed.
 - **Comparison table and timelines.** Wording is condensed from the keyhole and open-surgery sections (e.g. "Day 2 — move to the ward", "Day 6–7 — bandage removed; home"). Confirm the condensed wording reads correctly.
 - **Route labels in the age path:** "Keyhole Surgery, Then Orthotic Helmet Therapy", "Open Remodelling Surgery", "Open Surgery, Often in Stages" (syndromic).
+
+### Rolled out to all 23 service pages (15 Nov 2026)
+
+Every page on the service template (`app/(public)/[slug]/page.tsx`) now has the "On This Page" side menu and two-across cards. The 22 pages besides Craniosynostosis also have three hero fact chips each, and where the copy supports it a hero video, a recovery timeline and videos beside sections (`lib/page-visuals.ts`). Cleft Lip and Palate shows its protocol as an age path.
+
+For the doctor to confirm, page by page: the three hero chips and any recovery timeline. Each restates a sentence in that page's own approved copy in fewer words; nothing was added. The condensed wording is the only new text.
+
+Not yet converted (different templates): the six Craniosynostosis type pages and the 15 sheet-based procedure pages.

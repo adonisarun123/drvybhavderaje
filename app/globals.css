@@ -861,6 +861,7 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
 .age-route { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; color: var(--blue); font-size: 17px; font-weight: 600; line-height: 1.35; }
 .prose .age-what h3 { margin: 0 0 8px; font-size: 15px; font-weight: 600; letter-spacing: 0; line-height: 1.4; color: var(--muted); }
 .age-what > p:not(.age-route) { margin: 0; font-size: 16px; line-height: 1.7; }
+.prose .age-what h3:first-child { font-size: 18px; letter-spacing: -0.3px; color: var(--navy); }
 
 .prose ol.step-strip { list-style: none; padding: 0; margin: 20px 0 6px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .prose .step-strip > li { margin: 0; display: flex; flex-direction: column; gap: 6px; padding: 16px; border-radius: 8px; background: var(--pale); color: var(--muted); font-size: 14px; line-height: 1.5; }

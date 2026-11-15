@@ -4,10 +4,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Fragment, type ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
-import { Byline, CtaBand, Faq, HelpSideCard, KeyFacts, PageHero, PhotoGallery, RelatedServices } from "@/components/site/blocks";
+import { Byline, CtaBand, Faq, KeyFacts, PageHero, PhotoGallery, RelatedServices } from "@/components/site/blocks";
 import { VideoSection } from "@/components/site/video-section";
 import { AgePath, CompareSection, DayLine, HeroFacts, HeroVideo, InlineToc, SectionVideo, ServiceSide, StepStrip, TypeGrid } from "@/components/site/page-visuals";
-import { placedVideoIds, sectionAnchor, SHOW_DIAGRAMS, visualsFor, type PageVisuals } from "@/lib/page-visuals";
+import { PAGE_VISUALS, placedVideoIds, resolveVisuals, sectionAnchor, SHOW_DIAGRAMS, type PageVisuals } from "@/lib/page-visuals";
+import { videosFor } from "@/lib/videos";
 import { AllCostsLink, CostTable } from "@/components/site/cost-table";
 import { bothRanges, costsForPath, formatInr, formatUsd, toUsd, type CostItem } from "@/lib/costs";
 import { JsonLd } from "@/components/site/json-ld";
@@ -108,7 +109,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   }));
   const faqs = page.faqs.map((f) => ({ q: f.q, a: autolink(f.a, budget) }));
   const costs = costsForPath(page.path);
-  const visuals = visualsFor(page.slug);
+  const placed = placedVideoIds(PAGE_VISUALS[page.slug]);
+  const visuals = resolveVisuals(page, videosFor(page.slug, 6, placed).length > 0);
   // The page's own procedure (first listed for this page) leads; hub pages show the lowest figure instead.
   const isHub = page.slug === "face-plastic-surgery-bangalore" || page.slug === "breast-plastic-surgeon-bangalore" || page.slug === "body-plastic-surgeon-bangalore";
   const primary = isHub ? undefined : costs.find((c) => c.paths[0] === page.path);
@@ -152,7 +154,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <section className="section container content-grid">
         <article className="prose service-prose">
           <Byline />
-          {visuals?.toc && <InlineToc toc={visuals.toc} />}
+          <InlineToc toc={visuals.toc ?? []} />
           <KeyFacts title={titleCase(`${page.shortTitle} in Bangalore${page.slug === "craniosynostosis-surgery-bangalore" ? ", India" : ""}`)}>
             <p>{page.description}</p>
             <ul>
@@ -228,7 +230,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               <Section s={s} costs={costs} path={page.path} visuals={visuals} />
             </Fragment>
           ))}
-          <VideoSection page={page.slug} exclude={placedVideoIds(visuals)} id="videos" />
+          <VideoSection page={page.slug} exclude={placed} id="videos" />
           {page.gallery && (
             <section>
               <h2>Gallery</h2>
@@ -274,7 +276,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </section>
           <p className="note">This page is general information written by {DOCTOR.name} for patients and families. It does not replace an individual consultation; treatment plans depend on clinical assessment.</p>
         </article>
-        {visuals?.toc ? <ServiceSide toc={visuals.toc} /> : <HelpSideCard />}
+        <ServiceSide toc={visuals.toc ?? []} />
       </section>
       <RelatedServices services={related} />
       <CtaBand />
