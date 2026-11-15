@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, MessageCircle } from "lucide-react";
+import { ArrowUpRight, MessageCircle } from "lucide-react";
 import { Byline, CtaBand, Faq, PageHero } from "@/components/site/blocks";
 import { CostFinder } from "@/components/site/cost-finder";
-import { CostTable } from "@/components/site/cost-table";
+import { PriceList } from "@/components/site/cost-table";
 import { JsonLd } from "@/components/site/json-ld";
-import { HeroFacts, InlineToc, ServiceSide, StepStrip } from "@/components/site/page-visuals";
+import { HeroFacts, ServiceSide, StepStrip } from "@/components/site/page-visuals";
 import { DOCTOR, getService, SITE } from "@/lib/content";
 import { COST_CATEGORIES, COST_ITEMS, formatInr, formatUsd, FX_NOTE, GST_NOTE, joinList, notIncludedFor, PAYMENT_NOTE, toUsd, TYPICAL_NOTE, USD_INR, type CostCategory, type CostItem } from "@/lib/costs";
 import { ROUTES, type ServiceSlug } from "@/lib/routes";
@@ -25,15 +25,15 @@ const CONSULT = formatInr(1200);
 const CONSULT_USD = formatUsd(toUsd(1200));
 
 /** Per category: anchor, the conditions it covers (for the reader and the finder) and the condition pages it links to. */
-const CATEGORY: Record<CostCategory, { id: string; label: string; intro: string; pages: ServiceSlug[] }> = {
-  Consultations: { id: "consultations", label: "Consultations", intro: "The first step for every treatment — in clinic in Bangalore, or by video from anywhere in India or abroad.", pages: [] },
-  "Craniosynostosis and Head Shape": { id: "craniosynostosis-head-shape", label: "Craniosynostosis and Head Shape", intro: "Keyhole and open surgery for Craniosynostosis, Orthotic Helmet Therapy, helmet treatment for flat head, and EarWell ear moulding for newborns.", pages: ["craniosynostosis-surgery-bangalore", "helmet-therapy-flat-head-bangalore", "earwell-infant-ear-correction-bangalore"] },
-  "Cleft Lip and Palate": { id: "cleft-lip-palate", label: "Cleft Lip and Palate", intro: "Each stage of cleft care is costed on its own, from lip and palate repair in infancy to bone grafting, nose and jaw surgery as the child grows. Subsidised treatment is available for children from economically disadvantaged families.", pages: ["cleft-lip-and-palate-treatment-bangalore"] },
-  "Corrective Jaw Surgery": { id: "jaw-surgery", label: "Corrective Jaw Surgery", intro: "Orthognathic surgery for jaw misalignment. Virtual surgical planning, 3D models and orthodontic braces are billed separately.", pages: ["corrective-jaw-surgery-bangalore"] },
-  "Ear Reconstruction": { id: "ear-reconstruction", label: "Ear Reconstruction", intro: "Reconstruction of an ear that is small or absent from birth (Microtia), done in two stages.", pages: ["ear-reconstruction-surgery-bangalore"] },
-  "Face — Cosmetic": { id: "face", label: "Face — Cosmetic", intro: "Cosmetic surgery of the nose, eyelids, ears, chin, lips and face. GST is added to these figures.", pages: ["rhinoplasty-surgery-bangalore", "blepharoplasty-eyelid-surgery-bangalore", "otoplasty-ear-correction-bangalore", "chin-augmentation-surgery-bangalore", "facelift-surgery-bangalore"] },
-  "Non-Surgical Treatments": { id: "non-surgical", label: "Non-Surgical Treatments", intro: "Injectable and thread treatments, priced per unit or per ml where shown. GST is added to these figures.", pages: ["face-plastic-surgery-bangalore"] },
-  "Breast and Body — Cosmetic": { id: "breast-body", label: "Breast and Body — Cosmetic", intro: "Breast and body contouring surgery. Compression garments are billed separately, and GST is added to these figures.", pages: ["breast-augmentation-surgery-bangalore", "breast-reduction-surgery-bangalore", "gynecomastia-surgery-bangalore", "tummy-tuck-abdominoplasty-bangalore", "liposuction-surgery-bangalore"] },
+const CATEGORY: Record<CostCategory, { id: string; label: string; tab: string; intro: string; pages: ServiceSlug[] }> = {
+  Consultations: { id: "consultations", tab: "Consultations", label: "Consultations", intro: "The first step for every treatment — in clinic in Bangalore, or by video from anywhere in India or abroad.", pages: [] },
+  "Craniosynostosis and Head Shape": { id: "craniosynostosis-head-shape", tab: "Craniosynostosis", label: "Craniosynostosis and Head Shape", intro: "Keyhole and open surgery for Craniosynostosis, Orthotic Helmet Therapy, helmet treatment for flat head, and EarWell ear moulding for newborns.", pages: ["craniosynostosis-surgery-bangalore", "helmet-therapy-flat-head-bangalore", "earwell-infant-ear-correction-bangalore"] },
+  "Cleft Lip and Palate": { id: "cleft-lip-palate", tab: "Cleft", label: "Cleft Lip and Palate", intro: "Each stage of cleft care is costed on its own, from lip and palate repair in infancy to bone grafting, nose and jaw surgery as the child grows. Subsidised treatment is available for children from economically disadvantaged families.", pages: ["cleft-lip-and-palate-treatment-bangalore"] },
+  "Corrective Jaw Surgery": { id: "jaw-surgery", tab: "Jaw", label: "Corrective Jaw Surgery", intro: "Orthognathic surgery for jaw misalignment. Virtual surgical planning, 3D models and orthodontic braces are billed separately.", pages: ["corrective-jaw-surgery-bangalore"] },
+  "Ear Reconstruction": { id: "ear-reconstruction", tab: "Ear", label: "Ear Reconstruction", intro: "Reconstruction of an ear that is small or absent from birth (Microtia), done in two stages.", pages: ["ear-reconstruction-surgery-bangalore"] },
+  "Face — Cosmetic": { id: "face", tab: "Face", label: "Face — Cosmetic", intro: "Cosmetic surgery of the nose, eyelids, ears, chin, lips and face. GST is added to these figures.", pages: ["rhinoplasty-surgery-bangalore", "blepharoplasty-eyelid-surgery-bangalore", "otoplasty-ear-correction-bangalore", "chin-augmentation-surgery-bangalore", "facelift-surgery-bangalore"] },
+  "Non-Surgical Treatments": { id: "non-surgical", tab: "Non-Surgical", label: "Non-Surgical Treatments", intro: "Injectable and thread treatments, priced per unit or per ml where shown. GST is added to these figures.", pages: ["face-plastic-surgery-bangalore"] },
+  "Breast and Body — Cosmetic": { id: "breast-body", tab: "Breast and Body", label: "Breast and Body — Cosmetic", intro: "Breast and body contouring surgery. Compression garments are billed separately, and GST is added to these figures.", pages: ["breast-augmentation-surgery-bangalore", "breast-reduction-surgery-bangalore", "gynecomastia-surgery-bangalore", "tummy-tuck-abdominoplasty-bangalore", "liposuction-surgery-bangalore"] },
 };
 
 /** Conditions and everyday words patients search with, per procedure (the finder matches name + category + these). */
@@ -116,79 +116,49 @@ export default function TreatmentCostsPage() {
         }
         media={<CostFinder suggestions={SUGGESTIONS} />}
       />
-      <section className="section container content-grid">
-        <article className="prose service-prose cost-page">
-          <Byline />
-          <InlineToc toc={TOC} />
-          <aside className="key-facts" id="summary" aria-label="At a Glance">
-            <p className="eyebrow">At a Glance</p>
-            <p>{TYPICAL_NOTE}</p>
-            <ul>
-              <li>
-                <b>Currency:</b> Billed in Indian rupees. US dollar figures are approximate, at ₹{USD_INR} to US$1.
-              </li>
-              <li>
-                <b>GST:</b> Added to cosmetic procedures (marked <span className="cost-badge">+ GST</span>).
-              </li>
-              <li>
-                <b>Usually Not Included:</b> {joinList(notIncludedFor(COST_ITEMS).filter((x) => x !== "GST"))}, depending on the procedure.
-              </li>
-            </ul>
-          </aside>
-
-          {COST_CATEGORIES.map((cat) => {
+      <section className="section container cost-page">
+        <Byline />
+        <dl className="cost-legend" id="summary" aria-label="At a Glance">
+          <div>
+            <dt>What the Figures Are</dt>
+            <dd>{TYPICAL_NOTE}</dd>
+          </div>
+          <div>
+            <dt>Currency</dt>
+            <dd>Billed in Indian rupees. US dollar figures are approximate, at ₹{USD_INR} to US$1.</dd>
+          </div>
+          <div>
+            <dt>GST and Extras</dt>
+            <dd>
+              GST is added to cosmetic procedures (marked <span className="cost-badge">+ GST</span>). Each procedure also lists what is billed separately.
+            </dd>
+          </div>
+        </dl>
+        <nav className="cost-tabs" aria-label="Cost categories">
+          {COST_CATEGORIES.map((c) => (
+            <a key={c} href={`#${CATEGORY[c].id}`}>
+              {CATEGORY[c].tab}
+            </a>
+          ))}
+        </nav>
+        <PriceList
+          searchTerms={searchTerms}
+          groups={COST_CATEGORIES.map((cat) => {
             const info = CATEGORY[cat];
-            const items = COST_ITEMS.filter((c) => c.category === cat);
-            const excluded = notIncludedFor(items);
             const pages = info.pages.map((s) => getService(s)).filter((p) => p !== undefined);
-            return (
-              <section key={cat} id={info.id} className="cost-category" data-cost-section="">
-                <div className="cost-category-head">
-                  <h2>{info.label}</h2>
-                  <span className="cost-count">
-                    {items.length} {items.length === 1 ? "item" : "items"}
-                  </span>
-                </div>
-                <p>{info.intro}</p>
-                <CostTable items={items} currentPath={ROUTES.costs} searchTerms={searchTerms} />
-                {excluded.length > 0 && (
-                  <p className="cost-excluded">
-                    <b>{excluded.length && items.some((c) => (c.notIncluded ?? []).join() !== (items[0]?.notIncluded ?? []).join()) ? "Not included (varies by procedure):" : "Not included:"}</b>{" "}
-                    {excluded.map((x) => (
-                      <span key={x} className="cost-chip">
-                        {x}
-                      </span>
-                    ))}
-                  </p>
-                )}
-                {items
-                  .filter((c) => c.note)
-                  .map((c) => (
-                    <p key={c.name} className="note">
-                      {c.name}: {c.note}.
-                    </p>
-                  ))}
-                {pages.length > 0 && (
-                  <p className="cost-read-more">
-                    <span>Read about:</span>
-                    {pages.map((p) => (
-                      <Link key={p.slug} href={p.path}>
-                        {p.shortTitle}
-                      </Link>
-                    ))}
-                  </p>
-                )}
-                {cat === "Consultations" && (
-                  <p className="cost-read-more">
-                    <Link className="text-link" href={ROUTES.contact}>
-                      Book a Consultation <ArrowRight size={14} aria-hidden="true" />
-                    </Link>
-                  </p>
-                )}
-              </section>
-            );
+            return {
+              id: info.id,
+              label: info.label,
+              intro: info.intro,
+              items: COST_ITEMS.filter((c) => c.category === cat),
+              links: cat === "Consultations" ? [{ href: ROUTES.contact, label: "Book a Consultation" }] : pages.map((p) => ({ href: p.path, label: p.shortTitle })),
+              linksLabel: cat === "Consultations" ? "" : undefined,
+            };
           })}
-
+        />
+      </section>
+      <section className="section container content-grid cost-details">
+        <article className="prose service-prose">
           <section id="how-costs-work">
             <h2>How Costs Work</h2>
             <StepStrip steps={STEPS} />
@@ -223,7 +193,7 @@ export default function TreatmentCostsPage() {
             Costs published by {DOCTOR.name} for patients and families. Figures are typical, not a quotation, and can change. Call <a href={`tel:${SITE.phoneTel}`}>{SITE.phone}</a> or email <a href={`mailto:${SITE.email}`}>{SITE.email}</a> for your estimate.
           </p>
         </article>
-        <ServiceSide toc={TOC} />
+        <ServiceSide toc={TOC.slice(COST_CATEGORIES.length)} />
       </section>
       <CtaBand />
     </>
