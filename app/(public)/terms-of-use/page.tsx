@@ -3,7 +3,7 @@ import { Byline, HelpSideCard, PageHero } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { SITE } from "@/lib/content";
 import { ROUTES } from "@/lib/routes";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, pageMetadata, medicalWebPageJsonLd } from "@/lib/seo";
 
 const TITLE = "Terms of Use";
 const DESCRIPTION = "Terms of use and medical disclaimer for drvybhavderaje.com: website information is general and does not replace professional medical advice or treatment.";
@@ -15,7 +15,7 @@ const NAME = SITE.legalName;
 export default function TermsPage() {
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Terms of Use", path: ROUTES.terms }])} />
+      <JsonLd data={[breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Terms of Use", path: ROUTES.terms }]), medicalWebPageJsonLd({ title: TITLE, description: DESCRIPTION, path: ROUTES.terms, type: "WebPage" })]} />
       <PageHero eyebrow="Terms of Use" crumb="Terms of Use" title="Terms of use and disclaimer." lead="Please read these terms before using this website or acting on any information it contains." />
       <section className="section container content-grid">
         <article className="prose">

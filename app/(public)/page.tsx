@@ -12,7 +12,7 @@ import { getPublicClinics } from "@/lib/clinics";
 import { DOCTOR_PHOTO } from "@/lib/images";
 import { autolink, createLinkBudget, linkTargetFor } from "@/lib/links";
 import { ROUTES, servicePath } from "@/lib/routes";
-import { faqJsonLd, medicalWebPageJsonLd, pageMetadata, PHYSICIAN_ID, physicianJsonLd, practiceJsonLd, videoJsonLd, websiteJsonLd } from "@/lib/seo";
+import { faqJsonLd, medicalWebPageJsonLd, pageMetadata, PHYSICIAN_ID, physicianJsonLd, practiceJsonLd, videoJsonLd, websiteJsonLd, pageVideosJsonLd } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -38,6 +38,7 @@ export default async function HomePage() {
           practiceJsonLd(clinics),
           faqJsonLd(HOME_FAQS),
           videoJsonLd(videosFor("home", 3)),
+          ...pageVideosJsonLd("home", 3),
         ]}
       />
       <section className="hero">

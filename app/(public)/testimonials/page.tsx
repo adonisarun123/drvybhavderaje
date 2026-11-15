@@ -8,7 +8,7 @@ import { SITE, TESTIMONIALS, VIDEOS } from "@/lib/content";
 import { withTitles } from "@/lib/videos";
 import { linkTargetFor } from "@/lib/links";
 import { ROUTES, servicePath } from "@/lib/routes";
-import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, videoJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, videoJsonLd, videoObjectsJsonLd } from "@/lib/seo";
 
 const TITLE = "Patient Stories & Testimonials — Dr Vybhav Deraje, Bangalore";
 const DESCRIPTION = "Patients and families on their experience with Dr Vybhav Deraje, Bangalore: Craniosynostosis, hand surgery, facial injury, jaw surgery and more. Plus videos.";
@@ -23,6 +23,7 @@ export default function TestimonialsPage() {
           breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Patient Stories", path: ROUTES.testimonials }]),
           medicalWebPageJsonLd({ title: TITLE, description: DESCRIPTION, path: ROUTES.testimonials, type: "CollectionPage" }),
           videoJsonLd(withTitles(VIDEOS)),
+          ...videoObjectsJsonLd(withTitles(VIDEOS)),
         ]}
       />
       <PageHero eyebrow="Our Stories" crumb="Patient Stories" title="Patients speak." lead="In their own words — experiences shared by patients and families, as published on the practice’s website." />

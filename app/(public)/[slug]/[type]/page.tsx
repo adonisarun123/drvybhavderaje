@@ -14,7 +14,7 @@ import { titleCase } from "@/lib/title-case";
 import { autolink, createLinkBudget } from "@/lib/links";
 import { ROUTES, SECTION } from "@/lib/routes";
 import { getSubProcedure, SUB_PROCEDURES, subProcedurePath } from "@/lib/sub-procedures";
-import { breadcrumbJsonLd, costCatalogJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, siteOrigin } from "@/lib/seo";
+import { breadcrumbJsonLd, costCatalogJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, siteOrigin, pageVideosJsonLd } from "@/lib/seo";
 
 /**
  * Child pages under a service page: the craniosynostosis types (/craniosynostosis-surgery-bangalore/<type>, lib/cranio-types.ts)
@@ -85,6 +85,7 @@ export default async function CranioTypePage({ params }: { params: Params }) {
           },
           faqJsonLd(t.faqs),
           ...(costs.length ? [costCatalogJsonLd(costs, { path, name: `${t.shortTitle} surgery — typical costs` })] : []),
+          ...pageVideosJsonLd(cranioVideoKey(t)),
         ]}
       />
       <PageHero

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import { AFFILIATIONS, contentModified, CREDENTIALS, DOCTOR, HOSPITALS, hospitalMapUrl, PRACTICES, SERVICE_PAGES, type ServicePage, SITE } from "./content";
+import { AFFILIATIONS, contentModified, CREDENTIALS, DOCTOR, HOSPITALS, hospitalMapUrl, PRACTICES, SERVICE_PAGES, type Photo, type ServicePage, SITE } from "./content";
 import { DOCTOR_PHOTO, imageUrl } from "./images";
 import { inSchemaHoldout } from "./link-experiment";
 import { openingHoursSpecification, type ClinicHours } from "./hours";
 import { ROUTES } from "./routes";
 import { FX_DATE, priceRangeLabel, toUsd, USD_INR, type CostItem } from "./costs";
+import { videosFor, type VideoPage } from "./videos";
+import VIDEO_META from "./video-meta.json";
 
 export function siteOrigin(): string {
   return (process.env.SITE_ORIGIN ?? "http://localhost:3000").replace(/\/$/, "");
@@ -92,7 +94,7 @@ export function physicianJsonLd(clinics: ClinicLike[]) {
     honorificSuffix: DOCTOR.honorificSuffix,
     jobTitle: "Consultant Craniofacial & Plastic Surgeon",
     url: siteOrigin(),
-    image: DOCTOR_IMAGE(),
+    image: { "@type": "ImageObject", url: DOCTOR_IMAGE(), contentUrl: DOCTOR_IMAGE(), width: 466, height: 588, caption: "Dr Vybhav Deraje, craniofacial and plastic surgeon, Bangalore" },
     telephone: SITE.phoneTel,
     email: SITE.email,
     description: SITE.defaultDescription,
@@ -127,7 +129,7 @@ export function practiceJsonLd(clinics: ClinicLike[]) {
     alternateName: "Aesthetica Veda",
     url: siteOrigin(),
     logo: `${siteOrigin()}/icon.svg`,
-    image: DOCTOR_IMAGE(),
+    image: { "@type": "ImageObject", url: DOCTOR_IMAGE(), contentUrl: DOCTOR_IMAGE(), width: 466, height: 588, caption: "Dr Vybhav Deraje, craniofacial and plastic surgeon, Bangalore" },
     telephone: SITE.phoneTel,
     email: SITE.email,
     founder: { "@id": PHYSICIAN_ID() },
@@ -258,6 +260,48 @@ export function videoJsonLd(videos: { id: string; title?: string }[], name = "Dr
     name,
     itemListElement: videos.map((v, i) => ({ "@type": "ListItem", position: i + 1, url: `https://www.youtube.com/watch?v=${v.id}`, ...(v.title ? { name: v.title } : {}) })),
   };
+}
+
+/**
+ * One VideoObject per embedded YouTube video. Upload date and duration come from YouTube (lib/video-meta.json,
+ * fetched 15 Nov 2026 — add an entry when a video is added to lib/videos.ts). A video with no title or no
+ * metadata is left out rather than published with required fields missing.
+ */
+export function videoObjectsJsonLd(videos: { id: string; title?: string; lang?: string }[]) {
+  const meta = VIDEO_META as Record<string, { uploadDate: string; duration: string; description?: string }>;
+  const seen = new Set<string>();
+  return videos.flatMap((v) => {
+    const m = meta[v.id];
+    if (!m || !v.title || seen.has(v.id)) return [];
+    seen.add(v.id);
+    return [
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        name: v.title,
+        description: m.description ?? `${v.title} — a video from ${DOCTOR.name}, craniofacial and plastic surgeon, Bangalore.`,
+        thumbnailUrl: [`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`],
+        uploadDate: m.uploadDate,
+        duration: m.duration,
+        embedUrl: `https://www.youtube.com/embed/${v.id}`,
+        url: `https://www.youtube.com/watch?v=${v.id}`,
+        inLanguage: v.lang ?? "en",
+      },
+    ];
+  });
+}
+
+/** VideoObjects for the videos a page's "Watch" block shows (same selection as components/site/video-section.tsx). */
+export function pageVideosJsonLd(page: VideoPage, limit = 6) {
+  return videoObjectsJsonLd(videosFor(page, limit));
+}
+
+/** Gallery photos as ImageObjects. Files under /talks/ are served by the site; the rest by ImageKit. */
+export function imageObjectsJsonLd(photos: Photo[]) {
+  return photos.map((p) => {
+    const url = p.src.startsWith("/talks/") ? absolute(p.src) : imageUrl(p.src);
+    return { "@context": "https://schema.org", "@type": "ImageObject", contentUrl: url, url, name: p.caption, caption: p.caption, width: p.width, height: p.height };
+  });
 }
 
 /**

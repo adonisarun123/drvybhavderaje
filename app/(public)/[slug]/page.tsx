@@ -8,14 +8,14 @@ import { Byline, CtaBand, Faq, KeyFacts, PageHero, PhotoGallery, RelatedServices
 import { VideoSection } from "@/components/site/video-section";
 import { AgePath, CompareSection, DayLine, HeroFacts, HeroVideo, InlineToc, SectionVideo, ServiceSide, StepStrip, TypeGrid } from "@/components/site/page-visuals";
 import { PAGE_VISUALS, placedVideoIds, resolveVisuals, sectionAnchor, SHOW_DIAGRAMS, type PageVisuals } from "@/lib/page-visuals";
-import { videosFor } from "@/lib/videos";
+import { videoById, videosFor } from "@/lib/videos";
 import { AllCostsLink, CostTable } from "@/components/site/cost-table";
 import { bothRanges, costsForPath, formatInr, formatUsd, toUsd, type CostItem } from "@/lib/costs";
 import { JsonLd } from "@/components/site/json-ld";
 import { childServices, CLINICS_SEED, COSTS_SECTION_ID, DOCTOR, isPendingReview, HEAD_SHAPE_CLINIC, HEAD_SHAPE_SLUGS, getService, GROUP_HREF, GROUP_LABEL, HOSPITALS, isFeatured, PRACTICES, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
 import { autolink, createLinkBudget, relatedServices, serviceRelatedPaths } from "@/lib/links";
 import { ROUTES, SECTION } from "@/lib/routes";
-import { breadcrumbJsonLd, costCatalogJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, PROCEDURE_ID, CONDITION_ID, serviceEntitiesJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, costCatalogJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, PROCEDURE_ID, CONDITION_ID, serviceEntitiesJsonLd, imageObjectsJsonLd, videoObjectsJsonLd } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -137,6 +137,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           faqJsonLd(page.faqs),
           ...serviceEntitiesJsonLd(page),
           ...(costs.length ? [costCatalogJsonLd(costs, { path: page.path, name: `${page.shortTitle} — typical costs` })] : []),
+          ...videoObjectsJsonLd([...placed.flatMap((id) => videoById(id) ?? []), ...videosFor(page.slug, 6, placed)]),
+          ...(page.gallery ? imageObjectsJsonLd(page.gallery) : []),
         ]}
       />
       <PageHero

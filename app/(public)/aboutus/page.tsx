@@ -11,7 +11,7 @@ import { getPublicClinics } from "@/lib/clinics";
 import { DOCTOR_PHOTO } from "@/lib/images";
 import { autolink, createLinkBudget } from "@/lib/links";
 import { ROUTES } from "@/lib/routes";
-import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, PHYSICIAN_ID, physicianJsonLd, scholarlyArticlesJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, PHYSICIAN_ID, physicianJsonLd, scholarlyArticlesJsonLd, imageObjectsJsonLd, pageVideosJsonLd } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -46,6 +46,8 @@ export default async function AboutPage() {
           medicalWebPageJsonLd({ title: TITLE, description: DESCRIPTION, path: ROUTES.about, type: "AboutPage", speakable: [".page-hero .lead", ".timeline li:first-child p"], mainEntityId: PHYSICIAN_ID() }),
           physicianJsonLd(clinics),
           ...scholarlyArticlesJsonLd(PUBLICATIONS),
+          ...pageVideosJsonLd("about"),
+          ...imageObjectsJsonLd(ABOUT_GALLERY),
         ]}
       />
 

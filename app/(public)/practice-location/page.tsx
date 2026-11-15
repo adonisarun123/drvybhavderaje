@@ -10,7 +10,7 @@ import { CLINICS_SEED, HOSPITALS, hospitalMapUrl } from "@/lib/content";
 import { formatHours } from "@/lib/hours";
 import { formatPhone } from "@/lib/phone";
 import { ROUTES } from "@/lib/routes";
-import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, physicianJsonLd, practiceJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, physicianJsonLd, practiceJsonLd, pageVideosJsonLd } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -29,6 +29,7 @@ export default async function LocationsPage() {
           medicalWebPageJsonLd({ title: TITLE, description: DESCRIPTION, path: ROUTES.locations, type: "WebPage" }),
           physicianJsonLd(clinics),
           practiceJsonLd(clinics),
+          ...pageVideosJsonLd("locations"),
         ]}
       />
       <PageHero eyebrow="Practice Locations" crumb="Practice Locations" title="Clinics and hospitals in Bangalore." lead="Consultations at Aesthetica Veda clinics and The Head Shape Clinic; surgeries at partner hospitals across the city. Please confirm availability with the clinic before you travel." />

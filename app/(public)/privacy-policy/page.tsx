@@ -3,7 +3,7 @@ import { Byline, HelpSideCard, PageHero } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { SITE } from "@/lib/content";
 import { ROUTES } from "@/lib/routes";
-import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, pageMetadata, medicalWebPageJsonLd } from "@/lib/seo";
 
 const TITLE = "Privacy Policy";
 const DESCRIPTION = "How drvybhavderaje.com collects and uses personal data: enquiry form details, usage data, cookies, analytics, where data is stored (India and Singapore), international transfers, children’s privacy and contact.";
@@ -13,7 +13,7 @@ export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESC
 export default function PrivacyPage() {
   return (
     <>
-      <JsonLd data={breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Privacy Policy", path: ROUTES.privacy }])} />
+      <JsonLd data={[breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Privacy Policy", path: ROUTES.privacy }]), medicalWebPageJsonLd({ title: TITLE, description: DESCRIPTION, path: ROUTES.privacy, type: "WebPage" })]} />
       <PageHero eyebrow="Website Privacy" crumb="Privacy Policy" title="Privacy policy." lead="How this website handles the information you share with the practice." />
       <section className="section container content-grid">
         <article className="prose">

@@ -5,7 +5,7 @@ import { JsonLd } from "@/components/site/json-ld";
 import { HOME_FAQS, RESOURCES } from "@/lib/content";
 import { autolink, createLinkBudget } from "@/lib/links";
 import { ROUTES } from "@/lib/routes";
-import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, pageVideosJsonLd } from "@/lib/seo";
 
 const TITLE = "Patient Resources — Preparing for Your Consultation";
 const DESCRIPTION = "Before you see Dr Vybhav Deraje in Bangalore: what to bring, travelling from another city, questions worth asking and a guide to every procedure.";
@@ -21,6 +21,7 @@ export default function PatientResourcesPage() {
           breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Patient Resources", path: ROUTES.resources }]),
           medicalWebPageJsonLd({ title: TITLE, description: DESCRIPTION, path: ROUTES.resources }),
           faqJsonLd(HOME_FAQS),
+          ...pageVideosJsonLd("resources"),
         ]}
       />
       <PageHero eyebrow="Patient Resources" crumb="Patient Resources" title="A little preparation. A clearer conversation." lead="Practical information to help you feel ready for your first consultation." />
