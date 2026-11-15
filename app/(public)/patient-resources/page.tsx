@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Metadata } from "next";
 import { VideoSection } from "@/components/site/video-section";
 import { Byline, CtaBand, Faq, HelpSideCard, PageHero, ServiceIndex } from "@/components/site/blocks";
@@ -36,6 +37,9 @@ export default function PatientResourcesPage() {
               </div>
             ))}
           </div>
+          <p className="callout">
+            Costs: every procedure with a published figure is listed on the <Link href={ROUTES.costs}>Treatment Costs</Link> page, in Indian rupees with approximate US dollars.
+          </p>
           <ServiceIndex heading="Procedure Guides" intro={<p>Every condition and procedure Dr Vybhav Deraje treats has its own page: who it suits, how it is done, recovery, limitations and the questions patients ask most.</p>} />
           <VideoSection page="resources" heading="Before and After Surgery" />
           <h2 style={{ marginTop: 40 }}>Frequently Asked Questions</h2>

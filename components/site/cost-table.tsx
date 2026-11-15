@@ -3,8 +3,14 @@ import { ArrowRight } from "lucide-react";
 import { inrRange, usdRange, type CostItem } from "@/lib/costs";
 import { ROUTES } from "@/lib/routes";
 
-/** Published costs (lib/costs.ts) as a table: INR, the billing currency, with an approximate USD column. */
-export function CostTable({ items, currentPath, caption }: { items: CostItem[]; currentPath?: string; caption?: string }) {
+const strip = (s: string) => s.replace(/ \+ GST$/, "");
+
+/**
+ * Published costs (lib/costs.ts) as a table: INR, the billing currency, with an approximate USD column.
+ * On phones each row becomes a small card (labels come from data-label). Pass `searchTerms` to make rows
+ * filterable by the cost finder on /treatment-costs.
+ */
+export function CostTable({ items, currentPath, caption, searchTerms }: { items: CostItem[]; currentPath?: string; caption?: string; searchTerms?: (c: CostItem) => string }) {
   return (
     <div className="cost-table-wrap">
       <table className="cost-table">
@@ -20,10 +26,13 @@ export function CostTable({ items, currentPath, caption }: { items: CostItem[]; 
           {items.map((c) => {
             const href = c.paths[0];
             return (
-              <tr key={c.name}>
-                <th scope="row">{href && href !== currentPath ? <Link href={href}>{c.name}</Link> : c.name}</th>
-                <td>{inrRange(c)}</td>
-                <td>{usdRange(c)}</td>
+              <tr key={c.name} data-cost-row={searchTerms ? "" : undefined} data-search={searchTerms ? searchTerms(c).toLowerCase() : undefined}>
+                <th scope="row">
+                  {href && href !== currentPath ? <Link href={href}>{c.name}</Link> : c.name}
+                  {c.gst && <span className="cost-badge">+ GST</span>}
+                </th>
+                <td data-label="INR">{strip(inrRange(c))}</td>
+                <td data-label="USD (approx.)">{strip(usdRange(c))}</td>
               </tr>
             );
           })}

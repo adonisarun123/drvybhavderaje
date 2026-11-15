@@ -1082,6 +1082,7 @@ export const NAV: NavItem[] = [
   { href: SECTION.craniofacial, allHref: `${ROUTES.procedures}#craniofacial`, label: GROUP_LABEL.craniofacial, children: CRANIOFACIAL_SERVICES.map((s) => ({ href: s.path, label: s.shortTitle })) },
   { href: SECTION.cosmetic, allHref: `${ROUTES.procedures}#cosmetic`, label: GROUP_LABEL.cosmetic, children: COSMETIC_SERVICES.map((s) => ({ href: s.path, label: s.shortTitle })) },
   { href: ROUTES.locations, label: "Locations" },
+  { href: ROUTES.costs, label: "Costs" },
   { href: ROUTES.testimonials, label: "Patient Stories" },
 ];
 

@@ -920,3 +920,42 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
   .compare-table th, .compare-table td { padding: 9px 8px; }
   .compare-table tbody th { font-size: 13px; }
 }
+
+/* Treatment Costs page (app/(public)/treatment-costs) and cost tables everywhere */
+.cost-badge { display: inline-block; margin-left: 8px; padding: 1px 7px; border-radius: 999px; background: #fff4e5; color: #8a4b00; border: 1px solid #f1d3a8; font-size: 12px; font-weight: 600; letter-spacing: 0; vertical-align: 2px; white-space: nowrap; }
+.cost-table tbody tr:hover { background: #f7fafd; }
+.cost-table td:nth-child(2) { font-weight: 600; color: var(--navy); }
+.cost-table td:nth-child(3) { color: var(--muted); }
+.cost-finder { background: #fff; border: 1px solid #dbe6f1; border-radius: 10px; padding: 24px; box-shadow: 0 10px 30px rgba(8, 41, 74, 0.06); }
+.cost-finder-label { display: block; font-weight: 600; font-size: 17px; color: var(--navy); margin-bottom: 12px; }
+.cost-finder-input { display: flex; align-items: center; gap: 10px; border: 1px solid var(--input-border); border-radius: 6px; padding: 0 12px; background: #fff; color: var(--muted); }
+.cost-finder-input:focus-within { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(7, 89, 199, 0.15); }
+.cost-finder-input input { flex: 1; border: 0; outline: 0; min-height: 48px; font-size: 16px; color: var(--navy); background: transparent; min-width: 0; }
+.cost-finder-input button { border: 0; background: none; color: var(--muted); padding: 6px; display: grid; place-items: center; }
+.cost-finder-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.cost-finder-chips button { border: 1px solid var(--line); background: var(--pale); color: var(--navy); border-radius: 999px; padding: 6px 12px; font-size: 14px; }
+.cost-finder-chips button:hover, .cost-finder-chips button[aria-pressed="true"] { border-color: var(--blue); color: var(--blue); background: #fff; }
+.cost-finder-status { min-height: 22px; margin-top: 12px; font-size: 14px; }
+.cost-page .cost-category { border: 1px solid var(--line); border-radius: 10px; padding: 26px 28px 20px; margin-top: 28px; }
+.cost-page .cost-category[hidden] { display: none; }
+.cost-category-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.cost-category-head h2 { margin: 0 !important; }
+.cost-count { flex-shrink: 0; font-size: 13px; color: var(--muted); background: var(--pale); border-radius: 999px; padding: 3px 10px; }
+.cost-category > p { margin-top: 10px; }
+.cost-excluded { font-size: 14px !important; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.cost-chip { display: inline-block; padding: 3px 10px; border-radius: 999px; background: var(--pale); color: var(--navy); font-size: 13px; }
+.cost-read-more { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; font-size: 15px !important; }
+.cost-read-more span { color: var(--muted); }
+.cost-read-more a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.cost-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 16px; }
+.cost-actions .button { color: #fff; text-decoration: none; }
+@media (max-width: 640px) {
+  .cost-page .cost-category { padding: 20px 16px 14px; }
+  .cost-table thead { display: none; }
+  .cost-table, .cost-table tbody, .cost-table tr, .cost-table th, .cost-table td { display: block; width: 100%; }
+  .cost-table tr { padding: 12px 0; border-bottom: 1px solid #e3e8ef; }
+  .cost-table th, .cost-table td { border: 0; padding: 2px 0; white-space: normal; }
+  .cost-table tbody th { font-size: 15px; margin-bottom: 4px; }
+  .cost-table td { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; }
+  .cost-table td::before { content: attr(data-label); color: var(--muted); font-weight: 400; font-size: 13px; }
+}
