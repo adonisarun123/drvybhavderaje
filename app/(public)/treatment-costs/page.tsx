@@ -140,6 +140,9 @@ export default function TreatmentCostsPage() {
               {CATEGORY[c].tab}
             </a>
           ))}
+          <button type="button" className="cost-clear" data-cost-clear="" hidden>
+            Show All
+          </button>
         </nav>
         <PriceList
           searchTerms={searchTerms}

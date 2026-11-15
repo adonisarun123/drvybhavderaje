@@ -948,6 +948,7 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
 .cost-tabs { scroll-margin-top: -100px; position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 8px; height: 56px; overflow-x: auto; background: #fff; scrollbar-width: none; }
 .cost-tabs::-webkit-scrollbar { display: none; }
 .cost-tabs a { flex-shrink: 0; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--navy); font-size: 14px; white-space: nowrap; }
+.cost-clear { flex-shrink: 0; margin-left: auto; padding: 6px 4px; border: 0; background: none; color: var(--blue); font-size: 14px; font-weight: 600; white-space: nowrap; text-decoration: underline; text-underline-offset: 3px; }
 .cost-tabs a:hover { border-color: var(--blue); color: var(--blue); background: var(--pale); }
 .price-list { width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0; border: 1px solid var(--line); border-top: 0; font-size: 15px; }
 .price-list caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
@@ -993,6 +994,7 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
   .price-inr, .price-usd { white-space: normal; }
 }
 @media (max-width: 780px) {
+  .cost-clear { order: -1; margin-left: 0; }
   .price-list, .price-list tbody, .price-list tr, .price-list tbody th, .price-list tbody td { display: block; width: auto; }
   .price-list thead, .price-list colgroup { display: none; }
   .price-list tr[data-cost-row] { padding: 12px 14px; border-bottom: 1px solid #e6ecf2; }

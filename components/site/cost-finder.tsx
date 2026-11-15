@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Search, X } from "lucide-react";
 
 /**
@@ -24,8 +24,24 @@ export function CostFinder({ suggestions }: { suggestions: string[] }) {
       section.hidden = !!term && !section.querySelector("[data-cost-row]:not([hidden])");
     });
     setShown(term ? count : null);
+    // "Show All" beside the category tabs (rendered by the page), so a filter can be cleared from the table itself.
+    const clear = document.querySelector<HTMLElement>("[data-cost-clear]");
+    if (clear) {
+      clear.hidden = !term || count === 0;
+      clear.textContent = `Showing ${count} of ${document.querySelectorAll("[data-cost-row]").length} · Show All`;
+    }
     return term ? count : 0;
   }
+  const applyRef = useRef(apply);
+  useEffect(() => {
+    applyRef.current = apply;
+  });
+  useEffect(() => {
+    const clear = document.querySelector<HTMLElement>("[data-cost-clear]");
+    const reset = () => applyRef.current("");
+    clear?.addEventListener("click", reset);
+    return () => clear?.removeEventListener("click", reset);
+  }, []);
 
   /** Chips and Enter jump to the table, which sits below the hero; typing alone does not move the page. */
   function showResults(value: string) {
