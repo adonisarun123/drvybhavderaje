@@ -24,6 +24,12 @@ export function CostFinder({ suggestions }: { suggestions: string[] }) {
       section.hidden = !!term && !section.querySelector("[data-cost-row]:not([hidden])");
     });
     setShown(term ? count : null);
+    return term ? count : 0;
+  }
+
+  /** Chips and Enter jump to the table, which sits below the hero; typing alone does not move the page. */
+  function showResults(value: string) {
+    if (apply(value) > 0) document.querySelector(".cost-tabs")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   return (
@@ -33,7 +39,7 @@ export function CostFinder({ suggestions }: { suggestions: string[] }) {
       </label>
       <div className="cost-finder-input">
         <Search size={18} aria-hidden="true" />
-        <input id="cost-search" type="search" placeholder="e.g. Craniosynostosis, Cleft Palate, Rhinoplasty" value={q} onChange={(e) => apply(e.target.value)} autoComplete="off" />
+        <input id="cost-search" type="search" placeholder="e.g. Craniosynostosis, Cleft Palate, Rhinoplasty" value={q} onChange={(e) => apply(e.target.value)} onKeyDown={(e) => e.key === "Enter" && showResults(q)} autoComplete="off" />
         {q && (
           <button type="button" onClick={() => apply("")} aria-label="Clear search">
             <X size={16} aria-hidden="true" />
@@ -42,7 +48,7 @@ export function CostFinder({ suggestions }: { suggestions: string[] }) {
       </div>
       <div className="cost-finder-chips" aria-label="Popular searches">
         {suggestions.map((s) => (
-          <button type="button" key={s} onClick={() => apply(s)} aria-pressed={q === s}>
+          <button type="button" key={s} onClick={() => showResults(s)} aria-pressed={q === s}>
             {s}
           </button>
         ))}

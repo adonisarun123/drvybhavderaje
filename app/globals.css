@@ -945,7 +945,7 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
 .cost-legend dt { font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--blue); margin-bottom: 5px; }
 .cost-legend dd { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--navy); }
 .cost-legend .cost-badge { margin-left: 2px; }
-.cost-tabs { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 8px; height: 56px; overflow-x: auto; background: #fff; scrollbar-width: none; }
+.cost-tabs { scroll-margin-top: -100px; position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: 8px; height: 56px; overflow-x: auto; background: #fff; scrollbar-width: none; }
 .cost-tabs::-webkit-scrollbar { display: none; }
 .cost-tabs a { flex-shrink: 0; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: #fff; color: var(--navy); font-size: 14px; white-space: nowrap; }
 .cost-tabs a:hover { border-color: var(--blue); color: var(--blue); background: var(--pale); }
