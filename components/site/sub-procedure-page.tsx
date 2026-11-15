@@ -2,11 +2,13 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Byline, CtaBand, Faq, HelpSideCard, KeyFacts, PageHero } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
+import { AllCostsLink, CostTable } from "@/components/site/cost-table";
+import { costsForPath } from "@/lib/costs";
 import { DOCTOR, getService, GROUP_HREF, GROUP_LABEL, isFeatured, SITE } from "@/lib/content";
 import { autolink, createLinkBudget } from "@/lib/links";
 import { ROUTES, SECTION } from "@/lib/routes";
 import { capFirst } from "@/lib/title-case";
-import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, PHYSICIAN_ID, siteOrigin } from "@/lib/seo";
+import { breadcrumbJsonLd, costCatalogJsonLd, faqJsonLd, medicalWebPageJsonLd, PHYSICIAN_ID, siteOrigin } from "@/lib/seo";
 import { subProcedurePath, subProceduresOf, type SubProcedure } from "@/lib/sub-procedures";
 
 /** Procedure page nested under its parent service: /<parent>/<procedure> (see lib/sub-procedures.ts). */
@@ -24,6 +26,7 @@ export function SubProcedureView({ p }: { p: SubProcedure }) {
   const sections = p.sections.map((s) => ({ heading: s.heading, body: s.body?.map((b) => autolink(b, budget)), bullets: s.bullets }));
   const faqs = p.faqs.map((f) => ({ q: f.q, a: autolink(f.a, budget) }));
   const procedureId = `${siteOrigin()}${path}#procedure`;
+  const costs = costsForPath(path);
 
   return (
     <>
@@ -55,6 +58,7 @@ export function SubProcedureView({ p }: { p: SubProcedure }) {
             performer: { "@id": PHYSICIAN_ID() },
           },
           faqJsonLd(p.faqs),
+          ...(costs.length ? [costCatalogJsonLd(costs, { path, name: `${p.shortTitle} — typical costs` })] : []),
         ]}
       />
       <PageHero
@@ -83,8 +87,9 @@ export function SubProcedureView({ p }: { p: SubProcedure }) {
           </KeyFacts>
 
           {sections.map((s, i) => (
-            <section key={s.heading}>
+            <section key={s.heading} id={s.heading === "Costs and Estimates" ? "costs" : undefined}>
               <h2>{s.heading}</h2>
+              {s.heading === "Costs and Estimates" && costs.length > 0 && <CostTable items={costs} currentPath={path} />}
               {s.body?.map((b, j) => (
                 <p key={j} className={i === 0 && j === 0 ? "intro" : undefined}>
                   {b}
@@ -97,6 +102,7 @@ export function SubProcedureView({ p }: { p: SubProcedure }) {
                   ))}
                 </ul>
               )}
+              {s.heading === "Costs and Estimates" && <AllCostsLink />}
             </section>
           ))}
 

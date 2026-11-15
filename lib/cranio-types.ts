@@ -10,6 +10,7 @@
  * URLs: /craniosynostosis-surgery-bangalore/<type> — nested under the parent so the hierarchy is in the address.
  */
 import { servicePath } from "./routes";
+import { costFaqAnswer, costSentences, costsForPath } from "./costs";
 
 export const CRANIO_PARENT = "craniosynostosis-surgery-bangalore" as const;
 const PDF = "/images/pdf/Craniosynthosis";
@@ -108,7 +109,7 @@ function commonFaqs(typeName: string, openName: string) {
 
 /* ---- The six types ------------------------------------------------------------------------------- */
 
-export const CRANIO_TYPES: CranioType[] = [
+const TYPE_PAGES: CranioType[] = [
   {
     slug: "sagittal-synostosis",
     shortTitle: "Sagittal Synostosis",
@@ -274,6 +275,19 @@ export const CRANIO_TYPES: CranioType[] = [
     sheet: `${PDF}/Patient-information-sheet-Multi-suture-craniosynostosis.pdf`,
   },
 ];
+
+/** Adds the doctor's published costs for the operations each type needs (lib/costs.ts): a section and a FAQ. */
+function withCosts(t: CranioType): CranioType {
+  const items = costsForPath(cranioTypePath(t.slug));
+  if (!items.length) return t;
+  return {
+    ...t,
+    sections: [...t.sections, { heading: "Costs and Estimates", body: costSentences(items) }],
+    faqs: [...t.faqs, { q: `How much does surgery for ${t.shortTitle} cost?`, a: costFaqAnswer(items) }],
+  };
+}
+
+export const CRANIO_TYPES: CranioType[] = TYPE_PAGES.map(withCosts);
 
 export function getCranioType(slug: string): CranioType | undefined {
   return CRANIO_TYPES.find((t) => t.slug === slug);

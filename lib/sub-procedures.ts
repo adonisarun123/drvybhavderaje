@@ -9,6 +9,7 @@
  * The doctor read and signed off all 15 pages on 23 Oct 2026 (docs/CONTENT-APPROVAL.md).
  */
 import { servicePath, type ServiceSlug } from "./routes";
+import { bothRanges, costFaqAnswer, costSentences, costsForPath } from "./costs";
 
 const PDF = "/images/pdf";
 
@@ -48,7 +49,7 @@ const FACE: ServiceSlug = "face-plastic-surgery-bangalore";
 const BREAST: ServiceSlug = "breast-plastic-surgeon-bangalore";
 const BODY: ServiceSlug = "body-plastic-surgeon-bangalore";
 
-export const SUB_PROCEDURES: SubProcedure[] = [
+const SHEET_PAGES: SubProcedure[] = [
   /* ---- Cleft Lip and Palate ---------------------------------------------------------------------------- */
   {
     slug: "cleft-lip-repair",
@@ -697,6 +698,21 @@ export const SUB_PROCEDURES: SubProcedure[] = [
 export function subProcedurePath(p: Pick<SubProcedure, "parent" | "slug">): string {
   return `${servicePath(p.parent)}/${p.slug}`;
 }
+
+/** Adds the doctor's published cost (lib/costs.ts): an "At a Glance" row, a cost section and a cost FAQ. */
+function withCosts(p: SubProcedure): SubProcedure {
+  const items = costsForPath(subProcedurePath(p));
+  if (!items.length) return p;
+  const answer = costFaqAnswer(items);
+  return {
+    ...p,
+    facts: [...p.facts, { label: "Typical Cost", value: items.map(bothRanges).join("; ") }],
+    sections: [...p.sections, { heading: "Costs and Estimates", body: costSentences(items) }],
+    faqs: [...p.faqs.filter((f) => !/\bcost\b/i.test(f.q)), { q: `How much does ${p.shortTitle} cost in Bangalore?`, a: answer }],
+  };
+}
+
+export const SUB_PROCEDURES: SubProcedure[] = SHEET_PAGES.map(withCosts);
 
 export function getSubProcedure(parent: string, slug: string): SubProcedure | undefined {
   return SUB_PROCEDURES.find((p) => p.parent === parent && p.slug === slug);

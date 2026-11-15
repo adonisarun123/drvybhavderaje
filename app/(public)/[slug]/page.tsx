@@ -6,11 +6,13 @@ import type { ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { Byline, CtaBand, Faq, HelpSideCard, KeyFacts, PageHero, PhotoGallery, RelatedServices } from "@/components/site/blocks";
 import { VideoSection } from "@/components/site/video-section";
+import { AllCostsLink, CostTable } from "@/components/site/cost-table";
+import { bothRanges, costsForPath, formatInr, formatUsd, toUsd, type CostItem } from "@/lib/costs";
 import { JsonLd } from "@/components/site/json-ld";
-import { childServices, CLINICS_SEED, DOCTOR, isPendingReview, HEAD_SHAPE_CLINIC, HEAD_SHAPE_SLUGS, getService, GROUP_HREF, GROUP_LABEL, HOSPITALS, isFeatured, PRACTICES, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
+import { childServices, CLINICS_SEED, COSTS_SECTION_ID, DOCTOR, isPendingReview, HEAD_SHAPE_CLINIC, HEAD_SHAPE_SLUGS, getService, GROUP_HREF, GROUP_LABEL, HOSPITALS, isFeatured, PRACTICES, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
 import { autolink, createLinkBudget, relatedServices, serviceRelatedPaths } from "@/lib/links";
 import { ROUTES, SECTION } from "@/lib/routes";
-import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, PROCEDURE_ID, CONDITION_ID, serviceEntitiesJsonLd } from "@/lib/seo";
+import { breadcrumbJsonLd, costCatalogJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, PROCEDURE_ID, CONDITION_ID, serviceEntitiesJsonLd } from "@/lib/seo";
 
 export const dynamicParams = false;
 
@@ -35,11 +37,14 @@ interface LinkedSection {
   note?: ReactNode;
 }
 
-function Section({ s }: { s: LinkedSection }) {
+function Section({ s, costs, path }: { s: LinkedSection; costs?: CostItem[]; path?: string }) {
+  const showCosts = s.id === COSTS_SECTION_ID && costs && costs.length > 0;
   return (
     <section id={s.id}>
       <h2>{s.heading}</h2>
+      {showCosts && <CostTable items={costs} currentPath={path} />}
       {s.body?.map((p, i) => <p key={i}>{p}</p>)}
+      {showCosts && <AllCostsLink />}
       {s.bullets && (
         <ul>
           {s.bullets.map((b, i) => (
@@ -91,6 +96,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     note: s.note ? autolink(s.note, budget) : undefined,
   }));
   const faqs = page.faqs.map((f) => ({ q: f.q, a: autolink(f.a, budget) }));
+  const costs = costsForPath(page.path);
+  // The page's own procedure (first listed for this page) leads; hub pages show the lowest figure instead.
+  const isHub = page.slug === "face-plastic-surgery-bangalore" || page.slug === "breast-plastic-surgeon-bangalore" || page.slug === "body-plastic-surgeon-bangalore";
+  const primary = isHub ? undefined : costs.find((c) => c.paths[0] === page.path);
+  const lowest = costs.length ? Math.min(...costs.filter((c) => !c.per).map((c) => c.inrFrom)) : 0;
 
   return (
     <>
@@ -112,6 +122,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           }),
           faqJsonLd(page.faqs),
           ...serviceEntitiesJsonLd(page),
+          ...(costs.length ? [costCatalogJsonLd(costs, { path: page.path, name: `${page.shortTitle} — typical costs` })] : []),
         ]}
       />
       <PageHero
@@ -164,6 +175,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 )}
                 {headShape ? " — founded by Dr Vybhav Deraje." : page.group === "craniofacial" ? " — both founded by Dr Vybhav Deraje." : " — Dr Vybhav Deraje's cosmetic clinics in Bangalore."}
               </li>
+              {costs.length > 0 && (
+                <li>
+                  <b>Typical Cost:</b> {primary ? `${primary.name}, ${bothRanges(primary)}` : `From ${formatInr(lowest)} (about ${formatUsd(toUsd(lowest))})`} for an uncomplicated case — <a href={`#${COSTS_SECTION_ID}`}>all costs</a>.
+                </li>
+              )}
               <li>
                 <b>Patients from Outside Bangalore:</b> <Link href={ROUTES.contact}>Video consultations</Link> for an initial opinion; surgery needs an in-person assessment.
               </li>
@@ -191,7 +207,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </section>
           )}
           {sections.map((s) => (
-            <Section key={s.heading} s={s} />
+            <Section key={s.heading} s={s} costs={costs} path={page.path} />
           ))}
           <VideoSection page={page.slug} />
           {page.gallery && (

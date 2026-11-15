@@ -13,6 +13,7 @@
 import { FEATURED_COSMETIC, FEATURED_CRANIOFACIAL, OTHER_SERVICES_ORDER, ROUTES, SECTION, servicePath, type ServiceSlug } from "./routes";
 import { formatHours } from "./hours";
 import { PROCEDURE_PAGES } from "./procedures";
+import { COST_PATHS, COSTS_UPDATED, costFaqAnswer, costSentences, costsForPath, formatInr, formatUsd, toUsd } from "./costs";
 import { subProcedureForSheet, subProcedurePath } from "./sub-procedures";
 import { COMPLICATIONS as CRANIO_COMPLICATIONS, DIAGNOSIS_SINGLE, KEYHOLE, KEYHOLE_AFTER, openSurgery } from "./cranio-types";
 
@@ -79,6 +80,8 @@ const CONTENT_MODIFIED = {
 };
 
 export function contentModified(path: string, isServicePage = false): string {
+  // Pages showing the doctor's published costs changed when the figures went live (lib/costs.ts).
+  if (COST_PATHS.has(path) || path === ROUTES.costs) return COSTS_UPDATED;
   return CONTENT_MODIFIED.paths[path] ?? (isServicePage ? CONTENT_MODIFIED.servicePages : CONTENT_MODIFIED.siteWide);
 }
 
@@ -1003,7 +1006,37 @@ const LEGACY_SERVICE_PAGES: ServicePage[] = [
 ];
 
 /** Sections still awaiting the doctor's sign-off are dropped here, so no page, schema, sitemap or llms.txt consumer can render them. */
-export const SERVICE_PAGES: ServicePage[] = [...LEGACY_SERVICE_PAGES, ...PROCEDURE_PAGES].map((p) => (SHOW_DRAFT_SECTIONS ? p : { ...p, sections: p.sections.filter((s) => !s.pendingReview) }));
+/** Section id of the published-costs section; the page template renders it as a table (lib/costs.ts). */
+export const COSTS_SECTION_ID = "costs";
+const isCostQuestion = (q: string) => /\bcost\b/i.test(q);
+/** Cost questions worded the way people search, where "How much does <shortTitle> cost" reads badly. */
+const COST_QUESTION: Partial<Record<ServiceSlug, string>> = {
+  "craniosynostosis-surgery-bangalore": "How much does Craniosynostosis Surgery cost in India?",
+  "cleft-lip-and-palate-treatment-bangalore": "How much does Cleft Lip and Palate treatment cost in Bangalore?",
+  "face-plastic-surgery-bangalore": "How much does Facial Plastic Surgery cost in Bangalore?",
+  "breast-plastic-surgeon-bangalore": "How much does Breast Surgery cost in Bangalore?",
+  "body-plastic-surgeon-bangalore": "How much does Body Contouring Surgery cost in Bangalore?",
+};
+
+/**
+ * Puts the doctor's published costs (lib/costs.ts) on every page that has figures: the "Costs and
+ * Estimates" section is replaced (or added), and the page's cost question answers with the figures.
+ */
+function withCosts(p: ServicePage): ServicePage {
+  const items = costsForPath(p.path);
+  if (!items.length) return p;
+  const existing = p.sections.find((s) => s.heading === "Costs and Estimates");
+  const extra = existing?.body?.slice(1) ?? [];
+  const section: ServiceSection = { heading: "Costs and Estimates", id: COSTS_SECTION_ID, body: [...costSentences(items), ...extra] };
+  const sections = existing ? p.sections.map((s) => (s === existing ? section : s)) : [...p.sections, section];
+  const answer = costFaqAnswer(items);
+  const hasCostFaq = p.faqs.some((f) => isCostQuestion(f.q));
+  const q = (fallback: string) => COST_QUESTION[p.slug] ?? fallback;
+  const faqs = hasCostFaq ? p.faqs.map((f) => (isCostQuestion(f.q) ? { q: q(f.q), a: answer } : f)) : [...p.faqs, { q: q(`How much does ${p.shortTitle} cost in Bangalore?`), a: answer }];
+  return { ...p, sections, faqs };
+}
+
+export const SERVICE_PAGES: ServicePage[] = [...LEGACY_SERVICE_PAGES, ...PROCEDURE_PAGES].map((p) => withCosts(SHOW_DRAFT_SECTIONS ? p : { ...p, sections: p.sections.filter((s) => !s.pendingReview) }));
 
 /**
  * Pages whose clinical copy the doctor has not yet confirmed. They stay visible on the site and in
@@ -1092,6 +1125,10 @@ export const HOME_FAQS = [
     a: `${CLINICS_SEED.filter((c) => CLINIC_HOURS_SEED[c.slug]?.length)
       .map((c) => `${c.name}: ${CLINIC_HOURS_SEED[c.slug]!.map(formatHours).join("; ")}`)
       .join(". ")}. Timings are in Indian Standard Time and can change around surgery and travel, so please book or call the clinic before you visit.`,
+  },
+  {
+    q: "How much does treatment cost, and can I see prices in US dollars?",
+    a: `Every procedure page shows Dr Vybhav Deraje's typical cost for an uncomplicated case in Indian rupees, with an approximate US dollar figure, and all of them are listed together on the Treatment Costs page. A consultation, in clinic or by video from India or abroad, is ${formatInr(1200)} (about ${formatUsd(toUsd(1200))}). Bills are raised in Indian rupees, and your individual estimate is confirmed after assessment.`,
   },
   { q: "Do you see patients from outside India, and are video consultations available?", a: "Yes. Dr Deraje treats patients who travel to Bangalore from abroad and offers video consultations for an initial opinion or for follow-up after surgery. Use the enquiry form, choose “Video consultation”, and select the country of your phone number; the clinic will reply by email or phone to arrange a time. Surgery itself always requires an in-person assessment in Bangalore." },
   { q: "How do I book an appointment with Dr Vybhav Deraje?", a: "Call +91 95355 81616, email connect@drvybhavderaje.com or use the enquiry form on this website. The clinic confirms the location, date and time." },

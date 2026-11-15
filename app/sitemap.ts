@@ -28,6 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...CRANIO_TYPES.map((t) => entry(cranioTypePath(t.slug), 0.7, "monthly")),
     ...SUB_PROCEDURES.map((p) => entry(subProcedurePath(p), 0.7, "monthly")),
     entry(ROUTES.procedures, 0.9, "monthly"),
+    entry(ROUTES.costs, 0.8, "monthly"),
     entry(ROUTES.locations, 0.8, "monthly"),
     entry(ROUTES.contact, 0.9, "monthly"),
     entry(ROUTES.testimonials, 0.6, "monthly"),

@@ -6,13 +6,15 @@ import { Byline, CtaBand, Faq, HelpSideCard, KeyFacts, PageHero } from "@/compon
 import { JsonLd } from "@/components/site/json-ld";
 import { SubProcedureView } from "@/components/site/sub-procedure-page";
 import { VideoSection } from "@/components/site/video-section";
+import { AllCostsLink, CostTable } from "@/components/site/cost-table";
+import { costsForPath } from "@/lib/costs";
 import { CRANIO_PARENT, CRANIO_TYPES, cranioTypePath, cranioVideoKey, getCranioType } from "@/lib/cranio-types";
 import { DOCTOR, getService, HEAD_SHAPE_CLINIC, SITE } from "@/lib/content";
 import { titleCase } from "@/lib/title-case";
 import { autolink, createLinkBudget } from "@/lib/links";
 import { ROUTES, SECTION } from "@/lib/routes";
 import { getSubProcedure, SUB_PROCEDURES, subProcedurePath } from "@/lib/sub-procedures";
-import { breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, siteOrigin } from "@/lib/seo";
+import { breadcrumbJsonLd, costCatalogJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, siteOrigin } from "@/lib/seo";
 
 /**
  * Child pages under a service page: the craniosynostosis types (/craniosynostosis-surgery-bangalore/<type>, lib/cranio-types.ts)
@@ -54,6 +56,7 @@ export default async function CranioTypePage({ params }: { params: Params }) {
   const sections = t.sections.map((s) => ({ heading: s.heading, body: s.body?.map((p) => autolink(p, budget)), bullets: s.bullets }));
   const faqs = t.faqs.map((f) => ({ q: f.q, a: autolink(f.a, budget) }));
   const conditionId = `${siteOrigin()}${path}#condition`;
+  const costs = costsForPath(path);
 
   return (
     <>
@@ -81,6 +84,7 @@ export default async function CranioTypePage({ params }: { params: Params }) {
                 ],
           },
           faqJsonLd(t.faqs),
+          ...(costs.length ? [costCatalogJsonLd(costs, { path, name: `${t.shortTitle} surgery — typical costs` })] : []),
         ]}
       />
       <PageHero
@@ -138,8 +142,9 @@ export default async function CranioTypePage({ params }: { params: Params }) {
             ))}
           </section>
           {sections.map((s) => (
-            <section key={s.heading}>
+            <section key={s.heading} id={s.heading === "Costs and Estimates" ? "costs" : undefined}>
               <h2>{s.heading}</h2>
+              {s.heading === "Costs and Estimates" && costs.length > 0 && <CostTable items={costs} currentPath={path} />}
               {s.body?.map((p, i) => <p key={i}>{p}</p>)}
               {s.bullets && (
                 <ul>
@@ -148,6 +153,7 @@ export default async function CranioTypePage({ params }: { params: Params }) {
                   ))}
                 </ul>
               )}
+              {s.heading === "Costs and Estimates" && <AllCostsLink />}
             </section>
           ))}
 

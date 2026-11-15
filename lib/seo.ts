@@ -4,6 +4,7 @@ import { DOCTOR_PHOTO, imageUrl } from "./images";
 import { inSchemaHoldout } from "./link-experiment";
 import { openingHoursSpecification, type ClinicHours } from "./hours";
 import { ROUTES } from "./routes";
+import { FX_DATE, priceRangeLabel, toUsd, USD_INR, type CostItem } from "./costs";
 
 export function siteOrigin(): string {
   return (process.env.SITE_ORIGIN ?? "http://localhost:3000").replace(/\/$/, "");
@@ -31,6 +32,10 @@ export const PHYSICIAN_ID = () => `${siteOrigin()}/#physician`;
 export const WEBSITE_ID = () => `${siteOrigin()}/#website`;
 export const ORG_ID = () => `${siteOrigin()}/#practice`;
 export const DOCTOR_IMAGE = () => imageUrl(DOCTOR_PHOTO);
+/** The full published price list (OfferCatalog on the Treatment Costs page). */
+export const COST_CATALOG_ID = () => `${siteOrigin()}${ROUTES.costs}#catalog`;
+/** Patients come from India and abroad (video consultations; surgery in Bangalore). */
+const AREA_SERVED = [{ "@type": "City", name: "Bengaluru", alternateName: "Bangalore" }, { "@type": "Country", name: "India" }, "Worldwide"];
 
 const SAME_AS = () => [SITE.social.facebook, SITE.social.instagram, SITE.social.linkedin, SITE.social.youtube];
 
@@ -68,6 +73,8 @@ function clinicNode(c: ClinicLike) {
     telephone: c.phone ?? undefined,
     address: { "@type": "PostalAddress", streetAddress: c.addressLines, addressLocality: c.city, addressRegion: "Karnataka", postalCode: c.postcode ?? undefined, addressCountry: "IN" },
     openingHoursSpecification: c.hours?.length ? openingHoursSpecification(c.hours) : undefined,
+    priceRange: priceRangeLabel(),
+    currenciesAccepted: "INR",
   };
 }
 
@@ -95,7 +102,9 @@ export function physicianJsonLd(clinics: ClinicLike[]) {
     ],
     knowsAbout: SERVICE_PAGES.flatMap((p) => [...p.conditions, ...p.procedures]).filter((v, i, a) => a.indexOf(v) === i),
     sameAs: SAME_AS(),
-    areaServed: [{ "@type": "City", name: "Bengaluru", alternateName: "Bangalore" }, { "@type": "Country", name: "India" }],
+    areaServed: AREA_SERVED,
+    knowsLanguage: ["en", "kn", "hi"],
+    hasOfferCatalog: { "@id": COST_CATALOG_ID() },
     alumniOf: CREDENTIALS.map((c) => ({ "@type": "EducationalOrganization", name: (c.detail.split(" — ")[0] ?? c.detail).split(",")[0] ?? c.detail })),
     hasCredential: CREDENTIALS.map((c) => ({ "@type": "EducationalOccupationalCredential", name: c.title, recognizedBy: { "@type": "Organization", name: c.detail } })),
     memberOf: AFFILIATIONS.map((a) => ({ "@type": "Organization", name: a.org, url: a.url })),
@@ -125,6 +134,10 @@ export function practiceJsonLd(clinics: ClinicLike[]) {
     department: clinics.map(clinicNode),
     subOrganization: PRACTICES.map((p) => ({ "@type": "MedicalBusiness", name: p.name, url: p.url, description: p.description })),
     contactPoint: [{ "@type": "ContactPoint", telephone: SITE.phoneTel, email: SITE.email, contactType: "appointments", areaServed: ["IN", "Worldwide"], availableLanguage: ["en", "kn", "hi"], url: SITE.whatsappUrl }],
+    areaServed: AREA_SERVED,
+    priceRange: priceRangeLabel(),
+    currenciesAccepted: "INR",
+    hasOfferCatalog: { "@id": COST_CATALOG_ID() },
   };
 }
 
@@ -242,5 +255,53 @@ export function videoJsonLd(videos: { id: string; title?: string }[], name = "Dr
     "@type": "ItemList",
     name,
     itemListElement: videos.map((v, i) => ({ "@type": "ListItem", position: i + 1, url: `https://www.youtube.com/watch?v=${v.id}`, ...(v.title ? { name: v.title } : {}) })),
+  };
+}
+
+/**
+ * Published costs as Offers (lib/costs.ts). The INR figure is the price; the USD figure is a second
+ * price specification marked as an approximate conversion, so assistants answering overseas patients can
+ * quote both without implying a dollar price. `itemOffered` is a Service (MedicalProcedure is not a valid
+ * `itemOffered` type) that points at the procedure's own page.
+ */
+function costOffer(c: CostItem) {
+  const spec = (currency: "INR" | "USD") => {
+    const v = (n: number) => (currency === "INR" ? n : toUsd(n));
+    return {
+      "@type": c.per ? "UnitPriceSpecification" : "PriceSpecification",
+      priceCurrency: currency,
+      ...(c.inrTo ? { minPrice: v(c.inrFrom), maxPrice: v(c.inrTo) } : c.fixed || c.per ? { price: v(c.inrFrom) } : { minPrice: v(c.inrFrom) }),
+      ...(c.per ? { unitText: c.per } : {}),
+      description: currency === "USD" ? `Approximate conversion at ₹${USD_INR} = US$1 (${FX_DATE}); billed in INR.` : undefined,
+    };
+  };
+  const url = c.paths[0] ? absolute(c.paths[0]) : absolute(ROUTES.costs);
+  return {
+    "@type": "Offer",
+    name: c.name,
+    url,
+    priceCurrency: "INR",
+    ...(c.inrTo ? {} : { price: c.inrFrom }),
+    priceSpecification: [spec("INR"), spec("USD")],
+    availability: "https://schema.org/InStock",
+    eligibleRegion: AREA_SERVED,
+    offeredBy: { "@id": PHYSICIAN_ID() },
+    description: [c.notIncluded?.length ? `Typical cost for an uncomplicated case. Not included: ${c.notIncluded.join(", ")}.` : "Typical cost for an uncomplicated case.", c.note].filter(Boolean).join(" "),
+    itemOffered: { "@type": "Service", name: c.name, serviceType: c.category, url, provider: { "@id": PHYSICIAN_ID() }, areaServed: AREA_SERVED },
+  };
+}
+
+/** OfferCatalog for a set of published costs — the full list (Treatment Costs page) or one page's figures. */
+export function costCatalogJsonLd(items: CostItem[], args: { path: string; name: string; full?: boolean }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    "@id": args.full ? COST_CATALOG_ID() : `${absolute(args.path)}#costs`,
+    name: args.name,
+    url: absolute(args.path),
+    provider: { "@id": PHYSICIAN_ID() },
+    isPartOf: args.full ? undefined : { "@id": COST_CATALOG_ID() },
+    numberOfItems: items.length,
+    itemListElement: items.map((c) => costOffer(c)),
   };
 }

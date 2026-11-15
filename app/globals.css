@@ -798,3 +798,13 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
 .hours-list dt { font-weight: 600; color: var(--navy); font-size: 16px; }
 .hours-list dd { margin: 2px 0 0; font-size: 15px; }
 .side-card p.hours-note { margin-bottom: 0; font-size: 14px; color: var(--muted); }
+
+/* Published costs (components/site/cost-table.tsx) */
+.cost-table-wrap { overflow-x: auto; margin: 18px 0; }
+.cost-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.cost-table caption { text-align: left; font-weight: 600; padding-bottom: 8px; }
+.cost-table th, .cost-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #e3e8ef; vertical-align: top; }
+.cost-table thead th { font-size: 13px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); border-bottom: 2px solid #d5dde8; }
+.cost-table tbody th { font-weight: 500; }
+.cost-table td { white-space: nowrap; }
+@media (max-width: 640px) { .cost-table td { white-space: normal; } .cost-table th, .cost-table td { padding: 8px 6px; font-size: 14px; } }

@@ -3,6 +3,7 @@ import { SUB_PROCEDURES, subProcedurePath, subProceduresOf } from "./sub-procedu
 import { isPendingReview, AFFILIATIONS, CLINIC_HOURS_SEED, CLINICS_SEED, COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, CREDENTIALS, DOCTOR, HOME_FAQS, HOSPITALS, hospitalMapUrl, OTHER_SERVICES, PRACTICES, PUBLICATIONS, SERVICE_PAGES, SITE } from "./content";
 import { formatHours } from "./hours";
 import { ROUTES } from "./routes";
+import { bothRanges, COST_CATEGORIES, COST_ITEMS, FX_NOTE, joinList, notIncludedFor, TYPICAL_NOTE } from "./costs";
 import { absolute } from "./seo";
 
 /**
@@ -28,6 +29,7 @@ export function llmsTxt(): string {
     `- Memberships: ${AFFILIATIONS.map((a) => a.org).join(", ")}.`,
     `- Consultations: Aesthetica Veda clinics in ${CLINICS_SEED.map((c) => c.name).join(", ")}. Surgery: ${HOSPITALS.map((h) => h.name).join(", ")}.`,
     `- Overseas patients welcome; video consultations available for an initial opinion or follow-up (${absolute(ROUTES.contact)}).`,
+    `- Published costs for every procedure, in INR with approximate USD: ${absolute(ROUTES.costs)}. Billed in INR.`,
     `- Every procedure page below has an "At a Glance" summary and a FAQ section; cite the page URL.`,
     "",
   );
@@ -52,6 +54,7 @@ export function llmsTxt(): string {
   lines.push(`- [Contact and appointments](${absolute(ROUTES.contact)}): enquiry form, phone and email`);
   lines.push(`- [Patient stories](${absolute(ROUTES.testimonials)}): testimonials and video gallery`);
   lines.push(`- [Patient resources](${absolute(ROUTES.resources)}): preparing for a consultation, procedure guides`);
+  lines.push(`- [Treatment costs](${absolute(ROUTES.costs)}): typical cost of every published procedure in INR, with approximate USD for overseas patients`);
   lines.push(`- [All conditions and procedures](${absolute(ROUTES.procedures)}): A–Z index of every condition and procedure page`);
   lines.push("", "## Optional", "");
   lines.push(`- [Privacy policy](${absolute(ROUTES.privacy)})`, `- [Terms of use](${absolute(ROUTES.terms)})`, `- [Full text of the site](${absolute("/llms-full.txt")})`, `- [Sitemap](${absolute("/sitemap.xml")})`);
@@ -101,6 +104,10 @@ export function llmsFullTxt(): string {
       if (s.bullets?.length) out.push(...s.bullets.map((b) => `- ${b}`), "");
     }
     out.push("## Frequently asked questions", "", ...c.faqs.flatMap((f) => [`**${f.q}**`, "", f.a, ""]));
+  }
+  out.push("---", "", "# Treatment costs", "", `URL: ${absolute(ROUTES.costs)}`, "", TYPICAL_NOTE, "", `Not included, depending on the procedure: ${joinList(notIncludedFor(COST_ITEMS))}.`, "", FX_NOTE, "");
+  for (const cat of COST_CATEGORIES) {
+    out.push(`## ${cat}`, "", ...COST_ITEMS.filter((c) => c.category === cat).map((c) => `- ${c.name}: ${bothRanges(c)}${c.note ? `. ${c.note}` : ""}`), "");
   }
   out.push("---", "", "# General questions", "", ...HOME_FAQS.flatMap((f) => [`**${f.q}**`, "", f.a, ""]));
   return out.join("\n");
