@@ -10,13 +10,14 @@
  *
  * Review gate: the head-shape diagrams are schematic medical illustrations drawn for this site. They stay
  * hidden until DIAGRAMS_APPROVED is true (docs/CONTENT-APPROVAL.md); preview them with
- * NEXT_PUBLIC_SHOW_DRAFT_SECTIONS=true.
+ * NEXT_PUBLIC_SHOW_DIAGRAMS=true.
  */
-import { COSTS_SECTION_ID, SHOW_DRAFT_SECTIONS } from "./content";
+import { COSTS_SECTION_ID } from "./content";
 import type { ServiceSlug } from "./routes";
 
 export const DIAGRAMS_APPROVED = false;
-export const SHOW_DIAGRAMS = DIAGRAMS_APPROVED || SHOW_DRAFT_SECTIONS;
+/** Own preview switch. The diagrams showed on the live site while gated by NEXT_PUBLIC_SHOW_DRAFT_SECTIONS (15 Nov 2026), so that flag cannot be relied on to hide them. */
+export const SHOW_DIAGRAMS = DIAGRAMS_APPROVED || process.env.NEXT_PUBLIC_SHOW_DIAGRAMS === "true";
 
 /** Anchor id for a section heading that has no explicit id. */
 export function sectionAnchor(heading: string): string {
