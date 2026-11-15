@@ -54,11 +54,13 @@ export function HelpSideCard() {
   );
 }
 
-export function PageHero({ eyebrow, title, lead, crumb }: { eyebrow: string; title: string; lead: string; crumb: string | Crumb[] }) {
+/** `after` renders under the lead (e.g. key-fact chips); `media` puts a figure beside the copy on wide screens. */
+export function PageHero({ eyebrow, title, lead, crumb, after, media }: { eyebrow: string; title: string; lead: string; crumb: string | Crumb[]; after?: ReactNode; media?: ReactNode }) {
   const trail: Crumb[] = typeof crumb === "string" ? [{ label: crumb }] : crumb;
   return (
-    <section className="page-hero">
+    <section className={`page-hero${media ? " has-media" : ""}`}>
       <div className="container">
+        <div className="page-hero-copy">
         <nav className="breadcrumb" aria-label="Breadcrumb">
           <ol>
             <li>
@@ -74,6 +76,9 @@ export function PageHero({ eyebrow, title, lead, crumb }: { eyebrow: string; tit
         <p className="eyebrow">{eyebrow}</p>
         <h1>{title}</h1>
         <p className="lead">{lead}</p>
+        {after}
+        </div>
+        {media}
       </div>
     </section>
   );

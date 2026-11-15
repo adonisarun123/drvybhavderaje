@@ -102,3 +102,12 @@ Search Console shows people searching "<procedure> cost in bangalore" (gynecomas
 - **Exclusivity claim replaced, on the doctor's wording:** the home page and the Craniosynostosis page now call the Aster Whitefield team "the pioneering team in Endoscopic Craniosynostosis Surgery in India". His basis: it was the only team in India doing this until about two years ago, and the newer teams started with its support. "The only hospital in India" stays retired.
 - **Costs:** the doctor is open to publishing costs; a cost sheet has gone to him to fill in. No prices on the site until it comes back.
 - **Public slots:** stay off. The doctor will consider publishing slots if he or his staff can block time; that control already exists at /admin/availability.
+
+## Service-page visuals — Craniosynostosis page (added 15 Nov 2026) — DIAGRAMS AWAIT THE DOCTOR'S SIGN-OFF
+
+The Craniosynostosis page now presents its approved copy visually (source: `lib/page-visuals.ts`, `components/site/page-visuals.tsx`): hero fact chips and overview video, an "On This Page" side menu, the six types as a card grid, treatment as an age path, a keyhole-vs-open comparison table, day-by-day lines for both operations, a four-step strip for travelling families, and one video beside each section it explains. No clinical statement was added: every chip, table cell, timeline entry and step restates a sentence already on the page.
+
+For the doctor to confirm:
+- **Head-shape diagrams (hidden until approved).** Six simplified top-down skull diagrams drawn for this site, one per type, with the closed suture in solid blue. They are schematic, not anatomical drawings. Preview with `NEXT_PUBLIC_SHOW_DRAFT_SECTIONS=true npm run dev`; publish by setting `DIAGRAMS_APPROVED = true` in `lib/page-visuals.ts`. Points to check: the shape shown for each type; unilateral types are drawn with the right side affected; Multisuture shows the coronal, sagittal and lambdoid sutures closed.
+- **Comparison table and timelines.** Wording is condensed from the keyhole and open-surgery sections (e.g. "Day 2 — move to the ward", "Day 6–7 — bandage removed; home"). Confirm the condensed wording reads correctly.
+- **Route labels in the age path:** "Keyhole Surgery, Then Orthotic Helmet Therapy", "Open Remodelling Surgery", "Open Surgery, Often in Stages" (syndromic).

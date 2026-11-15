@@ -3,12 +3,12 @@ import { VideoGallery } from "@/components/site/video-gallery";
 import { CHANNELS, videosFor, type VideoPage } from "@/lib/videos";
 
 /** "Watch" block for a page: the videos tagged for it in lib/videos.ts, or nothing when there are none. */
-export function VideoSection({ page, heading = "Watch Dr Vybhav Explain", limit = 6 }: { page: VideoPage; heading?: string; limit?: number }) {
-  const videos = videosFor(page, limit);
+export function VideoSection({ page, heading = "Watch Dr Vybhav Explain", limit = 6, exclude, id }: { page: VideoPage; heading?: string; limit?: number; exclude?: readonly string[]; id?: string }) {
+  const videos = videosFor(page, limit, exclude);
   if (!videos.length) return null;
   const channels = [...new Set(videos.map((v) => v.channel))];
   return (
-    <section className="video-section" aria-labelledby={`videos-${page.replace(/[^a-z0-9]/gi, "-")}`}>
+    <section className="video-section" id={id} aria-labelledby={`videos-${page.replace(/[^a-z0-9]/gi, "-")}`}>
       <h2 id={`videos-${page.replace(/[^a-z0-9]/gi, "-")}`}>{heading}</h2>
       <VideoGallery videos={videos} title={heading} />
       <p className="channel-note">

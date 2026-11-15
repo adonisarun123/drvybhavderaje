@@ -24,7 +24,8 @@ export function VideoGallery({ videos, title = "Video Gallery" }: { videos: Gall
   );
 }
 
-function Video({ id, index, title }: { id: string; index: number; title?: string }) {
+/** One click-to-load YouTube embed. `eager` is for a poster above the fold (page hero). */
+export function Video({ id, index, title, eager = false }: { id: string; index: number; title?: string; eager?: boolean }) {
   const [playing, setPlaying] = useState(false);
   const label = title ?? `Video ${index}`;
   if (playing) {
@@ -48,7 +49,7 @@ function Video({ id, index, title }: { id: string; index: number; title?: string
           setPlaying(true);
         }} aria-label={`Play video: ${label}`}>
         {/* eslint-disable-next-line @next/next/no-img-element -- YouTube thumbnail; sizes are fixed by YouTube */}
-        <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" width={480} height={360} loading="lazy" decoding="async" />
+        <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" width={480} height={360} loading={eager ? "eager" : "lazy"} decoding="async" />
         <span className="video-play" aria-hidden="true">
           <Play size={26} fill="currentColor" />
         </span>

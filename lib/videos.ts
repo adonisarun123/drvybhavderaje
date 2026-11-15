@@ -151,8 +151,12 @@ export const VIDEO_LIBRARY: Video[] = [
   { id: "vXMd00rIhJE", title: "Aesthetica Veda HRBR Layout — clinic walkthrough", channel: AV, pages: ["locations"] },
 ];
 
-export function videosFor(page: VideoPage, limit = 9): Video[] {
-  return VIDEO_LIBRARY.filter((v) => v.pages.includes(page)).slice(0, limit);
+export function videosFor(page: VideoPage, limit = 9, exclude: readonly string[] = []): Video[] {
+  return VIDEO_LIBRARY.filter((v) => v.pages.includes(page) && !exclude.includes(v.id)).slice(0, limit);
+}
+
+export function videoById(id: string): Video | undefined {
+  return VIDEO_LIBRARY.find((v) => v.id === id);
 }
 
 /** Attach library titles to a plain list of YouTube ids (legacy gallery on the testimonials page). */

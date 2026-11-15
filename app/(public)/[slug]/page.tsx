@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { titleCase } from "@/lib/title-case";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import type { ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { Byline, CtaBand, Faq, HelpSideCard, KeyFacts, PageHero, PhotoGallery, RelatedServices } from "@/components/site/blocks";
 import { VideoSection } from "@/components/site/video-section";
+import { AgePath, CompareSection, DayLine, HeroFacts, HeroVideo, InlineToc, SectionVideo, ServiceSide, StepStrip, TypeGrid } from "@/components/site/page-visuals";
+import { placedVideoIds, sectionAnchor, SHOW_DIAGRAMS, visualsFor, type PageVisuals } from "@/lib/page-visuals";
 import { AllCostsLink, CostTable } from "@/components/site/cost-table";
 import { bothRanges, costsForPath, formatInr, formatUsd, toUsd, type CostItem } from "@/lib/costs";
 import { JsonLd } from "@/components/site/json-ld";
@@ -37,11 +39,16 @@ interface LinkedSection {
   note?: ReactNode;
 }
 
-function Section({ s, costs, path }: { s: LinkedSection; costs?: CostItem[]; path?: string }) {
+function Section({ s, costs, path, visuals }: { s: LinkedSection; costs?: CostItem[]; path?: string; visuals?: PageVisuals }) {
   const showCosts = s.id === COSTS_SECTION_ID && costs && costs.length > 0;
+  const layout = visuals?.layouts?.[s.heading];
+  const days = visuals?.timelines?.[s.heading];
+  const steps = visuals?.steps?.[s.heading];
+  const video = visuals?.videos?.[s.heading];
   return (
-    <section id={s.id}>
+    <section id={s.id ?? sectionAnchor(s.heading)}>
       <h2>{s.heading}</h2>
+      {days && <DayLine days={days} />}
       {showCosts && <CostTable items={costs} currentPath={path} />}
       {s.body?.map((p, i) => <p key={i}>{p}</p>)}
       {showCosts && <AllCostsLink />}
@@ -52,8 +59,11 @@ function Section({ s, costs, path }: { s: LinkedSection; costs?: CostItem[]; pat
           ))}
         </ul>
       )}
-      {s.items && (
-        <div className="procedure-list">
+      {steps && <StepStrip steps={steps} />}
+      {s.items && layout === "type-grid" && <TypeGrid items={s.items} visuals={visuals?.items ?? {}} showDiagrams={SHOW_DIAGRAMS} />}
+      {s.items && layout === "age-path" && <AgePath items={s.items} visuals={visuals?.items ?? {}} />}
+      {s.items && layout !== "type-grid" && layout !== "age-path" && (
+        <div className={`procedure-list${layout === "cards-2" ? " cols-2" : ""}`}>
           {s.items.map((it) => (
             <article className="procedure" key={it.title}>
               <h3>{it.href ? <Link href={it.href}>{it.title}</Link> : it.title}</h3>
@@ -68,6 +78,7 @@ function Section({ s, costs, path }: { s: LinkedSection; costs?: CostItem[]; pat
         </div>
       )}
       {s.note && <p className="callout">{s.note}</p>}
+      {video && <SectionVideo id={video} />}
     </section>
   );
 }
@@ -97,6 +108,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   }));
   const faqs = page.faqs.map((f) => ({ q: f.q, a: autolink(f.a, budget) }));
   const costs = costsForPath(page.path);
+  const visuals = visualsFor(page.slug);
   // The page's own procedure (first listed for this page) leads; hub pages show the lowest figure instead.
   const isHub = page.slug === "face-plastic-surgery-bangalore" || page.slug === "breast-plastic-surgeon-bangalore" || page.slug === "body-plastic-surgeon-bangalore";
   const primary = isHub ? undefined : costs.find((c) => c.paths[0] === page.path);
@@ -134,10 +146,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         ]}
         title={page.title}
         lead={page.lead}
+        after={visuals?.hero && <HeroFacts facts={visuals.hero.facts} />}
+        media={visuals?.hero?.videoId && <HeroVideo id={visuals.hero.videoId} caption={visuals.hero.videoCaption} />}
       />
       <section className="section container content-grid">
         <article className="prose service-prose">
           <Byline />
+          {visuals?.toc && <InlineToc toc={visuals.toc} />}
           <KeyFacts title={titleCase(`${page.shortTitle} in Bangalore${page.slug === "craniosynostosis-surgery-bangalore" ? ", India" : ""}`)}>
             <p>{page.description}</p>
             <ul>
@@ -193,6 +208,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               {p}
             </p>
           ))}
+          {visuals?.videos?.intro && <SectionVideo id={visuals.videos.intro} />}
           {children.length > 0 && (
             <section data-link-group="related">
               <h2>Procedure Pages</h2>
@@ -207,9 +223,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </section>
           )}
           {sections.map((s) => (
-            <Section key={s.heading} s={s} costs={costs} path={page.path} />
+            <Fragment key={s.heading}>
+              {visuals?.compare?.before === s.heading && <CompareSection data={visuals.compare} />}
+              <Section s={s} costs={costs} path={page.path} visuals={visuals} />
+            </Fragment>
           ))}
-          <VideoSection page={page.slug} />
+          <VideoSection page={page.slug} exclude={placedVideoIds(visuals)} id="videos" />
           {page.gallery && (
             <section>
               <h2>Gallery</h2>
@@ -249,13 +268,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               </Link>
             </nav>
           </section>
-          <section>
+          <section id="faqs">
             <h2>Frequently Asked Questions</h2>
             <Faq items={faqs} />
           </section>
           <p className="note">This page is general information written by {DOCTOR.name} for patients and families. It does not replace an individual consultation; treatment plans depend on clinical assessment.</p>
         </article>
-        <HelpSideCard />
+        {visuals?.toc ? <ServiceSide toc={visuals.toc} /> : <HelpSideCard />}
       </section>
       <RelatedServices services={related} />
       <CtaBand />
