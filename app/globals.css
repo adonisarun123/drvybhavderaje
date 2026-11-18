@@ -1032,3 +1032,6 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
 .post-references li { font-size: 15px; word-break: break-word; }
 .content-grid > .post { min-width: 0; }
 .post-table { max-width: 100%; }
+.care-grid.compact.cols-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1100px) { .care-grid.compact.cols-4 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 580px) { .care-grid.compact.cols-4 { grid-template-columns: 1fr; } }

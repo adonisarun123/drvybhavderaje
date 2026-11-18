@@ -73,7 +73,7 @@ export function SiteFooter() {
           ))}
           <Link href={ROUTES.testimonials}>Patient Stories</Link>
           <Link href={ROUTES.resources}>Preparing for Your Visit</Link>
-          <Link href={ROUTES.blog}>Blog: Patient Guides</Link>
+          <Link href={ROUTES.blog}>Blog</Link>
           <Link href={ROUTES.costs}>Treatment Costs</Link>
           <Link href={ROUTES.contact}>
             Book an Appointment <ArrowRight size={14} aria-hidden="true" />

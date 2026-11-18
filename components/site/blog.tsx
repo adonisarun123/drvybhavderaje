@@ -1,7 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ArrowUpRight, BookOpen } from "lucide-react";
-import { blogPath, headingText, type BlogBlock, type BlogPost } from "@/lib/blog";
+import { ArrowRight, ArrowUpRight, BookOpen } from "lucide-react";
+import { BLOG_POSTS, blogPath, headingText, type BlogBlock, type BlogPost } from "@/lib/blog";
+import { ROUTES } from "@/lib/routes";
 import { autolink, type LinkBudget } from "@/lib/links";
 import { titleCase } from "@/lib/title-case";
 
@@ -111,9 +112,9 @@ export function PostBlock({ block, budget }: { block: BlogBlock; budget: LinkBud
 }
 
 /** Article cards — the blog index and the "More Guides" block under each article. */
-export function PostCards({ posts, columns }: { posts: BlogPost[]; columns?: 3 }) {
+export function PostCards({ posts, columns }: { posts: BlogPost[]; columns?: 3 | 4 }) {
   return (
-    <div className={`care-grid compact${columns === 3 ? " cols-3" : ""}`}>
+    <div className={`care-grid compact${columns === 3 ? " cols-3" : columns === 4 ? " cols-4" : ""}`}>
       {posts.map((p, i) => (
         <Link key={p.slug} href={blogPath(p.slug)} className={`care-card care-${i % 4}`}>
           <BookOpen className="care-icon" size={28} strokeWidth={1.3} aria-hidden="true" />
@@ -138,5 +139,25 @@ export function PostList({ posts }: { posts: BlogPost[] }) {
         </li>
       ))}
     </ul>
+  );
+}
+
+/** "From the Blog" band: the newest guides as cards, with a link to the index. Sits below the Video Gallery on the home and Patient Stories pages. */
+export function BlogCardsSection({ limit = 4 }: { limit?: number }) {
+  const posts = BLOG_POSTS.slice(0, limit);
+  if (!posts.length) return null;
+  return (
+    <section className="section container" aria-labelledby="blog-heading" style={{ paddingTop: 0 }} data-link-group="related">
+      <div className="section-heading">
+        <div>
+          <p className="eyebrow">From the Blog</p>
+          <h2 id="blog-heading">Patient Guides</h2>
+        </div>
+        <Link href={ROUTES.blog} className="text-link">
+          All Patient Guides <ArrowRight size={18} aria-hidden="true" />
+        </Link>
+      </div>
+      <PostCards posts={posts} columns={posts.length % 4 === 0 ? 4 : posts.length % 3 === 0 ? 3 : undefined} />
+    </section>
   );
 }

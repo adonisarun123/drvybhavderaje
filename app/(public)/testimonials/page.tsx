@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Byline, CtaBand, PageHero, TestimonialCard } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { VideoGallery } from "@/components/site/video-gallery";
+import { BlogCardsSection } from "@/components/site/blog";
 import { SITE, TESTIMONIALS, VIDEOS } from "@/lib/content";
 import { withTitles } from "@/lib/videos";
 import { linkTargetFor } from "@/lib/links";
@@ -51,6 +52,7 @@ export default function TestimonialsPage() {
         </div>
         <VideoGallery videos={withTitles(VIDEOS)} />
       </section>
+      <BlogCardsSection />
       <CtaBand />
     </>
   );

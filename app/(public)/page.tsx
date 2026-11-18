@@ -6,6 +6,7 @@ import { ArrowRight, ArrowUpRight, Baby, Building2, Check, GraduationCap, HeartH
 import { AffiliationLogos, Byline, CtaBand, Faq, PracticeCards, ServiceGrid, TestimonialCard } from "@/components/site/blocks";
 import { JsonLd } from "@/components/site/json-ld";
 import { VideoGallery } from "@/components/site/video-gallery";
+import { BlogCardsSection } from "@/components/site/blog";
 import { COSMETIC_SERVICES, CRANIOFACIAL_SERVICES, DOCTOR, HOME_FAQS, HOSPITALS, OTHER_SERVICES, PRESENTATIONS, PUBLICATIONS, SITE, TESTIMONIALS } from "@/lib/content";
 import { videosFor } from "@/lib/videos";
 import { getPublicClinics } from "@/lib/clinics";
@@ -341,6 +342,7 @@ export default async function HomePage() {
         </div>
         <VideoGallery videos={videosFor("home", 3)} />
       </section>
+      <BlogCardsSection />
 
       <section className="section container faq-section" aria-labelledby="faq-heading">
         <div>
