@@ -24,6 +24,8 @@ export const ROUTES = {
   procedures: "/procedures",
   /** Every published procedure cost in INR with approximate USD (lib/costs.ts). */
   costs: "/treatment-costs",
+  /** Patient guides: the blog index; articles live at /blog/<slug> (lib/blog.ts). */
+  blog: "/blog",
   /** Shown after a successful enquiry (noindex; the GA4 conversion destination). Never in the sitemap. */
   thankYou: "/thank-you",
 } as const;

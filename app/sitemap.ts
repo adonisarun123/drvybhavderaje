@@ -5,6 +5,7 @@ import { CRANIO_TYPES, cranioTypePath } from "@/lib/cranio-types";
 import { SUB_PROCEDURES, subProcedurePath } from "@/lib/sub-procedures";
 import { DOCTOR_PHOTO, imageUrl } from "@/lib/images";
 import { siteOrigin } from "@/lib/seo";
+import { BLOG_POSTS, blogPath } from "@/lib/blog";
 
 /**
  * All canonical public URLs — clean paths only; the legacy `.html` addresses are 308 redirects and
@@ -33,6 +34,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     entry(ROUTES.contact, 0.9, "monthly"),
     entry(ROUTES.testimonials, 0.6, "monthly"),
     entry(ROUTES.resources, 0.6, "monthly"),
+    // Blog: each article carries its own modified date; the index changes when the newest article does.
+    { url: `${base}${ROUTES.blog}`, lastModified: new Date(BLOG_POSTS.reduce((d, p) => (p.modified > d ? p.modified : d), "2026-11-18")), changeFrequency: "weekly" as const, priority: 0.7 },
+    ...BLOG_POSTS.map((p) => ({ url: `${base}${blogPath(p.slug)}`, lastModified: new Date(p.modified), changeFrequency: "monthly" as const, priority: 0.7 })),
     entry(ROUTES.privacy, 0.2, "yearly"),
     entry(ROUTES.terms, 0.2, "yearly"),
   ];

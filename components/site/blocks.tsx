@@ -85,12 +85,12 @@ export function PageHero({ eyebrow, title, lead, crumb, after, media }: { eyebro
 }
 
 /** Visible author / reviewer line — the E-E-A-T signal answer engines look for, and a contextual link to the surgeon's profile. */
-export function Byline() {
+export function Byline({ published }: { /** Articles: the publication date (already formatted) shown in place of the site-wide review date. */ published?: string } = {}) {
   return (
     <p className="byline">
       <BadgeCheck size={16} aria-hidden="true" />
       <span>
-        Written and medically reviewed by <Link href={ROUTES.about}>{DOCTOR.name}</Link>, {DOCTOR.honorificSuffix} · Consultant Craniofacial &amp; Plastic Surgeon, Bangalore · KMC Reg. No. {DOCTOR.kmcRegistration} · Last reviewed {reviewedOn()}
+        Written and medically reviewed by <Link href={ROUTES.about}>{DOCTOR.name}</Link>, {DOCTOR.honorificSuffix} · Consultant Craniofacial &amp; Plastic Surgeon, Bangalore · KMC Reg. No. {DOCTOR.kmcRegistration} · {published ? `Published ${published}` : `Last reviewed ${reviewedOn()}`}
       </span>
     </p>
   );

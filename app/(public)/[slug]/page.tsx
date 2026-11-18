@@ -12,6 +12,8 @@ import { videoById, videosFor } from "@/lib/videos";
 import { AllCostsLink, CostTable } from "@/components/site/cost-table";
 import { bothRanges, costsForPath, formatInr, formatUsd, toUsd, type CostItem } from "@/lib/costs";
 import { JsonLd } from "@/components/site/json-ld";
+import { PostList } from "@/components/site/blog";
+import { blogPath, postsForService } from "@/lib/blog";
 import { childServices, CLINICS_SEED, COSTS_SECTION_ID, DOCTOR, isPendingReview, HEAD_SHAPE_CLINIC, HEAD_SHAPE_SLUGS, getService, GROUP_HREF, GROUP_LABEL, HOSPITALS, isFeatured, PRACTICES, SERVICE_PAGES, SITE, type ServiceSection } from "@/lib/content";
 import { autolink, createLinkBudget, relatedServices, serviceRelatedPaths } from "@/lib/links";
 import { ROUTES, SECTION } from "@/lib/routes";
@@ -95,6 +97,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const children = childServices(page.slug);
   const related = relatedServices(page);
   const headShape = HEAD_SHAPE_SLUGS.has(page.slug);
+  const guides = postsForService(page.slug);
 
   // Contextual links, resolved in reading order: at-a-glance → intro → sections → FAQs.
   const budget = createLinkBudget(page.path, [ROUTES.about, ROUTES.locations, ROUTES.contact]);
@@ -132,7 +135,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             speakable: ["#summary", ".service-prose .intro", ".faq"],
             mainEntityId: page.procedures.length ? PROCEDURE_ID(page, 0) : page.conditions.length ? CONDITION_ID(page, 0) : undefined,
             aboutIds: [...page.conditions.map((_, i) => CONDITION_ID(page, i)), ...page.procedures.map((_, i) => PROCEDURE_ID(page, i))],
-            relatedPaths: serviceRelatedPaths(page),
+            relatedPaths: [...serviceRelatedPaths(page), ...guides.map((g) => blogPath(g.slug))],
           }),
           faqJsonLd(page.faqs),
           ...serviceEntitiesJsonLd(page),
@@ -237,6 +240,15 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <section>
               <h2>Gallery</h2>
               <PhotoGallery photos={page.gallery} columns={2} />
+            </section>
+          )}
+          {guides.length > 0 && (
+            <section id="guides" data-link-group="related">
+              <h2>Patient Guides</h2>
+              <p>
+                Longer reads from the <Link href={ROUTES.blog}>blog</Link> that go deeper into the questions patients ask before deciding.
+              </p>
+              <PostList posts={guides} />
             </section>
           )}
           {parent && (

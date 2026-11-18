@@ -5,6 +5,7 @@ import { formatHours } from "./hours";
 import { ROUTES } from "./routes";
 import { bothRanges, COST_CATEGORIES, COST_ITEMS, FX_NOTE, joinList, notIncludedFor, TYPICAL_NOTE } from "./costs";
 import { absolute } from "./seo";
+import { BLOG_POSTS, blogPath, plainText, type BlogBlock } from "./blog";
 
 /**
  * /llms.txt — the llmstxt.org convention: a short, link-rich Markdown summary of the site for
@@ -48,6 +49,9 @@ export function llmsTxt(): string {
     lines.push(`- [${p.shortTitle}](${absolute(p.path)}): ${p.description}`);
     for (const c of subProceduresOf(p.slug)) lines.push(`  - [${c.shortTitle}](${absolute(subProcedurePath(c))}): ${c.description}`);
   }
+  lines.push("", "## Patient guides (blog)", "");
+  lines.push(`- [All patient guides](${absolute(ROUTES.blog)}): long-form articles by ${DOCTOR.name}, each with key takeaways, a FAQ section and references`);
+  for (const p of BLOG_POSTS) lines.push(`- [${p.title}](${absolute(blogPath(p.slug))}): ${p.card}`);
   lines.push("", "## About the practice", "");
   lines.push(`- [About Dr Vybhav Deraje](${absolute(ROUTES.about)}): training, qualifications, memberships, hospital affiliations, publications and presentations`);
   lines.push(`- [Practice locations](${absolute(ROUTES.locations)}): clinic and hospital addresses and phone numbers`);
@@ -60,6 +64,14 @@ export function llmsTxt(): string {
   lines.push(`- [Privacy policy](${absolute(ROUTES.privacy)})`, `- [Terms of use](${absolute(ROUTES.terms)})`, `- [Full text of the site](${absolute("/llms-full.txt")})`, `- [Sitemap](${absolute("/sitemap.xml")})`);
   lines.push("", `Author and medical reviewer of all pages: ${DOCTOR.name}, ${DOCTOR.honorificSuffix} (KMC Reg. No. ${DOCTOR.kmcRegistration}). Content last reviewed ${SITE.contentUpdated}. Information is general and does not replace a consultation.`, "");
   return lines.join("\n");
+}
+
+/** One article block as Markdown (tables as pipe tables). */
+function blockMarkdown(b: BlogBlock): string[] {
+  if (b.t === "p") return [plainText(b.text), ""];
+  if (b.t === "h3") return [`### ${b.text}`, ""];
+  if (b.t === "table") return [`| ${b.head.join(" | ")} |`, `| ${b.head.map(() => "---").join(" | ")} |`, ...b.rows.map((r) => `| ${r.map(plainText).join(" | ")} |`), ""];
+  return [...b.items.map((it, i) => `${b.t === "ol" ? `${i + 1}.` : "-"} ${plainText(it)}`), ""];
 }
 
 function clinicHoursLine(slug: string): string {
@@ -104,6 +116,12 @@ export function llmsFullTxt(): string {
       if (s.bullets?.length) out.push(...s.bullets.map((b) => `- ${b}`), "");
     }
     out.push("## Frequently asked questions", "", ...c.faqs.flatMap((f) => [`**${f.q}**`, "", f.a, ""]));
+  }
+  for (const p of BLOG_POSTS) {
+    out.push("---", "", `# ${p.title}`, "", `URL: ${absolute(blogPath(p.slug))}`, `Published: ${p.published}`, "", ...p.intro.map(plainText), "", "## Key takeaways", "", ...p.takeaways.map((t) => `- ${plainText(t)}`), "");
+    for (const s of p.sections) out.push(`## ${s.heading}`, "", ...s.blocks.flatMap(blockMarkdown));
+    out.push("## Frequently asked questions", "", ...p.faqs.flatMap((f) => [`**${f.q}**`, "", plainText(f.a), ""]));
+    out.push("## References", "", ...p.references.map((r) => `- ${r.label}: ${r.url}`), "");
   }
   out.push("---", "", "# Treatment costs", "", `URL: ${absolute(ROUTES.costs)}`, "", TYPICAL_NOTE, "", `Not included, depending on the procedure: ${joinList(notIncludedFor(COST_ITEMS))}.`, "", FX_NOTE, "");
   for (const cat of COST_CATEGORIES) {

@@ -7,6 +7,7 @@ import { ROUTES } from "./routes";
 import { FX_DATE, priceRangeLabel, toUsd, USD_INR, type CostItem } from "./costs";
 import { videosFor, type VideoPage } from "./videos";
 import VIDEO_META from "./video-meta.json";
+import { BLOG_DESCRIPTION, BLOG_TITLE, blogPath, plainText, postWordCount, type BlogPost } from "./blog";
 
 export function siteOrigin(): string {
   return (process.env.SITE_ORIGIN ?? "http://localhost:3000").replace(/\/$/, "");
@@ -41,7 +42,7 @@ const AREA_SERVED = [{ "@type": "City", name: "Bengaluru", alternateName: "Banga
 
 const SAME_AS = () => [SITE.social.facebook, SITE.social.instagram, SITE.social.linkedin, SITE.social.youtube];
 
-export function pageMetadata(args: { title: string; description: string; path: string; noindex?: boolean; ogType?: "website" | "article" | "profile"; /** Use the title as given, without the " | Dr Vybhav Deraje" suffix. The suffix is also skipped automatically when it would push the title past 60 characters. */ bare?: boolean }): Metadata {
+export function pageMetadata(args: { title: string; description: string; path: string; noindex?: boolean; ogType?: "website" | "article" | "profile"; /** Use the title as given, without the " | Dr Vybhav Deraje" suffix. The suffix is also skipped automatically when it would push the title past 60 characters. */ bare?: boolean; /** Articles: ISO dates for og:article:published_time / modified_time. */ published?: string; modified?: string }): Metadata {
   const url = absolute(args.path);
   const fullTitle = args.bare ? args.title : args.path === "/" ? `${SITE.name} | Craniofacial & Plastic Surgeon, Bangalore` : args.title.includes(SITE.name) || `${args.title} | ${SITE.name}`.length > 60 ? args.title : `${args.title} | ${SITE.name}`;
   return {
@@ -57,12 +58,18 @@ export function pageMetadata(args: { title: string; description: string; path: s
       url,
       siteName: SITE.name,
       type: args.ogType ?? "website",
+      ...(args.ogType === "article" && args.published ? { publishedTime: isoDateTime(args.published), modifiedTime: isoDateTime(args.modified ?? args.published), authors: [absolute(ROUTES.about)] } : {}),
       locale: "en_IN",
       alternateLocale: ["en_US", "en_GB", "en_AE", "en_AU"],
       images: [{ url: DOCTOR_IMAGE(), width: 466, height: 588, alt: "Dr Vybhav Deraje, craniofacial and plastic surgeon, Bangalore" }],
     },
     twitter: { card: "summary", title: fullTitle, description: args.description, images: [DOCTOR_IMAGE()] },
   };
+}
+
+/** A content date as a full timestamp in Indian Standard Time (search engines ask for a time zone on article dates). */
+export function isoDateTime(date: string): string {
+  return date.includes("T") ? date : `${date}T09:00:00+05:30`;
 }
 
 type ClinicLike = { name: string; brand: string; addressLines: string; phone: string | null; postcode: string | null; city: string; slug?: string; hours?: ClinicHours[] };
@@ -189,6 +196,9 @@ export function medicalWebPageJsonLd(args: {
   significantPaths?: string[];
   /** Additional `@id`s the page is about (conditions, procedures). */
   aboutIds?: string[];
+  /** Articles carry their own dates: when the text was reviewed and last changed (ISO). Defaults to the site-wide values. */
+  lastReviewed?: string;
+  dateModified?: string;
 }) {
   const url = absolute(args.path);
   const links = (paths?: string[]) => {
@@ -210,8 +220,8 @@ export function medicalWebPageJsonLd(args: {
     author: { "@id": PHYSICIAN_ID() },
     publisher: { "@id": ORG_ID() },
     reviewedBy: { "@id": PHYSICIAN_ID() },
-    lastReviewed: SITE.contentUpdated,
-    dateModified: contentModified(args.path, SERVICE_PAGES.some((p) => p.path === args.path)),
+    lastReviewed: args.lastReviewed ?? SITE.contentUpdated,
+    dateModified: args.dateModified ?? contentModified(args.path, SERVICE_PAGES.some((p) => p.path === args.path)),
     inLanguage: "en-IN",
     audience: { "@type": "MedicalAudience", audienceType: "Patient" },
     speakable: args.speakable?.length ? { "@type": "SpeakableSpecification", cssSelector: args.speakable } : undefined,
@@ -350,5 +360,74 @@ export function costCatalogJsonLd(items: CostItem[], args: { path: string; name:
     isPartOf: args.full ? undefined : { "@id": COST_CATALOG_ID() },
     numberOfItems: items.length,
     itemListElement: items.map((c) => costOffer(c)),
+  };
+}
+
+/* ------------------------------------------------------------------------------------------------
+ * Blog (lib/blog.ts)
+ * ---------------------------------------------------------------------------------------------- */
+
+export const BLOG_ID = () => `${absolute(ROUTES.blog)}#blog`;
+export const ARTICLE_ID = (post: BlogPost) => `${absolute(blogPath(post.slug))}#article`;
+
+/**
+ * The article itself. The page node (medicalWebPageJsonLd) points here as its mainEntity; `about` ties the
+ * article to the procedure and condition entities declared on its procedure page, so answer engines read the
+ * guide and the procedure page as one topic. `citation` lists the references printed at the foot of the article.
+ */
+export function blogPostingJsonLd(post: BlogPost, aboutIds: string[] = []) {
+  const url = absolute(blogPath(post.slug));
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": ARTICLE_ID(post),
+    headline: post.title,
+    name: post.title,
+    alternativeHeadline: post.metaTitle,
+    description: post.description,
+    abstract: post.takeaways.map(plainText).join(" "),
+    url,
+    mainEntityOfPage: { "@id": `${url}#webpage` },
+    isPartOf: { "@id": BLOG_ID() },
+    datePublished: isoDateTime(post.published),
+    dateModified: isoDateTime(post.modified),
+    author: { "@id": PHYSICIAN_ID() },
+    publisher: { "@id": ORG_ID() },
+    image: { "@type": "ImageObject", url: DOCTOR_IMAGE(), width: 466, height: 588, caption: "Dr Vybhav Deraje, craniofacial and plastic surgeon, Bangalore" },
+    articleSection: post.category,
+    keywords: post.about.join(", "),
+    wordCount: postWordCount(post),
+    inLanguage: "en-IN",
+    isAccessibleForFree: true,
+    audience: { "@type": "MedicalAudience", audienceType: "Patient" },
+    about: [...aboutIds.map((id) => ({ "@id": id })), ...post.about.map((name) => ({ "@type": "Thing", name }))],
+    citation: post.references.map((r) => ({ "@type": "WebPage", name: r.label, url: r.url })),
+    speakable: { "@type": "SpeakableSpecification", cssSelector: ["#summary", ".service-prose .intro", ".faq"] },
+  };
+}
+
+/** The blog as a whole, with every article listed — on the index page. */
+export function blogJsonLd(posts: BlogPost[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "@id": BLOG_ID(),
+    name: BLOG_TITLE,
+    description: BLOG_DESCRIPTION,
+    url: absolute(ROUTES.blog),
+    inLanguage: "en-IN",
+    author: { "@id": PHYSICIAN_ID() },
+    publisher: { "@id": ORG_ID() },
+    isPartOf: { "@id": WEBSITE_ID() },
+    blogPost: posts.map((p) => ({
+      "@type": "BlogPosting",
+      "@id": ARTICLE_ID(p),
+      headline: p.title,
+      description: p.description,
+      url: absolute(blogPath(p.slug)),
+      datePublished: isoDateTime(p.published),
+      dateModified: isoDateTime(p.modified),
+      author: { "@id": PHYSICIAN_ID() },
+    })),
   };
 }

@@ -19,6 +19,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { FEATURED_SERVICES, getService, SERVICE_PAGES, type ServicePage } from "./content";
 import { ROUTES, servicePath, type ServiceSlug } from "./routes";
+import { blogPath } from "./blog";
 
 interface TermLink {
   href: string;
@@ -55,11 +56,14 @@ export const TERM_LINKS: TermLink[] = [
   svc("face-plastic-surgery-bangalore", "facial plastic surgery", "facial cosmetic surgery", "cosmetic surgery of the face"),
   svc("breast-plastic-surgeon-bangalore", "breast reconstruction", "breast cancer reconstruction", "breast plastic surgery"),
   svc("body-plastic-surgeon-bangalore", "body contouring", "body plastic surgery"),
+  // Patient guides (lib/blog.ts) — a condition with no page of its own links to the guide that explains it.
+  { href: blogPath("diastasis-recti-exercises-vs-surgery"), phrases: ["diastasis recti", "abdominal separation", "rectus diastasis"] },
   // Practice pages
   { href: ROUTES.about, phrases: ["Dr Vybhav Deraje"] },
   { href: ROUTES.locations, phrases: ["Aesthetica Veda", "Aster Whitefield Hospital", "Aster Hospital Whitefield", "Aster Hospital, Whitefield", "Gifted Hands Hospital", "Aarogya Hastha Hospital", "Medicover Hospital", "Apollo Spectra Hospital"] },
   { href: ROUTES.contact, phrases: ["video consultation", "video consultations", "book an appointment", "enquiry form"] },
   { href: ROUTES.procedures, phrases: ["all procedures", "conditions and procedures", "full range of procedures"] },
+  { href: ROUTES.blog, phrases: ["patient guides"] },
   { href: ROUTES.resources, phrases: ["first consultation", "first appointment", "patient information sheet", "patient information sheets"] },
 ];
 

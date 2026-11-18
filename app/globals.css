@@ -1009,3 +1009,26 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
   .cost-band h2 { font-size: 19px; }
   .cost-band-links { display: block; margin: 4px 0 0; }
 }
+
+/* Blog (lib/blog.ts): article tables, the index list and the reference list. */
+.post-table { overflow-x: auto; margin: 22px 0; border: 1px solid var(--line); border-radius: 8px; }
+.post-table:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.post-table table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px; line-height: 1.6; }
+.post-table th, .post-table td { padding: 12px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+.post-table thead th { background: #f2f7fc; color: var(--navy); font-weight: 600; white-space: nowrap; }
+.post-table tbody th { color: var(--navy); font-weight: 600; width: 24%; }
+.post-table td { color: var(--muted); }
+.post-table tbody tr:last-child th, .post-table tbody tr:last-child td { border-bottom: 0; }
+.prose.post section > p { margin-bottom: 18px; }
+.prose.post .key-facts { margin-top: 28px; }
+.prose .post-index { list-style: none; padding-left: 0; display: grid; gap: 0; color: inherit; }
+.prose .post-index li { margin: 0; padding: 28px 0; border-bottom: 1px solid var(--line); }
+.prose .post-index li:first-child { padding-top: 0; }
+.prose .post-index h2 { font-size: 26px; margin: 6px 0 12px; }
+.prose .post-index h2 a { color: var(--navy); text-decoration: none; }
+.prose .post-index h2 a:hover { color: var(--blue); }
+.post-index-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 14px; }
+.prose .post-index-links a { text-decoration: none; }
+.post-references li { font-size: 15px; word-break: break-word; }
+.content-grid > .post { min-width: 0; }
+.post-table { max-width: 100%; }
