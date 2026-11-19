@@ -18,7 +18,7 @@ export const publicEnquirySchema = z.object({
   phone: z.string().trim().min(8, "Please enter a phone number").max(20),
   /** ISO country of the phone number (see lib/dial-codes.ts); "OTHER" means the number carries its own "+". */
   phoneCountry: z.string().trim().max(8).optional(),
-  email: z.union([z.literal(""), z.string().trim().email("Please enter a valid email address").max(254)]).optional(),
+  email: z.string({ error: "Please enter your email address" }).trim().min(1, "Please enter your email address").max(254).pipe(z.email("Please enter a valid email address")),
   clinic: z.string().trim().min(1, "Please choose a clinic").max(64),
   preferredStart: z.string().trim().max(40).optional().or(z.literal("")),
   remarks: z.string().trim().max(1000, "Please keep this under 1,000 characters").optional().or(z.literal("")),

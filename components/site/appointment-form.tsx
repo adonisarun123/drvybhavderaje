@@ -231,8 +231,8 @@ export function AppointmentForm({ clinics, enabled, slotsEnabled, dateMin, dateM
           )}
         </label>
         <label className="field full" htmlFor={`${id}-email`}>
-          Email Address (Optional)
-          <input id={`${id}-email`} name="email" type="email" autoComplete="email" placeholder="Optional" maxLength={254} aria-invalid={!!err("email")} aria-describedby={err("email") ? `${id}-email-err` : undefined} disabled={!enabled} />
+          Email Address *
+          <input id={`${id}-email`} name="email" type="email" autoComplete="email" placeholder="you@example.com" required maxLength={254} aria-invalid={!!err("email")} aria-describedby={err("email") ? `${id}-email-err` : undefined} disabled={!enabled} />
           {err("email") && (
             <span className="field-error" id={`${id}-email-err`}>
               {err("email")}

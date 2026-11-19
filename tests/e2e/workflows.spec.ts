@@ -115,6 +115,7 @@ test("public enquiry reaches the admin list", async ({ page }) => {
   await page.goto(`${BASE}/contact-us`);
   await page.fill('input[name="name"]', `E2E Patient ${run}`);
   await page.fill('input[name="phone"]', "98765 43210");
+  await page.fill('input[name="email"]', "e2e-patient@example.test");
   await page.selectOption('select[name="clinic"]', "whitefield");
   // published availability: pick next Monday and the first slot
   await page.fill('input[type="date"]', nextMonday.toISODate()!);

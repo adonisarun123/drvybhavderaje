@@ -25,7 +25,7 @@ export default function PrivacyPage() {
 
           <h2>Information We Collect</h2>
           <h3>Enquiry Form</h3>
-          <p>When you send an enquiry we ask for your name, phone number, optional email address, the reason for your enquiry, your preferred clinic and, where offered, a preferred appointment time, so that the practice can respond. Please do not submit medical reports, photographs or detailed health information through this website; bring them to your appointment instead.</p>
+          <p>When you send an enquiry we ask for your name, phone number, email address, the reason for your enquiry, your preferred clinic and, where offered, a preferred appointment time, so that the practice can respond. Please do not submit medical reports, photographs or detailed health information through this website; bring them to your appointment instead.</p>
           <h3>Usage Data</h3>
           <p>We may collect information about how the Service is accessed and used, such as your device’s Internet Protocol (IP) address, browser type and version, the pages you visit, the date, time and duration of your visit, and other diagnostic data.</p>
           <h3>Cookies</h3>
