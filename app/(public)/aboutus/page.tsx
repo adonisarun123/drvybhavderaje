@@ -15,7 +15,7 @@ import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, PHYSICIAN_ID, phy
 
 export const revalidate = 3600;
 
-const TITLE = "About Dr Vybhav Deraje — Craniofacial & Plastic Surgeon, Bangalore";
+const TITLE = "About Dr Vybhav Deraje | Training, Hospitals & Practices";
 const DESCRIPTION = "Dr Vybhav Deraje: MBBS, MS, DNB (Plastic Surgery), craniofacial fellowship in Adelaide. Founder of The Head Shape Clinic and Aesthetica Veda, Bangalore.";
 
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: ROUTES.about, ogType: "profile" });

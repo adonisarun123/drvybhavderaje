@@ -14,8 +14,8 @@ import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, physicianJsonLd, 
 
 export const revalidate = 3600;
 
-const TITLE = "Practice Locations in Bangalore — Clinics & Hospitals";
-const DESCRIPTION = "Consult Dr Vybhav Deraje at Aesthetica Veda in Whitefield, HRBR Layout and Koramangala, or The Head Shape Clinic, Koramangala. Surgery at partner hospitals.";
+const TITLE = "Plastic Surgeon in Whitefield, Koramangala & HRBR Layout";
+const DESCRIPTION = "See Dr Vybhav Deraje at Aesthetica Veda in Whitefield, HRBR Layout and Koramangala, or The Head Shape Clinic. Timings, directions and partner hospitals.";
 
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: ROUTES.locations });
 

@@ -6,7 +6,7 @@ import { ROUTES } from "@/lib/routes";
 import { breadcrumbJsonLd, pageMetadata, medicalWebPageJsonLd } from "@/lib/seo";
 
 const TITLE = "Privacy Policy";
-const DESCRIPTION = "How drvybhavderaje.com collects and uses personal data: enquiry form details, usage data, cookies, analytics, where data is stored (India and Singapore), international transfers, children’s privacy and contact.";
+const DESCRIPTION = "How drvybhavderaje.com collects and uses personal data: enquiry forms, cookies, analytics, storage in India and Singapore, and how to contact us.";
 
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: ROUTES.privacy });
 

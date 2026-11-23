@@ -11,8 +11,8 @@ import { linkTargetFor } from "@/lib/links";
 import { ROUTES, servicePath } from "@/lib/routes";
 import { breadcrumbJsonLd, medicalWebPageJsonLd, pageMetadata, videoJsonLd, videoObjectsJsonLd } from "@/lib/seo";
 
-const TITLE = "Patient Stories & Testimonials — Dr Vybhav Deraje, Bangalore";
-const DESCRIPTION = "Patients and families on their experience with Dr Vybhav Deraje, Bangalore: Craniosynostosis, hand surgery, facial injury, jaw surgery and more. Plus videos.";
+const TITLE = "Patient Reviews & Stories | Dr Vybhav Deraje, Bangalore";
+const DESCRIPTION = "Read and watch stories from patients and families treated by Dr Vybhav Deraje in Bangalore, for craniosynostosis, jaw, hand and facial surgery and more.";
 
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: ROUTES.testimonials });
 

@@ -16,8 +16,8 @@ import { PRACTICE_TZ } from "@/lib/time";
 
 export const dynamic = "force-dynamic";
 
-const TITLE = "Contact Us & Book an Appointment — Dr Vybhav Deraje, Bangalore";
-const DESCRIPTION = `Book an appointment with Dr Vybhav Deraje, craniofacial & plastic surgeon, Bangalore. Call or WhatsApp ${SITE.phone} or send an enquiry. Whitefield, HRBR Layout, Koramangala.`;
+const TITLE = "Book an Appointment | Dr Vybhav Deraje, Plastic Surgeon";
+const DESCRIPTION = `Book a consultation with Dr Vybhav Deraje in Whitefield, HRBR Layout or Koramangala, or by video. Call/WhatsApp ${SITE.phone} or send an enquiry.`;
 
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: ROUTES.contact });
 

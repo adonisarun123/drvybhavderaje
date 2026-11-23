@@ -17,7 +17,7 @@ import { breadcrumbJsonLd, costCatalogJsonLd, faqJsonLd, medicalWebPageJsonLd, p
  * overseas patients. The tables render in full on the server; the finder only filters them.
  */
 const TITLE = "Plastic & Craniofacial Surgery Costs in Bangalore (INR/USD)";
-const DESCRIPTION = "Dr Vybhav Deraje's costs for craniosynostosis, cleft, jaw, ear and cosmetic surgery in Bangalore, in Indian rupees with approximate US dollars.";
+const DESCRIPTION = "Typical costs for craniosynostosis, cleft, jaw, ear and cosmetic surgery with Dr Vybhav Deraje in Bangalore, in INR and USD. Ask for your own estimate.";
 
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: ROUTES.costs, bare: true });
 

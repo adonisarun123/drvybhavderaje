@@ -11,7 +11,7 @@ import { SUB_PROCEDURES, subProcedurePath } from "@/lib/sub-procedures";
 import { absolute, breadcrumbJsonLd, faqJsonLd, medicalWebPageJsonLd, pageMetadata, PHYSICIAN_ID } from "@/lib/seo";
 
 const TITLE = "All Conditions & Procedures — Dr Vybhav Deraje, Bangalore";
-const DESCRIPTION = `A–Z index of every condition and procedure treated by Dr Vybhav Deraje, craniofacial & plastic surgeon, Bangalore: ${SERVICE_PAGES.length} pages on craniofacial, cosmetic and reconstructive surgery.`;
+const DESCRIPTION = "A–Z of every condition and procedure Dr Vybhav Deraje treats in Bangalore: craniofacial, cosmetic and reconstructive surgery, with a guide to each.";
 
 export const metadata: Metadata = pageMetadata({ title: TITLE, description: DESCRIPTION, path: ROUTES.procedures });
 

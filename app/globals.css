@@ -1035,3 +1035,27 @@ nav.site-nav .nav-menu .nav-menu-all { font-size: 14px; color: var(--muted); bor
 .care-grid.compact.cols-4 { grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 1100px) { .care-grid.compact.cols-4 { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 580px) { .care-grid.compact.cols-4 { grid-template-columns: 1fr; } }
+
+/* ------------------------------------------------------------------------------------------------
+ * Responsive pass (23 Nov 2026): no sideways scrolling at any width from 320px up.
+ * Found by measuring every public page at 320–1920px; each rule names the overflow it fixes.
+ * ---------------------------------------------------------------------------------------------- */
+/* Laptop widths (1261–1440px): the full desktop nav was ~70px wider than the screen at 1280–1366px. */
+@media (min-width: 1261px) and (max-width: 1440px) {
+  .nav { gap: 12px; }
+  nav.site-nav { gap: 2px; font-size: 14px; }
+  nav.site-nav > a, nav.site-nav > .nav-group > button { padding: 10px 7px; }
+  nav.site-nav > a.button { padding-inline: 14px; margin-left: 6px; }
+}
+/* Grid and flex children may shrink below their content's width; long words and emails wrap instead of pushing the page wider. */
+.content-grid > *, .hero-grid > *, .feature-grid > *, .section-heading > * { min-width: 0; }
+.side-card, .form-card, .prose { overflow-wrap: break-word; }
+.side-card a, .form-card a, .prose a { overflow-wrap: anywhere; }
+/* Tablet widths (581–900px): the article-plus-sidebar layout left the sidebar too narrow for its buttons, so it stacks under the article. */
+@media (max-width: 900px) {
+  .content-grid { grid-template-columns: 1fr; gap: 36px; }
+}
+/* Small tablets (581–700px): the section intro beside a heading was squeezed to a sliver; it moves under the heading. */
+@media (max-width: 700px) {
+  .section-heading { display: block; } .section-heading > p { max-width: none; margin-top: 18px; }
+}
